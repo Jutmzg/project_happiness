@@ -16,7 +16,6 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 
 <?php require '../layout/header.php'; ?>
 
-<button class="btn btn-primary" onclick="getSelectedRows()">-></button>
 
 <div class="container">
   <div class="card mt-5">
@@ -25,51 +24,23 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       <h2>Consultants</h2>
       <a href="/Akkappiness/consultant/create.php"><button type="button" class="btn btn-primary"><i class="fas fa-user-plus"></i></button></a>
       <div class="card-body">
-<?php $loupe ="fas fa-search"?>
 
+        <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
 
-        <input type="text" class="form-control col-3" id="filter-text-box" placeholder="<i class=<?=$loupe?></i>"onFilterTextBoxChanged()/>
-        <div id="myGrid" style="height: 600px;width:100%;" class="ag-theme-balham"></div>
-
-
-
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Nom</th>
-              <th>Email</th>
-              <th>Mission</th>
-              <th>Manager</th>
-              <th>Action</th>
-
-            </tr>
-          </thead>
-          <?php foreach ($consultants as $consultant) : ?>
-            <tr>
-              <td data-label="Nom"><?= $consultant->fullname; ?></td>
-              <td data-label="Email"><?= $consultant->mail; ?></td>
-              <td data-label="Mission"><?= $consultant->mission ?></td>
-              <td data-label="Manager"><?= $consultant->manager ?></td>
-
-              <td data-label="Action">
-                <a href="edit.php?id=<?= $consultant->id ?>" class="btn btn-info"><i class="fas fa-user-edit fa-xs"></i></a>
-                <a onclick="return confirm('Etes vous sur de vouloir effectuer la suppression?')" href="delete.php?id=<?= $consultant->id ?>" class='btn btn-danger'><i class="fas fa-trash-alt"></i></a>
-              </td>
-            </tr>
-          <?php endforeach; ?>
-        </table>
+        <div id="myGrid" style="height: 600px;width:100%;" class="ag-theme-balham"></div> 
       </div>
     </div>
   </div>
 </div>
 
-
 <script type="text/javascript" charset="utf-8">
   // specify the columns
-
-  const PRODUCTS_ACTIONS_TEMPLATE = `
-  <a href="edit.php?id=<?= $consultant->id ?>" class="btn btn-info"><i class="fas fa-user-edit fa-xs"></i></a>
+  
+  /* const PRODUCTS_ACTIONS_TEMPLATE = 
+  `<?= $consultant->id ?>
+<a href="edit.php?id=1" class="btn btn-info"><i class="fas fa-user-edit fa-xs"></i></a>
                 <a onclick="return confirm('Etes vous sur de vouloir effectuer la suppression?')" href="delete.php?id=<?= $consultant->id ?>" class='btn btn-danger'><i class="fas fa-trash-alt"></i></a>`;
+                */
 
   var columnDefs = [{
       headerName: "Nom",
@@ -98,10 +69,8 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
     },
     {
       headerName: "Action",
-      field: '',
-      template: PRODUCTS_ACTIONS_TEMPLATE,
-      minWidth: 80,
-      maxWidth: 80,
+      field: 'action',
+     // template:PRODUCTS_ACTIONS_TEMPLATE,
 
     },
   ];
@@ -114,7 +83,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
         mail: "<?= $consultant->mail ?>",
         mission: "<?= $consultant->mission ?>",
         manager: "<?= $consultant->manager ?>",
-        action: "bouton"
+        action: <a href='<?=$consultant->id?>' class='btn btn-info'>ff</a>,
       },
     <?php } ?>
 
@@ -155,5 +124,6 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
   function onFilterTextBoxChanged() {
     gridOptions.api.setQuickFilter(document.getElementById('filter-text-box').value);
   }
+
 </script>
 <?php require '../layout/footer.php'; ?>
