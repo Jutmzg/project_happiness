@@ -1,3 +1,4 @@
+<html>
 <?php require './layout/header.php'; ?>
 
 <head>

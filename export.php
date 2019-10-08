@@ -5,15 +5,23 @@ require 'db/db.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-/*  $consultant = $PDO->prepare('SELECT * FROM consultant');
- $consultant->execute();
- $data = $req->fetchAll(); */
+$sql = 'SELECT * FROM consultant';
+$statement = $connection->prepare($sql);
+$statement->execute();
+$consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 
 $spreadsheet = new Spreadsheet();
-
 $sheet = $spreadsheet->getActiveSheet();
+$column = 'A';
+$row = 7;
+foreach($consultants as $c)
+        {   
+          
+            $sheet
+                ->setCellValue($column . $row, 'test');
+                
+        }
 $sheet->setTitle('Consultant');
-$sheet->setCellValue('A1', 'consultant');
 
 $worksheet2 = $spreadsheet->createSheet();
 $worksheet2->setTitle('Mission');
