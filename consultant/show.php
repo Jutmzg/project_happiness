@@ -83,7 +83,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
         mail: "<?= $consultant->mail ?>",
         mission: "<?= $consultant->mission ?>",
         manager: "<?= $consultant->manager ?>",
-        action: <a href='<?=$consultant->id?>' class='btn btn-info'>ff</a>,
+        action: "<?=$consultant->id?>",
       },
     <?php } ?>
 
