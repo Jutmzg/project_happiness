@@ -1,5 +1,5 @@
 <?php require '../layout/header.php';?>
-<div action="login.php" class="container">
+<div action="login.php" class="container login col-6">
 <form method="post">
   <div class="form-group">
     <label for="exampleInputEmail1">Email</label>
@@ -33,7 +33,7 @@ require '../db/db.php';
         }
 		
 		
-		header('Location: ../index.php');
+		header('Location: ../home/index.php');
 		exit();
 	}
 ?>

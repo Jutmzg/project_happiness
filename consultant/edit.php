@@ -51,6 +51,7 @@ if (
             <a href ="/Akkappiness/consultant/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
         </div>
+
         <div class="card-body">
             <?php if (!empty($message)) : ?>
                 <div class="alert alert-success">
@@ -82,7 +83,7 @@ if (
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="manager">Mission</label>
+                    <label for="manager">Manager</label>
                     <select name="manager_id" class="form-control"required>
                         <option name="choice" id="choice" value="">Selectionner un manager</option>
                         <?php foreach ($managers as $manager) {

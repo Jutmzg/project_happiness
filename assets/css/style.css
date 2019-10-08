@@ -131,15 +131,18 @@ table {
   overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: x-large;
+    font-size: large;
+    color: black;
     margin:auto;
     text-transform: uppercase;
   }
 
+
+
   .ag-cell.ag-cell-not-inline-editing.ag-cell-with-height.ag-cell-value{
     background: #b9b9b91f;
     text-align: center;
-    font-size: large;
+    font-size: initial;
     padding:20px;
   }
 
@@ -153,4 +156,14 @@ table {
 
   .ag-center-cols-viewport{
     background:#b9b9b91f;
+  }
+
+  /******************/
+
+  .login{
+    padding:5%;
+  }
+  .login label{
+    color:white;
+    font-size: 1.2rem;
   }
