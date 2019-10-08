@@ -154,3 +154,13 @@ table {
   .ag-center-cols-viewport{
     background:#b9b9b91f;
   }
+
+  /******************/
+
+  .login{
+    padding:5%;
+  }
+  .login label{
+    color:white;
+    font-size: 1.2rem;
+  }
