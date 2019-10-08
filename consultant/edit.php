@@ -82,7 +82,7 @@ if (
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="manager">Mission</label>
+                    <label for="manager">Manager</label>
                     <select name="manager_id" class="form-control"required>
                         <option name="choice" id="choice" value="">Selectionner un manager</option>
                         <?php foreach ($managers as $manager) {
