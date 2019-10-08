@@ -51,6 +51,7 @@ if (
             <a href ="/Akkappiness/consultant/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
         </div>
+
         <div class="card-body">
             <?php if (!empty($message)) : ?>
                 <div class="alert alert-success">
