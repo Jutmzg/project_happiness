@@ -1,0 +1,156 @@
+body{
+    background-color: #294456;
+}
+.btn{
+  cursor: pointer;
+}
+.retour a{
+  color:white;
+  text-decoration: none;
+}
+.retour:hover{
+  background-color: white;
+  border-color: #294456;
+  color: #294456;
+}
+.retour a:hover{
+  color: #294456;
+}
+
+.btn-info{
+    background-color: #294456;
+    border-color: #294456;
+    transition: 0.7s;
+    cursor: pointer;
+}
+.btn-info a{
+    border:none;
+    
+}
+.btn-info:hover{
+    background-color: white;
+    border-color: #294456;
+    color: #294456;
+}
+
+.navbar-light .navbar-nav .nav-link{
+    color: #294456;
+    font-size: 1.5rem;
+    text-align: center;
+    transition: 0.5;
+}
+.navbar-light .navbar-nav .nav-link:hover{
+    color: #294456;
+    opacity: 0.2;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+/*TABLE*/
+
+table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+  }
+  table th,
+  table td {
+    text-align: center;
+  }
+  table th {
+    text-transform: uppercase;
+  }
+  @media screen and (max-width: 850px) {
+    table {
+      border: 0;
+    }
+  
+    table caption {
+      font-size: 1.3em;
+    }
+    
+    table thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    
+    table tr {
+      border-bottom: 3px solid #ddd;
+      display: block;
+      margin-bottom: .625em;
+    }
+    
+    table td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: .8em;
+      text-align: right;
+    }
+    
+    table td::before {
+      /*
+      * aria-label has no advantage, it won't be read inside a table
+      content: attr(aria-label);
+      */
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    table td:last-child {
+      border-bottom: 0;
+    }
+  }
+
+/*****bouton retour*****/
+
+#cross{
+  cursor:pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 13px;
+  color:red;
+
+}
+
+
+/*************AG GRID***********/
+
+.ag-header-cell-label .ag-header-cell-text{
+  overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: x-large;
+    margin:auto;
+    text-transform: uppercase;
+  }
+
+  .ag-cell.ag-cell-not-inline-editing.ag-cell-with-height.ag-cell-value{
+    background: #b9b9b91f;
+    text-align: center;
+    font-size: large;
+    padding:20px;
+  }
+
+  .ag-header-viewport{
+    background:#b9b9b91f;
+  }
+
+  .ag-root.ag-unselectable.ag-layout-normal{
+    border:1px solid #e9ecef;
+  }
+
+  .ag-center-cols-viewport{
+    background:#b9b9b91f;
+  }
