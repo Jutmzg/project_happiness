@@ -43,6 +43,9 @@
         <li class="nav-item">
         <a class="nav-link mr-2" href="/Akkappiness/job/show.php">Métiers</a>
         </li>
+        <li class="nav-item">
+        <a class="nav-link mr-2" href="/Akkappiness/export.php">Export</a>
+        </li>
       </ul>
     </div>
   </nav>
