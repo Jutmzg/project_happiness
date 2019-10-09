@@ -51,8 +51,8 @@ if (
 <div class="container">
   <div class="card mt-5">
     <div class="card-header">
-      <h2>Modifier la mission : <?=$row->name?></h2>
-      <a href ="/Akkappiness/mission/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
+      <h2>Modifier la mission : <?= $row->name ?></h2>
+      <a href="/Akkappiness/mission/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
     </div>
     <div class="card-body">
@@ -76,8 +76,6 @@ if (
             } ?>
           </select>
         </div>
-
-
         <div class="form-group">
           <label for="consultant">Consultant</label>
           <select name="consultant_id" class="form-control" required>
@@ -89,7 +87,6 @@ if (
             } ?>
           </select>
         </div>
-        
         <div class="form-group">
           <label for="job_id">Métier</label>
           <select name="job_id" class="form-control" required>
@@ -106,17 +103,16 @@ if (
         </div>
         <div class="form-group">
           <label for="stop">Fin de mission</label>
-          <input type="text" class="form-control datepicker" name="stop" id="stop" min="<?= date('d/m/Y', strtotime($row->start)) ?>" value="<?= date('d/m/Y', strtotime($row->stop)) ?>" required>
+          <input type="text" class="form-control datepicker" name="stop" id="stop" min="<?= date('d/m/Y', strtotime($row->start)) ?>" value="<?= $row->stop ?>" required>
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-info">Valider</button>
-          <button class="btn btn-info retour"><a href ="/Akkappiness/mission/show.php">Annuler</a></button>
-
+          <button class="btn btn-info retour"><a href="/Akkappiness/mission/show.php">Annuler</a></button>
         </div>
       </form>
     </div>
   </div>
 </div>
 
-  
+
 <?php require '../layout/footer.php'; ?>
