@@ -11,11 +11,10 @@ $statement->execute();
 $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 
 $spreadsheet = new Spreadsheet();
-$sheet = $spreadsheet->getActiveSheet();
+$spreadsheet->setActiveSheetIndex(0);
 $row = 3;
 foreach($consultants as $value){
-        $sheet
-            ->setCellValue('B'.$row, $value->lastname)
+        $spreadsheet->getActiveSheet()->setCellValue('B'.$row, $value->lastname)
             ->setCellValue('C'.$row, $value->firstname)
             ->setCellValue('D'.$row, $value->mail)
             ->setCellValue('E'.$row, $value->mission_id)
@@ -23,21 +22,43 @@ foreach($consultants as $value){
             ->setCellValue('G'.$row, $value->manager_id);
         $row++;     
 }
-$sheet->setCellValue('A1', 'Liste des Consultants')
-        ->setCellValue('B1', 'Nom')
-        ->setCellValue('C1', 'Prénom')
-        ->setCellValue('D1', 'Mail')
-        ->setCellValue('E1', 'Mission')
-        ->setCellValue('F1', 'Statut')
-        ->setCellValue('G1', 'Manager');
-$sheet->mergeCells('A1:D1');
-$sheet->setTitle('Consultant');
+$spreadsheet->getActiveSheet()->setCellValue('A1', 'Liste des Consultants')
+        ->setCellValue('B2', 'Nom')
+        ->setCellValue('C2', 'Prénom')
+        ->setCellValue('D2', 'Mail')
+        ->setCellValue('E2', 'Mission')
+        ->setCellValue('F2', 'Statut')
+        ->setCellValue('G2', 'Manager');
+$spreadsheet->getActiveSheet()->mergeCells('A1:D1');
+$spreadsheet->getActiveSheet()->setTitle('Consultant');
 
 $sql = 'SELECT * FROM mission';
 $statement = $connection->prepare($sql);
 $statement->execute();
 $missions = $statement->fetchAll(PDO::FETCH_OBJ);
-$spreadsheet->createSheet();
+$spreadsheet->createSheet(1);
+$spreadsheet->setActiveSheetIndex(1);
+$row = 3;
+foreach($missions as $value){
+    $spreadsheet->getActiveSheet()->setCellValue('B'.$row, $value->name)
+        ->setCellValue('C'.$row, $value->customer_id)
+        ->setCellValue('D'.$row, $value->job_id)
+        ->setCellValue('E'.$row, $value->consultant_id)
+        ->setCellValue('F'.$row, $value->start)
+        ->setCellValue('G'.$row, $value->stop)
+        ->setCellValue('E'.$row, $value->state);
+    $row++;     
+}
+$spreadsheet->getActiveSheet()->setTitle('Mission');
+$spreadsheet->getActiveSheet()->setCellValue('A1', 'Liste des Missions')
+        ->setCellValue('B2', 'Nom')
+        ->setCellValue('C2', 'Client')
+        ->setCellValue('D2', 'Métier')
+        ->setCellValue('E2', 'Consultant')
+        ->setCellValue('F2', 'Début de la Mission')
+        ->setCellValue('G2', 'Fin de la Mission')
+        ->setCellValue('E2', 'Statut');
+        $row = 3;
 
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 header('Content-Disposition: attachment; filename="Akkappiness.xlsx"');
