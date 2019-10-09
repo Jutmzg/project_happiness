@@ -28,6 +28,13 @@ $statement = $connection->prepare($sql);
 $statement->execute();
 $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 ?>
+
+
+
+		
+		<label FOR="datepicker">Date : </label>
+		<input type="text" id="datepicker" name="datepicker"><br />
+
 <input type="text" id="filter-text-box" placeholder="Filter..." oninput="onFilterTextBoxChanged()" />
 <button class="btn btn-primary" onclick="getSelectedRows()">-></button>
 <div class="container d-flex">
