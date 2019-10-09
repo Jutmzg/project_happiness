@@ -1,6 +1,3 @@
-<!doctype html>
-<html lang="en">
-
 <head>
   <title>AKKAPPINESS</title>
 
@@ -19,7 +16,6 @@
   <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css">
     <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-balham.css">
-
 </head>
 
 <body>
@@ -42,6 +38,9 @@
         </li>
         <li class="nav-item">
         <a class="nav-link mr-2" href="/Akkappiness/job/show.php">Métiers</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link mr-2" href="/Akkappiness/enquete/index.php">Enquête</a>
         </li>
         <li class="nav-item">
         <a class="nav-link mr-2" href="/Akkappiness/export.php">Export</a>

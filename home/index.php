@@ -1,5 +1,6 @@
+<!DOCTYPE html>
+<html lang="en">
 <?php require '../layout/header.php'; ?>
-
 <head>
   <script src="https://unpkg.com/ag-grid-enterprise/dist/ag-grid-enterprise.min.noStyle.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css">

@@ -43,6 +43,8 @@ if (
     }
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">
 <?php require '../layout/header.php'; ?>
 <div class="container">
     <div class="card mt-5">

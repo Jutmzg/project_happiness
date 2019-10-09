@@ -8,10 +8,10 @@ WHERE m.state = 0";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $mission = $statement->fetchAll(PDO::FETCH_OBJ);
-
 ?>
+<!DOCTYPE html>
+<html lang="en">
 <?php require '../layout/header.php'; ?>
-
 <div class="container">
   <div class="card mt-5">
     <div class="card-header">

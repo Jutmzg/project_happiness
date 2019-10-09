@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <?php require '../layout/header.php';?>
 <div action="login.php" class="container login col-6">
 <form method="post">

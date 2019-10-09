@@ -4,8 +4,9 @@ $sql = 'SELECT ID,name, address FROM customer WHERE state = 0';
 $statement = $connection->prepare($sql);
 $statement->execute();
 $customers = $statement->fetchAll(PDO::FETCH_OBJ);
-
 ?>
+<!DOCTYPE html>
+<html lang="en">
 <?php require '../layout/header.php'; ?>
 <div class="container">
   <div class="card mt-5">

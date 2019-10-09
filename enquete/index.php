@@ -1,10 +1,10 @@
-<html>
-<?php require './layout/header.php'; ?>
+<!DOCTYPE html>
+<html lang="en">
+<?php require '../layout/header.php'; ?>
 
 <head>
   <script src="https://unpkg.com/ag-grid-enterprise/dist/ag-grid-enterprise.min.noStyle.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css">
-  <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-balham.css">
 </head>
 
 <!-- <div class="col-md-10 col-md-offset-1 spacer-below-20">
@@ -15,7 +15,7 @@
 </div> -->
 <?php
 
-require 'db/db.php';
+require '../db/db.php';
 $sql = "SELECT c.id, CONCAT(c.firstname,' ', c.lastname) as fullname, 
 c.mail, CONCAT(mana.firstname,' ',mana.lastname) manager, m.name mission 
 FROM consultant c
@@ -149,4 +149,4 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
   }
 </style>
 
-<?php require './layout/footer.php'; ?>
+<?php require '../layout/footer.php'; ?>

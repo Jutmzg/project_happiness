@@ -4,8 +4,9 @@ $sql = 'SELECT * FROM job';
 $statement = $connection->prepare($sql);
 $statement->execute();
 $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
-
 ?>
+<!DOCTYPE html>
+<html lang="en">
 <?php require '../layout/header.php'; ?>
 <div class="container">
   <div class="card mt-5">
