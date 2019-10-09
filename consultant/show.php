@@ -20,9 +20,6 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
   <div class="card mt-5">
     <div class="card-header">
 
-
-    
-
       <h2>Consultants</h2>
       <a href="/Akkappiness/consultant/create.php"><button type="button" class="btn btn-primary"><i class="fas fa-user-plus"></i></button></a>
       <div id="editAndDelete"></div>
@@ -31,7 +28,6 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
         <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
 
         <div id="myGrid" style="height: 600px;width:100%;" class="ag-theme-balham" onclick="buttons()"></div>
-        
         
       </div>
     </div>
@@ -47,15 +43,6 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 <body>
 
 <script type="text/javascript" charset="utf-8">
-  // specify the columns 
-
-  var variableRecuperee = <?php echo json_encode($test); ?>;
-  console.log(variableRecuperee)
-  var PRODUCTS_ACTIONS_TEMPLATE = 
-    `
-<a href="edit.php?id=" class="btn btn-info"><i class="fas fa-user-edit fa-xs"></i></a>
-                <a onclick="return confirm('Etes vous sur de vouloir effectuer la suppression?')" href="delete.php?id=1" class='btn btn-danger'><i class="fas fa-trash-alt"></i></a>`;
-
 
   var columnDefs = [{
       headerName: "Nom",
@@ -148,7 +135,6 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
     gridOptions.api.setQuickFilter(document.getElementById('filter-text-box').value);
   }
 
-
   function buttons() {
     var selectedNodes = gridOptions.api.getSelectedNodes()
     var selectedData = selectedNodes.map(function(node) {
@@ -159,12 +145,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
     })
   document.getElementById("editAndDelete").innerHTML = 
   "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-user-edit fa-xs'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
-  
 
 }
-
-
-
-
 </script>
 <?php require '../layout/footer.php'; ?>
