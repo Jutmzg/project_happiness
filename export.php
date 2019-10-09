@@ -106,13 +106,3 @@ header('Content-Encoding: UTF-8');
 $writer = new Xlsx($spreadsheet);
 $writer->save('php://output');
 ?>
-
-/* /**  Loop through all the remaining files in the list  **/
-//foreach($inputFileNames as $sheet => $inputFileName) {
-    /**  Increment the worksheet index pointer for the Reader  **/
-    //$reader->setSheetIndex($sheet+1);
-    /**  Load the current file into a new worksheet in Spreadsheet  **/
-    //$reader->loadIntoExisting($inputFileName,$spreadsheet);
-    /**  Set the worksheet title (to the filename that we've loaded)  **/
-    //$spreadsheet->getActiveSheet()
-        //->setTitle(pathinfo($inputFileName,PATHINFO_BASENAME));*/
