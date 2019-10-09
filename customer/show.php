@@ -62,12 +62,13 @@ $customers = $statement->fetchAll(PDO::FETCH_OBJ);
 
     columnDefs: columnDefs,
     pagination: true,
+    paginationPageSize: 20,
     rowData: rowData,
     rowSelection: 'multiple',
     headerHeight: 50,
     // hauteur des rows
     getRowHeight: function(params) {
-      return 80;
+      return 60;
     },
   };
 
