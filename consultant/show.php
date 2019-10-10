@@ -17,31 +17,46 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 <html lang="en">
 <?php require '../layout/header.php'; ?>
 
-
 <div class="container">
   <div class="card mt-5">
     <div class="card-header">
 
+
+    
+
       <h2>Consultants</h2>
       <a href="/Akkappiness/consultant/create.php"><button type="button" class="btn btn-primary"><i class="fas fa-user-plus"></i></button></a>
+      <div id="editAndDelete"></div>
       <div class="card-body">
 
         <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
 
-        <div id="myGrid" style="height: 600px;width:100%;" class="ag-theme-balham"></div> 
+        <div id="myGrid" style="height: 600px;width:100%;" class="ag-theme-balham" onclick="buttons()"></div>
+        
+        
       </div>
     </div>
   </div>
 </div>
 
+<?Php foreach($consultants as $consultant){
+  $test[] = '<a href=edit.php?id='.$consultant->id. ' class="btn btn-info"><i class="fas fa-user-edit fa-xs"></i></a>' ;
+}
+?>
+
+</head>
+<body>
+
 <script type="text/javascript" charset="utf-8">
-  // specify the columns
-  
-  /* const PRODUCTS_ACTIONS_TEMPLATE = 
-  `<?= $consultant->id ?>
-<a href="edit.php?id=1" class="btn btn-info"><i class="fas fa-user-edit fa-xs"></i></a>
-                <a onclick="return confirm('Etes vous sur de vouloir effectuer la suppression?')" href="delete.php?id=<?= $consultant->id ?>" class='btn btn-danger'><i class="fas fa-trash-alt"></i></a>`;
-                */
+  // specify the columns 
+
+  var variableRecuperee = <?php echo json_encode($test); ?>;
+  console.log(variableRecuperee)
+  var PRODUCTS_ACTIONS_TEMPLATE = 
+    `
+<a href="edit.php?id=" class="btn btn-info"><i class="fas fa-user-edit fa-xs"></i></a>
+                <a onclick="return confirm('Etes vous sur de vouloir effectuer la suppression?')" href="delete.php?id=1" class='btn btn-danger'><i class="fas fa-trash-alt"></i></a>`;
+
 
   var columnDefs = [{
       headerName: "Nom",
@@ -71,27 +86,34 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
     {
       headerName: "Action",
       field: 'action',
-     // template:PRODUCTS_ACTIONS_TEMPLATE,
-
+      hide:true,
+     // template: PRODUCTS_ACTIONS_TEMPLATE,
+      
     },
+    
   ];
   // specify the data
   var rowData = [
     <?php foreach ($consultants as $consultant) { ?>
-
+      
       {
+      
         nom: "<?= $consultant->fullname ?>",
         mail: "<?= $consultant->mail ?>",
         mission: "<?= $consultant->mission ?>",
-        manager: "<?= $consultant->manager ?>",
-        action: "<?=$consultant->id?>",
+        manager: "<?= $consultant->manager ?>", 
+        action:   "<?= $consultant->id ?>",
       },
+
     <?php } ?>
 
   ];
   // let the grid know which columns and what data to use
   var gridOptions = {
-
+    defaultColDef: {
+        resizable: true,
+        suppressColumnVirtualisation: true,
+    },
     columnDefs: columnDefs,
     pagination: true,
     rowData: rowData,
@@ -106,6 +128,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
     },
   };
 
+ 
   var eGridDiv = document.querySelector('#myGrid');
 
   new agGrid.Grid(eGridDiv, gridOptions);
@@ -125,6 +148,24 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
   function onFilterTextBoxChanged() {
     gridOptions.api.setQuickFilter(document.getElementById('filter-text-box').value);
   }
+
+
+  function buttons() {
+    var selectedNodes = gridOptions.api.getSelectedNodes()
+    var selectedData = selectedNodes.map(function(node) {
+      return node.data
+    })
+    var action = selectedData.map(function(node){
+      return node.action
+    })
+  document.getElementById("editAndDelete").innerHTML = 
+  "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-user-edit fa-xs'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
+  
+
+}
+
+
+
 
 </script>
 <?php require '../layout/footer.php'; ?>
