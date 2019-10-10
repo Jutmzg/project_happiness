@@ -71,7 +71,7 @@ if (
               <option name="choice" id="choice" value="">Selectionner un client</option>
               <?php foreach ($customers as $customer) {
                 ?>
-                <option value="<?= $customer->ID ?>" name="customer" id="customer"><?= $customer->name ?></option>
+                <option value="<?= $customer->id ?>" name="customer" id="customer"><?= utf8_encode($customer->name) ?></option>
               <?php } ?>
             </select>
           </div>
@@ -80,7 +80,7 @@ if (
             <select name="consultant_id" class="form-control" required>
               <option name="choice" id="choice" value="">Selectionner un consultant</option>
               <?php foreach ($consultants as $consultant) { ?>
-                <option value="<?= $consultant->ID ?>" name="consultant" id="consultant"><?= $consultant->firstname ?></option>
+                <option value="<?= $consultant->id ?>" name="consultant" id="consultant"><?= utf8_encode($consultant->firstname) ?></option>
               <?php } ?>
             </select>
           </div>
@@ -90,7 +90,7 @@ if (
               <option name="choice" id="choice" value="">Selectionner un métier</option>
               <?php foreach ($jobs as $job) {
                 ?>
-                <option value="<?= $job->ID ?>" name="job" id="job"><?= $job->name ?></option>
+                <option value="<?= $job->id ?>" name="job" id="job"><?= utf8_encode($job->name) ?></option>
               <?php } ?>
             </select>
           </div>

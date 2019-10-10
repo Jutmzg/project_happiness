@@ -75,20 +75,20 @@ if (
             <select name="customer_id" class="form-control" required>
               <option name="choice" id="choice" value="">Selectionner un client</option>
               <?php foreach ($customers as $customer) {
-                $selected = $row->customer_id == $customer->id ? 'selected' : '';
-                echo "<option value='$customer->id' name='customer' id='customer' $selected>$customer->name</option>";
-              } ?>
+                $selected = $row->customer_id == $customer->id ? 'selected' : ''; ?>
+                <?= "<option value='$customer->id' name='customer' id='customer' $selected>"?><?=utf8_encode($customer->name)?></option>
+              <?php } ?>
             </select>
           </div>
           <div class="form-group">
             <label for="consultant">Consultant</label>
             <select name="consultant_id" class="form-control" required>
               <option name="choice" id="choice" value="">Selectionner un consultant</option>
-              <?php foreach ($consultants as $consultant) {
-                $selected = $row->consultant_id == $consultant->id ? 'selected' : '';
+              <?php foreach ($consultants as $consultant) { ?>
+               <?= $selected = $row->consultant_id == $consultant->id ? 'selected' : ''; ?>
 
-                echo "<option value='$consultant->id' name='consultant' id='consultant' $selected>$consultant->firstname $consultant->lastname</option>";
-              } ?>
+                <?= "<option value='$consultant->id' name='consultant' id='consultant' $selected>"?><?= utf8_encode($consultant->firstname),' ', utf8_encode($consultant->lastname)?></option>
+            <?php } ?>
             </select>
           </div>
           <div class="form-group">
@@ -96,9 +96,9 @@ if (
             <select name="job_id" class="form-control" required>
               <option name="choice" id="choice" value="">Selectionner un métier</option>
               <?php foreach ($jobs as $job) {
-                $selected = $row->job_id == $job->id ? 'selected' : '';
-                echo "<option value='$job->id' $selected>$job->name</option>";
-              } ?>
+                $selected = $row->job_id == $job->id ? 'selected' : ''; ?>
+                <?= "<option value='$job->id' $selected>"?><?=utf8_encode($job->name)?></option>
+            <?php  } ?>
             </select>
           </div>
           <div class="form-group">

@@ -50,7 +50,7 @@ $customers = $statement->fetchAll(PDO::FETCH_OBJ);
   var rowData = [
     <?php foreach ($customers as $customer) { ?>
       {
-        nom: "<?= $customer->name ?>",
+        nom: "<?= utf8_encode($customer->name) ?>",
         adresse: "<?= $customer->address ?>",
         action: "<?= $customer->ID ?>",
       },

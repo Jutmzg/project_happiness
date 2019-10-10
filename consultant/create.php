@@ -74,7 +74,7 @@ if (
               <option name="choice" id="choice"></option>
               <?php foreach ($missions as $mission) {
                 ?>
-                <option value="<?= $mission->ID ?>" name="mission" id="mission"><?= $mission->name ?></option>
+                <option value="<?= $mission->id ?>" name="mission" id="mission"><?= utf8_encode($mission->name) ?></option>
               <?php } ?>
             </select>
           </div>
@@ -84,7 +84,7 @@ if (
               <option name="choice" id="choice" value="">Selectionner un manager</option>
               <?php foreach ($managers as $manager) {
                 ?>
-                <option value="<?= $manager->id ?>" name="manager" id="manager"><?= $manager->fullname ?></option>
+                <option value="<?= $manager->id ?>" name="manager" id="manager"><?= utf8_encode($manager->fullname) ?></option>
               <?php } ?>
             </select>
           </div>

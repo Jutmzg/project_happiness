@@ -40,11 +40,11 @@ if (
       <form method="post">
         <div class="form-group">
           <label for="name">Nom</label>
-          <input value="<?= $customers->name; ?>" type="text" name="name" id="name" class="form-control" maxlength="50" minlength="2" required>
+          <input value="<?= utf8_encode($customers->name); ?>" type="text" name="name" id="name" class="form-control" maxlength="50" minlength="2" required>
         </div>
         <div class="form-group">
           <label for="address">Adresse</label>
-          <input value="<?= $customers->address; ?>" type="text" name="address" id="address" class="form-control" maxlength="75" minlength="10" required>
+          <input value="<?= $customers->address; ?>" type="text" name="address" id="address" class="form-control" maxlength="75" minlength="10">
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-info">Valider</button>

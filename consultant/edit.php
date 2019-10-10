@@ -80,20 +80,22 @@ if (
                         <label for="mission">Mission</label>
                         <select name="mission_id" class="form-control">
                             <option name="choice" id="choice"></option>
-                            <?php foreach ($missions as $mission) {
-                                $selected = $row->mission_id == $mission->ID ? 'selected' : '';
-                                echo "<option value='$mission->ID' name='mission_id' id='mission_id' $selected>$mission->name</option>";
-                            } ?>
+                            
+
+                            <?php foreach ($missions as $mission) { ?>
+                               <?php $selected = $row->mission_id == $mission->id ? 'selected' : ''; ?>
+                                <?= "<option value='$mission->id' name='mission_id' id='mission_id' $selected>"?><?= utf8_encode($mission->name)?></option>
+                            <?php } ?>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="manager">Manager</label>
                         <select name="manager_id" class="form-control" required>
                             <option name="choice" id="choice" value="">Selectionner un manager</option>
-                            <?php foreach ($managers as $manager) {
-                                $selected = $row->manager_id == $manager->id ? 'selected' : '';
-                                echo "<option value='$manager->id' name='manager_id' id='manager_id' $selected>$manager->fullname</option>";
-                            } ?>
+                            <?php foreach ($managers as $manager) { ?>
+                               <?php $selected = $row->manager_id == $manager->id ? 'selected' : ''; ?>
+                                <?= "<option value='$manager->id' name='manager_id' id='manager_id' $selected>"?><?= utf8_encode($manager->fullname)?></option>
+                            <?php } ?>
                         </select>
                     </div>
                     <div class="form-group">
