@@ -44,64 +44,68 @@ if (
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <?php require '../layout/header.php'; ?>
-<div class="container">
-    <div class="card mt-5">
-        <div class="card-header">
-            <h2>Modifier les informations de <?= utf8_encode($row->firstname) . ' ' . utf8_encode($row->lastname) ?></h2>
-            <a href ="/Akkappiness/consultant/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
-        </div>
+<body>
+    <div class="container">
+        <div class="card mt-5">
+            <div class="card-header">
+                <h2>Modifier les informations de <?= utf8_encode($row->firstname) . ' ' . utf8_encode($row->lastname) ?></h2>
+                <a href="/Akkappiness/consultant/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
-        <div class="card-body">
-            <?php if (!empty($message)) : ?>
-                <div class="alert alert-success">
-                    <?= $message; ?>
-                </div>
-            <?php endif; ?>
-            <form method="post">
-                <div class="form-group">
-                    <label for="lastname">Nom</label>
-                    <input value="<?= utf8_encode($row->lastname); ?>" type="text" name="lastname" id="lastname" class="form-control" maxlength="50" minlength="2" required>
-                </div>
-                <div class="form-group">
-                    <label for="firstname">Prénom</label>
-                    <input value="<?=utf8_encode($row->firstname); ?>" type="text" name="firstname" id="firstname" class="form-control" maxlength="50" minlength="2" required>
-                </div>
-                <div class="form-group">
-                    <label for="mail">Email</label>
-                    <input value="<?= $row->mail; ?>" type="email" name="mail" id="mail" class="form-control" maxlength="50" minlength="5" required>
-                </div>
-                </select>
-                <div class="form-group">
-                    <label for="mission">Mission</label>
-                    <select name="mission_id" class="form-control">
-                        <option name="choice" id="choice"></option>
-                        <?php foreach ($missions as $mission) {
-                            $selected = $row->mission_id == $mission->ID ? 'selected' : '';
-                            echo "<option value='$mission->ID' name='mission_id' id='mission_id' $selected>$mission->name</option>";
-                        } ?>
+            </div>
+
+            <div class="card-body">
+                <?php if (!empty($message)) : ?>
+                    <div class="alert alert-success">
+                        <?= $message; ?>
+                    </div>
+                <?php endif; ?>
+                <form method="post">
+                    <div class="form-group">
+                        <label for="lastname">Nom</label>
+                        <input value="<?= utf8_encode($row->lastname); ?>" type="text" name="lastname" id="lastname" class="form-control" maxlength="50" minlength="2" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname">Prénom</label>
+                        <input value="<?= utf8_encode($row->firstname); ?>" type="text" name="firstname" id="firstname" class="form-control" maxlength="50" minlength="2" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mail">Email</label>
+                        <input value="<?= $row->mail; ?>" type="email" name="mail" id="mail" class="form-control" maxlength="50" minlength="5" required>
+                    </div>
                     </select>
-                </div>
-                <div class="form-group">
-                    <label for="manager">Manager</label>
-                    <select name="manager_id" class="form-control" required>
-                        <option name="choice" id="choice" value="">Selectionner un manager</option>
-                        <?php foreach ($managers as $manager) {
-                            $selected = $row->manager_id == $manager->id ? 'selected' : '';
-                            echo "<option value='$manager->id' name='manager_id' id='manager_id' $selected>$manager->fullname</option>";
-                        } ?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-info">Valider</button>
-                    <button class="btn btn-info retour"><a href="/Akkappiness/consultant/show.php">Retour</a></button>
+                    <div class="form-group">
+                        <label for="mission">Mission</label>
+                        <select name="mission_id" class="form-control">
+                            <option name="choice" id="choice"></option>
+                            <?php foreach ($missions as $mission) {
+                                $selected = $row->mission_id == $mission->ID ? 'selected' : '';
+                                echo "<option value='$mission->ID' name='mission_id' id='mission_id' $selected>$mission->name</option>";
+                            } ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="manager">Manager</label>
+                        <select name="manager_id" class="form-control" required>
+                            <option name="choice" id="choice" value="">Selectionner un manager</option>
+                            <?php foreach ($managers as $manager) {
+                                $selected = $row->manager_id == $manager->id ? 'selected' : '';
+                                echo "<option value='$manager->id' name='manager_id' id='manager_id' $selected>$manager->fullname</option>";
+                            } ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info">Valider</button>
+                        <button class="btn btn-info retour"><a href="/Akkappiness/consultant/show.php">Retour</a></button>
 
-                </div>
-            </form>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-</div>
+    </div>
+</body>
 <?php require '../layout/footer.php'; ?>
+</html>

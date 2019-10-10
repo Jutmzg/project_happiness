@@ -48,73 +48,76 @@ if (
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <?php require '../layout/header.php'; ?>
-<div class="container">
-  <div class="card mt-5">
-    <div class="card-header">
-      <h2>Modifier la mission : <?= $row->name ?></h2>
-      <a href="/Akkappiness/mission/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
-    </div>
-    <div class="card-body">
-      <?php if (!empty($message)) : ?>
-        <div class="alert alert-success">
-          <?= $message; ?>
-        </div>
-      <?php endif; ?>
-      <form method="post">
-        <div class="form-group">
-          <label for="name">Intitulé</label>
-          <input value="<?= $row->name; ?>" type="text" name="name" id="name" class="form-control" maxlength="50" minlength="2" required>
-        </div>
-        <div class="form-group">
-          <label for="customer">Client</label>
-          <select name="customer_id" class="form-control" required>
-            <option name="choice" id="choice" value="">Selectionner un client</option>
-            <?php foreach ($customers as $customer) {
-              $selected = $row->customer_id == $customer->id ? 'selected' : '';
-              echo "<option value='$customer->id' name='customer' id='customer' $selected>$customer->name</option>";
-            } ?>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="consultant">Consultant</label>
-          <select name="consultant_id" class="form-control" required>
-            <option name="choice" id="choice" value="">Selectionner un consultant</option>
-            <?php foreach ($consultants as $consultant) {
-              $selected = $row->consultant_id == $consultant->id ? 'selected' : '';
+<body>
+  <div class="container">
+    <div class="card mt-5">
+      <div class="card-header">
+        <h2>Modifier la mission : <?= $row->name ?></h2>
+        <a href="/Akkappiness/mission/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
-              echo "<option value='$consultant->id' name='consultant' id='consultant' $selected>$consultant->firstname $consultant->lastname</option>";
-            } ?>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="job_id">Métier</label>
-          <select name="job_id" class="form-control" required>
-            <option name="choice" id="choice" value="">Selectionner un métier</option>
-            <?php foreach ($jobs as $job) {
-              $selected = $row->job_id == $job->id ? 'selected' : '';
-              echo "<option value='$job->id' $selected>$job->name</option>";
-            } ?>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="start">Début de mission</label>
-          <input type="text" name="start" id="start" value="<?= date('d/m/Y', strtotime($row->start)) ?>" class="form-control datepicker" required>
-        </div>
-        <div class="form-group">
-          <label for="stop">Fin de mission</label>
-          <input type="text" class="form-control datepicker" name="stop" id="stop" min="<?= date('d/m/Y', strtotime($row->start)) ?>" value="<?= $row->stop ?>" required>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-info">Valider</button>
-          <button class="btn btn-info retour"><a href="/Akkappiness/mission/show.php">Annuler</a></button>
-        </div>
-      </form>
+      </div>
+      <div class="card-body">
+        <?php if (!empty($message)) : ?>
+          <div class="alert alert-success">
+            <?= $message; ?>
+          </div>
+        <?php endif; ?>
+        <form method="post">
+          <div class="form-group">
+            <label for="name">Intitulé</label>
+            <input value="<?= $row->name; ?>" type="text" name="name" id="name" class="form-control" maxlength="50" minlength="2" required>
+          </div>
+          <div class="form-group">
+            <label for="customer">Client</label>
+            <select name="customer_id" class="form-control" required>
+              <option name="choice" id="choice" value="">Selectionner un client</option>
+              <?php foreach ($customers as $customer) {
+                $selected = $row->customer_id == $customer->id ? 'selected' : '';
+                echo "<option value='$customer->id' name='customer' id='customer' $selected>$customer->name</option>";
+              } ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="consultant">Consultant</label>
+            <select name="consultant_id" class="form-control" required>
+              <option name="choice" id="choice" value="">Selectionner un consultant</option>
+              <?php foreach ($consultants as $consultant) {
+                $selected = $row->consultant_id == $consultant->id ? 'selected' : '';
+
+                echo "<option value='$consultant->id' name='consultant' id='consultant' $selected>$consultant->firstname $consultant->lastname</option>";
+              } ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="job_id">Métier</label>
+            <select name="job_id" class="form-control" required>
+              <option name="choice" id="choice" value="">Selectionner un métier</option>
+              <?php foreach ($jobs as $job) {
+                $selected = $row->job_id == $job->id ? 'selected' : '';
+                echo "<option value='$job->id' $selected>$job->name</option>";
+              } ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="start">Début de mission</label>
+            <input type="text" name="start" id="start" value="<?= date('d/m/Y', strtotime($row->start)) ?>" class="form-control datepicker" required>
+          </div>
+          <div class="form-group">
+            <label for="stop">Fin de mission</label>
+            <input type="text" class="form-control datepicker" name="stop" id="stop" min="<?= date('d/m/Y', strtotime($row->start)) ?>" value="<?= $row->stop ?>" required>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-info">Valider</button>
+            <button class="btn btn-info retour"><a href="/Akkappiness/mission/show.php">Annuler</a></button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-</div>
-
-
+</body>
 <?php require '../layout/footer.php'; ?>
+
+</html>

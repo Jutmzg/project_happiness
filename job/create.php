@@ -16,9 +16,9 @@ if (
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <?php require '../layout/header.php'; ?>
-
+<body>
 <div class="container">
   <div class="card mt-5">
     <div class="card-header">
@@ -46,4 +46,6 @@ if (
     </div>
   </div>
 </div>
+</body>
 <?php require '../layout/footer.php'; ?>
+</html>

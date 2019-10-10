@@ -10,91 +10,92 @@ $statement->execute();
 $mission = $statement->fetchAll(PDO::FETCH_OBJ);
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <?php require '../layout/header.php'; ?>
-<div class="container">
-  <div class="card mt-4">
-    <div class="card-header">
-    <h2 class="text-center text-uppercase">Missions</h2>
-      <a href="/Akkappiness/mission/create.php"><button type="button" class="btn btn-primary ml-4"><i class="fas fa-user-plus"></i></button></a>
-      <div id="editAndDelete"></div>
-      <div class="card-body">
-        <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
-        <div id="myGrid" class="ag-theme-balham" onclick="buttons()"></div>
+
+<body>
+  <div class="container">
+    <div class="card mt-4">
+      <div class="card-header">
+        <h2 class="text-center text-uppercase">Missions</h2>
+        <a href="/Akkappiness/mission/create.php"><button type="button" class="btn btn-primary ml-4"><i class="fas fa-user-plus"></i></button></a>
+        <div id="editAndDelete"></div>
+        <div class="card-body">
+          <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
+          <div id="myGrid" class="ag-theme-balham" onclick="buttons()"></div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<script type="text/javascript" charset="utf-8">
-  
-  var columnDefs = [{
-      headerName: "Mission",
-      field: "mission",
-      sortable: true,
-      filter: true,
-      width: 167,
-      suppressSizeToFit: true,
+  <script type="text/javascript" charset="utf-8">
+    var columnDefs = [{
+        headerName: "Mission",
+        field: "mission",
+        sortable: true,
+        filter: true,
+        width: 167,
+        suppressSizeToFit: true,
 
-    },
-    {
-      headerName: "Client",
-      field: "customer",
-      sortable: true,
-      filter: true,
-      width: 167,
-    },
-    {
-      headerName: "Consultant",
-      field: "consultant",
-      sortable: true,
-      filter: true,
-      width: 167,
-    },
-    {
-      headerName: "Poste",
-      field: "job",
-      sortable: true,
-      filter: true,
-      width: 167,
-    },
-    {
-      headerName: "Début de mission",
-      field: "start",
-      sortable: true,
-      filter: true,
-      width: 167,
-    },
-    {
-      headerName: "Fin de mission",
-      field: "stop",
-      sortable: true,
-      filter: true,
-      width: 167,
-    },
-    {
-      headerName: "Action",
-      field: 'action',
-      hide: true,
-      width: 250,
-    },
-  ];
-  var rowData = [
-    <?php foreach ($mission as $row) { ?>
-
-      {
-        mission: "<?= $row->mission ?>",
-        customer: "<?= $row->customer ?>",
-        consultant: "<?= utf8_encode($row->consultant) ?>",
-        job: "<?= utf8_encode($row->job) ?>",
-        start: "<?= date('d/m/Y', strtotime($row->start)) ?>",
-        stop: "<?= date('d/m/Y', strtotime($row->stop)) ?>",
-        action: "<?= $row->ID ?>",
       },
-    <?php } ?>
+      {
+        headerName: "Client",
+        field: "customer",
+        sortable: true,
+        filter: true,
+        width: 167,
+      },
+      {
+        headerName: "Consultant",
+        field: "consultant",
+        sortable: true,
+        filter: true,
+        width: 167,
+      },
+      {
+        headerName: "Poste",
+        field: "job",
+        sortable: true,
+        filter: true,
+        width: 167,
+      },
+      {
+        headerName: "Début de mission",
+        field: "start",
+        sortable: true,
+        filter: true,
+        width: 167,
+      },
+      {
+        headerName: "Fin de mission",
+        field: "stop",
+        sortable: true,
+        filter: true,
+        width: 167,
+      },
+      {
+        headerName: "Action",
+        field: 'action',
+        hide: true,
+        width: 250,
+      },
+    ];
+    var rowData = [
+      <?php foreach ($mission as $row) { ?>
 
-  ];
-  var gridOptions = {
+        {
+          mission: "<?= $row->mission ?>",
+          customer: "<?= $row->customer ?>",
+          consultant: "<?= utf8_encode($row->consultant) ?>",
+          job: "<?= utf8_encode($row->job) ?>",
+          start: "<?= date('d/m/Y', strtotime($row->start)) ?>",
+          stop: "<?= date('d/m/Y', strtotime($row->stop)) ?>",
+          action: "<?= $row->ID ?>",
+        },
+      <?php } ?>
+
+    ];
+    var gridOptions = {
       defaultColDef: {
         resizable: true,
         suppressColumnVirtualisation: true,
@@ -111,8 +112,8 @@ $mission = $statement->fetchAll(PDO::FETCH_OBJ);
       },
     };
 
-  var eGridDiv = document.querySelector('#myGrid');
-  new agGrid.Grid(eGridDiv, gridOptions);
+    var eGridDiv = document.querySelector('#myGrid');
+    new agGrid.Grid(eGridDiv, gridOptions);
 
     function onFilterTextBoxChanged() {
       gridOptions.api.setQuickFilter(document.getElementById('filter-text-box').value);
@@ -130,5 +131,7 @@ $mission = $statement->fetchAll(PDO::FETCH_OBJ);
         "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-user-edit fa-xs'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
     }
   </script>
-
+</body>
 <?php require '../layout/footer.php'; ?>
+
+</html>

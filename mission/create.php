@@ -44,69 +44,73 @@ if (
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <?php require '../layout/header.php'; ?>
 
-<div class="container">
-  <div class="card mt-5">
-    <div class="card-header">
-      <h2>Créer une mission</h2>
-      <a href="/Akkappiness/mission/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
+<body>
+  <div class="container">
+    <div class="card mt-5">
+      <div class="card-header">
+        <h2>Créer une mission</h2>
+        <a href="/Akkappiness/mission/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
+      </div>
+      <div class="card-body">
+        <?php if (!empty($message)) : ?>
+          <div class="alert alert-success">
+            <?= $message; ?>
+          </div>
+        <?php endif; ?>
+        <form method="post" id="monFormulaire">
+          <div class="form-group">
+            <label for="name">Intitulé</label>
+            <input type="text" name="name" id="name" class="form-control" maxlength="50" minlength="2" required>
+          </div>
+          <div class="form-group">
+            <label for="customer">Client</label>
+            <select name="customer_id" class="form-control" required>
+              <option name="choice" id="choice" value="">Selectionner un client</option>
+              <?php foreach ($customers as $customer) {
+                ?>
+                <option value="<?= $customer->ID ?>" name="customer" id="customer"><?= $customer->name ?></option>
+              <?php } ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="consultant">Consultant</label>
+            <select name="consultant_id" class="form-control" required>
+              <option name="choice" id="choice" value="">Selectionner un consultant</option>
+              <?php foreach ($consultants as $consultant) { ?>
+                <option value="<?= $consultant->ID ?>" name="consultant" id="consultant"><?= $consultant->firstname ?></option>
+              <?php } ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="job">Métier</label>
+            <select name="job" class="form-control" required>
+              <option name="choice" id="choice" value="">Selectionner un métier</option>
+              <?php foreach ($jobs as $job) {
+                ?>
+                <option value="<?= $job->ID ?>" name="job" id="job"><?= $job->name ?></option>
+              <?php } ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="start">Début de mission</label>
+            <input type="text" name="start" id="start" value="" class="form-control datepicker" required>
+          </div>
+          <div class="form-group">
+            <label for="stop">Fin de mission</label>
+            <input type="text" name="stop" id="stop" value="" class="form-control datepicker" required>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-info">Valider</button>
+            <button class="btn btn-info retour"><a href="/Akkappiness/mission/show.php">Annuler</a></button>
+          </div>
+      </div>
+      </form>
     </div>
-    <div class="card-body">
-      <?php if (!empty($message)) : ?>
-        <div class="alert alert-success">
-          <?= $message; ?>
-        </div>
-      <?php endif; ?>
-      <form method="post" id="monFormulaire">
-        <div class="form-group">
-          <label for="name">Intitulé</label>
-          <input type="text" name="name" id="name" class="form-control" maxlength="50" minlength="2" required>
-        </div>
-        <div class="form-group">
-          <label for="customer">Client</label>
-          <select name="customer_id" class="form-control" required>
-            <option name="choice" id="choice" value="">Selectionner un client</option>
-            <?php foreach ($customers as $customer) {
-              ?>
-              <option value="<?= $customer->ID ?>" name="customer" id="customer"><?= $customer->name ?></option>
-            <?php } ?>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="consultant">Consultant</label>
-          <select name="consultant_id" class="form-control" required>
-            <option name="choice" id="choice" value="">Selectionner un consultant</option>
-            <?php foreach ($consultants as $consultant) { ?>
-              <option value="<?= $consultant->ID ?>" name="consultant" id="consultant"><?= $consultant->firstname ?></option>
-            <?php } ?>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="job">Métier</label>
-          <select name="job" class="form-control" required>
-            <option name="choice" id="choice" value="">Selectionner un métier</option>
-            <?php foreach ($jobs as $job) {
-              ?>
-              <option value="<?= $job->ID ?>" name="job" id="job"><?= $job->name ?></option>
-            <?php } ?>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="start">Début de mission</label>
-          <input type="text" name="start" id="start" value="" class="form-control datepicker" required>
-        </div>
-        <div class="form-group">
-          <label for="stop">Fin de mission</label>
-          <input type="text" name="stop" id="stop" value="" class="form-control datepicker" required>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-info">Valider</button>
-          <button class="btn btn-info retour"><a href="/Akkappiness/mission/show.php">Annuler</a></button>
-        </div>
-    </div>
-    </form>
   </div>
-</div>
+</body>
 <?php require '../layout/footer.php'; ?>
+
+</html>

@@ -6,8 +6,9 @@ $statement->execute();
 $customers = $statement->fetchAll(PDO::FETCH_OBJ);
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <?php require '../layout/header.php'; ?>
+<body>
 <div class="container">
   <div class="card mt-4">
     <div class="card-header">
@@ -21,8 +22,6 @@ $customers = $statement->fetchAll(PDO::FETCH_OBJ);
     </div>
   </div>
 </div>
-
-
 <script type="text/javascript" charset="utf-8">
 
   var columnDefs = [{
@@ -92,4 +91,6 @@ $customers = $statement->fetchAll(PDO::FETCH_OBJ);
         "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-user-edit fa-xs'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
     }
   </script>
+</body>
 <?php require '../layout/footer.php'; ?>
+</html>

@@ -15,7 +15,7 @@
   <script src="../assets/aggrid/ag-grid-community.min.noStyle.js"></script>
 </head>
 
-<body>
+<header>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light text-uppercase">
     <a class="navbar-brand" href="/Akkappiness/home/index.php"><img src='../assets/img/logo.png' alt="logo"> </a>
@@ -45,3 +45,4 @@
       </ul>
     </div>
   </nav>
+</header>
