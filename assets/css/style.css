@@ -46,6 +46,11 @@ body{
     text-align: center;
 }
 
+#myGrid{
+  height:470px;
+  width:100%;
+}
+
 /*****bouton retour*****/
 
 #cross{
@@ -66,6 +71,17 @@ right: 9%;
 margin: 13px;
 }
 
+/*******CHARTS********/
+
+#myChart1, #myChart2, #myChart3 {
+  background-color: #0000001a;
+  margin:20px;
+}
+
+.welcome{
+  color:white;
+}
+
 /*************AG GRID***********/
 
 #filter-text-box{
@@ -76,7 +92,7 @@ margin: 13px;
 }
 
 .ag-theme-balham .ag-row-hover {
-  background-color: #33546b9e !important; }
+  background-color: #33546b9e ; }
 
   
 .ag-header-cell-label .ag-header-cell-text{

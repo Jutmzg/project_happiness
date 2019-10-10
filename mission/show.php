@@ -20,7 +20,7 @@ $mission = $statement->fetchAll(PDO::FETCH_OBJ);
       <div id="editAndDelete"></div>
       <div class="card-body">
         <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
-        <div id="myGrid" style="height: 600px;width:100%;" class="ag-theme-balham" onclick="buttons()"></div>
+        <div id="myGrid" class="ag-theme-balham" onclick="buttons()"></div>
       </div>
     </div>
   </div>
