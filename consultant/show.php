@@ -60,11 +60,12 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
         width: 250,
       },
       {
-        nom: "<?= utf8_encode($consultant->fullname) ?>",
-        mail: "<?= $consultant->mail ?>",
-        mission: "<?= utf8_encode($consultant->mission) ?>",
-        manager: "<?= utf8_encode($consultant->manager) ?>", 
-        action:   "<?= $consultant->id ?>",
+        headerName: "Manager",
+        field: "manager",
+        sortable: true,
+        filter: true,
+        width: 250,
+        
       },
       {
         headerName: "Action",
@@ -78,11 +79,11 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
     // specify the data
     var rowData = [
       <?php foreach ($consultants as $consultant) { ?> {
-          nom: "<?= $consultant->fullname ?>",
-          mail: "<?= $consultant->mail ?>",
-          mission: "<?= $consultant->mission ?>",
-          manager: "<?= $consultant->manager ?>",
-          action: "<?= $consultant->id ?>",
+        nom: "<?= utf8_encode($consultant->fullname) ?>",
+        mail: "<?= $consultant->mail ?>",
+        mission: "<?= utf8_encode($consultant->mission) ?>",
+        manager: "<?= utf8_encode($consultant->manager) ?>", 
+        action:   "<?= $consultant->id ?>",
         },
       <?php } ?>
 
