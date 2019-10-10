@@ -51,7 +51,7 @@ if (
   <div class="card mt-5">
     <div class="card-header">
       <h2>Créer une mission</h2>
-      <a href ="/Akkappiness/mission/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
+      <a href="/Akkappiness/mission/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
     </div>
     <div class="card-body">
       <?php if (!empty($message)) : ?>
@@ -101,21 +101,12 @@ if (
           <label for="stop">Fin de mission</label>
           <input type="text" name="stop" id="stop" value="" class="form-control datepicker" required>
         </div>
-
         <div class="form-group">
-          <label for="test">Début de mission</label>
-          <input type="date" name="test" id="test" value="" class="form-control datepicker">
+          <button type="submit" class="btn btn-info">Valider</button>
+          <button class="btn btn-info retour"><a href="/Akkappiness/mission/show.php">Annuler</a></button>
         </div>
-
-    </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-info">Valider</button>
-      <button class="btn btn-info retour"><a href ="/Akkappiness/mission/show.php">Annuler</a></button>
-
     </div>
     </form>
   </div>
 </div>
-</div>
-
 <?php require '../layout/footer.php'; ?>

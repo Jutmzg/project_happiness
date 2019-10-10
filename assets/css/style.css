@@ -46,71 +46,10 @@ body{
     text-align: center;
 }
 
-/*TABLE*/
-
-table {
-    border: 1px solid #ccc;
-    border-collapse: collapse;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    table-layout: fixed;
-  }
-  table th,
-  table td {
-    text-align: center;
-  }
-  table th {
-    text-transform: uppercase;
-  }
-  @media screen and (max-width: 850px) {
-    table {
-      border: 0;
-    }
-  
-    table caption {
-      font-size: 1.3em;
-    }
-    
-    table thead {
-      border: none;
-      clip: rect(0 0 0 0);
-      height: 1px;
-      margin: -1px;
-      overflow: hidden;
-      padding: 0;
-      position: absolute;
-      width: 1px;
-    }
-    
-    table tr {
-      border-bottom: 3px solid #ddd;
-      display: block;
-      margin-bottom: .625em;
-    }
-    
-    table td {
-      border-bottom: 1px solid #ddd;
-      display: block;
-      font-size: .8em;
-      text-align: right;
-    }
-    
-    table td::before {
-      /*
-      * aria-label has no advantage, it won't be read inside a table
-      content: attr(aria-label);
-      */
-      content: attr(data-label);
-      float: left;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-    
-    table td:last-child {
-      border-bottom: 0;
-    }
-  }
+#myGrid{
+  height:470px;
+  width:100%;
+}
 
 /*****bouton retour*****/
 
@@ -132,8 +71,30 @@ right: 9%;
 margin: 13px;
 }
 
+/*******CHARTS********/
+
+#myChart1, #myChart2, #myChart3 {
+  background-color: #0000001a;
+  margin:20px;
+}
+
+.welcome{
+  color:white;
+}
+
 /*************AG GRID***********/
 
+#filter-text-box{
+  position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+}
+
+.ag-theme-balham .ag-row-hover {
+  background-color: #33546b9e ; }
+
+  
 .ag-header-cell-label .ag-header-cell-text{
   overflow: hidden;
     text-overflow: ellipsis;

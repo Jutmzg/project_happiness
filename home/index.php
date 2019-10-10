@@ -2,26 +2,17 @@
 <html lang="en">
 <?php require '../layout/header.php'; ?>
 <head>
-  <script src="https://unpkg.com/ag-grid-enterprise/dist/ag-grid-enterprise.min.noStyle.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css">
-  <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-balham.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 </head>
 
-<!-- <div class="col-md-10 col-md-offset-1 spacer-below-20">
-    <label>The date</label>
-    <div class="input-group">
-        <input class="datepicker" type="text" name="date">
-    </div>
-</div> -->
-<h2 class="text-center p-4">BIENVENUE SUR AKKAPPINESS</h2>
+<h2 class="text-center p-4 welcome">BIENVENUE SUR AKKAPPINESS</h2>
 <div class="container d-flex justify-content-between">
-  <div class="row col-5 p-2">
+  <div class="row col-md-5 col-lg-5 col-sm-12 p-2">
 <canvas id="myChart1" width="400" height="400"></canvas>
 <canvas id="myChart2" width="400" height="400"></canvas>
   </div>
-  <div class="row col-5">
+  <div class="row  col-md-5 col-lg-5 col-sm-12">
   <canvas id="myChart3" width="400" height="400"></canvas>
   </div>
 </div>
@@ -146,16 +137,4 @@ var myChart3 = new Chart(ctx, {
 });
 </script>
 
-<style>
-
-#myChart1, #myChart2, #myChart3 {
-  background-color: #0000001a;
-  margin:20px;
-}
-
-h2{
-  color:white;
-}
-
-  </style>
 <?php require '../layout/footer.php'; ?>

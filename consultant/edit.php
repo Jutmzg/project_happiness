@@ -29,9 +29,9 @@ if (
     $mail = $_POST['mail'];
     if ($_POST['mission_id'] == '') {
         $mission_id = NULL;
-      } else {
+    } else {
         $mission_id = $_POST['mission_id'];
-      }
+    }
     $manager_id = $_POST['manager_id'];
     $state = 0;
 
@@ -71,7 +71,7 @@ if (
                 </div>
                 <div class="form-group">
                     <label for="mail">Email</label>
-                    <input value="<?= $row->mail; ?>" type="email" name="mail" id="mail" class="form-control"  maxlength="50" minlength="5" required>
+                    <input value="<?= $row->mail; ?>" type="email" name="mail" id="mail" class="form-control" maxlength="50" minlength="5" required>
                 </div>
                 </select>
                 <div class="form-group">
@@ -86,17 +86,17 @@ if (
                 </div>
                 <div class="form-group">
                     <label for="manager">Manager</label>
-                    <select name="manager_id" class="form-control"required>
+                    <select name="manager_id" class="form-control" required>
                         <option name="choice" id="choice" value="">Selectionner un manager</option>
                         <?php foreach ($managers as $manager) {
-                            $selected = $row->manager == $manager->ID ? 'selected' : '';
+                            $selected = $row->manager_id == $manager->id ? 'selected' : '';
                             echo "<option value='$manager->id' name='manager_id' id='manager_id' $selected>$manager->fullname</option>";
                         } ?>
                     </select>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-info">Valider</button>
-                    <button class="btn btn-info retour"><a href ="/Akkappiness/consultant/show.php">Retour</a></button>
+                    <button class="btn btn-info retour"><a href="/Akkappiness/consultant/show.php">Retour</a></button>
 
                 </div>
             </form>
