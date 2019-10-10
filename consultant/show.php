@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require '../db/db.php';
 
 $sql = "SELECT c.id, CONCAT(c.firstname,' ', c.lastname) as fullname, 
@@ -14,7 +14,7 @@ $statement->execute();
 $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <?php require '../layout/header.php'; ?>
 
 <div class="container">
@@ -98,10 +98,10 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       
       {
       
-        nom: "<?= $consultant->fullname ?>",
+        nom: "<?= utf8_encode($consultant->fullname) ?>",
         mail: "<?= $consultant->mail ?>",
-        mission: "<?= $consultant->mission ?>",
-        manager: "<?= $consultant->manager ?>", 
+        mission: "<?= utf8_encode($consultant->mission) ?>",
+        manager: "<?= utf8_encode($consultant->manager) ?>", 
         action:   "<?= $consultant->id ?>",
       },
 

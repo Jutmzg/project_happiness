@@ -15,11 +15,11 @@ $spreadsheet->setActiveSheetIndex(0);
 $row = 3;
 foreach($consultants as $value){
         $spreadsheet->getActiveSheet()->setCellValue('B'.$row, $value->lastname)
-            ->setCellValue('C'.$row, $value->firstname)
-            ->setCellValue('D'.$row, $value->mail)
-            ->setCellValue('E'.$row, $value->mission_id)
-            ->setCellValue('F'.$row, $value->state)
-            ->setCellValue('G'.$row, $value->manager_id);
+            ->setCellValue('C'.$row, utf8_encode($value->firstname))
+            ->setCellValue('D'.$row, utf8_encode($value->mail))
+            ->setCellValue('E'.$row, utf8_encode($value->mission_id))
+            ->setCellValue('F'.$row, utf8_encode($value->state))
+            ->setCellValue('G'.$row, utf8_encode($value->manager_id));
         $row++;     
 }
 $spreadsheet->getActiveSheet()->setCellValue('A1', 'Liste des Consultants')
@@ -41,12 +41,12 @@ $spreadsheet->setActiveSheetIndex(1);
 $row = 3;
 foreach($missions as $value){
     $spreadsheet->getActiveSheet()->setCellValue('B'.$row, $value->name)
-        ->setCellValue('C'.$row, $value->customer_id)
-        ->setCellValue('D'.$row, $value->job_id)
-        ->setCellValue('E'.$row, $value->consultant_id)
-        ->setCellValue('F'.$row, $value->start)
-        ->setCellValue('G'.$row, $value->stop)
-        ->setCellValue('E'.$row, $value->state);
+        ->setCellValue('C'.$row, utf8_encode($value->customer_id))
+        ->setCellValue('D'.$row, utf8_encode($value->job_id))
+        ->setCellValue('E'.$row, utf8_encode($value->consultant_id))
+        ->setCellValue('F'.$row, utf8_encode($value->start))
+        ->setCellValue('G'.$row, utf8_encode($value->stop))
+        ->setCellValue('E'.$row, utf8_encode($value->state));
     $row++;     
 }
 $spreadsheet->getActiveSheet()->setTitle('Mission');
@@ -68,9 +68,9 @@ $spreadsheet->setActiveSheetIndex(2);
 $row = 3;
     foreach($customers as $value){
         $spreadsheet->getActiveSheet()
-        ->setCellValue('B'.$row, $value->name)
-        ->setCellValue('C'.$row, $value->address)
-        ->setCellValue('D'.$row, $value->state);
+        ->setCellValue('B'.$row,utf8_encode($value->name))
+        ->setCellValue('C'.$row, utf8_encode($value->address))
+        ->setCellValue('D'.$row, utf8_encode($value->state));
     $row++;     
     }
 $spreadsheet->getActiveSheet()->setTitle('Client');
@@ -88,7 +88,7 @@ $spreadsheet->setActiveSheetIndex(3);
 $row = 3;
     foreach($jobs as $value){
         $spreadsheet->getActiveSheet()
-            ->setCellValue('B'.$row, $value->name);
+            ->setCellValue('B'.$row, utf8_encode(($value->name)));
         $row++;     
     }
 $spreadsheet->getActiveSheet()->setTitle('Métier');

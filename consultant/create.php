@@ -38,7 +38,7 @@ if (
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <?php require '../layout/header.php'; ?>
 
 <div class="container">

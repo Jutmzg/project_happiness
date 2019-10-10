@@ -49,7 +49,7 @@ if (
 <div class="container">
     <div class="card mt-5">
         <div class="card-header">
-            <h2>Modifier les informations de <?= $row->firstname . ' ' . $row->lastname ?></h2>
+            <h2>Modifier les informations de <?= utf8_encode($row->firstname) . ' ' . utf8_encode($row->lastname) ?></h2>
             <a href ="/Akkappiness/consultant/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
         </div>
@@ -63,11 +63,11 @@ if (
             <form method="post">
                 <div class="form-group">
                     <label for="lastname">Nom</label>
-                    <input value="<?= $row->lastname; ?>" type="text" name="lastname" id="lastname" class="form-control" maxlength="50" minlength="2" required>
+                    <input value="<?= utf8_encode($row->lastname); ?>" type="text" name="lastname" id="lastname" class="form-control" maxlength="50" minlength="2" required>
                 </div>
                 <div class="form-group">
                     <label for="firstname">Prénom</label>
-                    <input value="<?= $row->firstname; ?>" type="text" name="firstname" id="firstname" class="form-control" maxlength="50" minlength="2" required>
+                    <input value="<?=utf8_encode($row->firstname); ?>" type="text" name="firstname" id="firstname" class="form-control" maxlength="50" minlength="2" required>
                 </div>
                 <div class="form-group">
                     <label for="mail">Email</label>
