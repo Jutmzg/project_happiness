@@ -71,8 +71,8 @@ if (
           <select name="customer_id" class="form-control" required>
             <option name="choice" id="choice" value="">Selectionner un client</option>
             <?php foreach ($customers as $customer) {
-              $selected = $row->customer_id == $customer->ID ? 'selected' : '';
-              echo "<option value='$customer->ID' name='customer' id='customer' $selected>$customer->name</option>";
+              $selected = $row->customer_id == $customer->id ? 'selected' : '';
+              echo "<option value='$customer->id' name='customer' id='customer' $selected>$customer->name</option>";
             } ?>
           </select>
         </div>
@@ -81,9 +81,9 @@ if (
           <select name="consultant_id" class="form-control" required>
             <option name="choice" id="choice" value="">Selectionner un consultant</option>
             <?php foreach ($consultants as $consultant) {
-              $selected = $row->consultant_id == $consultant->ID ? 'selected' : '';
+              $selected = $row->consultant_id == $consultant->id ? 'selected' : '';
 
-              echo "<option value='$consultant->ID' name='consultant' id='consultant' $selected>$consultant->firstname $consultant->lastname</option>";
+              echo "<option value='$consultant->id' name='consultant' id='consultant' $selected>$consultant->firstname $consultant->lastname</option>";
             } ?>
           </select>
         </div>
@@ -92,8 +92,8 @@ if (
           <select name="job_id" class="form-control" required>
             <option name="choice" id="choice" value="">Selectionner un métier</option>
             <?php foreach ($jobs as $job) {
-              $selected = $row->job_id == $job->ID ? 'selected' : '';
-              echo "<option value='$job->ID' $selected>$job->name</option>";
+              $selected = $row->job_id == $job->id ? 'selected' : '';
+              echo "<option value='$job->id' $selected>$job->name</option>";
             } ?>
           </select>
         </div>

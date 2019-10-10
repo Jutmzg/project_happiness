@@ -1,15 +1,17 @@
 <?php require '../layout/header.php';?>
-<div action="login.php" class="container login col-6">
+<div action="login.php" class="container login col-lg-4 col-sm-6 text-center">
 <form method="post">
   <div class="form-group">
     <label for="exampleInputEmail1">Email</label>
     <input type="email" name="login" class="form-control" value="<?php if (isset($_POST['login'])) echo htmlentities(trim($_POST['login'])); ?>" placeholder="Enter email">
   </div>
-  <div class="form-group">
+  <div class="form-group mt-4">
     <label for="exampleInputPassword1">Mot de passe</label>
     <input type="password" name="pass" class="form-control" value="<?php if (isset($_POST['pass'])) echo htmlentities(trim($_POST['pass'])); ?>" placeholder="Password">
   </div>
-  <button type="submit" class="btn btn-primary" name="connexion" value="Connexion">Se Connecter</button>
+  <div class="form-group">
+  <button type="submit" class="btn btn-info connexion" name="connexion" value="Connexion">Connexion</button>
+  </div>
 </form>
 </div>
 

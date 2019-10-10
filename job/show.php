@@ -43,7 +43,7 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
     <?php foreach ($jobs as $job) { ?>
       {
         nom: "<?= $job->name ?>",
-        action: "<?= $job->ID ?>",
+        action: "<?= $job->id ?>",
       },
 
     <?php } ?>
@@ -67,7 +67,7 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
   new agGrid.Grid(eGridDiv, gridOptions);
 
   function onFilterTextBoxChanged() {
-      gridOptions.api.setQuickFilter(document.getElementById('filter-text-box').value);
+      gridOptions.api.setQuickFilter(document.getElementByid('filter-text-box').value);
     }
 
     function buttons() {
@@ -78,7 +78,7 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
       var action = selectedData.map(function(node) {
         return node.action
       })
-      document.getElementById("editAndDelete").innerHTML =
+      document.getElementByid("editAndDelete").innerHTML =
         "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-user-edit fa-xs'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
     }
   </script>
