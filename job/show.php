@@ -43,7 +43,7 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
   var rowData = [
     <?php foreach ($jobs as $job) { ?>
       {
-        nom: "<?= $job->name ?>",
+        nom: "<?= utf8_encode($job->name) ?>",
         action: "<?= $job->id ?>",
       },
 

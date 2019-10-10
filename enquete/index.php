@@ -89,9 +89,9 @@ $enquete = $statement->fetchAll(PDO::FETCH_OBJ);
   let rowData = [
     <?php foreach ($consultants as $consultant) { ?>
       {
-        nom: "<?= $consultant->fullname ?>",
+        nom: "<?= utf8_encode($consultant->fullname) ?>",
         mail: "<?= $consultant->mail ?>",
-        manager: "<?= $consultant->manager ?>"
+        manager: "<?= utf8_encode($consultant->manager) ?>"
       },
     <?php } ?>
   ];

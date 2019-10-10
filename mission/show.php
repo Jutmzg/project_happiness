@@ -85,8 +85,8 @@ $mission = $statement->fetchAll(PDO::FETCH_OBJ);
       {
         mission: "<?= $row->mission ?>",
         customer: "<?= $row->customer ?>",
-        consultant: "<?= $row->consultant ?>",
-        job: "<?= $row->job ?>",
+        consultant: "<?= utf8_encode($row->consultant) ?>",
+        job: "<?= utf8_encode($row->job) ?>",
         start: "<?= date('d/m/Y', strtotime($row->start)) ?>",
         stop: "<?= date('d/m/Y', strtotime($row->stop)) ?>",
         action: "<?= $row->ID ?>",
