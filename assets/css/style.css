@@ -75,6 +75,10 @@ margin: 13px;
     margin: 10px;
 }
 
+.ag-theme-balham .ag-row-hover {
+  background-color: #33546b9e !important; }
+
+  
 .ag-header-cell-label .ag-header-cell-text{
   overflow: hidden;
     text-overflow: ellipsis;
