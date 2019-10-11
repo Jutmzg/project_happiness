@@ -29,7 +29,7 @@ $customers = $statement->fetchAll(PDO::FETCH_OBJ);
       field: "nom",
       sortable: true,
       filter: true,
-      width: 510,
+      width: 504,
       suppressSizeToFit: true,
     },
     {
@@ -37,7 +37,7 @@ $customers = $statement->fetchAll(PDO::FETCH_OBJ);
       field: "adresse",
       sortable: true,
       filter: true,
-      width: 520,
+      width: 503,
 
     },
     {
