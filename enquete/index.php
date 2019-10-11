@@ -37,15 +37,11 @@ $sql = 'INSERT INTO job(name) VALUES(:name)';
   } */
 ?>
 
-		<label FOR="datepicker">Date : </label>
-		<input type="text" id="datepicker" name="datepicker"><br />
-
-<input type="text" id="filter-text-box" placeholder="Filter..." oninput="onFilterTextBoxChanged()" />
-<button class="btn btn-primary" onclick="getSelectedRows()">-></button>
-<button class="btn btn-primary" onclick="getSelectedMissionId()">MissionID</button>
+<button class="btn btn-primary" onclick="getSelectedMissionId()">Insérer</button>
 ​
 <div class="container d-flex">
-  <div id="myGrid" style="height: 400px;width:600px;" class="ag-theme-balham"></div>
+<input type="text" id="filter-text-box" placeholder="Filter..." oninput="onFilterTextBoxChanged()" />
+  <div id="myGrid" class="ag-theme-balham"></div>
   </div>
 </div>
 <script type="text/javascript" charset="utf-8">
@@ -55,7 +51,7 @@ $sql = 'INSERT INTO job(name) VALUES(:name)';
           field: "nom",
           sortable: true,
           filter: true,
-          width: 250,
+          width: 350,
           suppressSizeToFit: true,
           checkboxSelection: true,
 
@@ -65,21 +61,21 @@ $sql = 'INSERT INTO job(name) VALUES(:name)';
           field: "mail",
           sortable: true,
           filter: true,
-          width: 250,
+          width: 400,
         },
         {
           headerName: "Manager",
           field: "manager",
           sortable: true,
           filter: true,
-          width: 250,
+          width: 350,
 
         },
         {
           headerName: "Action",
           field: 'action',
           hide: true,
-          width: 250,
+          width: 350,
 
         },
 
@@ -152,29 +148,4 @@ $sql = 'INSERT INTO job(name) VALUES(:name)';
 
  
 </script>
-
-<style>
-  #mailing {
-    background: #c3bfbf;
-    width: 243px;
-    height: 300px;
-  }
-
-  h2 {
-    background-color: #dededea1;
-    width: 243px;
-  }
-
-  .container {
-    align-items: baseline;
-  }
-
-
-  #missionId {
-    background: red;
-    width: 243px;
-    height: 300px;
-  }
-</style>
-
 <?php require '../layout/footer.php'; ?>
