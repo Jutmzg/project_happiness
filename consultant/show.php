@@ -2,12 +2,10 @@
 require '../db/db.php';
 
 $sql = "SELECT c.id, CONCAT(c.firstname,' ', c.lastname) as fullname, 
-c.mail, CONCAT(mana.firstname,' ',mana.lastname) manager, m.name mission 
+c.mail, CONCAT(mana.firstname,' ',mana.lastname) manager 
 FROM consultant c
 JOIN manager mana 
 ON c.manager_id = mana.id
-LEFT JOIN mission m
-ON c.mission_id = m.id
 WHERE c.state = 0";
 $statement = $connection->prepare($sql);
 $statement->execute();
@@ -39,7 +37,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
           field: "nom",
           sortable: true,
           filter: true,
-          width: 250,
+          width: 350,
           suppressSizeToFit: true,
 
         },
@@ -48,40 +46,23 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
           field: "mail",
           sortable: true,
           filter: true,
-          width: 250,
-        },
-        {
-          headerName: "Mission",
-          field: "mission",
-          sortable: true,
-          filter: true,
-          width: 250,
+          width: 350,
         },
         {
           headerName: "Manager",
           field: "manager",
           sortable: true,
           filter: true,
-          width: 250,
+          width: 350,
 
         },
-        {
-          headerName: "Action",
-          field: 'action',
-          hide: true,
-          width: 250,
-
-        },
-
       ];
       // specify the data
       var rowData = [
         <?php foreach ($consultants as $consultant) { ?> {
             nom: "<?= utf8_encode($consultant->fullname) ?>",
             mail: "<?= $consultant->mail ?>",
-            mission: "<?= utf8_encode($consultant->mission) ?>",
             manager: "<?= utf8_encode($consultant->manager) ?>",
-            action: "<?= $consultant->id ?>",
           },
         <?php } ?>
 

@@ -17,7 +17,6 @@ foreach($consultants as $value){
         $spreadsheet->getActiveSheet()->setCellValue('B'.$row, $value->lastname)
             ->setCellValue('C'.$row, utf8_encode($value->firstname))
             ->setCellValue('D'.$row, utf8_encode($value->mail))
-            ->setCellValue('E'.$row, utf8_encode($value->mission_id))
             ->setCellValue('F'.$row, utf8_encode($value->state))
             ->setCellValue('G'.$row, utf8_encode($value->manager_id));
         $row++;     
@@ -26,7 +25,6 @@ $spreadsheet->getActiveSheet()->setCellValue('A1', 'Liste des Consultants')
         ->setCellValue('B2', 'Nom')
         ->setCellValue('C2', 'Prénom')
         ->setCellValue('D2', 'Mail')
-        ->setCellValue('E2', 'Mission')
         ->setCellValue('F2', 'Statut')
         ->setCellValue('G2', 'Manager');
 $spreadsheet->getActiveSheet()->mergeCells('A1:D1');
@@ -50,6 +48,7 @@ foreach($missions as $value){
     $row++;     
 }
 $spreadsheet->getActiveSheet()->setTitle('Mission');
+$spreadsheet->getActiveSheet()->mergeCells('A1:D1');
 $spreadsheet->getActiveSheet()->setCellValue('A1', 'Liste des Missions')
         ->setCellValue('B2', 'Nom')
         ->setCellValue('C2', 'Client')
@@ -74,6 +73,7 @@ $row = 3;
     $row++;     
     }
 $spreadsheet->getActiveSheet()->setTitle('Client');
+$spreadsheet->getActiveSheet()->mergeCells('A1:D1');
 $spreadsheet->getActiveSheet()->setCellValue('A1', 'Liste des Clients')
     ->setCellValue('B2', 'Nom')
     ->setCellValue('C2', 'Adresse')
@@ -91,6 +91,7 @@ $row = 3;
             ->setCellValue('B'.$row, utf8_encode(($value->name)));
         $row++;     
     }
+$spreadsheet->getActiveSheet()->mergeCells('A1:D1');
 $spreadsheet->getActiveSheet()->setTitle('Métier');
 $spreadsheet->getActiveSheet()->setCellValue('A1', 'Liste des Métiers')
     ->setCellValue('B2', 'Nom');

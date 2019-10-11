@@ -1,6 +1,6 @@
 <?php
 require '../db/db.php';
-$sql = 'SELECT ID,name, address FROM customer WHERE state = 0';
+$sql = 'SELECT id, name, address FROM customer WHERE state = 0';
 $statement = $connection->prepare($sql);
 $statement->execute();
 $customers = $statement->fetchAll(PDO::FETCH_OBJ);
@@ -37,7 +37,7 @@ $customers = $statement->fetchAll(PDO::FETCH_OBJ);
       field: "adresse",
       sortable: true,
       filter: true,
-      width: 510,
+      width: 520,
 
     },
     {
@@ -52,7 +52,7 @@ $customers = $statement->fetchAll(PDO::FETCH_OBJ);
       {
         nom: "<?= utf8_encode($customer->name) ?>",
         adresse: "<?= $customer->address ?>",
-        action: "<?= $customer->ID ?>",
+        action: "<?= $customer->id ?>",
       },
 
     <?php } ?>
