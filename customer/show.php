@@ -13,7 +13,7 @@ $customers = $statement->fetchAll(PDO::FETCH_OBJ);
   <div class="card mt-4">
     <div class="card-header">
     <h2 class="text-center text-uppercase">Clients</h2>
-      <a href="/Akkappiness/customer/create.php"><button type="button" class="btn btn-primary ml-4"><i class="fas fa-user-plus"></i></button></a>
+      <a href="/Akkappiness/customer/create.php"><button type="button" class="btn btn-primary add"><i class="fas fa-user-plus"></i></button></a>
       <div id="editAndDelete"></div>
       <div class="card-body">
         <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
@@ -29,7 +29,7 @@ $customers = $statement->fetchAll(PDO::FETCH_OBJ);
       field: "nom",
       sortable: true,
       filter: true,
-      width: 504,
+      width: 450,
       suppressSizeToFit: true,
     },
     {
@@ -37,7 +37,7 @@ $customers = $statement->fetchAll(PDO::FETCH_OBJ);
       field: "adresse",
       sortable: true,
       filter: true,
-      width: 503,
+      width: 450,
 
     },
     {

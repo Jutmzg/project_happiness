@@ -1,6 +1,6 @@
 <?php
 require '../db/db.php';
-$sql = 'SELECT * FROM job';
+$sql = 'SELECT id, name FROM job';
 $statement = $connection->prepare($sql);
 $statement->execute();
 $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
@@ -14,7 +14,7 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
     <div class="card mt-4">
       <div class="card-header">
         <h2 class="text-center text-uppercase">Métiers</h2>
-        <a href="/Akkappiness/job/create.php"><button type="button" class="btn btn-primary ml-4"><i class="fas fa-user-plus"></i></button></a>
+        <a href="/Akkappiness/job/create.php"><button type="button" class="btn btn-primary add"><i class="fas fa-user-plus"></i></button></a>
         <div id="editAndDelete"></div>
         <div class="card-body">
           <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
@@ -30,7 +30,7 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
         field: "nom",
         sortable: true,
         filter: true,
-        width: 1000,
+        width: 925,
         suppressSizeToFit: true,
       },
       {
@@ -67,7 +67,7 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
     new agGrid.Grid(eGridDiv, gridOptions);
 
     function onFilterTextBoxChanged() {
-      gridOptions.api.setQuickFilter(document.getElementByid('filter-text-box').value);
+      gridOptions.api.setQuickFilter(document.getElementById('filter-text-box').value);
     }
 
     function buttons() {
@@ -78,11 +78,10 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
       var action = selectedData.map(function(node) {
         return node.action
       })
-      document.getElementByid("editAndDelete").innerHTML =
+      document.getElementById("editAndDelete").innerHTML =
         "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-user-edit fa-xs'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
     }
   </script>
 </body>
 <?php require '../layout/footer.php'; ?>
-
 </html>

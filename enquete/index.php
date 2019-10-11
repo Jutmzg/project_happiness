@@ -22,7 +22,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       <div class="card-header">
 
         <h2 class="text-center text-uppercase">Enquête</h2>
-        <button class="btn btn-primary ml-4" onclick="getSelectedMissionId()">Envoyer</button>
+        <button class="btn btn-primary add" onclick="getSelectedMissionId()">Envoyer</button>
 
         <div class="card-body">
           <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
@@ -50,7 +50,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       field: "nom",
       sortable: true,
       filter: true,
-      width: 250,
+      width: 220,
       suppressSizeToFit: true,
 
     },
@@ -59,7 +59,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       field: "mail",
       sortable: true,
       filter: true,
-      width: 250,
+      width: 220,
     },
     {
       headerName: "Mission ID",
@@ -82,7 +82,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       field: "manager",
       sortable: true,
       filter: true,
-      width: 250,
+      width: 220,
 
     },
     {

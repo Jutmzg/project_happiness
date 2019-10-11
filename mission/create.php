@@ -54,7 +54,7 @@ if (
         <h2>Créer une mission</h2>
         <a href="/Akkappiness/mission/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
       </div>
-      <div class="card-body">
+      <div class="card-body p-4">
         <?php if (!empty($message)) : ?>
           <div class="alert alert-success">
             <?= $message; ?>

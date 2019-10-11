@@ -21,7 +21,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
         <div class="card-header">
 
           <h2 class="text-center text-uppercase">Consultants</h2>
-          <a href="/Akkappiness/consultant/create.php"><button type="button" class="btn btn-primary ml-4"><i class="fas fa-user-plus"></i></button></a>
+          <a href="/Akkappiness/consultant/create.php"><button type="button" class="btn btn-primary add"><i class="fas fa-user-plus"></i></button></a>
           <div id="editAndDelete"></div>
           <div class="card-body">
             <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />

@@ -31,7 +31,7 @@ if (
       <h2>Modifier les informations de : <?= $customers->name ?></h2>
       <a href ="/Akkappiness/customer/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
     </div>
-    <div class="card-body">
+    <div class="card-body p-4">
       <?php if (!empty($message)) : ?>
         <div class="alert alert-success">
           <?= $message; ?>

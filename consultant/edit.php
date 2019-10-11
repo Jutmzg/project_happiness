@@ -56,7 +56,7 @@ if (
 
             </div>
 
-            <div class="card-body">
+            <div class="card-body p-4">
                 <?php if (!empty($message)) : ?>
                     <div class="alert alert-success">
                         <?= $message; ?>
