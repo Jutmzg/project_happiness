@@ -51,7 +51,7 @@ $sql = 'INSERT INTO job(name) VALUES(:name)';
           field: "nom",
           sortable: true,
           filter: true,
-          width: 350,
+          width: 349,
           suppressSizeToFit: true,
           checkboxSelection: true,
 
@@ -68,7 +68,7 @@ $sql = 'INSERT INTO job(name) VALUES(:name)';
           field: "manager",
           sortable: true,
           filter: true,
-          width: 350,
+          width: 340,
 
         },
         {
