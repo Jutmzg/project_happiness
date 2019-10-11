@@ -46,26 +46,6 @@ $sql = 'INSERT INTO job(name) VALUES(:name)';
 ​
 <div class="container d-flex">
   <div id="myGrid" style="height: 400px;width:600px;" class="ag-theme-balham"></div>
-
-  <div class="form-mail m-4">
-    <label class="white">FROM</label>
-    <input class="form-control mb-3" type="text" value="mailduconnecté@gmail.com" />
-    <textarea class="form-control" type="textarea">Bonjour à tous .....</textarea>
-    <label for="exampleFormControlSelect2 white">Example multiple select</label>
-    <select multiple class="form-control" id="">
-      <option selected id="">1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select>
-    <p class="text-center white">DESTINATAIRE</p>
-    <div class="m-1" id="mailing"></div>
-    <div class="m-1" id="missionId"></div>
-
-    <form method="post">
-    <button type="submit" name="submitbutton" class="btn btn-info" value="button">Valider</button>
-    </form>
   </div>
 </div>
 <script type="text/javascript" charset="utf-8">
