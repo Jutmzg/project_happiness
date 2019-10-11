@@ -1,113 +1,128 @@
-<!DOCTYPE html>
-<html lang="en">
-<?php require '../layout/header.php'; ?>
 
-<!-- <div class="col-md-10 col-md-offset-1 spacer-below-20">
-    <label>The date</label>
-    <div class="input-group">
-        <input class="datepicker" type="text" name="date">
-    </div>
-</div> -->
 <?php
-
 require '../db/db.php';
-$sql = "SELECT c.id, CONCAT(c.firstname,' ', c.lastname) as fullname, 
-c.mail, CONCAT(mana.firstname,' ',mana.lastname) manager
-FROM consultant c
-JOIN manager mana 
+
+$sql = "SELECT CONCAT(c.firstname,' ', c.lastname) as fullname, c.mail mail, m.id mission_id, m.name mission, CONCAT(mana.firstname,' ', mana.lastname) manager FROM mission m
+JOIN consultant c
+ON m.id = c.mission_id
+JOIN manager mana
 ON c.manager_id = mana.id
 WHERE c.state = 0";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
-
-
- 
-  /* if (
-    isset($_POST['submitbutton']) 
-  ){
-  $submitbutton= $_POST['submitbutton'];
-​
-if ($submitbutton){
-  $name = "test";
-$sql = 'INSERT INTO job(name) VALUES(:name)';
-  $statement = $connection->prepare($sql);
-  $statement->execute([':name' => $name]) ;
-}
-  } */
 ?>
+<!DOCTYPE html>
+<html lang="fr">
+<?php require '../layout/header.php';?>
 
-<button class="btn btn-primary" onclick="getSelectedMissionId()">Insérer</button>
-​
-<div class="container d-flex">
-<input type="text" id="filter-text-box" placeholder="Filter..." oninput="onFilterTextBoxChanged()" />
-  <div id="myGrid" class="ag-theme-balham"></div>
+<body>
+  <div class="container">
+    <div class="card mt-4">
+      <div class="card-header">
+
+        <h2 class="text-center text-uppercase">Enquête</h2>
+        <button class="btn btn-primary ml-4" onclick="getSelectedMissionId()">Envoyer</button>
+
+        <div class="card-body">
+          <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
+          <div id="myGrid" class="ag-theme-balham"></div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+  <div id="missionId"></div>
 <script type="text/javascript" charset="utf-8">
   // specify the columns
   var columnDefs = [{
-          headerName: "Nom",
-          field: "nom",
-          sortable: true,
-          filter: true,
-          width: 349,
-          suppressSizeToFit: true,
-          checkboxSelection: true,
 
-        },
-        {
-          headerName: "Email",
-          field: "mail",
-          sortable: true,
-          filter: true,
-          width: 400,
-        },
-        {
-          headerName: "Manager",
-          field: "manager",
-          sortable: true,
-          filter: true,
-          width: 340,
+      headerName: "",
+      field: "nom",
+      sortable: true,
+      filter: true,
+      width: 40,
+      suppressSizeToFit: true,
+      checkboxSelection: true,
 
-        },
-        {
-          headerName: "Action",
-          field: 'action',
-          hide: true,
-          width: 350,
+    },
+    {
+      headerName: "Nom",
+      field: "nom",
+      sortable: true,
+      filter: true,
+      width: 250,
+      suppressSizeToFit: true,
 
-        },
+    },
+    {
+      headerName: "Email",
+      field: "mail",
+      sortable: true,
+      filter: true,
+      width: 250,
+    },
+    {
+      headerName: "Mission ID",
+      field: "mission",
+      sortable: true,
+      filter: true,
+      width: 250,
+      hide: true,
+    },
+    {
+      headerName: "Mission",
+      field: "missionName",
+      sortable: true,
+      filter: true,
+      width: 190,
 
+    },
+    {
+      headerName: "Manager",
+      field: "manager",
+      sortable: true,
+      filter: true,
+      width: 250,
+
+    },
+    {
+      headerName: "Action",
+      field: 'action',
+      hide: true,
+      width: 250,
+
+    },
   ];
-
   // specify the data
   let rowData = [
-    <?php foreach ($consultants as $consultant) { ?>
-      {
+    <?php foreach ($consultants as $consultant) { ?> {
         nom: "<?= utf8_encode($consultant->fullname) ?>",
         mail: "<?= $consultant->mail ?>",
+        mission: "<?= $consultant->mission_id ?>",
+        missionName: "<?= $consultant->mission ?>",
         manager: "<?= utf8_encode($consultant->manager) ?>"
+
       },
     <?php } ?>
   ];
-
   // let the grid know which columns and what data to use
   var gridOptions = {
-        defaultColDef: {
-          resizable: true,
-          suppressColumnVirtualisation: true,
-        },
-        columnDefs: columnDefs,
-        pagination: true,
-        paginationPageSize: 20,
-        rowData: rowData,
-        rowSelection: 'multiple',
-        headerHeight: 50,
-        // hauteur des rows
-        getRowHeight: function(params) {
-          return 60;
-        },
+
+    defaultColDef: {
+      resizable: true,
+      suppressColumnVirtualisation: true,
+    },
+    columnDefs: columnDefs,
+    pagination: true,
+    paginationPageSize: 20,
+    rowData: rowData,
+    rowSelection: 'multiple',
+    headerHeight: 50,
+    // hauteur des rows
+    getRowHeight: function(params) {
+      return 60;
+    },
+
   };
 
   // lookup the container we want the Grid to use
@@ -116,17 +131,6 @@ $sql = 'INSERT INTO job(name) VALUES(:name)';
   // create the grid passing in the div to use together with the columns & data we want to use
   new agGrid.Grid(eGridDiv, gridOptions);
 
-  function getSelectedRows() {
-    let selectedNodes = gridOptions.api.getSelectedNodes()
-    let selectedData = selectedNodes.map(function(node) {
-      return node.data
-    })
-    let mail = selectedData.map(function(node) {
-      return node.mail
-    }).join('<br>')
-    document.getElementById("mailing").innerHTML = mail;
-  }
-
   function getSelectedMissionId() {
     let selectedNodes = gridOptions.api.getSelectedNodes()
     let selectedData = selectedNodes.map(function(node) {
@@ -134,18 +138,35 @@ $sql = 'INSERT INTO job(name) VALUES(:name)';
     })
     let mission = selectedData.map(function(node) {
       return node.mission
-      
+
     }).join(',')
     document.getElementById("missionId").innerHTML = mission;
+
     selectedData.forEach(function(element) {
-      // on récupère l'élément mission
-  console.log(element.mission);
-});
+
+      // on récupère l'élement mission
+      var missions = element.mission
+      $.ajax({
+        url: "insertion.php",
+        type: "post",
+        async: false,
+        data: {
+          done: 1,
+          info: missions
+        },
+        success: function(data) {
+
+        }
+
+      });
+    });
   }
+
   function onFilterTextBoxChanged() {
     gridOptions.api.setQuickFilter(document.getElementById('filter-text-box').value);
   }
-
- 
 </script>
+
+</body>
 <?php require '../layout/footer.php'; ?>
+</html>
