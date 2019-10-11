@@ -1,89 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-<?php require '../layout/header.php';
 
+<?php
 require '../db/db.php';
-$sql = "SELECT c.id, CONCAT(c.firstname,' ', c.lastname) as fullname, 
-c.mail, CONCAT(mana.firstname,' ',mana.lastname) manager, c.mission_id 
-FROM consultant c
-JOIN manager mana 
+
+$sql = "SELECT CONCAT(c.firstname,' ', c.lastname) as fullname, c.mail mail, m.id mission_id, m.name mission, CONCAT(mana.firstname,' ', mana.lastname) manager FROM mission m
+JOIN consultant c
+ON m.id = c.mission_id
+JOIN manager mana
 ON c.manager_id = mana.id
 WHERE c.state = 0";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
-
 ?>
-<a class="btn btn-primary" href="insertion.php">CREER LES ENQUETES</a>
-<form method="POST">
-  <input id="name" type="text">
-  <input value="POST" id="save" type="submit">
-</form>
+<!DOCTYPE html>
+<html lang="fr">
+<?php require '../layout/header.php';?>
 
-<div id="display">
-</div>
+<body>
+  <div class="container">
+    <div class="card mt-4">
+      <div class="card-header">
 
-<button class="btn btn-primary" onclick="getSelectedMissionId()">MissionID</button>
+        <h2 class="text-center text-uppercase">Enquête</h2>
+        <button class="btn btn-primary ml-4" onclick="getSelectedMissionId()">Envoyer</button>
 
-<div class="container d-flex">
-  <div id="myGrid" style="height: 400px;width:600px;" class="ag-theme-balham"></div>
-  <div class="form-mail m-4">
-
-    <div class="m-1" id="missionId"></div>
-    <form method="post">
-      <button type="submit" name="submitbutton" class="btn btn-info" value="button">Valider</button>
-    </form>
+        <div class="card-body">
+          <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
+          <div id="myGrid" class="ag-theme-balham"></div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+  <div id="missionId"></div>
 <script type="text/javascript" charset="utf-8">
-  $(document).ready(function() {
-
-    $("#save").click(function() {
-      
-      var name = $("#name").val();
-      $.ajax({
-        url: "insertion.php",
-        type: "post",
-        async: false,
-        data: {
-          done: 1,
-          "name": name,
-        },
-        success: function(data){
-          displayFromDatabase();
-          $("#name").val('');
-
-
-        }
-
-      });
-    });
-  });
-
-  function displayFromDatabase(){
-    $.ajax({
-      url: "insertion.php",
-      type: "POST",
-      async: false,
-      data:{
-        "display": 1
-      },
-      success: function(data){
-        $("#display").html(data);
-
-      }
-    })
-  }
-
   // specify the columns
   var columnDefs = [{
+      headerName: "",
+      field: "nom",
+      sortable: true,
+      filter: true,
+      width: 40,
+      suppressSizeToFit: true,
+      checkboxSelection: true,
+
+    },
+    {
       headerName: "Nom",
       field: "nom",
       sortable: true,
       filter: true,
       width: 250,
       suppressSizeToFit: true,
-      checkboxSelection: true,
 
     },
     {
@@ -99,6 +66,15 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       sortable: true,
       filter: true,
       width: 250,
+      hide: true,
+    },
+    {
+      headerName: "Mission",
+      field: "missionName",
+      sortable: true,
+      filter: true,
+      width: 190,
+
     },
     {
       headerName: "Manager",
@@ -115,20 +91,19 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       width: 250,
 
     },
-
   ];
-
   // specify the data
   let rowData = [
     <?php foreach ($consultants as $consultant) { ?> {
         nom: "<?= utf8_encode($consultant->fullname) ?>",
         mail: "<?= $consultant->mail ?>",
         mission: "<?= $consultant->mission_id ?>",
+        missionName: "<?= $consultant->mission ?>",
         manager: "<?= utf8_encode($consultant->manager) ?>"
+
       },
     <?php } ?>
   ];
-
   // let the grid know which columns and what data to use
   var gridOptions = {
     defaultColDef: {
@@ -168,9 +143,20 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 
       // on récupère l'élement mission
       var missions = element.mission
-      console.log(missions);
-    });
+      $.ajax({
+        url: "insertion.php",
+        type: "post",
+        async: false,
+        data: {
+          done: 1,
+          info: missions
+        },
+        success: function(data) {
 
+        }
+
+      });
+    });
   }
 
   function onFilterTextBoxChanged() {
@@ -178,34 +164,6 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
   }
 </script>
 
-<style>
-  #mailing {
-    background: #c3bfbf;
-    width: 243px;
-    height: 300px;
-  }
-
-  #display {
-    
-    width: 243px;
-    height: 300px;
-  }
-
-  h2 {
-    background-color: #dededea1;
-    width: 243px;
-  }
-
-  .container {
-    align-items: baseline;
-  }
-
-
-  #missionId {
-    background: red;
-    width: 243px;
-    height: 300px;
-  }
-</style>
-
+</body>
 <?php require '../layout/footer.php'; ?>
+</html>

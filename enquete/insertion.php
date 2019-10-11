@@ -1,36 +1,14 @@
 <?php
 
 require '../db/db.php';
+
 if (isset($_POST['done'])) {
+    $mission_id = $_POST['info'];
+   $now = date("Y-m-d H:i:s");
 
-    $name = $_POST['name'];
-    var_dump($name);
-
-    $sql = 'INSERT INTO job(name) VALUES(:name)';
-    $statement = $connection->prepare($sql);
-    $statement->execute([':name' => $name]);
-    exit;
+       $sql = 'INSERT INTO enquete(mission_id,created_at) VALUES(:mission_id,:created_at)';
+        $statement = $connection->prepare($sql);
+        $statement->execute(array(':mission_id' => $mission_id,':created_at' => $now));  
+  
+        return true;
 }
-/* if (isset($_POST['display'])) {
-    $sql = "SELECT * FROM job";
-    $statement = $connection->prepare($sql);
-    $statement->execute();
-    $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
-    foreach ($jobs as $job) { ?>
-        <p><?= $job->name?></p>
-  <?php  } ?>
-    <?php exit;
-}
-
-
-*/
-
-/* $names = ["jean", "pierre"];
-
-foreach($names as $name){
-    $sql = 'INSERT INTO job(name) VALUES(:name)';
-  $statement = $connection->prepare($sql);
-  if($statement->execute([':name' => $name])) {
-    header('Location: ../home/index.php');
-  }
-} */
