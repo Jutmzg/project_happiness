@@ -1,87 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php require '../layout/header.php'; ?>
-
-<!-- <div class="col-md-10 col-md-offset-1 spacer-below-20">
-    <label>The date</label>
-    <div class="input-group">
-        <input class="datepicker" type="text" name="date">
-    </div>
-</div> -->
-<?php
+<?php require '../layout/header.php'; 
 
 require '../db/db.php';
 $sql = "SELECT c.id, CONCAT(c.firstname,' ', c.lastname) as fullname, 
-c.mail, CONCAT(mana.firstname,' ',mana.lastname) manager, m.name mission 
+c.mail, CONCAT(mana.firstname,' ',mana.lastname) manager, c.mission_id 
 FROM consultant c
 JOIN manager mana 
 ON c.manager_id = mana.id
-LEFT JOIN mission m
-ON c.mission_id = m.id
 WHERE c.state = 0";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 
-$sql = "INSERT INTO enquete e 
-VALUES ('mission_id', 'resultat', 'created_at', 'state')
-LEFT JOIN mission m
-ON e.mission_id = m.id
-JOIN consultant c
-ON c.id = e.id
-WHERE c.id = m.id";
-$statement = $connection->prepare($sql);
-$statement->execute();
-$enquete = $statement->fetchAll(PDO::FETCH_OBJ);
+  
+  /* if (
+    isset($_POST['submitbutton']) 
+  ){
+  $submitbutton= $_POST['submitbutton'];
+
+if ($submitbutton){
+  $name = "test";
+$sql = 'INSERT INTO job(name) VALUES(:name)';
+  $statement = $connection->prepare($sql);
+  $statement->execute([':name' => $name]) ;
+}
+  } */
 ?>
 
-		<label FOR="datepicker">Date : </label>
-		<input type="text" id="datepicker" name="datepicker"><br />
+<button class="btn btn-primary" onclick="getSelectedMissionId()">MissionID</button>
 
-<input type="text" id="filter-text-box" placeholder="Filter..." oninput="onFilterTextBoxChanged()" />
-<button class="btn btn-primary" onclick="getSelectedRows()">-></button>
 <div class="container d-flex">
   <div id="myGrid" style="height: 400px;width:600px;" class="ag-theme-balham"></div>
-
   <div class="form-mail m-4">
-    <label class="white">FROM</label>
-    <input class="form-control mb-3" type="text" value="mailduconnecté@gmail.com" />
-    <textarea class="form-control" type="textarea">Bonjour à tous .....</textarea>
-    <label for="exampleFormControlSelect2 white">Example multiple select</label>
-    <select multiple class="form-control" id="">
-      <option selected id="">1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select>
-    <p class="text-center white">DESTINATAIRE</p>
-    <div class="m-1" id="mailing"></div>
-    <input class="btn btn-primary d-flex m-auto" type="submit" id="send" value="Envoyer"/>
+  
+    <div class="m-1" id="missionId"></div>
+    <form method="post">
+    <button type="submit" name="submitbutton" class="btn btn-info" value="button">Valider</button>
+    </form>
   </div>
 </div>
+
 <script type="text/javascript" charset="utf-8">
   // specify the columns
-  let columnDefs = [{
-      headerName: "NOM",
-      field: "nom",
-      sortable: true,
-      filter: true,
+  var columnDefs = [{
+          headerName: "Nom",
+          field: "nom",
+          sortable: true,
+          filter: true,
+          width: 250,
+          suppressSizeToFit: true,
+          checkboxSelection: true,
 
-      checkboxSelection: true
-    },
-    {
-      headerName: "EMAIL",
-      field: "mail",
-      sortable: true,
-      filter: true
-    },
-    {
-      headerName: "MANAGER",
-      field: "manager",
-      sortable: true,
-      filter: true
-    },
+        },
+        {
+          headerName: "Email",
+          field: "mail",
+          sortable: true,
+          filter: true,
+          width: 250,
+        },
+        {
+          headerName: "Mission ID",
+          field: "mission",
+          sortable: true,
+          filter: true,
+          width: 250,
+        },
+        {
+          headerName: "Manager",
+          field: "manager",
+          sortable: true,
+          filter: true,
+          width: 250,
+
+        },
+        {
+          headerName: "Action",
+          field: 'action',
+          hide: true,
+          width: 250,
+
+        },
 
   ];
 
@@ -91,18 +91,28 @@ $enquete = $statement->fetchAll(PDO::FETCH_OBJ);
       {
         nom: "<?= utf8_encode($consultant->fullname) ?>",
         mail: "<?= $consultant->mail ?>",
+        mission: "<?= $consultant->mission_id ?>",
         manager: "<?= utf8_encode($consultant->manager) ?>"
       },
     <?php } ?>
   ];
 
   // let the grid know which columns and what data to use
-  let gridOptions = {
-    columnDefs: columnDefs,
-    pagination: true,
-    rowData: rowData,
-    rowSelection: 'multiple'
-
+  var gridOptions = {
+        defaultColDef: {
+          resizable: true,
+          suppressColumnVirtualisation: true,
+        },
+        columnDefs: columnDefs,
+        pagination: true,
+        paginationPageSize: 20,
+        rowData: rowData,
+        rowSelection: 'multiple',
+        headerHeight: 50,
+        // hauteur des rows
+        getRowHeight: function(params) {
+          return 60;
+        },
   };
 
   // lookup the container we want the Grid to use
@@ -122,10 +132,27 @@ $enquete = $statement->fetchAll(PDO::FETCH_OBJ);
     document.getElementById("mailing").innerHTML = mail;
     
   }
+
+  function getSelectedMissionId() {
+    let selectedNodes = gridOptions.api.getSelectedNodes()
+    let selectedData = selectedNodes.map(function(node) {
+      return node.data
+    })
+    let mission = selectedData.map(function(node) {
+      return node.mission
+      
+    }).join(',')
+    document.getElementById("missionId").innerHTML = mission;
+    
+    
+  }
   function onFilterTextBoxChanged() {
     gridOptions.api.setQuickFilter(document.getElementById('filter-text-box').value);
   }
+
+  
 </script>
+
 <style>
   #mailing {
     background: #c3bfbf;
@@ -140,6 +167,13 @@ $enquete = $statement->fetchAll(PDO::FETCH_OBJ);
 
   .container {
     align-items: baseline;
+  }
+
+
+  #missionId {
+    background: red;
+    width: 243px;
+    height: 300px;
   }
 </style>
 
