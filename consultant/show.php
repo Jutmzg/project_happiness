@@ -37,7 +37,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
           field: "nom",
           sortable: true,
           filter: true,
-          width: 350,
+          width: 334,
           suppressSizeToFit: true,
 
         },
@@ -46,14 +46,14 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
           field: "mail",
           sortable: true,
           filter: true,
-          width: 350,
+          width: 340,
         },
         {
           headerName: "Manager",
           field: "manager",
           sortable: true,
           filter: true,
-          width: 350,
+          width: 335,
 
         },
       ];
