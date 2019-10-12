@@ -28,7 +28,7 @@ h2{
 
 .btn-info{
     background-color: #294456;
-    border-color: #294456;
+    border-color: #758087;
     transition: 0.7s;
     cursor: pointer;
 }
@@ -104,9 +104,8 @@ margin: 11px;
 
 /***********INPUTS***********/
 
-
 .box {
-  background: rgba(0, 0, 0, 0.8);
+  background: #0000001a;
   width: 600px;
   height: 482px;
   border-radius: 5px;
@@ -137,6 +136,9 @@ margin: 11px;
   font-size: 18px;
   margin-bottom: 30px;
 }
+.input-box ::placeholder {
+  color: white;
+}
 
 .input-box select {
   border-style: none;
@@ -161,7 +163,7 @@ margin: 11px;
   transition: 0.5s;
 }
 option{
-  background:red;
+  background:#294456;
 }
 
 /*************AG GRID***********/

@@ -44,18 +44,15 @@ if (
         <a href="/Akkappiness/consultant/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
           <div class="input-box">
-            <label for="lastname">Nom</label>
-            <input type="text" name="lastname" id="lastname" class="" maxlength="50" minlength="2" required>
+            <input type="text" name="lastname" id="lastname" class="" maxlength="50" minlength="2" placeholder="Nom" required>
           </div>
 
           <div class="input-box">
-            <label for="firstname">Prénom</label>
-            <input type="text" name="firstname" id="firstname" class="" maxlength="50" minlength="2" required>
+            <input type="text" name="firstname" id="firstname" class="" maxlength="50" minlength="2" placeholder="Prénom" required>
           </div>
 
           <div class="input-box">
-            <label for="mail">Email</label>
-            <input type="email" name="mail" id="mail" class="" maxlength="50" minlength="5" required>
+            <input type="email" name="mail" id="mail" class="" maxlength="50" minlength="5" placeholder="Email" required>
           </div>
 
           <div class="input-box">
@@ -71,7 +68,7 @@ if (
           <div class="form-group">
           <div class="input-box">
             <button type="submit" class="btn btn-info">Valider</button>
-            <button class="btn btn-info retour"><a href="/Akkappiness/consultant/show.php">Retour</a></button>
+            <button class="btn btn-info retour"><a href="/Akkappiness/consultant/show.php">Annuler</a></button>
           </div>
           </div>
         </form>
