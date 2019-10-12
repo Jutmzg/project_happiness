@@ -4,7 +4,7 @@ require '../db/db.php';
 
 $sql = "SELECT CONCAT(c.firstname,' ', c.lastname) as fullname, c.mail mail, m.id mission_id, m.name mission, CONCAT(mana.firstname,' ', mana.lastname) manager FROM mission m
 JOIN consultant c
-ON m.id = c.mission_id
+ON m.consultant_id = c.id
 JOIN manager mana
 ON c.manager_id = mana.id
 WHERE c.state = 0";
@@ -21,7 +21,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
     <div class="card mt-4">
       <div class="card-header">
 
-        <h2 class="text-center text-uppercase">Enquête</h2>
+        <h2 class="text-center text-uppercase">Enquêtes</h2>
         <button class="btn btn-primary add" onclick="getSelectedMissionId()">Envoyer</button>
 
         <div class="card-body">

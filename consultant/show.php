@@ -56,6 +56,12 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
           width: 335,
 
         },
+        {
+          headerName: "Action",
+          field: "action",
+          hide: true,
+
+        },
       ];
       // specify the data
       var rowData = [
@@ -63,6 +69,8 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
             nom: "<?= utf8_encode($consultant->fullname) ?>",
             mail: "<?= $consultant->mail ?>",
             manager: "<?= utf8_encode($consultant->manager) ?>",
+            action: "<?= utf8_encode($consultant->id) ?>",
+
           },
         <?php } ?>
 
@@ -102,7 +110,9 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
         document.getElementById("editAndDelete").innerHTML =
           "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-user-edit fa-xs'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
       }
+      
     </script>
+
 
   </body>
   <?php require '../layout/footer.php'; ?>
