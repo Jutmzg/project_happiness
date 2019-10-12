@@ -15,25 +15,19 @@ if (
     isset($_POST['lastname']) &&
     isset($_POST['firstname']) &&
     isset($_POST['mail']) &&
-    isset($_POST['mission_id']) &&
     isset($_POST['manager_id'])
 ) {
 
     $lastname = $_POST['lastname'];
     $firstname = $_POST['firstname'];
     $mail = $_POST['mail'];
-    if ($_POST['mission_id'] == '') {
-        $mission_id = NULL;
-    } else {
-        $mission_id = $_POST['mission_id'];
-    }
     $manager_id = $_POST['manager_id'];
     $state = 0;
 
-    $sql = 'UPDATE consultant SET lastname=:lastname, firstname=:firstname, mail=:mail, mission_id=:mission_id, state=:state, manager_id=:manager_id WHERE id=:id';
+    $sql = 'UPDATE consultant SET lastname=:lastname, firstname=:firstname, mail=:mail, state=:state, manager_id=:manager_id WHERE id=:id';
     $statement = $connection->prepare($sql);
 
-    if ($statement->execute([':lastname' => $lastname, ':firstname' => $firstname, ':mail' => $mail, ':mission_id' => $mission_id, ':state' => $state, ':manager_id' => $manager_id, ':id' => $id])) {
+    if ($statement->execute([':lastname' => $lastname, ':firstname' => $firstname, ':mail' => $mail, ':state' => $state, ':manager_id' => $manager_id, ':id' => $id])) {
         header("Location: show.php");
     }
 }
