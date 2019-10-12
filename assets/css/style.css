@@ -100,6 +100,70 @@ margin: 11px;
   color:white;
 }
 
+
+
+/***********INPUTS***********/
+
+
+.box {
+  background: rgba(0, 0, 0, 0.8);
+  width: 600px;
+  height: 482px;
+  border-radius: 5px;
+  padding: 40px;
+  position: absolute;
+  left: 50%;
+  top:55%;
+  transform: translate(-50%, -50%);
+  color:#294456;
+}
+.box h2 {
+  color:white;
+}
+
+.input-box {
+  position: relative;
+}
+
+.input-box input {
+  border-style: none;
+  background: transparent;
+  border-bottom: 1px solid white;
+  width: 100%;
+  position: relative;
+  outline: none;
+  padding: 10px 0;
+  color: white;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.input-box select {
+  border-style: none;
+  background: transparent;
+  border-bottom: 1px solid white;
+  width: 100%;
+  position: relative;
+  outline: none;
+  padding: 6px 0;
+  color: white;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.input-box label {
+  color: white;
+  position: absolute;
+  padding: 10px 0;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  transition: 0.5s;
+}
+option{
+  background:red;
+}
+
 /*************AG GRID***********/
 
 #filter-text-box{

@@ -7,11 +7,6 @@ $statement = $connection->prepare($sql);
 $statement->execute([':id' => $id]);
 $row = $statement->fetch(PDO::FETCH_OBJ);
 
-$sql2 = 'SELECT * FROM mission WHERE state = 0';
-$statement = $connection->query($sql2);
-$statement->execute();
-$missions = $statement->fetchAll(PDO::FETCH_OBJ);
-
 $sql2 = "SELECT id, mail, CONCAT(firstname,' ', lastname) as fullname FROM manager WHERE state = 0";
 $statement = $connection->query($sql2);
 $statement->execute();
@@ -49,7 +44,7 @@ if (
 
 <body>
     <div class="container">
-        <div class="card mt-5">
+        <div class="card mt-4">
             <div class="card-header">
                 <h2>Modifier les informations de <?= utf8_encode($row->firstname) . ' ' . utf8_encode($row->lastname) ?></h2>
                 <a href="/Akkappiness/consultant/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
@@ -76,18 +71,6 @@ if (
                         <input value="<?= $row->mail; ?>" type="email" name="mail" id="mail" class="form-control" maxlength="50" minlength="5" required>
                     </div>
                     </select>
-                    <div class="form-group">
-                        <label for="mission">Mission</label>
-                        <select name="mission_id" class="form-control">
-                            <option name="choice" id="choice"></option>
-                            
-
-                            <?php foreach ($missions as $mission) { ?>
-                               <?php $selected = $row->mission_id == $mission->id ? 'selected' : ''; ?>
-                                <?= "<option value='$mission->id' name='mission_id' id='mission_id' $selected>"?><?= utf8_encode($mission->name)?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
                     <div class="form-group">
                         <label for="manager">Manager</label>
                         <select name="manager_id" class="form-control" required>
