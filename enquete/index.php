@@ -155,7 +155,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
           info: missions
         },
         success: function(data) {
-
+          alert('Validation bien prise en compte');
         }
 
       });
