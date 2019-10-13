@@ -17,6 +17,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 <?php require '../layout/header.php';?>
 
 <body>
+
   <div class="container">
     <div class="card mt-4">
       <div class="card-header">
@@ -141,22 +142,22 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 
     }).join(',')
     document.getElementById("missionId").innerHTML = mission;
-
+    
     selectedData.forEach(function(element) {
-
-      // on récupère l'élement mission
+      var array = element
       var missions = element.mission
       $.ajax({
         url: "insertion.php",
         type: "post",
-        async: false,
+        
         data: {
           done: 1,
           info: missions
         },
-        success: function(data) {
-
+        success: function() {
+          console.log(array.lenght);
         }
+        
 
       });
     });
@@ -165,6 +166,51 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
   function onFilterTextBoxChanged() {
     gridOptions.api.setQuickFilter(document.getElementById('filter-text-box').value);
   }
+
+
+  iziToast.settings({
+      timeout: 3000, // default timeout
+      resetOnHover: true,
+      // icon: '', // icon class
+      transitionIn: 'flipInX',
+      transitionOut: 'flipOutX',
+      position: 'topRight', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter, center
+      onOpen: function () {
+        console.log('callback abriu!');
+      },
+      onClose: function () {
+        console.log("callback fechou!");
+      }
+    });
+
+    // info
+    $('#infoClick').click(function () {
+      iziToast.success({position: "center", message: 'Enquête effectuée'});
+    }); // ! click
+
+    // custom toast
+    $('#customClick').click(function () {
+
+      iziToast.show({
+        color: 'dark',
+        icon: 'fa fa-user',
+        title: 'Hey',
+        message: 'Custom Toast!',
+        position: 'center', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
+        progressBarColor: 'rgb(0, 255, 184)',
+        buttons: [
+          [
+            '<button>Close</button>',
+            function (instance, toast) {
+              instance.hide({
+                transitionOut: 'fadeOutUp'
+              }, toast);
+            }
+          ]
+        ]
+      });
+
+    }); 
 </script>
 
 </body>

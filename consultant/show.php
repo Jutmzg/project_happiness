@@ -108,9 +108,11 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
           return node.action
         })
         document.getElementById("editAndDelete").innerHTML =
-          "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-user-edit fa-xs'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
+          "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-user-edit fa-xs'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " id ='infoClick' class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
       }
-      
+      $('#infoClick').click(function () {
+      iziToast.success({position: "center", message: 'Enquête effectuée'});
+    }); // ! click
     </script>
 
 
