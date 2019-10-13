@@ -37,36 +37,28 @@ if (
 
 <body>
     <div class="container">
-        <div class="card mt-4">
-            <div class="card-header">
-                <h2>Modifier les informations de <?= utf8_encode($row->firstname) . ' ' . utf8_encode($row->lastname) ?></h2>
-                <a href="/Akkappiness/consultant/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
-
-            </div>
-
-            <div class="card-body p-4">
-                <?php if (!empty($message)) : ?>
+    <?php if (!empty($message)) : ?>
                     <div class="alert alert-success">
                         <?= $message; ?>
                     </div>
                 <?php endif; ?>
+               <div class="box">
+
                 <form method="post">
-                    <div class="form-group">
-                        <label for="lastname">Nom</label>
-                        <input value="<?= utf8_encode($row->lastname); ?>" type="text" name="lastname" id="lastname" class="form-control" maxlength="50" minlength="2" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="firstname">Prénom</label>
-                        <input value="<?= utf8_encode($row->firstname); ?>" type="text" name="firstname" id="firstname" class="form-control" maxlength="50" minlength="2" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="mail">Email</label>
-                        <input value="<?= $row->mail; ?>" type="email" name="mail" id="mail" class="form-control" maxlength="50" minlength="5" required>
-                    </div>
-                    </select>
-                    <div class="form-group">
-                        <label for="manager">Manager</label>
-                        <select name="manager_id" class="form-control" required>
+                <h2>Modifier les informations de <?= utf8_encode($row->firstname) . ' ' . utf8_encode($row->lastname) ?></h2>
+                <a href="/Akkappiness/consultant/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
+
+                <div class="input-box">
+                        <input value="<?= utf8_encode($row->lastname); ?>" type="text" name="lastname" id="lastname" maxlength="50" minlength="2" required>
+                </div>
+                <div class="input-box">
+                        <input value="<?= utf8_encode($row->firstname); ?>" type="text" name="firstname" id="firstname" maxlength="50" minlength="2" required>
+                </div>
+                <div class="input-box">
+                        <input value="<?= $row->mail; ?>" type="email" name="mail" id="mail" maxlength="50" minlength="5" required>
+                </div>
+                <div class="input-box">
+                        <select name="manager_id" required>
                             <option name="choice" id="choice" value="">Selectionner un manager</option>
                             <?php foreach ($managers as $manager) { ?>
                                <?php $selected = $row->manager_id == $manager->id ? 'selected' : ''; ?>
@@ -75,9 +67,10 @@ if (
                         </select>
                     </div>
                     <div class="form-group">
+                    <div class="input-box">
                         <button type="submit" class="btn btn-info">Valider</button>
                         <button class="btn btn-info retour"><a href="/Akkappiness/consultant/show.php">Retour</a></button>
-
+                    </div>
                     </div>
                 </form>
             </div>

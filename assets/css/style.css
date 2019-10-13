@@ -487,20 +487,25 @@ margin: 11px;
 .boxmission {
   background: #0000001a;
   width: 600px;
-  height: 570px;
+  height: auto;
   border-radius: 5px;
   padding: 40px;
   position: absolute;
   left: 50%;
-  top:65%;
+  top:63%;
   transform: translate(-50%, -50%);
   color:#294456;
 }
 .box h2 {
   color:white;
+  font-size: 1.5rem;
+  text-align: center;
 }
 .boxmission h2 {
   color:white;
+  font-size: 1.5rem;
+  text-align: center;
+  
 }
 
 .input-box {

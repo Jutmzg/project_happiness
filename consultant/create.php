@@ -28,7 +28,6 @@ if (
 }
 ?>
 
-
 <body>
   <div class="container">
         <?php if (!empty($message)) : ?>
@@ -39,7 +38,6 @@ if (
         <div class="box">
 
         <form method="post">
-        <h2>Ajouter un consultant</h2>
         <a href="/Akkappiness/consultant/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
           <div class="input-box">
@@ -72,6 +70,8 @@ if (
           </div>
         </form>
       </div>
+  </div>
+
 </body>
 <?php require '../layout/footer.php'; ?>
 
