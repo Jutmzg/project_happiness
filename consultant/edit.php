@@ -69,7 +69,7 @@ if (
                     <div class="form-group">
                     <div class="input-box">
                         <button type="submit" class="btn btn-info">Valider</button>
-                        <button class="btn btn-info retour"><a href="/Akkappiness/consultant/show.php">Retour</a></button>
+                        <button class="btn btn-info retour"><a href="/Akkappiness/consultant/show.php">Annuler</a></button>
                     </div>
                     </div>
                 </form>
