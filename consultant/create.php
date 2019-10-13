@@ -32,31 +32,40 @@ if (
 
 <body>
   <div class="container">
+    <div class="card mt-4">
+      <div class="card-header">
+        <h2>Ajouter un consultant</h2>
+        <a href="/Akkappiness/consultant/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
+      </div>
+      <div class="card-body p-4">
         <?php if (!empty($message)) : ?>
           <div class="alert alert-success">
             <?= $message; ?>
           </div>
         <?php endif; ?>
-        <div class="box">
-
         <form method="post">
-        <h2>Ajouter un consultant</h2>
-        <a href="/Akkappiness/consultant/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
+          <div class="form-group">
 
-          <div class="input-box">
-            <input type="text" name="lastname" id="lastname" class="" maxlength="50" minlength="2" placeholder="Nom" required>
+            <label for="lastname">Nom</label>
+            <input type="text" class="form-control" name="lastname" id="lastname" class="" maxlength="50" minlength="2" placeholder="Nom" required>
           </div>
 
-          <div class="input-box">
-            <input type="text" name="firstname" id="firstname" class="" maxlength="50" minlength="2" placeholder="Prénom" required>
+          <div class="form-group">
+            <label for="firstname">Prénom</label>
+
+            <input type="text" class="form-control" name="firstname" id="firstname" class="" maxlength="50" minlength="2" placeholder="Prénom" required>
           </div>
 
-          <div class="input-box">
-            <input type="email" name="mail" id="mail" class="" maxlength="50" minlength="5" placeholder="Email" required>
+          <div class="form-group">
+            <label for="email">Email</label>
+
+            <input type="email" class="form-control" name="mail" id="mail" class="" maxlength="50" minlength="5" placeholder="Email" required>
           </div>
 
-          <div class="input-box">
-            <select name="manager_id" class="" required>
+          <div class="form-group">
+                        <label for="manager">Manager</label>
+
+            <select class="form-control" name="manager_id" class="" required>
               <option name="choice" id="choice" value="">Selectionner un manager</option>
               <?php foreach ($managers as $manager) {
                 ?>
@@ -66,13 +75,14 @@ if (
           </div>
 
           <div class="form-group">
-          <div class="input-box">
-            <button type="submit" class="btn btn-info">Valider</button>
-            <button class="btn btn-info retour"><a href="/Akkappiness/consultant/show.php">Annuler</a></button>
-          </div>
+              <button type="submit" class="btn btn-info">Valider</button>
+              <button class="btn btn-info retour"><a href="/Akkappiness/consultant/show.php">Annuler</a></button>
           </div>
         </form>
       </div>
+    </div>
+  </div>
 </body>
 <?php require '../layout/footer.php'; ?>
+
 </html>

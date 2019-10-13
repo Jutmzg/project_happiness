@@ -26,7 +26,7 @@ if (
 
 <body>
   <div class="container">
-    <div class="card mt-5">
+    <div class="card mt-4">
       <div class="card-header">
         <h2>Ajouter un client</h2>
         <a href="/Akkappiness/customer/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
