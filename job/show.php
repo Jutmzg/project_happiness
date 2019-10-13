@@ -30,7 +30,7 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
         field: "nom",
         sortable: true,
         filter: true,
-        width: 925,
+        width: 910,
         suppressSizeToFit: true,
       },
       {
