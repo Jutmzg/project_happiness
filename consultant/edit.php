@@ -1,5 +1,7 @@
-<?php
-require '../db/db.php';
+<!DOCTYPE html>
+<html lang="fr">
+<?php require '../layout/header.php'; 
+
 $id = $_GET['id'];
 
 $sql = 'SELECT * FROM consultant WHERE id=:id';
@@ -32,9 +34,6 @@ if (
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<?php require '../layout/header.php'; ?>
 
 <body>
     <div class="container">

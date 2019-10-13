@@ -1,5 +1,7 @@
-<?php
-require '../db/db.php';
+<!DOCTYPE html>
+<html lang="en">
+<?php require '../layout/header.php'; 
+
 $id = $_GET['id'];
 
 $sql = 'SELECT * FROM customer WHERE id=:id';
@@ -22,9 +24,7 @@ if (
   }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<?php require '../layout/header.php'; ?>
+
 <div class="container">
   <div class="card mt-4">
     <div class="card-header">

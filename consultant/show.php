@@ -1,6 +1,7 @@
-﻿<?php
-require '../db/db.php';
-
+﻿<!DOCTYPE html>
+  <html lang="fr">
+  <?php require '../layout/header.php'; 
+  
 $sql = "SELECT c.id, CONCAT(c.firstname,' ', c.lastname) as fullname, 
 c.mail, CONCAT(mana.firstname,' ',mana.lastname) manager 
 FROM consultant c
@@ -11,9 +12,6 @@ $statement = $connection->prepare($sql);
 $statement->execute();
 $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 ?>
-<!DOCTYPE html>
-  <html lang="fr">
-  <?php require '../layout/header.php'; ?>
 
   <body>
     <div class="container">

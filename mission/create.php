@@ -1,7 +1,8 @@
-<?php
-require '../db/db.php';
-$message = '';
+<!DOCTYPE html>
+<html lang="fr">
+<?php require '../layout/header.php'; 
 
+$message = '';
 
 $sql2 = 'SELECT * FROM job';
 $statement = $connection->query($sql2);
@@ -43,9 +44,6 @@ if (
   }
 }
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<?php require '../layout/header.php'; ?>
 
 <body>
   <div class="container">

@@ -1,6 +1,6 @@
 <?php
 
-require '../db/db.php';
+require '../connection.php';
 
 if (isset($_POST['done'])) {
     $mission_id = $_POST['info'];

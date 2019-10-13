@@ -1,6 +1,6 @@
-
-<?php
-require '../db/db.php';
+<!DOCTYPE html>
+<html lang="fr">
+<?php require '../layout/header.php';
 
 $sql = "SELECT CONCAT(c.firstname,' ', c.lastname) as fullname, c.mail mail, m.id mission_id, m.name mission, CONCAT(mana.firstname,' ', mana.lastname) manager FROM mission m
 JOIN consultant c
@@ -12,9 +12,6 @@ $statement = $connection->prepare($sql);
 $statement->execute();
 $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<?php require '../layout/header.php';?>
 
 <body>
 
@@ -144,7 +141,6 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
     document.getElementById("missionId").innerHTML = mission;
     
     selectedData.forEach(function(element) {
-      var array = element
       var missions = element.mission
       $.ajax({
         url: "insertion.php",

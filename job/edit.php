@@ -1,5 +1,7 @@
-<?php
-require '../db/db.php';
+<!DOCTYPE html>
+<html lang="fr">
+<?php require '../layout/header.php'; 
+
 $id = $_GET['id'];
 
 $sql = 'SELECT * FROM job WHERE id=:id';
@@ -21,9 +23,6 @@ if (
 }
 
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<?php require '../layout/header.php'; ?>
 
 <body>
   <div class="container">
@@ -42,7 +41,7 @@ if (
         <form method="post">
           <div class="form-group">
             <label for="name">Nom</label>
-            <input value="<?= $jobs->name; ?>" type="text" name="name" id="name" class="form-control" maxlength="50" minlength="2" required>
+            <input value="<?= utf8_encode($jobs->name); ?>" type="text" name="name" id="name" class="form-control" maxlength="50" minlength="2" required>
           </div>
 
           <div class="form-group">

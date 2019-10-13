@@ -1,13 +1,12 @@
-<?php
-require '../db/db.php';
+<!DOCTYPE html>
+<html lang="fr">
+<?php require '../layout/header.php'; 
+
 $sql = 'SELECT id, name FROM job';
 $statement = $connection->prepare($sql);
 $statement->execute();
 $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<?php require '../layout/header.php'; ?>
 
 <body>
   <div class="container">

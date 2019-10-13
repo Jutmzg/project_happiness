@@ -1,5 +1,7 @@
-<?php
-require '../db/db.php';
+<!DOCTYPE html>
+<html lang="fr">
+<?php require '../layout/header.php'; 
+
 $message = '';
 
 if (
@@ -15,9 +17,7 @@ if (
   }
 }
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<?php require '../layout/header.php'; ?>
+
 <body>
 <div class="container">
   <div class="card mt-4">

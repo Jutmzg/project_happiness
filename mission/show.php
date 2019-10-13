@@ -1,5 +1,7 @@
-<?php
-require '../db/db.php';
+<!DOCTYPE html>
+<html lang="fr">
+<?php require '../layout/header.php'; 
+
 $sql = "SELECT m.ID, m.name mission,c.name customer, CONCAT(cons.firstname,' ', cons.lastname) as consultant, j.name job, m.start, m.stop, m.state FROM mission m
 LEFT JOIN consultant cons ON m.consultant_id = cons.ID
 INNER JOIN customer c ON m.customer_id = c.ID
@@ -8,10 +10,8 @@ WHERE m.state = 0";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $mission = $statement->fetchAll(PDO::FETCH_OBJ);
+
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<?php require '../layout/header.php'; ?>
 
 <body>
   <div class="container">

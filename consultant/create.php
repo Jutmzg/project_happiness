@@ -1,7 +1,8 @@
-<?php
-require '../db/db.php';
-$message = '';
+<!DOCTYPE html>
+<html lang="fr">
+<?php require '../layout/header.php'; 
 
+$message = '';
 $sql = "SELECT id, mail, CONCAT(firstname,' ', lastname) as fullname FROM manager WHERE state = 0";
 $statement = $connection->query($sql);
 $statement->execute();
@@ -26,9 +27,7 @@ if (
   }
 }
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<?php require '../layout/header.php'; ?>
+
 
 <body>
   <div class="container">
