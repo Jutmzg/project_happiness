@@ -19,15 +19,9 @@
   <script src="../assets/aggrid/ag-grid-community.min.noStyle.js"></script>
 
   <script src="https://unpkg.com/izitoast/dist/js/iziToast.min.js"></script>
-
-
-  
-
-
 </head>
 
 <header>
-
   <nav class="navbar navbar-expand-lg navbar-light bg-light text-uppercase p-1">
     <a class="navbar-brand" href="/Akkappiness/home/index.php"><img src='../assets/img/logo.png' alt="logo"> </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

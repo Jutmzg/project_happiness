@@ -74,5 +74,4 @@ if (
 
 </body>
 <?php require '../layout/footer.php'; ?>
-
 </html>
