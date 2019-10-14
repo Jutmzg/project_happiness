@@ -73,7 +73,7 @@ if (
           <div class="form-group">
             <label for="customer">Client</label>
             <select name="customer_id" class="form-control" required>
-              <option name="choice" id="choice" value="">Selectionner un client</option>
+              <option name="choice" id="choice" value="">Sélectionner un client</option>
               <?php foreach ($customers as $customer) {
                 $selected = $row->customer_id == $customer->id ? 'selected' : ''; ?>
                 <?= "<option value='$customer->id' name='customer' id='customer' $selected>"?><?=utf8_encode($customer->name)?></option>
@@ -83,7 +83,7 @@ if (
           <div class="form-group">
             <label for="consultant">Consultant</label>
             <select name="consultant_id" class="form-control" required>
-              <option name="choice" id="choice" value="">Selectionner un consultant</option>
+              <option name="choice" id="choice" value="">Sélectionner un consultant</option>
               <?php foreach ($consultants as $consultant) { ?>
                <?= $selected = $row->consultant_id == $consultant->id ? 'selected' : ''; ?>
 
@@ -94,7 +94,7 @@ if (
           <div class="form-group">
             <label for="job_id">Métier</label>
             <select name="job_id" class="form-control" required>
-              <option name="choice" id="choice" value="">Selectionner un métier</option>
+              <option name="choice" id="choice" value="">Sélectionner un métier</option>
               <?php foreach ($jobs as $job) {
                 $selected = $row->job_id == $job->id ? 'selected' : ''; ?>
                 <?= "<option value='$job->id' $selected>"?><?=utf8_encode($job->name)?></option>
@@ -107,7 +107,7 @@ if (
           </div>
           <div class="form-group">
             <label for="stop">Fin de mission</label>
-            <input type="text" class="form-control datepicker" name="stop" id="stop" min="<?= date('d/m/Y', strtotime($row->start)) ?>" value="<?= $row->stop ?>" required>
+            <input type="text" class="form-control datepicker" name="stop" id="stop" min="<?= date('d/m/Y', strtotime($row->stop)) ?>" value="<?= date('d/m/Y', strtotime($row->stop)) ?>" required>
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-info">Valider</button>

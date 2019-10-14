@@ -4,8 +4,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
 <script>
+
 $(function() {
 $( ".datepicker" ).datepicker({
+	yearRange: "-2:+10",
 	closeText: 'Fermer',
 	prevText: 'Précédent',
 	nextText: 'Suivant',
@@ -16,12 +18,12 @@ $( ".datepicker" ).datepicker({
 	dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
 	dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
 	weekHeader: 'Sem.',
-	dateFormat: 'yy/mm/dd'
+	dateFormat: 'dd/mm/yy',
+	afterShow: 'dd/mm/yy'
 	});
+
+	$.datepicker.setDefaults($.datepicker.regional['fr']);
 });
-		  $(function() {
-			$( ".datepicker" ).datepicker();
-		  });
 </script>
 
 </footer>

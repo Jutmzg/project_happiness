@@ -21,8 +21,6 @@ $statement = $connection->prepare($sql);
 $statement->execute();
 $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 
-
- 
   /* if (
     isset($_POST['submitbutton']) 
   ){
@@ -37,7 +35,7 @@ $sql = 'INSERT INTO job(name) VALUES(:name)';
   } */
 ?>
 
-<button class="btn btn-primary" onclick="getSelectedMissionId()">Insérer</button>
+<input type="submit" ic="save" class="btn btn-primary" onclick="getSelectedRows()" value="insérer">
 ​
 <div class="container d-flex">
 <input type="text" id="filter-text-box" placeholder="Filter..." oninput="onFilterTextBoxChanged()" />
@@ -53,8 +51,7 @@ $sql = 'INSERT INTO job(name) VALUES(:name)';
           filter: true,
           width: 349,
           suppressSizeToFit: true,
-          checkboxSelection: true,
-
+          checkboxSelection: true
         },
         {
           headerName: "Email",
@@ -137,10 +134,7 @@ $sql = 'INSERT INTO job(name) VALUES(:name)';
       
     }).join(',')
     document.getElementById("missionId").innerHTML = mission;
-    selectedData.forEach(function(element) {
-      // on récupère l'élément mission
-  console.log(element.mission);
-});
+    
   }
   function onFilterTextBoxChanged() {
     gridOptions.api.setQuickFilter(document.getElementById('filter-text-box').value);
