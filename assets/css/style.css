@@ -9,6 +9,7 @@ h2{
 }
 .card-body{
   padding:0;
+  height:400px;
 }
 .btn{
   cursor: pointer;
@@ -56,7 +57,7 @@ h2{
 }
 
 #myGrid{
-  height:400px;
+  height:100%;
   width:100%;
 }
 

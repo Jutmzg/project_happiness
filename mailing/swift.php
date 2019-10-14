@@ -7,6 +7,7 @@ echo 'Envoi de mail avec Swift Mailer';
 
 $subject = 'Mon premier email avec Swift Mailer';
 $fromEmail = 'zertouflex@gmail.com'; 
+$to = 'ju@gmail.com'; // tableau des emails 
 $fromUser = 'Toto';
 $body = '<!DOCTYPE html>
 <html>
@@ -32,7 +33,7 @@ $mailer = new Swift_Mailer($transport);
 // Create a message
 $message = (new Swift_Message($subject))
     ->setFrom([$fromEmail => $fromUser])
-    ->setTo([EMAIL_USERNAME])
+    ->setTo([$to])
     ->setBody($body, 'text/html')
 ;
 
