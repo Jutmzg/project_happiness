@@ -41,6 +41,8 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       width: 40,
       suppressSizeToFit: true,
       checkboxSelection: true,
+      headerCheckboxSelection: true,
+      headerCheckboxSelectionFilteredOnly: true,
 
     },
     {
