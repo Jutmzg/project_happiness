@@ -1,4 +1,4 @@
-<?php require '../db/db.php'; 
+<?php require '../connection.php'; 
 $id = $_GET['id'];
 $sql = 'UPDATE consultant SET state = 1 WHERE id=:id';
 $statement = $connection->prepare($sql);

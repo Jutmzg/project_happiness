@@ -1,5 +1,5 @@
 <?php
-require '../db/db.php';
+require 'connection.php';
 $id = $_GET['id'];
 $sql = 'DELETE FROM job WHERE id=:id';
 $statement = $connection->prepare($sql);

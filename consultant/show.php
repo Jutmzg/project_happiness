@@ -1,6 +1,7 @@
-﻿<?php
-require '../db/db.php';
-
+﻿<!DOCTYPE html>
+  <html lang="fr">
+  <?php require '../layout/header.php'; 
+  
 $sql = "SELECT c.id, CONCAT(c.firstname,' ', c.lastname) as fullname, 
 c.mail, CONCAT(mana.firstname,' ',mana.lastname) manager 
 FROM consultant c
@@ -11,9 +12,6 @@ $statement = $connection->prepare($sql);
 $statement->execute();
 $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 ?>
-<!DOCTYPE html>
-  <html lang="fr">
-  <?php require '../layout/header.php'; ?>
 
   <body>
     <div class="container">
@@ -21,7 +19,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
         <div class="card-header">
 
           <h2 class="text-center text-uppercase">Consultants</h2>
-          <a href="/Akkappiness/consultant/create.php"><button type="button" class="btn btn-primary ml-4"><i class="fas fa-user-plus"></i></button></a>
+          <a href="/Akkappiness/consultant/create.php"><button type="button" class="btn btn-primary add"><i class="fas fa-user-plus"></i></button></a>
           <div id="editAndDelete"></div>
           <div class="card-body">
             <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
@@ -37,7 +35,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
           field: "nom",
           sortable: true,
           filter: true,
-          width: 334,
+          width: 300,
           suppressSizeToFit: true,
 
         },
@@ -46,14 +44,20 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
           field: "mail",
           sortable: true,
           filter: true,
-          width: 340,
+          width: 300,
         },
         {
           headerName: "Manager",
           field: "manager",
           sortable: true,
           filter: true,
-          width: 335,
+          width: 300,
+
+        },
+        {
+          headerName: "Action",
+          field: "action",
+          hide: true,
 
         },
       ];
@@ -63,6 +67,8 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
             nom: "<?= utf8_encode($consultant->fullname) ?>",
             mail: "<?= $consultant->mail ?>",
             manager: "<?= utf8_encode($consultant->manager) ?>",
+            action: "<?= utf8_encode($consultant->id) ?>",
+
           },
         <?php } ?>
 
@@ -102,7 +108,9 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
         document.getElementById("editAndDelete").innerHTML =
           "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-user-edit fa-xs'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
       }
+      
     </script>
+
 
   </body>
   <?php require '../layout/footer.php'; ?>

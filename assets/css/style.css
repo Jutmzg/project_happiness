@@ -1,6 +1,15 @@
 body{
     background-color: #294456;
 }
+h2{
+  font-size: 2rem;
+}
+.container{
+  max-width: 1000px;
+}
+.card-body{
+  padding:0;
+}
 .btn{
   cursor: pointer;
 }
@@ -19,7 +28,7 @@ body{
 
 .btn-info{
     background-color: #294456;
-    border-color: #294456;
+    border-color: #758087;
     transition: 0.7s;
     cursor: pointer;
 }
@@ -35,20 +44,24 @@ body{
 
 .navbar-light .navbar-nav .nav-link{
     color: #294456;
-    font-size: 1.5rem;
+    font-size: 1rem;
     text-align: center;
     transition: 0.5;
 }
 .navbar-light .navbar-nav .nav-link:hover{
     color: #294456;
     opacity: 0.2;
-    font-size: 1.5rem;
+    font-size: 1rem;
     text-align: center;
 }
 
 #myGrid{
-  height:470px;
+  height:400px;
   width:100%;
+}
+
+#missionId {
+  display:none;
 }
 
 /*****bouton retour*****/
@@ -62,13 +75,18 @@ body{
   color:red;
 
 }
+.add{
+  position: relative;
+  bottom: 46px;
+}
 
 #editAndDelete{
 cursor: pointer;
 position: absolute;
-top: 7%;
-right: 9%;
-margin: 13px;
+position: absolute;
+top: 8%;
+right: 8%;
+margin: 11px;
 }
 
 /*******CHARTS********/
@@ -94,24 +112,32 @@ margin: 13px;
 .ag-theme-balham .ag-row-hover {
   background-color: #33546b9e ; }
 
+.ag-theme-balham .ag-paging-panel{
+  border-top: 1px solid #dcdcdc00;
+  color: #294456;
+  height: 21px;
+  padding: 0 0px;
+}
   
 .ag-header-cell-label .ag-header-cell-text{
   overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: large;
-    color: black;
+    font-size: initial;
+    color: #294456;
     margin:auto;
     text-transform: uppercase;
   }
 
-
-
   .ag-cell.ag-cell-not-inline-editing.ag-cell-with-height.ag-cell-value{
-    background: #b9b9b91f;
+    background: #98c8ea1f;
     text-align: center;
-    font-size: initial;
-    padding:20px;
+    font-size: unset;
+    padding:13px;
+  }
+  .ag-theme-balham .ag-ltr .ag-cell{
+    background: #98c8ea1f;
+
   }
 
   .ag-header-viewport{
@@ -132,6 +158,7 @@ margin: 13px;
     padding:5%;
     margin-top: 5%;
     background:#0000001a;
+    max-width: 500px;
   }
   .login label{
     color:white;
@@ -321,7 +348,6 @@ margin: 13px;
 }
 
 .ui-datepicker .ui-state-hover {
-  /*background: none !important;*/
   border: 0 !important;
 }
 
@@ -334,7 +360,6 @@ margin: 13px;
 .ui-datepicker .ui-state-default {
   border-radius: 2px;
   border-color: #edebeb !important;
-/*     background: white !important; */
   width: 24px;
   height: 24px;
   padding: 0 !important;
@@ -443,3 +468,100 @@ margin: 13px;
 .openemr-calendar .ui-datepicker-month {
   margin-right: 10px !important;
 }
+
+
+/***********INPUTS***********/
+
+.box {
+  background: #0000001a;
+  width: 600px;
+  height: auto;
+  border-radius: 5px;
+  padding: 40px;
+  position: absolute;
+  left: 50%;
+  top:55%;
+  transform: translate(-50%, -50%);
+  color:#294456;
+}
+.boxmission {
+  background: #0000001a;
+  width: 600px;
+  height: auto;
+  border-radius: 5px;
+  padding: 40px;
+  position: absolute;
+  left: 50%;
+  top:63%;
+  transform: translate(-50%, -50%);
+  color:#294456;
+}
+.box h2 {
+  color:white;
+  font-size: 1.5rem;
+  text-align: center;
+}
+.boxmission h2 {
+  color:white;
+  font-size: 1.5rem;
+  text-align: center;
+  
+}
+
+.input-box {
+  position: relative;
+}
+
+.input-box input {
+  border-style: none;
+  background: transparent;
+  border-bottom: 1px solid white;
+  width: 100%;
+  position: relative;
+  outline: none;
+  padding: 10px 0;
+  color: white;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+.input-box ::placeholder {
+  color: white;
+}
+
+.input-box select {
+  border-style: none;
+  background: transparent;
+  border-bottom: 1px solid white;
+  width: 100%;
+  position: relative;
+  outline: none;
+  padding: 6px 0;
+  color: white;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.input-box label {
+  color: white;
+  position: absolute;
+  padding: 10px 0;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  transition: 0.5s;
+}
+option{
+  background:#294456;
+}
+
+.alert{
+  position: relative;
+  padding: 6px;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  max-width: 300px;
+  margin: auto;
+  margin-top:2px;
+  text-align: center;
+
+  }
