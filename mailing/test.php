@@ -1,4 +1,14 @@
+<!--
 
+SELECT c.mail, e.mission_id FROM enquete e
+JOIN mission m 
+ON m.id = e.mission_id
+JOIN consultant c
+ON c.id = m.consultant_id
+WHERE e.mission_id = $mission_id
+AND c.mail = $mail
+
+ -->
 <!DOCTYPE html>
   <html lang="fr">
   <link href="../assets/fontawesome/css/all.css" rel="stylesheet">
