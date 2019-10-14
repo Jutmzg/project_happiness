@@ -27,8 +27,11 @@ WHERE e.state = 1
 </head>
 
 <body>
-  <h1>Bonjour</h1>
+  
   <div class="container">
+  <h1>Bonjour,</h1>
+  <p>Dans le cadre de notre campagne d’enquête de satisfaction, merci de nous donner votre niveau de satisfaction de votre mission actuelle.
+En vous remerciant par avance</p>
     <div class="row col-12">
       <a href="1.php?mission_id=3" title="Bien"><i class="far fa-smile fa-5x"></i></a>
       <a href="2.php?mission_id=3" title="Moyen"><i class="far fa-meh fa-5x"></i></a>
