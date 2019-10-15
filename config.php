@@ -15,9 +15,10 @@ $username = 'root';
 $password = '';
 
 
-
 const EMAIL_HOST = 'smtp.live.com';
 const EMAIL_PORT = 587;
 const EMAIL_USERNAME = 'maxime.vasseur.79@hotmail.fr';
 const EMAIL_PASSWORD = '26651bcbf';
 const EMAIL_ENCRYPTION = 'tls';
+
+
