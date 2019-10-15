@@ -16,8 +16,8 @@ $password = '';
 
 
 
-const EMAIL_HOST = 'smtp.gmail.com';
+const EMAIL_HOST = '173.194.65.108';
 const EMAIL_PORT = 587;
-const EMAIL_USERNAME = 'zertouflex@gmail.com';
-const EMAIL_PASSWORD = 'votre mot de passe';
-const EMAIL_ENCRYPTION = 'tls';
+const EMAIL_USERNAME = 'jul.bousseau@gmail.com';
+const EMAIL_PASSWORD = 'MaPaNo140303';
+const EMAIL_ENCRYPTION = 'ssl';

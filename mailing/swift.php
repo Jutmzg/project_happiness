@@ -6,7 +6,7 @@ require '../config.php';
 echo 'Envoi de mail avec Swift Mailer';
 
 $subject = 'Mon premier email avec Swift Mailer';
-$fromEmail = 'zertouflex@gmail.com'; 
+$fromEmail = 'jul.bousseau@gmail.com'; 
 $to = 'ju@gmail.com'; // tableau des emails 
 $fromUser = 'Toto';
 $body = '<!DOCTYPE html>

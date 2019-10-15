@@ -96,6 +96,29 @@ $spreadsheet->getActiveSheet()->setTitle('Métier');
 $spreadsheet->getActiveSheet()->setCellValue('A1', 'Liste des Métiers')
     ->setCellValue('B2', 'Nom');
 
+$sql = 'SELECT m.name as mission, resultat, created_at, e.state AS state FROM enquete AS e LEFT JOIN mission AS m ON m.id=e.mission_id';
+$statement = $connection->prepare($sql);
+$statement->execute();
+$enquete = $statement->fetchAll(PDO::FETCH_OBJ);
+$spreadsheet->createSheet(4);
+$spreadsheet->setActiveSheetIndex(4);
+$row = 3;
+        foreach($enquete as $value){
+            $spreadsheet->getActiveSheet()
+                ->setCellValue('B'.$row, utf8_encode(($value->mission)))
+                ->setCellValue('C'.$row, utf8_encode($value->resultat))
+                ->setCellValue('D'.$row, utf8_encode($value->created_at))
+                ->setCellValue('E'.$row, utf8_encode($value->state));
+            $row++;     
+        }
+    $spreadsheet->getActiveSheet()->mergeCells('A1:D1');
+    $spreadsheet->getActiveSheet()->setTitle('Enquête');
+    $spreadsheet->getActiveSheet()->setCellValue('A1', 'Résultats de l\'enquête Akkappiness')
+        ->setCellValue('B2', 'Mission')
+        ->setCellValue('C2', 'Résultat')
+        ->setCellValue('D2', 'Créé le')
+        ->setCellValue('E2', 'Statut');
+
 header('Content-Type: text/xlsx; charset=UTF-8');
 header('Content-Disposition: attachment; filename="Akkappiness.xlsx"');
 header('Cache-Control: max-age=0');
