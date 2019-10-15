@@ -39,7 +39,9 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
         <div class="col-md-5 col-lg-6 col-sm-12 d-flex justify-center">
             <canvas id="myChart1" width="400" height="400"></canvas>
             <canvas id="myChart2" width="400" height="400"></canvas>
+
         </div>
+
     </div>
 
     <script>
@@ -55,7 +57,7 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
     }, {
       label: "En attente",
       data: [<?=count($responseFalse);?>],
-      backgroundColor:"rgba(255,0,0,0.3)"
+      backgroundColor:"rgba(255,0,0,0.4)"
     }]
             },
             options: {
@@ -70,42 +72,33 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
         });
 
         var ctx = document.getElementById('myChart2').getContext('2d');
-        var myChart2 = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ["Taux de satisfaction , Total de réponse <?=count($responseTrue);?>"],
-    datasets: [{
-      label: "Bon",
-      data: [<?=count($goodRate);?>],
-      backgroundColor:"rgba(0,255,0,0.2)",
-      borderColor:"rgba(0,255,0,0.2)"
+        var myChart2     = new Chart(ctx, {
+            type: 'doughnut',
+    data: {
+      labels: ["Bon", "Moyen", "Mauvais"],
+      datasets: [
+        {
+          label: "Population (millions)",
+          backgroundColor: ["rgba(0,255,0,0.2)","rgba(255, 180, 67,0.7)","rgba(255,0,0,0.4)"],
+          borderWidth: 0, 
+          
+          data: [<?=count($goodRate);?>,<?=count($mediumRate);?>,<?=count($badRate);?>,]
+        }
+      ]
     },
-    {
-      label: "Moyen",
-      data: [<?=count($mediumRate);?>],
-      backgroundColor:"rgba(255,165,0,0.2)",
-      borderColor:"rgba(255,165,0,0.2)"
-    }, {
-      label: "Mauvais",
-      data: [<?=count($badRate);?>],
-      backgroundColor:"rgba(255,0,0,0.3)",
-      borderColor:"rgba(255,0,0,0.3)"
-    }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
+    options: {
+      title: {
+        display: true,
+        text: 'Taux de satisfaction , Total de réponse <?=count($responseTrue);?>'
+            }    
+      }
         });
     </script>
 
     
 </body>
+
+
 <?php require '../layout/footer.php'; ?>
 
 </html>
