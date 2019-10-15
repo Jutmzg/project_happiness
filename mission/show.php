@@ -84,8 +84,8 @@ $mission = $statement->fetchAll(PDO::FETCH_OBJ);
       <?php foreach ($mission as $row) { ?>
 
         {
-          mission: "<?= $row->mission ?>",
-          customer: "<?= $row->customer ?>",
+          mission: "<?= utf8_encode($row->mission) ?>",
+          customer: "<?= utf8_encode($row->customer) ?>",
           consultant: "<?= utf8_encode($row->consultant) ?>",
           job: "<?= utf8_encode($row->job) ?>",
           start: "<?= date('d/m/Y', strtotime($row->start)) ?>",
