@@ -45,7 +45,7 @@
         <a class="nav-link mr-2" href="/Akkappiness/enquete/index.php">Enquêtes</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link mr-2" href="/Akkappiness/mailing/test.php">Mailing</a>
+        <a class="nav-link mr-2" href="/Akkappiness/mailing/swift.php">Mail</a>
         </li>
         <li class="nav-item">
         <a class="nav-link mr-2" href="/Akkappiness/export/export.php">Export</a>

@@ -2,6 +2,23 @@
 <html lang="fr">
 <?php require '../layout/header.php'; ?>
 
+<?php
+$sql = "SELECT * FROM `enquete` WHERE state = 0";
+$statement = $connection->prepare($sql);
+$statement->execute();
+$responseTrue = $statement->fetchAll(PDO::FETCH_OBJ);
+
+$sql = "SELECT * FROM `enquete` WHERE state = 1";
+$statement = $connection->prepare($sql);
+$statement->execute();
+$responseFalse = $statement->fetchAll(PDO::FETCH_OBJ);
+
+?>
+
+
+
+
+
 <head>
     <script src="../assets/js/Chart.min.js"></script>
 
@@ -13,12 +30,6 @@
     <div class="container d-flex justify-content-between">
         <div class="row col-md-5 col-lg-5 col-sm-12 p-2">
             <canvas id="myChart1" width="400" height="400"></canvas>
-            <canvas id="myChart2" width="400" height="400"></canvas>
-        </div>
-        <div class="row col-md-5 col-lg-5 col-sm-12 p-2">
-        <canvas id="myChart3" width="400" height="400"></canvas>
-
-        </div>
     </div>
 
     <script>
@@ -26,23 +37,16 @@
         var myChart1 = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Répondu', 'En attente'],
-                datasets: [{
-                    label: 'Répondu,En attente',
-                    data: [12, 19],
-                    backgroundColor: [
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(255, 0, 0, 0.2)',
-                        
-                    ],
-                    borderColor: [
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(255, 0, 0, 0.2)',
-
-                        
-                    ],
-                    borderWidth: 1
-                }]
+                labels: ["Taux de réponse , Total des enquêtes <?=count($responseTrue) + count($responseFalse);?>"],
+    datasets: [{
+      label: "Répondu",
+      data: [<?=count($responseTrue);?>],
+      backgroundColor:"rgba(0,255,0,0.2)"
+    }, {
+      label: "En attente",
+      data: [<?=count($responseFalse);?>],
+      backgroundColor:"rgba(255,0,0,0.3)"
+    }]
             },
             options: {
                 scales: {
@@ -56,85 +60,6 @@
         });
     </script>
 
-    <script>
-        var ctx = document.getElementById('myChart2').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
-    </script>
-
-<script>
-        var ctx = document.getElementById('myChart3').getContext('2d');
-        var myChart3 = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
-    </script>
     
 </body>
 <?php require '../layout/footer.php'; ?>
