@@ -32,8 +32,8 @@ if (
   $customer_id = $_POST['customer_id'];
   $job_id = $_POST['job'];
   $consultant_id = $_POST['consultant_id'];
-  $start = $_POST['start'];
-  $stop = $_POST['stop'];
+  $start = date('Y-m-d', strtotime($_POST['start']));
+  $stop = date('Y-m-d', strtotime($_POST['stop']));
   $state = 0;
 
 
@@ -77,7 +77,7 @@ if (
     <select name="consultant_id" required>
       <option name="choice" id="choice" value="">Selectionner un consultant</option>
       <?php foreach ($consultants as $consultant) { ?>
-        <option value="<?= $consultant->id ?>" name="consultant" id="consultant"><?= utf8_encode($consultant->firstname) ?></option>
+        <option value="<?= $consultant->id ?>" name="consultant" id="consultant"><?= utf8_encode($consultant->firstname). ' ' . utf8_encode($consultant->lastname) ?></option>
       <?php } ?>
     </select>
   </div>

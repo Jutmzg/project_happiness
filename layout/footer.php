@@ -18,8 +18,8 @@ $( ".datepicker" ).datepicker({
 	dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
 	dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
 	weekHeader: 'Sem.',
-	dateFormat: 'dd/mm/yy',
-	afterShow: 'dd/mm/yy'
+	dateFormat: 'mm/dd/yy',
+	afterShow: 'mm/dd/yy'
 	});
 
 	$.datepicker.setDefaults($.datepicker.regional['fr']);

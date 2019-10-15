@@ -7,7 +7,7 @@ JOIN consultant c
 ON m.consultant_id = c.id
 JOIN manager mana
 ON c.manager_id = mana.id
-WHERE c.state = 0";
+WHERE c.state = 0 AND m.state = 0";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
