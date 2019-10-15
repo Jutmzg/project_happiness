@@ -4,4 +4,4 @@
 
 <div class="alert alert-success">Votre avis a bien été pris en compte</div>
 
-<?php header("Refresh: 3;url=http://google.fr"); ?>
+<?php header("Refresh: 2;url=http://localhost/Akkappiness/enquete/index.php"); ?>

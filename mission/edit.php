@@ -64,7 +64,7 @@ if (
         <a href="/Akkappiness/mission/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
                 <div class="input-box">
-            <input value="<?= $row->name; ?>" type="text" name="name" id="name"maxlength="50" minlength="2" required>
+            <input value="<?= $row->name; ?>" type="text" name="name" id="name" maxlength="50" minlength="2" required>
           </div>
 
                 <div class="input-box">
@@ -101,11 +101,11 @@ if (
             </select>
           </div>
                 <div class="input-box">
-            <input type="text" name="start" id="start" value="<?= date('d/m/Y', strtotime($row->start)) ?>" class="datepicker" required>
+            <input type="text" name="start" id="start" value="<?= date('m/d/Y', strtotime($row->start)) ?>" class="datepicker" required>
           </div>
 
                 <div class="input-box">
-            <input type="text" class="datepicker" name="stop" id="stop" min="<?= date('d/m/Y', strtotime($row->start)) ?>" value="<?= $row->stop ?>" required>
+            <input type="text" class="datepicker" name="stop" id="stop" min="<?= date('m/d/Y', strtotime($row->start)) ?>" value="<?= date('m/d/Y', strtotime($row->stop)) ?>" required>
 
           </div>
           <div class="form-group">
