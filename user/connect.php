@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-require_once '../connection.php';
-
 if ( !isset($_POST['mail'], $_POST['password']) ) {
 	die ('Please fill both the username and password field!');
 }
