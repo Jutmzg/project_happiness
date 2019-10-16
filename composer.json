@@ -1,6 +1,0 @@
-{
-    "require": {
-        "phpoffice/phpspreadsheet": "^1.9",
-        "swiftmailer/swiftmailer": "^6.2"
-    }
-}
