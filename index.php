@@ -71,6 +71,8 @@ $statement = $connection->prepare($sql);
 $statement->execute();
 $responseFalse = $statement->fetchAll(PDO::FETCH_OBJ);
 
+//////////////////////////////////////////////////////////
+
 $sql = "SELECT * FROM `enquete` WHERE resultat = 1";
 $statement = $connection->prepare($sql);
 $statement->execute();
@@ -86,6 +88,58 @@ $statement = $connection->prepare($sql);
 $statement->execute();
 $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
 
+//////////////////////////////////////////////////////////
+
+$sql = "SELECT count(c.name) customer, c.name, e.state 
+        FROM enquete e
+        JOIN mission m
+        ON m.id = e.mission_id
+        JOIN customer c
+        ON c.id = m.customer_id
+        WHERE e.state = 0 
+        GROUP BY c.name
+        ORDER BY customer DESC
+        LIMIT 5";
+$statement = $connection->prepare($sql);
+$statement->execute();
+$enqueteByCustomer = $statement->fetchAll(PDO::FETCH_OBJ);
+
+
+$sql = "SELECT COUNT(e.resultat) as nbrDeBien, c.name 
+        FROM enquete e
+        JOIN mission m ON m.id = e.mission_id
+        JOIN customer c ON m.customer_id = c.id
+        WHERE resultat = 1
+        GROUP BY c.name
+        ORDER BY nbrDeBien DESC
+        LIMIT 5";
+$statement = $connection->prepare($sql);
+$statement->execute();
+$goodRateByCustomer = $statement->fetchAll(PDO::FETCH_OBJ);
+
+
+$arrayCustomer = [];
+$arrayNbrDeBien = [];
+$arrayNbrEnquete = [];
+
+foreach($goodRateByCustomer as $row){
+  
+  $arrayNbrDeBien[] = $row->nbrDeBien;
+  $arrayCustomer[] = $row->name;
+}
+
+/* foreach($enqueteByCustomer as $enquete){
+  echo 'pour le client'. $enquete->name. ' ' .$enquete->customer . ' customers <br>';
+  $arrayNbrEnquete[] = $enquete->customer;
+} */
+
+//var_dump($arrayNbrEnquete);
+//var_dump($arrayNbrDeBien);
+
+$sql = "SELECT * FROM `enquete` WHERE resultat = 3";
+$statement = $connection->prepare($sql);
+$statement->execute();
+$badRate = $statement->fetchAll(PDO::FETCH_OBJ);
 ?>
 
 <body>
@@ -94,6 +148,9 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
     <div class="col-md-5 col-lg-6 col-sm-12 d-flex justify-center">
       <canvas id="myChart1" width="400" height="400"></canvas>
       <canvas id="myChart2" width="400" height="400"></canvas>
+    </div>
+    <div>
+      <canvas id="myChart3"></canvas>
     </div>
   </div>
 
@@ -144,6 +201,30 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
         }
       }
     });
+
+
+    var myChart3 = new Chart('myChart3', {
+  type: 'horizontalBar',
+  data: {
+        labels: [<?php echo "'".implode("','",$arrayCustomer)."'";?>],
+        datasets: [{
+          label: "TOP 5 des meilleurs résultat",
+          backgroundColor: ["rgba(0,255,0,0.2)", "rgba(255, 180, 67,0.7)", "rgba(255,0,0,0.4)", "rgba(132,111,34,0.4)", "rgba(112,0,122,0.4)"],
+          borderWidth: 0,
+
+          data: [<?= count($goodRate); ?>, <?= count($mediumRate); ?>, <?= count($badRate); ?>, ]
+        }]
+      },
+  options: {
+    scales: {
+      xAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
+  }
+});
   </script>
 
 </body>
