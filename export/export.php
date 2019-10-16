@@ -1,6 +1,6 @@
 <?php 
-require 'vendor/autoload.php';
-require 'db/db.php';
+require '../assets/phpspreadsheet/vendor/autoload.php';
+require '../connection.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -15,18 +15,16 @@ $spreadsheet->setActiveSheetIndex(0);
 $row = 3;
 foreach($consultants as $value){
         $spreadsheet->getActiveSheet()->setCellValue('B'.$row, $value->lastname)
-            ->setCellValue('C'.$row, $value->firstname)
-            ->setCellValue('D'.$row, $value->mail)
-            ->setCellValue('E'.$row, $value->mission_id)
-            ->setCellValue('F'.$row, $value->state)
-            ->setCellValue('G'.$row, $value->manager_id);
+            ->setCellValue('C'.$row, utf8_encode($value->firstname))
+            ->setCellValue('D'.$row, utf8_encode($value->mail))
+            ->setCellValue('F'.$row, utf8_encode($value->state))
+            ->setCellValue('G'.$row, utf8_encode($value->manager_id));
         $row++;     
 }
 $spreadsheet->getActiveSheet()->setCellValue('A1', 'Liste des Consultants')
         ->setCellValue('B2', 'Nom')
         ->setCellValue('C2', 'Prénom')
         ->setCellValue('D2', 'Mail')
-        ->setCellValue('E2', 'Mission')
         ->setCellValue('F2', 'Statut')
         ->setCellValue('G2', 'Manager');
 $spreadsheet->getActiveSheet()->mergeCells('A1:D1');
@@ -41,15 +39,16 @@ $spreadsheet->setActiveSheetIndex(1);
 $row = 3;
 foreach($missions as $value){
     $spreadsheet->getActiveSheet()->setCellValue('B'.$row, $value->name)
-        ->setCellValue('C'.$row, $value->customer_id)
-        ->setCellValue('D'.$row, $value->job_id)
-        ->setCellValue('E'.$row, $value->consultant_id)
-        ->setCellValue('F'.$row, $value->start)
-        ->setCellValue('G'.$row, $value->stop)
-        ->setCellValue('E'.$row, $value->state);
+        ->setCellValue('C'.$row, utf8_encode($value->customer_id))
+        ->setCellValue('D'.$row, utf8_encode($value->job_id))
+        ->setCellValue('E'.$row, utf8_encode($value->consultant_id))
+        ->setCellValue('F'.$row, utf8_encode($value->start))
+        ->setCellValue('G'.$row, utf8_encode($value->stop))
+        ->setCellValue('E'.$row, utf8_encode($value->state));
     $row++;     
 }
 $spreadsheet->getActiveSheet()->setTitle('Mission');
+$spreadsheet->getActiveSheet()->mergeCells('A1:D1');
 $spreadsheet->getActiveSheet()->setCellValue('A1', 'Liste des Missions')
         ->setCellValue('B2', 'Nom')
         ->setCellValue('C2', 'Client')
@@ -68,12 +67,13 @@ $spreadsheet->setActiveSheetIndex(2);
 $row = 3;
     foreach($customers as $value){
         $spreadsheet->getActiveSheet()
-        ->setCellValue('B'.$row, $value->name)
-        ->setCellValue('C'.$row, $value->address)
-        ->setCellValue('D'.$row, $value->state);
+        ->setCellValue('B'.$row,utf8_encode($value->name))
+        ->setCellValue('C'.$row, utf8_encode($value->address))
+        ->setCellValue('D'.$row, utf8_encode($value->state));
     $row++;     
     }
 $spreadsheet->getActiveSheet()->setTitle('Client');
+$spreadsheet->getActiveSheet()->mergeCells('A1:D1');
 $spreadsheet->getActiveSheet()->setCellValue('A1', 'Liste des Clients')
     ->setCellValue('B2', 'Nom')
     ->setCellValue('C2', 'Adresse')
@@ -88,12 +88,36 @@ $spreadsheet->setActiveSheetIndex(3);
 $row = 3;
     foreach($jobs as $value){
         $spreadsheet->getActiveSheet()
-            ->setCellValue('B'.$row, $value->name);
+            ->setCellValue('B'.$row, utf8_encode(($value->name)));
         $row++;     
     }
+$spreadsheet->getActiveSheet()->mergeCells('A1:D1');
 $spreadsheet->getActiveSheet()->setTitle('Métier');
 $spreadsheet->getActiveSheet()->setCellValue('A1', 'Liste des Métiers')
     ->setCellValue('B2', 'Nom');
+
+$sql = 'SELECT m.name as mission, resultat, created_at, e.state AS state FROM enquete AS e LEFT JOIN mission AS m ON m.id=e.mission_id';
+$statement = $connection->prepare($sql);
+$statement->execute();
+$enquete = $statement->fetchAll(PDO::FETCH_OBJ);
+$spreadsheet->createSheet(4);
+$spreadsheet->setActiveSheetIndex(4);
+$row = 3;
+        foreach($enquete as $value){
+            $spreadsheet->getActiveSheet()
+                ->setCellValue('B'.$row, utf8_encode(($value->mission)))
+                ->setCellValue('C'.$row, utf8_encode($value->resultat))
+                ->setCellValue('D'.$row, utf8_encode($value->created_at))
+                ->setCellValue('E'.$row, utf8_encode($value->state));
+            $row++;     
+        }
+    $spreadsheet->getActiveSheet()->mergeCells('A1:D1');
+    $spreadsheet->getActiveSheet()->setTitle('Enquête');
+    $spreadsheet->getActiveSheet()->setCellValue('A1', 'Résultats de l\'enquête Akkappiness')
+        ->setCellValue('B2', 'Mission')
+        ->setCellValue('C2', 'Résultat')
+        ->setCellValue('D2', 'Créé le')
+        ->setCellValue('E2', 'Statut');
 
 header('Content-Type: text/xlsx; charset=UTF-8');
 header('Content-Disposition: attachment; filename="Akkappiness.xlsx"');
@@ -106,13 +130,3 @@ header('Content-Encoding: UTF-8');
 $writer = new Xlsx($spreadsheet);
 $writer->save('php://output');
 ?>
-
-/* /**  Loop through all the remaining files in the list  **/
-//foreach($inputFileNames as $sheet => $inputFileName) {
-    /**  Increment the worksheet index pointer for the Reader  **/
-    //$reader->setSheetIndex($sheet+1);
-    /**  Load the current file into a new worksheet in Spreadsheet  **/
-    //$reader->loadIntoExisting($inputFileName,$spreadsheet);
-    /**  Set the worksheet title (to the filename that we've loaded)  **/
-    //$spreadsheet->getActiveSheet()
-        //->setTitle(pathinfo($inputFileName,PATHINFO_BASENAME));*/
