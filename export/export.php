@@ -1,5 +1,5 @@
 <?php 
-require '../vendor/autoload.php';
+require '../assets/phpspreadsheet/vendor/autoload.php';
 require '../connection.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
