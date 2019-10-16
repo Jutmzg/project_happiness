@@ -1,8 +1,7 @@
 <?php
-require '../vendor/autoload.php';
+require '../assets/swiftmailer/vendor/autoload.php';
 require '../config.php';
 require '../layout/header.php';
-
 
 $sql = "SELECT e.id, CONCAT(c.firstname,' ', c.lastname) as fullname, c.mail, m.name as mission, CONCAT(mana.firstname,' ', mana.lastname) as manager, e.state FROM enquete e
 LEFT JOIN mission m 
