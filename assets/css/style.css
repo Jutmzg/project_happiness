@@ -7,6 +7,11 @@ h2{
 .container{
   max-width: 1000px;
 }
+.logout{
+  position: absolute;
+  right:0;
+}
+
 .card-body{
   padding:0;
   height:400px;

@@ -1,45 +1,38 @@
 <!DOCTYPE html>
 <html lang="fr">
-<?php require '../layout/header.php'; 
-session_start();
-?>
-<?php
-$msg = "";
+<?php require '../config.php'; ?>
+<?php require '../connection.php'; ?>
+<?php session_start(); ?>
+<head>
+  <link href="../assets/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/css/style.css" rel="stylesheet">
+</head>
 
-if(isset($_POST['submit'])) {
-  
-  $mail = trim($_POST['mail']);
-  $password = trim($_POST['password']);
-  
-  if($mail != "" && $password != "") {
-    try {
-    $sql='SELECT mail, password FROM user WHERE mail = :mail AND password = :password';
-    $stmt = $connection->prepare($sql);
-    $stmt->bindParam('mail', $mail, PDO::PARAM_STR);
-    $stmt->bindValue('password', $password, PDO::PARAM_STR);
-    $stmt->execute();
-    $count = $stmt->rowCount();
-    $row   = $stmt->fetch(PDO::FETCH_ASSOC);
+<?php
+
+if (!empty($_POST) && (!empty($_POST['mail'])) && (!empty($_POST['password']))) {
+
+  $sql = "SELECT * FROM user WHERE mail = :mail";
+  $statement = $connection->prepare($sql);
+  $statement->execute([':mail' => $_POST['mail']]);
+  $user = $statement->fetch(PDO::FETCH_OBJ);
+  if ($_POST['password'] == $user->password) {
     
-    if($count == 1 && !empty($row)) {
-      $_SESSION['user_id']   = $row['id'];
-      $_SESSION['sess_user'] = $row['mail'];
-      header("Location: ../home/index.php"); 
-    
-    } else {
-      $msg = "Mail ou mot de passe invalide";
-    }
-    
-  } catch (PDOException $e) {
-    echo "Error : ".$e->getMessage();
+    $_SESSION['login'] = $user->mail;
+    header('Location: /Akkappiness');
+    exit();
+   
   }
-} else {
-  $msg = "Les deux champs doivent être remplis";
-}
+  else{
+    echo "<div class='alert alert-danger'>
+          <p>Email ou mot de passe incorrect</p>
+          </div>";
+  }
 }
 ?>
+
 <body>
-  <div action="login.php" class="container login col-lg-4 col-sm-6 text-center">
+  <div class="container login col-lg-4 col-sm-6 text-center">
     <form method="post">
       <div class="form-group">
         <label for="exampleInputEmail1">Email</label>
@@ -54,9 +47,6 @@ if(isset($_POST['submit'])) {
       </div>
     </form>
   </div>
-
-  <?php require '../layout/footer.php'; ?>
-  
 </body>
 
 </html>

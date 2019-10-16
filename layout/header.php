@@ -1,3 +1,4 @@
+
 <?php require_once('../connection.php'); ?>
 
 <head>
@@ -5,7 +6,6 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, user-scalable=no">
-
 
   <link href="../assets/css/alert.css" rel="stylesheet">
   <link href="../assets/fontawesome/css/all.css" rel="stylesheet">
@@ -22,7 +22,7 @@
 
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-light text-uppercase p-1">
-    <a class="navbar-brand" href="/Akkappiness/home/index.php"><img src='../assets/img/logo.png' alt="logo"> </a>
+    <a class="navbar-brand" href="/Akkappiness"><img src='../assets/img/logo.png' alt="logo"> </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -48,6 +48,9 @@
         </li>
         <li class="nav-item">
         <a class="nav-link mr-2" href="/Akkappiness/export/export.php">Export</a>
+        </li>
+        <li class="nav-item logout">
+        <a class="nav-link mr-2" href="/Akkappiness/user/logout.php"><i class="fas fa-power-off fa-lg"></i></a>
         </li>
       </ul>
     </div>
