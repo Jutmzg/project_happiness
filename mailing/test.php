@@ -20,7 +20,6 @@ AND c.mail = $mail
 </head>
 
 <body>
-  
   <div class="container">
   <h1>Bonjour,</h1>
   <p>Dans le cadre de notre campagne d’enquête de satisfaction, merci de nous donner votre niveau de satisfaction de votre mission actuelle.

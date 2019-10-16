@@ -7,8 +7,7 @@
   <meta name="viewport" content="width=device-width, user-scalable=no">
 
 
-  <link href="https://unpkg.com/izitoast/dist/css/iziToast.min.css" rel="stylesheet">
-  
+  <link href="../assets/css/alert.css" rel="stylesheet">
   <link href="../assets/fontawesome/css/all.css" rel="stylesheet">
   <link href="../assets/aggrid/ag-grid.css" rel="stylesheet">
   <link href="../assets/aggrid/ag-theme-balham.css" rel="stylesheet">
@@ -18,7 +17,7 @@
   <script src="../assets/jquery-ui/jquery-ui.min.js"></script>
   <script src="../assets/aggrid/ag-grid-community.min.noStyle.js"></script>
 
-  <script src="https://unpkg.com/izitoast/dist/js/iziToast.min.js"></script>
+  <script src="../assets/js/alert.js"></script>
 </head>
 
 <header>
@@ -45,7 +44,7 @@
         <a class="nav-link mr-2" href="/Akkappiness/enquete/index.php">Enquêtes</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link mr-2" href="/Akkappiness/mailing/test.php">Mailing</a>
+        <a class="nav-link mr-2" href="/Akkappiness/mailing/swift.php">Mail</a>
         </li>
         <li class="nav-item">
         <a class="nav-link mr-2" href="/Akkappiness/export/export.php">Export</a>

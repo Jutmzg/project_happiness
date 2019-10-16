@@ -60,11 +60,11 @@ if (
         <div class="boxmission">
         
         <form method="post">
-        <h2>Modifier la mission : <?= $row->name ?></h2>
+        <h2>Modifier la mission : <?= utf8_encode($row->name) ?></h2>
         <a href="/Akkappiness/mission/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
                 <div class="input-box">
-            <input value="<?= $row->name; ?>" type="text" name="name" id="name" maxlength="50" minlength="2" required>
+            <input value="<?= utf8_encode($row->name); ?>" type="text" name="name" id="name" maxlength="50" minlength="2" required>
           </div>
 
                 <div class="input-box">
