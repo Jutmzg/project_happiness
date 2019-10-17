@@ -2,12 +2,13 @@
   <html lang="fr">
   <?php require '../layout/header.php'; 
   
-$sql = "SELECT c.id, CONCAT(c.firstname,' ', c.lastname) as fullname, 
-c.mail, CONCAT(mana.firstname,' ',mana.lastname) manager 
+$sql = "SELECT c.id, CONCAT(c.lastname,' ', c.firstname) as fullname, 
+c.mail, CONCAT(mana.lastname,' ',mana.firstname) manager 
 FROM consultant c
 JOIN manager mana 
 ON c.manager_id = mana.id
-WHERE c.state = 0";
+WHERE c.state = 0
+ORDER BY fullname ASC";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $consultants = $statement->fetchAll(PDO::FETCH_OBJ);

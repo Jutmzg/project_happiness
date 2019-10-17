@@ -16,9 +16,7 @@ if (
   $sql = 'INSERT INTO customer(name, address, state) VALUES(:name, :address, :state)';
   $statement = $connection->prepare($sql);
   if ($statement->execute([':name' => $name, ':address' => $address, ':state' => $state])) {
-    $message = 'Mission enregistrée';
-  } else {
-    $message = 'Erreur de saisie';
+    $message = 'Client enregistré';
   }
 }
 ?>

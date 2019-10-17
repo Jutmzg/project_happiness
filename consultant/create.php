@@ -3,7 +3,7 @@
 <?php require '../layout/header.php'; 
 
 $message = '';
-$sql = "SELECT id, mail, CONCAT(firstname,' ', lastname) as fullname FROM manager WHERE state = 0";
+$sql = "SELECT id, mail, CONCAT(lastname,' ', firstname) as fullname FROM manager WHERE state = 0 ORDER BY fullname";
 $statement = $connection->query($sql);
 $statement->execute();
 $managers = $statement->fetchAll(PDO::FETCH_OBJ);

@@ -15,13 +15,14 @@ $statement = $connection->prepare($sql);
 $statement->execute();
 $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
 
-echo 'Envoi de mail pour chaque enquête';
+echo 'OK';
 foreach ($enquetes as $enquete) {
-
-    $subject = 'Mon premier email avec Swift Mailer';
-    $fromEmail = $enquete->mail; // $enquete->mail
-    $fromUser = $enquete->fullname; // $enquete->fullname
+    if(!empty($enquete->mail)){
+    $subject = 'AKKAPPINESS';
+    $toEmail = $enquete->mail; // $enquete->mail
+    $toUser = $enquete->fullname; // $enquete->fullname
     $id = $enquete->id; // $enquete->id
+
     $body = "<!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +30,7 @@ foreach ($enquetes as $enquete) {
 </head>
 <body>
 
-<h1>Bonjour $fromUser,</h1>
+<h1>Bonjour $toUser,</h1>
 <p>Dans le cadre de notre campagne d’enquête de satisfaction, merci de nous donner votre niveau de satisfaction de votre mission actuelle.
 En vous remerciant par avance</p>
   <div>
@@ -45,20 +46,21 @@ En vous remerciant par avance</p>
     $transport = (new Swift_SmtpTransport(EMAIL_HOST, EMAIL_PORT))
         ->setUsername(EMAIL_USERNAME)
         ->setPassword(EMAIL_PASSWORD)
-        ->setEncryption(EMAIL_ENCRYPTION) //For Gmail
     ;
+   
 
     // Create the Mailer using your created Transport
     $mailer = new Swift_Mailer($transport);
-
+   
     // Create a message
     $message = (new Swift_Message($subject))
-        ->setFrom([$fromEmail => $fromUser])
-        ->setTo([EMAIL_USERNAME])
+        ->setFrom([EMAIL_USERNAME])
+        ->setTo($toEmail)
         ->setContentType("text/html")
         ->setBody($body);
 
     // Send the message
     $result = $mailer->send($message);
 
+}
 }

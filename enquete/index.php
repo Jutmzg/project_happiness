@@ -2,13 +2,18 @@
 <html lang="fr">
 <?php require '../layout/header.php';
 
+<<<<<<< HEAD
 $sql = "SELECT CONCAT(c.firstname,' ', c.lastname) as fullname, c.mail mail, m.id mission_id, m.name mission, CONCAT(mana.firstname,' ', mana.lastname) manager 
 FROM mission m
+=======
+$sql = "SELECT CONCAT(c.lastname,' ', c.firstname) as fullname, c.mail mail, m.id mission_id, m.name mission, CONCAT(mana.lastname,' ', mana.firstname) manager FROM mission m
+>>>>>>> 8e3a0ba8216bcbaae3d66b757b3dfe0314ec58fb
 JOIN consultant c
 ON m.consultant_id = c.id
 JOIN manager mana
 ON c.manager_id = mana.id
-WHERE c.state = 0 AND m.state = 0";
+WHERE c.state = 0 AND m.state = 0
+ORDER BY fullname ";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $consultants = $statement->fetchAll(PDO::FETCH_OBJ);

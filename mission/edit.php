@@ -9,17 +9,17 @@ $statement = $connection->prepare($sql);
 $statement->execute([':id' => $id]);
 $row = $statement->fetch(PDO::FETCH_OBJ);
 
-$sql = 'SELECT * FROM customer';
+$sql = 'SELECT * FROM customer WHERE state = 0 ORDER BY name';
 $statement = $connection->query($sql);
 $statement->execute();
 $customers = $statement->fetchAll(PDO::FETCH_OBJ);
 
-$sql3 = 'SELECT * FROM consultant WHERE state = 0';
+$sql3 = "SELECT id, CONCAT(lastname,' ', firstname) as fullname FROM consultant WHERE state = 0 ORDER BY fullname";
 $statement = $connection->query($sql3);
 $statement->execute();
 $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 
-$sql2 = 'SELECT * FROM job';
+$sql2 = 'SELECT * FROM job ORDER BY name';
 $statement = $connection->query($sql2);
 $statement->execute();
 $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
@@ -85,7 +85,7 @@ if (
               <?php foreach ($consultants as $consultant) { ?>
                <?= $selected = $row->consultant_id == $consultant->id ? 'selected' : ''; ?>
 
-                <?= "<option value='$consultant->id' name='consultant' id='consultant' $selected>"?><?= utf8_encode($consultant->firstname),' ', utf8_encode($consultant->lastname)?></option>
+                <?= "<option value='$consultant->id' name='consultant' id='consultant' $selected>"?><?= utf8_encode($consultant->fullname)?></option>
             <?php } ?>
             </select>
           </div>

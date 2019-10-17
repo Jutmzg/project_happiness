@@ -2,7 +2,7 @@
 <html lang="fr">
 <?php require '../layout/header.php'; 
 
-$sql = 'SELECT id, name FROM job';
+$sql = 'SELECT id, name FROM job ORDER BY name';
 $statement = $connection->prepare($sql);
 $statement->execute();
 $jobs = $statement->fetchAll(PDO::FETCH_OBJ);

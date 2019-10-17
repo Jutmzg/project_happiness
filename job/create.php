@@ -13,7 +13,7 @@ if (
   $sql = 'INSERT INTO job(name) VALUES(:name)';
   $statement = $connection->prepare($sql);
   if ($statement->execute([':name' => $name])) {
-    $message = 'Mission enregistrée';
+    $message = 'Métier enregistré';
   }
 }
 ?>
@@ -28,7 +28,7 @@ if (
       <div class="box">
 
       <form method="post">
-      <a href ="/Akkappiness/mission/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
+      <a href ="/Akkappiness/job/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
           <div class="input-box">
           <input type="text" name="name" id="name" placeholder="Nom" maxlength="50" minlength="2" required>
