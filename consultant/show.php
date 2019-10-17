@@ -22,6 +22,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
           <div class="add d-flex">
         <a href="/Akkappiness/consultant/create.php" class='btn btn-primary mr-1'><i class="fas fa-user-plus fa-xs"></i></a>
         <div id="editAndDelete"></div>
+        <div id="editDeleteAddMission" class="ml-1"></div>
 </div>
           <div class="card-body">
             <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
@@ -109,6 +110,10 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
         })
         document.getElementById("editAndDelete").innerHTML =
           "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-user-edit fa-xs'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
+
+          document.getElementById("editDeleteAddMission").innerHTML =
+          "<a href=/Akkappiness/mission/create.php?id=" + action + " class='btn btn-success' title='Créer une mission'><i class='fas fa-user-secret'></i></a>";
+
       }
 
       

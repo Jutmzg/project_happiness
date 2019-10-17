@@ -3,6 +3,9 @@
 <?php require '../layout/header.php'; 
 
 $id = $_GET['id'];
+if($id == ""){
+  header('Location: /Akkappiness/mission/show.php');
+}
 
 $sql = 'SELECT * FROM mission WHERE id=:id';
 $statement = $connection->prepare($sql);
@@ -73,7 +76,7 @@ if (
 
               <?php foreach ($consultants as $consultant) { ?>
                <?= $selected = $row->consultant_id == $consultant->id ? 'selected' : ''; ?>
-                  <?php $cons = substr($consultant->fullname, 0, 4);?>
+                  <?php $cons = substr(utf8_encode($consultant->fullname), 0, 4);?>
                 <?= "<option value='$consultant->id' name='consultant' id='consultant' data-value=$cons $selected>"?><?= utf8_encode($consultant->fullname)?></option>
             <?php } ?>
             </select>
@@ -83,7 +86,8 @@ if (
             <select id="customer" name="customer_id"required>
               <option name="choice" id="choice" value="">Selectionner un client</option>
 
-              <?php foreach ($customers as $customer) {
+              <?php foreach ($customers as $customer) { 
+                 $customerName = utf8_encode($customer->name);
                 $selected = $row->customer_id == $customer->id ? 'selected' : ''; ?>
                 <?= "<option value='$customer->id' name='customer' id='customer' data-value=$customer->name $selected>"?><?=utf8_encode($customer->name)?></option>
               <?php } ?>
