@@ -2,7 +2,7 @@
 <html lang="fr">
 <?php require '../layout/header.php'; 
 
-$sql = 'SELECT id, name, address FROM customer WHERE state = 0';
+$sql = 'SELECT id, name, address FROM customer WHERE state = 0 ORDER BY name';
 $statement = $connection->prepare($sql);
 $statement->execute();
 $customers = $statement->fetchAll(PDO::FETCH_OBJ);

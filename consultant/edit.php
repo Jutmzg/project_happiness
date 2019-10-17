@@ -9,7 +9,7 @@ $statement = $connection->prepare($sql);
 $statement->execute([':id' => $id]);
 $row = $statement->fetch(PDO::FETCH_OBJ);
 
-$sql2 = "SELECT id, mail, CONCAT(firstname,' ', lastname) as fullname FROM manager WHERE state = 0";
+$sql2 = "SELECT id, mail, CONCAT(lastname,' ', firstname) as fullname FROM manager WHERE state = 0 ORDER BY fullname";
 $statement = $connection->query($sql2);
 $statement->execute();
 $managers = $statement->fetchAll(PDO::FETCH_OBJ);
@@ -55,7 +55,7 @@ if (
                         <input value="<?= utf8_encode($row->firstname); ?>" type="text" name="firstname" id="firstname" maxlength="50" minlength="2" required>
                 </div>
                 <div class="input-box">
-                        <input value="<?= $row->mail; ?>" type="email" name="mail" id="mail" maxlength="50" minlength="5" required>
+                        <input value="<?= $row->mail; ?>" type="email" name="mail" id="mail" placeholder= "Email" maxlength="50" minlength="5" required>
                 </div>
                 <div class="input-box">
                         <select name="manager_id" required>
