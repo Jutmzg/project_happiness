@@ -59,7 +59,6 @@
     </div>
   </nav>
 </header>
-
 <?php
 $sql = "SELECT * FROM `enquete` WHERE state = 0";
 $statement = $connection->prepare($sql);

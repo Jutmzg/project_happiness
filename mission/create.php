@@ -64,23 +64,22 @@ if (
         </div>
 
         <div class="input-box">
-        <select name="customer_id" required>
-          <option name="choice" id="choice" value="">Selectionner un client</option>
-          <?php foreach ($customers as $customer) {
-            ?>
-            <option value="<?= $customer->id ?>" name="customer" id="customer"><?= utf8_encode($customer->name) ?></option>
-          <?php } ?>
-        </select>
-    </div>
-
-        <div class="input-box">
-    <select name="consultant_id" required>
+    <select id="consultant" name="consultant_id" required>
       <option name="choice" id="choice" value="">Selectionner un consultant</option>
       <?php foreach ($consultants as $consultant) { ?>
-        <option value="<?= $consultant->id ?>" name="consultant" id="consultant"><?= utf8_encode($consultant->fullname)?></option>
+        <option value="<?= $consultant->id ?>" data-value="<?=substr($consultant->fullname, 0, 4);?>" name="consultant" id="consultant"><?= utf8_encode($consultant->fullname)?></option>
       <?php } ?>
     </select>
   </div>
+  <div class="input-box">
+        <select id="customer" name="customer_id" required>
+          <option name="choice" id="choice" value="">Selectionner un client</option>
+          <?php foreach ($customers as $customer) {
+            ?>
+            <option value="<?= $customer->id ?>" data-value="<?= utf8_encode($customer->name) ?>" name="customer" id="customer"><?= utf8_encode($customer->name) ?></option>
+          <?php } ?>
+        </select>
+    </div>
 
   <div class="input-box">
     <select name="job" required>
@@ -108,6 +107,28 @@ if (
   </div>
   </form>
   </div>
+
+
+  <script>
+
+$(document).ready(function(fourletters){
+$("#consultant").change(function () {
+   var selectedItem = $(this).val();
+   var FourLetters= $('option:selected', this).attr('data-value');
+   console.log(FourLetters);
+   document.getElementById('name').value = FourLetters+'-';
+   $("#customer").change(function () {
+   var selectedItem = $(this).val();
+   var customerName= $('option:selected', this).attr('data-value');
+   console.log(customerName);
+   document.getElementById('name').value = FourLetters+'-'+customerName;
+  });
+   
+  });
+});
+
+
+    </script>
 </body>
 <?php require '../layout/footer.php'; ?>
 

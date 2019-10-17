@@ -18,7 +18,6 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
     <div class="container">
       <div class="card mt-4">
         <div class="card-header">
-
           <h2 class="text-center text-uppercase">Consultants</h2>
           <a href="/Akkappiness/consultant/create.php"><button type="button" class="btn btn-primary add"><i class="fas fa-user-plus"></i></button></a>
           <div id="editAndDelete"></div>
@@ -29,7 +28,6 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
         </div>
       </div>
     </div>
-
     <script type="text/javascript" charset="utf-8">
       var columnDefs = [{
           headerName: "Nom",
@@ -78,6 +76,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
         defaultColDef: {
           resizable: true,
           suppressColumnVirtualisation: true,
+          
         },
         columnDefs: columnDefs,
         pagination: true,
@@ -97,7 +96,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       function onFilterTextBoxChanged() {
         gridOptions.api.setQuickFilter(document.getElementById('filter-text-box').value);
       }
-
+  
       function buttons() {
         var selectedNodes = gridOptions.api.getSelectedNodes()
         var selectedData = selectedNodes.map(function(node) {
@@ -109,6 +108,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
         document.getElementById("editAndDelete").innerHTML =
           "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-user-edit fa-xs'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
       }
+
       
     </script>
 

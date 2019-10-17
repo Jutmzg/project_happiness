@@ -24,6 +24,10 @@ $( ".datepicker" ).datepicker({
 
 	$.datepicker.setDefaults($.datepicker.regional['fr']);
 });
+
+function goBack() {
+  window.history.back();
+}
 </script>
 
 </footer>

@@ -46,7 +46,7 @@ if (
 
                 <form method="post">
                 <h2>Modifier les informations de <?= utf8_encode($row->firstname) . ' ' . utf8_encode($row->lastname) ?></h2>
-                <a href="/Akkappiness/consultant/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
+                <a onclick="goBack()"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
                 <div class="input-box">
                         <input value="<?= utf8_encode($row->lastname); ?>" type="text" name="lastname" id="lastname" maxlength="50" minlength="2" required>
