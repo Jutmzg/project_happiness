@@ -20,7 +20,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
         <div class="card-header">
           <h2 class="text-center text-uppercase">Consultants</h2>
           <a href="/Akkappiness/consultant/create.php"><button type="button" class="btn btn-primary add"><i class="fas fa-user-plus"></i></button></a>
-          <div id="editAndDelete"></div>
+          <div id="editDeleteAddMission"></div>
           <div class="card-body">
             <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
             <div id="myGrid" class="ag-theme-balham" onclick="buttons()"></div>
@@ -29,7 +29,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       </div>
     </div>
     <script type="text/javascript" charset="utf-8">
-      var columnDefs = [{
+      let columnDefs = [{
           headerName: "Nom",
           field: "nom",
           sortable: true,
@@ -61,7 +61,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
         },
       ];
       // specify the data
-      var rowData = [
+      let rowData = [
         <?php foreach ($consultants as $consultant) { ?> {
             nom: "<?= utf8_encode($consultant->fullname) ?>",
             mail: "<?= $consultant->mail ?>",
@@ -72,7 +72,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
         <?php } ?>
 
       ];
-      var gridOptions = {
+      let gridOptions = {
         defaultColDef: {
           resizable: true,
           suppressColumnVirtualisation: true,
@@ -90,7 +90,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
         },
       };
 
-      var eGridDiv = document.querySelector('#myGrid');
+      let eGridDiv = document.querySelector('#myGrid');
       new agGrid.Grid(eGridDiv, gridOptions);
 
       function onFilterTextBoxChanged() {
@@ -98,15 +98,15 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       }
   
       function buttons() {
-        var selectedNodes = gridOptions.api.getSelectedNodes()
-        var selectedData = selectedNodes.map(function(node) {
+        let selectedNodes = gridOptions.api.getSelectedNodes()
+        let selectedData = selectedNodes.map(function(node) {
           return node.data
         })
-        var action = selectedData.map(function(node) {
+        let action = selectedData.map(function(node) {
           return node.action
         })
-        document.getElementById("editAndDelete").innerHTML =
-          "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-user-edit fa-xs'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
+        document.getElementById("editDeleteAddMission").innerHTML =
+          "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-user-edit fa-xs'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a> <a href=/Akkappiness/mission/create.php?id=" + action + " class='btn btn-info'><i class='fas fa-user-plus fa-xs'></i></a>";
       }
 
       
