@@ -13,8 +13,10 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
     <div class="card mt-4">
       <div class="card-header">
         <h2 class="text-center text-uppercase">Métiers</h2>
-        <a href="/Akkappiness/job/create.php"><button type="button" class="btn btn-primary add"><i class="fas fa-user-plus"></i></button></a>
+        <div class="add d-flex">
+        <a href="/Akkappiness/job/create.php" class='btn btn-primary mr-1'><i class="fas fa-user-plus fa-xs"></i></a>
         <div id="editAndDelete"></div>
+        </div>
         <div class="card-body">
           <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
           <div id="myGrid" class="ag-theme-balham" onclick="buttons()"></div>
