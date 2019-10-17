@@ -2,7 +2,8 @@
 <html lang="fr">
 <?php require '../layout/header.php';
 
-$sql = "SELECT CONCAT(c.firstname,' ', c.lastname) as fullname, c.mail mail, m.id mission_id, m.name mission, CONCAT(mana.firstname,' ', mana.lastname) manager FROM mission m
+$sql = "SELECT CONCAT(c.firstname,' ', c.lastname) as fullname, c.mail mail, m.id mission_id, m.name mission, CONCAT(mana.firstname,' ', mana.lastname) manager 
+FROM mission m
 JOIN consultant c
 ON m.consultant_id = c.id
 JOIN manager mana
@@ -20,7 +21,6 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 
         <h2 class="text-center text-uppercase">Enquêtes</h2>
         <button class="btn btn-primary add" onclick="getSelectedMissionId()">Envoyer</button>
-
         <div class="card-body">
           <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
           <div id="myGrid" class="ag-theme-balham"></div>
@@ -31,7 +31,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
   <div id="missionId"></div>
 <script type="text/javascript" charset="utf-8">
   // specify the columns
-  var columnDefs = [{
+  let columnDefs = [{
       headerName: "",
       field: "nom",
       sortable: true,
@@ -104,7 +104,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
     <?php } ?>
   ];
   // let the grid know which columns and what data to use
-  var gridOptions = {
+  let gridOptions = {
 
     defaultColDef: {
       resizable: true,
@@ -125,7 +125,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 
   // lookup the container we want the Grid to use
   let eGridDiv = document.querySelector('#myGrid');
-
+  
   // create the grid passing in the div to use together with the columns & data we want to use
   new agGrid.Grid(eGridDiv, gridOptions);
 
@@ -141,7 +141,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
     document.getElementById("missionId").innerHTML = mission;
     
     selectedData.forEach(function(element) {
-      var missions = element.mission
+      let missions = element.mission
       $.ajax({
         url: "insertion.php",
         type: "post",
@@ -161,7 +161,6 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
   function onFilterTextBoxChanged() {
     gridOptions.api.setQuickFilter(document.getElementById('filter-text-box').value);
   }
-
 
   iziToast.settings({
       timeout: 3000, // default timeout
@@ -207,7 +206,6 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 
     }); 
 </script>
-
 </body>
 <?php require '../layout/footer.php'; ?>
 </html>

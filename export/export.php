@@ -123,8 +123,6 @@ header('Content-Type: text/xlsx; charset=UTF-8');
 header('Content-Disposition: attachment; filename="Akkappiness.xlsx"');
 header('Cache-Control: max-age=0');
 header('Cache-Control: max-age=1');
-header('Cache-Control: cache, must-revalidate');
-header('Pragma: public');
 header('Content-Encoding: UTF-8');
 
 $writer = new Xlsx($spreadsheet);
