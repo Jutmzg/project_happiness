@@ -121,20 +121,55 @@ $goodRateByCustomer = $statement->fetchAll(PDO::FETCH_OBJ);
 $arrayCustomer = [];
 $arrayNbrDeBien = [];
 $arrayNbrEnquete = [];
-
 foreach($goodRateByCustomer as $row){
   
   $arrayNbrDeBien[] = $row->nbrDeBien;
   $arrayCustomer[] = $row->name;
 }
 
-/* foreach($enqueteByCustomer as $enquete){
-  echo 'pour le client'. $enquete->name. ' ' .$enquete->customer . ' customers <br>';
+ foreach($enqueteByCustomer as $enquete){
   $arrayNbrEnquete[] = $enquete->customer;
-} */
+} 
 
-//var_dump($arrayNbrEnquete);
-//var_dump($arrayNbrDeBien);
+$Note1 = round(($arrayNbrDeBien[0] / $arrayNbrEnquete[0])*100);
+$Note2 = round(($arrayNbrDeBien[1] / $arrayNbrEnquete[1])*100);
+$Note3 = round(($arrayNbrDeBien[2] / $arrayNbrEnquete[2])*100);
+$Note4 = round(($arrayNbrDeBien[3] / $arrayNbrEnquete[3])*100);
+$Note5 = round(($arrayNbrDeBien[4] / $arrayNbrEnquete[4])*100);
+
+$customerNote = [ $arrayCustomer[0] => $Note1 ,
+                   $arrayCustomer[1] => $Note2 ,
+                   $arrayCustomer[2] => $Note3 ,
+                   $arrayCustomer[3] => $Note4 ,
+                   $arrayCustomer[4] => $Note5 ,
+                  ];
+
+ksort($customerNote);
+
+foreach ($customerNote as $key => $val) {
+  $key = $val;
+}
+
+$top5Customers = [];
+$top5Rate = [];
+
+foreach($customerNote as $customer => $key){
+  $top5Customers[] = $key;
+  $top5Rate[] = $customer;
+}
+arsort($customerNote);
+
+$topNote = [];
+foreach ($customerNote as $note => $value) {
+  $topNote[] = $value;
+}
+$top5 = [];
+foreach($customerNote as $enterprise => $value){
+  $top5[] = $enterprise;
+}
+
+
+
 
 $sql = "SELECT * FROM `enquete` WHERE resultat = 3";
 $statement = $connection->prepare($sql);
@@ -206,13 +241,13 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
     var myChart3 = new Chart('myChart3', {
   type: 'horizontalBar',
   data: {
-        labels: [<?php echo "'".implode("','",$arrayCustomer)."'";?>],
+        labels: [<?="'".implode("','",$top5)."'";?>],
         datasets: [{
-          label: "TOP 5 des meilleurs résultat",
-          backgroundColor: ["rgba(0,255,0,0.2)", "rgba(255, 180, 67,0.7)", "rgba(255,0,0,0.4)", "rgba(132,111,34,0.4)", "rgba(112,0,122,0.4)"],
+          label: "Meilleur taux de satisfaction",
+          backgroundColor: ["rgba(0,255,0,0.2)", "rgba(255, 180, 67,0.7)", "rgba(255,0,0,0.4)", "rgba(0,0,255,0.4)", "rgba(112,0,122,0.4)"],
           borderWidth: 0,
 
-          data: [<?= count($goodRate); ?>, <?= count($mediumRate); ?>, <?= count($badRate); ?>, ]
+          data: [<?= "'".implode("','",$topNote)."'";?>]
         }]
       },
   options: {
@@ -221,6 +256,7 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
         ticks: {
           beginAtZero: true
         }
+
       }]
     }
   }
