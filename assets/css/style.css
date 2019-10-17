@@ -514,6 +514,8 @@ margin: 11px;
   
 }
 
+
+
 .input-box {
   position: relative;
 }
@@ -529,6 +531,14 @@ margin: 11px;
   color: white;
   font-size: 18px;
   margin-bottom: 30px;
+}
+input[readonly] {
+  background-color: #9696966b;
+  
+}
+input[readonly]::placeholder {
+  
+  color:grey;
 }
 .input-box ::placeholder {
   color: white;

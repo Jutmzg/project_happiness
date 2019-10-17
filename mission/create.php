@@ -60,7 +60,7 @@ if (
         <a href="/Akkappiness/mission/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
         <div class="input-box">
-          <input type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" required>
+          <input type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" required readonly>
         </div>
 
         <div class="input-box">
@@ -115,17 +115,14 @@ $(document).ready(function(fourletters){
 $("#consultant").change(function () {
    var selectedItem = $(this).val();
    var FourLetters= $('option:selected', this).attr('data-value');
-   console.log(FourLetters);
-   document.getElementById('name').value = FourLetters+'-';
    $("#customer").change(function () {
    var selectedItem = $(this).val();
    var customerName= $('option:selected', this).attr('data-value');
-   console.log(customerName);
    document.getElementById('name').value = FourLetters+'-'+customerName;
   });
-   
   });
 });
+
 
 
     </script>

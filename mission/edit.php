@@ -64,29 +64,29 @@ if (
         <a href="/Akkappiness/mission/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
                 <div class="input-box">
-            <input value="<?= utf8_encode($row->name); ?>" type="text" name="name" id="name" maxlength="50" minlength="2" required>
+            <input value="<?= utf8_encode($row->name); ?>" type="text" name="name" id="name" maxlength="50" minlength="2" readonly required>
           </div>
 
-                <div class="input-box">
-            <select name="customer_id"required>
-              <option name="choice" id="choice" value="">Selectionner un client</option>
-
-              <?php foreach ($customers as $customer) {
-                $selected = $row->customer_id == $customer->id ? 'selected' : ''; ?>
-                <?= "<option value='$customer->id' name='customer' id='customer' $selected>"?><?=utf8_encode($customer->name)?></option>
-              <?php } ?>
-            </select>
-          </div>
-
-                <div class="input-box">
-            <select name="consultant_id"required>
+          <div class="input-box">
+            <select id="consultant" name="consultant_id"required>
               <option name="choice" id="choice" value="">Selectionner un consultant</option>
 
               <?php foreach ($consultants as $consultant) { ?>
                <?= $selected = $row->consultant_id == $consultant->id ? 'selected' : ''; ?>
-
-                <?= "<option value='$consultant->id' name='consultant' id='consultant' $selected>"?><?= utf8_encode($consultant->fullname)?></option>
+                  <?php $cons = substr($consultant->fullname, 0, 4);?>
+                <?= "<option value='$consultant->id' name='consultant' id='consultant' data-value=$cons $selected>"?><?= utf8_encode($consultant->fullname)?></option>
             <?php } ?>
+            </select>
+          </div>
+
+                <div class="input-box">
+            <select id="customer" name="customer_id"required>
+              <option name="choice" id="choice" value="">Selectionner un client</option>
+
+              <?php foreach ($customers as $customer) {
+                $selected = $row->customer_id == $customer->id ? 'selected' : ''; ?>
+                <?= "<option value='$customer->id' name='customer' id='customer' data-value=$customer->name $selected>"?><?=utf8_encode($customer->name)?></option>
+              <?php } ?>
             </select>
           </div>
 
@@ -119,6 +119,23 @@ if (
       </div>
     </div>
   </div>
+
+  <script>
+
+$(document).ready(function(fourletters){
+$("#consultant").change(function () {
+   var selectedItem = $(this).val();
+   var FourLetters= $('option:selected', this).attr('data-value');
+   $("#customer").change(function () {
+   var selectedItem = $(this).val();
+   var customerName= $('option:selected', this).attr('data-value');
+   document.getElementById('name').value = FourLetters+'-'+customerName;
+  });
+  });
+});
+
+
+    </script>
 </body>
 <?php require '../layout/footer.php'; ?>
 
