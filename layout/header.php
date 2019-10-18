@@ -57,9 +57,6 @@
         <li class="nav-item">
         <a class="nav-link mr-2" href="/Akkappiness/mailing/mail.php">Mail</a>
         </li>
-        <li class="nav-item">
-        <a class="nav-link mr-2" href="/Akkappiness/export/export.php">Export</a>
-        </li>
         <li class="nav-item logout">
         <a class="nav-link mr-2" href="/Akkappiness/user/logout.php"><i class="fas fa-power-off fa-lg"></i></a>
         </li>

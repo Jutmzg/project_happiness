@@ -15,7 +15,7 @@ $customers = $statement->fetchAll(PDO::FETCH_OBJ);
     <h2 class="text-center text-uppercase">Clients</h2>
 
       <div class="add d-flex">
-        <a href="/Akkappiness/customer/create.php" class='btn btn-primary mr-1'><i class="fas fa-user-plus fa-xs"></i></a>
+        <a href="/Akkappiness/customer/create.php" class='btn btn-primary mr-1'><i class="fas fa-plus"></i></a>
         <div id="editAndDelete"></div>
         </div>
       <div class="card-body">
@@ -91,7 +91,7 @@ $customers = $statement->fetchAll(PDO::FETCH_OBJ);
         return node.action
       })
       document.getElementById("editAndDelete").innerHTML =
-        "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-user-edit fa-xs'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
+        "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-edit fa-s'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
     }
   </script>
 </body>

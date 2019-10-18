@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <?php require '../layout/header.php';
-
+$id = $_GET['id'];
+var_dump($id);
 $message = '';
 
 $sql2 = 'SELECT * FROM job ORDER BY name';
@@ -18,7 +19,6 @@ $sql3 = "SELECT id, CONCAT(lastname,' ', firstname) as fullname FROM consultant 
 $statement = $connection->query($sql3);
 $statement->execute();
 $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
-
 
 if (
   isset($_POST['name']) &&
@@ -42,6 +42,13 @@ if (
   if ($statement->execute([':name' => $name, ':customer_id' => $customer_id, ':job_id' => $job_id, ':consultant_id' => $consultant_id, ':start' => $start, ':stop' => $stop, ':state' => $state])) {
     $message = 'Mission enregistrée';
   }
+
+  $lastname = $_POST['lastname'];
+  $firstname = $_POST['firstname'];
+  $manager_id = $_POST['manager_id'];
+  $sql = 'UPDATE consultant SET lastname=:lastname, firstname=:firstname, manager_id=:manager_id WHERE id=:id';
+    $statement = $connection->prepare($sql);
+    $statement->execute([':lastname' => $lastname, ':firstname' => $firstname, ':manager_id' => $manager_id, ':id' => $id]);
 }
 ?>
 
@@ -63,12 +70,15 @@ if (
 
         <div class="input-box">
     <select id="consultant" name="consultant_id" required>
-      <option name="choice" id="choice" value="">Selectionner un consultant</option>
-      <?php foreach ($consultants as $consultant) { ?>
-        <option value="<?= $consultant->id; ?>" data-value="<?=substr($consultant->fullname, 0, 4);?>" name="consultant" id="consultant"><?= utf8_encode($consultant->fullname)?></option>
+      <option name="choice" id="choice" value="">Sélectionner un consultant</option>
+      <?php foreach ($consultants as $consultant) { 
+                $selected = NULL;
+                $selected = "selected=" . $_GET['id'] = $consultant->id;
+                echo "\t",'<option value="','"', $selected ,'>', $consultant->fullname,'</option>',"\n";?>
       <?php } ?>
     </select>
   </div>
+
   <div class="input-box">
         <select id="customer" name="customer_id" required>
           <option name="choice" id="choice" value="">Selectionner un client</option>
@@ -105,10 +115,7 @@ if (
   </div>
   </form>
   </div>
-
-
   <script>
-
 $(document).ready(function(fourletters){
 $("#consultant").change(function () {
    var selectedItem = $(this).val();
@@ -120,11 +127,7 @@ $("#consultant").change(function () {
   });
   });
 });
-
-
-
     </script>
 </body>
 <?php require '../layout/footer.php'; ?>
-
 </html>
