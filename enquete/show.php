@@ -21,17 +21,17 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
     <div class="card mt-4">
       <div class="card-header">
         <h2 class="text-center text-uppercase">Enquêtes non lancées</h2>
+        <a class="btn btn-primary add" href="/Akkappiness/mailing/swift.php">Envoyer</a>
+
         <div class="card-body">
         <div class="add d-flex">
-        <a class="nav-link mr-2" href="/Akkappiness/mailing/swift.php">Mail</a>
-        
-         
         </div>
         <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
-          <div id="myGrid" class="ag-theme-balham" onclick="buttons()"></div>
+          <div id="myGrid" class="ag-theme-balham"></div>
       </div>
     </div>
   </div>
+</div>
 
   <script type="text/javascript" charset="utf-8">
     var columnDefs = [{
@@ -102,21 +102,12 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
     var eGridDiv = document.querySelector('#myGrid');
     new agGrid.Grid(eGridDiv, gridOptions);
 
+
     function onFilterTextBoxChanged() {
       gridOptions.api.setQuickFilter(document.getElementById('filter-text-box').value);
     }
 
-    function buttons() {
-      var selectedNodes = gridOptions.api.getSelectedNodes()
-      var selectedData = selectedNodes.map(function(node) {
-        return node.data
-      })
-      var action = selectedData.map(function(node) {
-        return node.action
-      })
-      document.getElementById("editAndDelete").innerHTML =
-        "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-user-edit fa-xs'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
-    }
+
   </script>
 </body>
 <?php require '../layout/footer.php'; ?>
