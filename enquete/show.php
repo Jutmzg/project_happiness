@@ -21,7 +21,7 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
     <div class="card mt-4">
       <div class="card-header">
         <h2 class="text-center text-uppercase">Enquêtes non lancées</h2>
-        <a class="btn btn-primary add" href="/Akkappiness/mailing/mail.php">Envoyer</a>
+        <a class="btn btn-primary add" href="/Akkappiness/mailing/phpmailer.php">Envoyer</a>
 
         <div class="card-body">
         <div class="add d-flex">
