@@ -40,7 +40,10 @@ foreach ($enquetes as $enquete) {
            'X-Mailer: PHP/' . phpversion();
 
      if(mail($to, $subject, $message, $headers));{
-         var_dump($to);
+         $sql = "UPDATE enquete SET state = 0 WHERE id=:id";
+         $statement = $connection->prepare($sql);
+         $statement->execute([':id' => $id]);
+         $enquete = $statement->fetch(PDO::FETCH_OBJ);
      }
     }
 }

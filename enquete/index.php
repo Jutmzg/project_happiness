@@ -8,7 +8,12 @@ JOIN consultant c
 ON m.consultant_id = c.id
 JOIN manager mana
 ON c.manager_id = mana.id
-WHERE c.state = 0 AND m.state = 0
+WHERE NOT EXISTS (
+    SELECT * 
+    FROM enquete e
+    WHERE e.mission_id = m.id  
+)
+AND c.state = 0 AND m.state = 0
 ORDER BY fullname";
 $statement = $connection->prepare($sql);
 $statement->execute();
@@ -21,7 +26,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       <div class="card-header">
 
         <h2 class="text-center text-uppercase">Enquêtes</h2>
-        <button class="btn btn-primary add" onclick="getSelectedMissionId()">Envoyer</button>
+        <button class="btn btn-primary add" onclick="getSelectedMissionId()">Créer</button>
         <a href="/Akkappiness/export/exporttest.php" class="btn btn-success add"><i class="fas fa-file-excel"></i></a>
         <div class="card-body">
           <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
