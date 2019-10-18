@@ -12,7 +12,6 @@
   }; ?>
 <head>
   <title>AKKAPPINESS</title>
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, user-scalable=no">
 
@@ -47,6 +46,9 @@
           <a class="nav-link mr-2" href="/Akkappiness/enquete/index.php">Enquêtes</a>
         </li>
         <li class="nav-item">
+        <a class="nav-link mr-2" href="/Akkappiness/enquete/show.php">A envoyer</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link mr-2" href="/Akkappiness/mailing/swift.php">Mail</a>
         </li>
         <li class="nav-item">
@@ -60,12 +62,12 @@
   </nav>
 </header>
 <?php
-$sql = "SELECT * FROM `enquete` WHERE state = 0";
+$sql = "SELECT * FROM `enquete` WHERE resultat != 0";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $responseTrue = $statement->fetchAll(PDO::FETCH_OBJ);
 
-$sql = "SELECT * FROM `enquete` WHERE state = 1";
+$sql = "SELECT * FROM `enquete` WHERE resultat = 0";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $responseFalse = $statement->fetchAll(PDO::FETCH_OBJ);

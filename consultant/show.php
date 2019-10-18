@@ -20,7 +20,8 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
         <div class="card-header">
           <h2 class="text-center text-uppercase">Consultants</h2>
           <div class="add d-flex">
-            <a href="/Akkappiness/consultant/create.php" class='btn btn-primary'><i class="fas fa-user-plus fa-xs"></i></a>
+
+            <a href="/Akkappiness/consultant/create.php" class='btn btn-primary mr-1'><i class="fas fa-user-plus fa-xs"></i></a>
             <div id="editDeleteConsultantAddMission"></div>
           </div>
           <div class="card-body">
