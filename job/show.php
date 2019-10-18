@@ -80,7 +80,7 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
         return node.action
       })
       document.getElementById("editAndDelete").innerHTML =
-        "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-edit'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
+        "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-edit fa-s'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
     }
   </script>
 </body>

@@ -30,7 +30,7 @@ if (
         <div class="box">
 
         <form method="post">
-        <a href="/Akkappiness/customer/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
+        <a href="/Akkappiness/customer/show.php"><i class="fas fa-times fa-2x" id="cross"></i></a>
 
           <div class="input-box">
             <input type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" required>
