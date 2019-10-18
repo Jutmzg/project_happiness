@@ -21,7 +21,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
           <h2 class="text-center text-uppercase">Consultants</h2>
           <div class="add d-flex">
 
-            <a href="/Akkappiness/consultant/create.php" class='btn btn-primary mr-1'><i class="fas fa-user-plus fa-xs"></i></a>
+            <a href="/Akkappiness/consultant/create.php" class='btn btn-primary mr-1'><i class="fas fa-plus"></i></a>
             <div id="editDeleteConsultantAddMission"></div>
           </div>
           <div class="card-body">
@@ -109,7 +109,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
           return node.action
         })
         document.getElementById("editDeleteConsultantAddMission").innerHTML =
-          "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-user-edit fa-xs'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a> <a href=/Akkappiness/mission/create.php?id=" + action + " class='btn btn-info'><i class='fas fa-folder-plus'></i></a>";
+          "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-pencil-alt'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a> <a href=/Akkappiness/mission/create.php?id=" + action + " class='btn btn-info'><i class='fas fa-folder-plus'></i></a>";
       }
 
       

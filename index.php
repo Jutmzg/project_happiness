@@ -199,11 +199,11 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
         datasets: [{
           label: "Répondu",
           data: [<?= count($responseTrue); ?>],
-          backgroundColor: "#95C623"
+          backgroundColor: "#F4D8CD"
         }, {
           label: "En attente",
           data: [<?= count($responseFalse); ?>],
-          backgroundColor: "#E55812"
+          backgroundColor: "#F15152"
         }]
       },
       options: {
@@ -224,7 +224,7 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
         labels: ["Bon", "Moyen", "Mauvais"],
         datasets: [{
           label: "Population (millions)",
-          backgroundColor: ["#95C623", "#949396", "#E55812"],
+          backgroundColor: ["#F4D8CD", "#EDB183", "#F15152"],
           borderWidth: 0,
 
           data: [<?= count($goodRate); ?>, <?= count($mediumRate); ?>, <?= count($badRate); ?>, ]

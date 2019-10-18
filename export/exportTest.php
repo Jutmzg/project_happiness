@@ -10,11 +10,28 @@ $excel = "";
 $excel .=  "MISSION\tRESULTAT\tCREE LE\tENVOYE\n";
 
 foreach($enquete as $row) {
-    $excel .= "$row[mission]\t$row[resultat]\t$row[created_at]\t$row[state]\n";
+        $excel .= "$row[mission]\t$row[resultat]\t$row[created_at]\t$row[state]\n";
 }
 
-header("Content-type: application/vnd.ms-excel; charset=utf-8");
+$answer = '';
+switch ($row['mission']) {
+    case 0:
+        $answer = 'Pas de réponse';
+        break;
+    case 1:
+        $answer = 'Bien';
+        break;
+    case 2:
+        $answer = 'Moyen';
+        break;
+    case 3:
+        $answer = 'Mauvais';
+        break;
+}       
+
+header("Content-type: application/vnd.msexcel; charset=utf-16");
 header("Content-disposition: attachment; filename=enquete_akkappiness.xls");
+
 
 print $excel;
 exit;
