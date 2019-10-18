@@ -23,7 +23,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
         <a href="/Akkappiness/consultant/create.php" class='btn btn-primary mr-1'><i class="fas fa-user-plus fa-xs"></i></a>
         <div id="editAndDelete"></div>
         <div id="editDeleteAddMission" class="ml-1"></div>
-</div>
+          </div>
           <div class="card-body">
             <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
             <div id="myGrid" class="ag-theme-balham" onclick="buttons()"></div>

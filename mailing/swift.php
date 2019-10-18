@@ -63,4 +63,8 @@ En vous remerciant par avance</p>
     $result = $mailer->send($message);
 
 }
+$sql = "UPDATE enquete SET state = 0 WHERE id=:id";
+$statement = $connection->prepare($sql);
+$statement->execute([':id' => $id]);
+$enquete = $statement->fetch(PDO::FETCH_OBJ);
 }
