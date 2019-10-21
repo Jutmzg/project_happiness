@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
 <?php require '../layout/header.php';
-$id = $_GET['id'];
-var_dump($id);
+if (isset($_GET['id'])) {
+  $id = $_GET['id'];
+
+}
+
 $message = '';
 
 $sql2 = 'SELECT * FROM job ORDER BY name';
@@ -43,43 +46,37 @@ if (
     $message = 'Mission enregistrée';
   }
 
-  $lastname = $_POST['lastname'];
-  $firstname = $_POST['firstname'];
-  $manager_id = $_POST['manager_id'];
-  $sql = 'UPDATE consultant SET lastname=:lastname, firstname=:firstname, manager_id=:manager_id WHERE id=:id';
-    $statement = $connection->prepare($sql);
-    $statement->execute([':lastname' => $lastname, ':firstname' => $firstname, ':manager_id' => $manager_id, ':id' => $id]);
 }
 ?>
 
 <body>
   <div class="container">
   </div>
-    <?php if (!empty($message)) : ?>
-      <div class="alert alert-success">
-        <?= $message; ?>
+  <?php if (!empty($message)) : ?>
+    <div class="alert alert-success">
+      <?= $message; ?>
+    </div>
+  <?php endif; ?>
+  <div class="boxmission">
+    <form method="post" id="monFormulaire">
+      <a href="/Akkappiness/mission/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
+
+      <div class="input-box">
+        <input type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" required readonly>
       </div>
-    <?php endif; ?>
-    <div class="boxmission">
-      <form method="post" id="monFormulaire">
-        <a href="/Akkappiness/mission/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
-        <div class="input-box">
-          <input type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" required readonly>
-        </div>
+      <div class="input-box">
+        <select id="consultant" name="consultant_id" required>
+          <option name="choice" id="choice" value="">Sélectionner un consultant</option>
+          <?php foreach ($consultants as $consultant) { ?>
+            <?php $cons = substr($consultant->fullname, 0, 4);?>
+            <option value="<?= $consultant->id ?>" data-value="<?= utf8_encode($cons) ?>" name="consultant" id="consultant"><?= utf8_encode($consultant->fullname) ?></option>
 
-        <div class="input-box">
-    <select id="consultant" name="consultant_id" required>
-      <option name="choice" id="choice" value="">Sélectionner un consultant</option>
-      <?php foreach ($consultants as $consultant) { 
-                $selected = NULL;
-                $selected = "selected=" . $_GET['id'] = $consultant->id;
-                echo "\t",'<option value="','"', $selected ,'>', $consultant->fullname,'</option>',"\n";?>
-      <?php } ?>
-    </select>
-  </div>
+          <?php } ?>
+        </select>
+      </div>
 
-  <div class="input-box">
+      <div class="input-box">
         <select id="customer" name="customer_id" required>
           <option name="choice" id="choice" value="">Selectionner un client</option>
           <?php foreach ($customers as $customer) {
@@ -87,47 +84,51 @@ if (
             <option value="<?= $customer->id ?>" data-value="<?= utf8_encode($customer->name) ?>" name="customer" id="customer"><?= utf8_encode($customer->name) ?></option>
           <?php } ?>
         </select>
-    </div>
+      </div>
 
-  <div class="input-box">
-    <select name="job" required>
-      <option name="choice" id="choice" value="">Selectionner un métier</option>
-      <?php foreach ($jobs as $job) {
-        ?>
-        <option value="<?= $job->id ?>" name="job" id="job"><?= utf8_encode($job->name) ?></option>
-      <?php } ?>
-    </select>
-  </div>
+      <div class="input-box">
+        <select name="job" required>
+          <option name="choice" id="choice" value="">Selectionner un métier</option>
+          <?php foreach ($jobs as $job) {
+            ?>
+            <option value="<?= $job->id ?>" name="job" id="job"><?= utf8_encode($job->name) ?></option>
+          <?php } ?>
+        </select>
+      </div>
 
-  <div class="input-box">
-    <input type="text" placeholder="Début de la mission" name="start" id="start" value="" class="datepicker" required>
-  </div>
+      <div class="input-box">
+        <input type="text" placeholder="Début de la mission" name="start" id="start" value="" class="datepicker" required>
+      </div>
 
-  <div class="input-box">
-    <input type="text" placeholder="Fin de la mission" name="stop" id="stop" value="" class="datepicker" required>
-  </div>
+      <div class="input-box">
+        <input type="text" placeholder="Fin de la mission" name="stop" id="stop" value="" class="datepicker" required>
+      </div>
 
-  <div class="form-group">
-  <div class="input-box">
-    <button type="submit" class="btn btn-info">Valider</button>
-    <button class="btn btn-info retour"><a href="/Akkappiness/mission/show.php">Annuler</a></button>
-  </div>
-  </div>
-  </form>
+      <div class="form-group">
+        <div class="input-box">
+          <button type="submit" class="btn btn-info">Valider</button>
+          <button class="btn btn-info retour"><a href="/Akkappiness/mission/show.php">Annuler</a></button>
+        </div>
+      </div>
+    </form>
   </div>
   <script>
-$(document).ready(function(fourletters){
-$("#consultant").change(function () {
-   var selectedItem = $(this).val();
-   var FourLetters= $('option:selected', this).attr('data-value');
-   $("#customer").change(function () {
-   var selectedItem = $(this).val();
-   var customerName= $('option:selected', this).attr('data-value');
-   document.getElementById('name').value = FourLetters+'-'+customerName;
-  });
-  });
-});
-    </script>
+    $(document).ready(function(fourletters) {
+      $("#consultant, #customer").change(function() {
+        var selectedItem = $(this).val();
+        var FourLetters = $('option:selected', consultant).attr('data-value');
+        var customerName = $('option:selected', customer).attr('data-value');
+        console.log(FourLetters)
+        if(customerName === undefined){
+        document.getElementById('name').value = FourLetters
+        }
+        else {
+          document.getElementById('name').value = FourLetters + '-' + customerName;
+        }
+      });
+    });
+  </script>
 </body>
 <?php require '../layout/footer.php'; ?>
+
 </html>

@@ -71,7 +71,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       field: "mission",
       sortable: true,
       filter: true,
-      width: 250,
+      width: 220,
       hide: true,
     },
     {

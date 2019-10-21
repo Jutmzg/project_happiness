@@ -125,21 +125,21 @@ if (
   </div>
 
   <script>
-
-$(document).ready(function(fourletters){
-$("#consultant").change(function () {
-   var selectedItem = $(this).val();
-   var FourLetters= $('option:selected', this).attr('data-value');
-   $("#customer").change(function () {
-   var selectedItem = $(this).val();
-   var customerName= $('option:selected', this).attr('data-value');
-   document.getElementById('name').value = FourLetters+'-'+customerName;
-  });
-  });
-});
-
-
-    </script>
+    $(document).ready(function(fourletters) {
+      $("#consultant, #customer").change(function() {
+        var selectedItem = $(this).val();
+        var FourLetters = $('option:selected', consultant).attr('data-value');
+        var customerName = $('option:selected', customer).attr('data-value');
+        console.log(FourLetters)
+        if(customerName === undefined){
+        document.getElementById('name').value = FourLetters
+        }
+        else {
+          document.getElementById('name').value = FourLetters + '-' + customerName;
+        }
+      });
+    });
+  </script>
 </body>
 <?php require '../layout/footer.php'; ?>
 
