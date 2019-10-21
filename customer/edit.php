@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <?php require '../layout/header.php';
 
 $id = $_GET['id'];
-
+if($id == ""){
+  header('Location: /Akkappiness/customer/show.php');
+}
 $sql = 'SELECT * FROM customer WHERE id=:id';
 $statement = $connection->prepare($sql);
 $statement->execute([':id' => $id]);

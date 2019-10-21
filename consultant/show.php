@@ -26,7 +26,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
           </div>
           <div class="card-body">
             <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
-            <div id="myGrid" class="ag-theme-balham" onclick="buttons()"></div>
+            <div id="myGrid" class="ag-theme-balham" onclick="buttons()" ondblclick="edit()"></div>
           </div>
         </div>
       </div>
@@ -78,7 +78,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       let gridOptions = {
         defaultColDef: {
           resizable: true,
-          suppressColumnVirtualisation: true,
+          suppressColumnVirtualisation: true, 
           
         },
         columnDefs: columnDefs,
@@ -112,9 +112,18 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
           "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-user-edit fa-xs'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a> <a href=/Akkappiness/mission/create.php?id=" + action + " class='btn btn-info'><i class='fas fa-folder-plus'></i></a>";
       }
 
-      
+      function edit(){
+        let selectedNodes = gridOptions.api.getSelectedNodes()
+        let selectedData = selectedNodes.map(function(node) {
+          return node.data
+        })
+        let action = selectedData.map(function(node) {
+          return node.action
+        })
+        var edit = 'edit.php?id='+action;
+        window.location= edit;
+        }
     </script>
-
 
   </body>
   <?php require '../layout/footer.php'; ?>

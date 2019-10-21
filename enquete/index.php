@@ -11,7 +11,7 @@ ON c.manager_id = mana.id
 WHERE NOT EXISTS (
     SELECT * 
     FROM enquete e
-    WHERE e.mission_id = m.id  
+    WHERE e.mission_id = m.id 
 )
 AND c.state = 0 AND m.state = 0
 ORDER BY fullname";

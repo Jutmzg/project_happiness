@@ -3,7 +3,9 @@
 <?php require '../layout/header.php'; 
 
 $id = $_GET['id'];
-
+if($id == ""){
+  header('Location: /Akkappiness/job/show.php');
+}
 $sql = 'SELECT * FROM job WHERE id=:id';
 $statement = $connection->prepare($sql);
 $statement->execute([':id' => $id]);

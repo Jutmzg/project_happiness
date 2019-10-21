@@ -3,6 +3,9 @@
 <?php require '../layout/header.php';
 
 $id = $_GET['id'];
+if($id == ""){
+  header('Location: /Akkappiness/consultant/show.php');
+}
 
 $sql = 'SELECT * FROM consultant WHERE id=:id';
 $statement = $connection->prepare($sql);
