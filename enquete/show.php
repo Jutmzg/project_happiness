@@ -21,13 +21,17 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
     <div class="card mt-4">
       <div class="card-header">
         <h2 class="text-center text-uppercase">Enquêtes non lancées</h2>
-        <a class="btn btn-primary add" href="/Akkappiness/mailing/phpmailer.php">Envoyer</a>
+        <div class="add d-flex">
+
+        <a class="btn btn-primary mr-1" href="/Akkappiness/mailing/phpmailer.php">Envoyer</a>
+          <div id="DeleteEnquete" onclick="return confirm('Etes vous sur de vouloir effectuer la suppression?')"></div>
+        </div>
 
         <div class="card-body">
         <div class="add d-flex">
         </div>
         <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
-          <div id="myGrid" class="ag-theme-balham"></div>
+          <div id="myGrid" class="ag-theme-balham" onclick="buttons()"></div>
       </div>
     </div>
   </div>
@@ -35,6 +39,18 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
 
   <script type="text/javascript" charset="utf-8">
     var columnDefs = [{
+      headerName: "",
+      field: "nom",
+      sortable: true,
+      filter: true,
+      width: 40,
+      suppressSizeToFit: true,
+      checkboxSelection: true,
+      headerCheckboxSelection: true,
+      headerCheckboxSelectionFilteredOnly: true,
+
+    },
+      {
         headerName: "Nom",
         field: "nom",
         sortable: true,
@@ -113,6 +129,17 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
       gridOptions.api.setQuickFilter(document.getElementById('filter-text-box').value);
     }
 
+    function buttons() {
+        let selectedNodes = gridOptions.api.getSelectedNodes()
+        let selectedData = selectedNodes.map(function(node) {
+          return node.data
+        })
+        let action = selectedData.map(function(node) {
+          return node.action
+        })
+        document.getElementById("DeleteEnquete").innerHTML =
+          "<a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
+      }
 
   </script>
 </body>
