@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
 <?php require '../layout/header.php';
-if (isset($_GET['id'])) {
-  $id = $_GET['id'];
-
-}
 
 $message = '';
+$id = $_GET['id'];
 
 $sql2 = 'SELECT * FROM job ORDER BY name';
 $statement = $connection->query($sql2);
@@ -39,7 +36,6 @@ if (
   $stop = date('Y-m-d', strtotime($_POST['stop']));
   $state = 0;
 
-
   $sql = 'INSERT INTO mission(name, customer_id, job_id, consultant_id, start, stop,state) VALUES(:name, :customer_id, :job_id, :consultant_id, :start, :stop, :state)';
   $statement = $connection->prepare($sql);
   if ($statement->execute([':name' => $name, ':customer_id' => $customer_id, ':job_id' => $job_id, ':consultant_id' => $consultant_id, ':start' => $start, ':stop' => $stop, ':state' => $state])) {
@@ -47,38 +43,41 @@ if (
   }
 
 }
+
+$sql = 'SELECT * FROM consultant WHERE id=:id';
+$statement = $connection->prepare($sql);
+$statement->execute([':id' => $id]);
+$row = $statement->fetch(PDO::FETCH_OBJ);
 ?>
 
 <body>
-  <div class="container">
-  </div>
   <?php if (!empty($message)) : ?>
     <div class="alert alert-success">
       <?= $message; ?>
     </div>
   <?php endif; ?>
+
   <div class="boxmission">
-    <form method="post" id="monFormulaire">
-      <a href="/Akkappiness/mission/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
+      <form method="post" id="monFormulaire">
+        <a onclick="goBack()"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
       <div class="input-box">
         <input type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" required readonly>
       </div>
 
-      <div class="input-box">
-        <select id="consultant" name="consultant_id" required>
-          <option name="choice" id="choice" value="">Sélectionner un consultant</option>
-          <?php foreach ($consultants as $consultant) { ?>
-            <?php $cons = substr($consultant->fullname, 0, 4);?>
-            <option value="<?= $consultant->id ?>" data-value="<?= utf8_encode($cons) ?>" name="consultant" id="consultant"><?= utf8_encode($consultant->fullname) ?></option>
-
-          <?php } ?>
-        </select>
-      </div>
+        <div class="input-box">
+    <select id="consultant" name="consultant_id" required>
+      <option name="choice" id="choice" value="">Sélectionner un consultant</option>
+      <?php foreach ($consultants as $consultant) { 
+                $selected = $row->id == $consultant->id ? 'selected' : ''; ?>
+                <?= "<option value='$consultant->id' name='consultant_id' id='consultant' $selected>" ?><?= utf8_encode($consultant->fullname) ?></option>
+      <?php } ?>
+    </select>
+  </div>
 
       <div class="input-box">
         <select id="customer" name="customer_id" required>
-          <option name="choice" id="choice" value="">Selectionner un client</option>
+          <option name="choice" id="choice" value="">Sélectionner un client</option>
           <?php foreach ($customers as $customer) {
             ?>
             <option value="<?= $customer->id ?>" data-value="<?= utf8_encode($customer->name) ?>" name="customer" id="customer"><?= utf8_encode($customer->name) ?></option>
@@ -88,7 +87,7 @@ if (
 
       <div class="input-box">
         <select name="job" required>
-          <option name="choice" id="choice" value="">Selectionner un métier</option>
+          <option name="choice" id="choice" value="">Sélectionner un métier</option>
           <?php foreach ($jobs as $job) {
             ?>
             <option value="<?= $job->id ?>" name="job" id="job"><?= utf8_encode($job->name) ?></option>
@@ -112,13 +111,14 @@ if (
       </div>
     </form>
   </div>
+
   <script>
     $(document).ready(function(fourletters) {
       $("#consultant, #customer").change(function() {
         var selectedItem = $(this).val();
         var FourLetters = $('option:selected', consultant).attr('data-value');
         var customerName = $('option:selected', customer).attr('data-value');
-        console.log(FourLetters)
+
         if(customerName === undefined){
         document.getElementById('name').value = FourLetters
         }
