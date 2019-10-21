@@ -48,12 +48,6 @@
         <li class="nav-item">
         <a class="nav-link mr-2" href="/Akkappiness/enquete/show.php">A envoyer</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link mr-2" href="/Akkappiness/mailing/swift.php">Mail</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link mr-2" href="/Akkappiness/export/export.php">Export</a>
-        </li>
         <li class="nav-item logout">
           <a class="nav-link mr-2 " href="/Akkappiness/user/logout.php"><i class="fas fa-power-off fa-lg"></i></a>
         </li>
@@ -199,11 +193,11 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
         datasets: [{
           label: "Répondu",
           data: [<?= count($responseTrue); ?>],
-          backgroundColor: "#F4D8CD"
+          backgroundColor: "rgba(0,255,0,0.2)"
         }, {
           label: "En attente",
           data: [<?= count($responseFalse); ?>],
-          backgroundColor: "#F15152"
+          backgroundColor: "rgba(255,0,0,0.4)"
         }]
       },
       options: {
@@ -224,7 +218,7 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
         labels: ["Bon", "Moyen", "Mauvais"],
         datasets: [{
           label: "Population (millions)",
-          backgroundColor: ["#F4D8CD", "#EDB183", "#F15152"],
+          backgroundColor: ["rgba(0,255,0,0.2)", "rgba(255, 180, 67,0.7)", "rgba(255,0,0,0.4)"],
           borderWidth: 0,
 
           data: [<?= count($goodRate); ?>, <?= count($mediumRate); ?>, <?= count($badRate); ?>, ]
@@ -245,7 +239,7 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
         labels: [<?="'".implode("','",$top5)."'";?>],
         datasets: [{
           label: "Meilleur taux de satisfaction",
-          backgroundColor: ["#F9F8F8", "#847E89", "#9FA4A9", "#D3A588", "#E4C3AD"],
+          backgroundColor: ["rgba(0,255,0,0.2)", "rgba(255, 180, 67,0.7)", "rgba(255,0,0,0.4)", "rgba(0,0,255,0.4)", "rgba(112,0,122,0.4)"],
           borderWidth: 0,
 
           data: [<?= "'".implode("','",$topNote)."'";?>]

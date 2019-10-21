@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <?php require '../layout/header.php';
-$id = $_GET['id'];
-var_dump($id);
+
 $message = '';
 
 $sql2 = 'SELECT * FROM job ORDER BY name';
@@ -36,7 +35,6 @@ if (
   $stop = date('Y-m-d', strtotime($_POST['stop']));
   $state = 0;
 
-
   $sql = 'INSERT INTO mission(name, customer_id, job_id, consultant_id, start, stop,state) VALUES(:name, :customer_id, :job_id, :consultant_id, :start, :stop, :state)';
   $statement = $connection->prepare($sql);
   if ($statement->execute([':name' => $name, ':customer_id' => $customer_id, ':job_id' => $job_id, ':consultant_id' => $consultant_id, ':start' => $start, ':stop' => $stop, ':state' => $state])) {
@@ -50,6 +48,9 @@ if (
     $statement = $connection->prepare($sql);
     $statement->execute([':lastname' => $lastname, ':firstname' => $firstname, ':manager_id' => $manager_id, ':id' => $id]);
 }
+
+$id = $_GET['id'];
+var_dump($id);
 ?>
 
 <body>
@@ -62,7 +63,7 @@ if (
     <?php endif; ?>
     <div class="boxmission">
       <form method="post" id="monFormulaire">
-        <a href="/Akkappiness/mission/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
+        <a onclick="goBack()"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
         <div class="input-box">
           <input type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" required readonly>
@@ -73,8 +74,9 @@ if (
       <option name="choice" id="choice" value="">Sélectionner un consultant</option>
       <?php foreach ($consultants as $consultant) { 
                 $selected = NULL;
-                $selected = "selected=" . $_GET['id'] = $consultant->id;
-                echo "\t",'<option value="','"', $selected ,'>', $consultant->fullname,'</option>',"\n";?>
+                $selected = "selected=" . $_GET['id'] = 'consultant';
+                echo "\t".'<option value="'.'"'. $selected .'>'. $consultant->fullname .'</option>'."\n";?>
+                
       <?php } ?>
     </select>
   </div>

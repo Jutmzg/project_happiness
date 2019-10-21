@@ -31,6 +31,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
         </div>
       </div>
     </div>
+    
     <script type="text/javascript" charset="utf-8">
       let columnDefs = [{
           headerName: "Nom",
@@ -111,12 +112,10 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
         document.getElementById("editDeleteConsultantAddMission").innerHTML =
           "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-pencil-alt'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a> <a href=/Akkappiness/mission/create.php?id=" + action + " class='btn btn-info'><i class='fas fa-folder-plus'></i></a>";
       }
-
-      
     </script>
 
-
   </body>
+
   <?php require '../layout/footer.php'; ?>
 
   </html>

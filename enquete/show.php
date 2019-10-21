@@ -21,7 +21,7 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
     <div class="card mt-4">
       <div class="card-header">
         <h2 class="text-center text-uppercase">Enquêtes non lancées</h2>
-        <a class="btn btn-primary add" href="/Akkappiness/mailing/swift.php">Envoyer</a>
+        <a class="btn btn-primary add" href="/Akkappiness/mailing/mail.php">Envoyer</a>
 
         <div class="card-body">
         <div class="add d-flex">
@@ -93,10 +93,16 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
       rowData: rowData,
       rowSelection: 'multiple',
       headerHeight: 50,
+      
       // hauteur des rows
       getRowHeight: function(params) {
         return 60;
       },
+      localeText: {
+      
+      noRowsToShow: 'Aucune ligne',   
+  }
+    
     };
 
     var eGridDiv = document.querySelector('#myGrid');
