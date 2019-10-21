@@ -29,7 +29,10 @@ try {
     foreach ($enquetes as $enquete) {
         if(!empty($enquete->mail)){
 
-    $mail->isSMTP();                                            
+    $toUser = $enquete->mail;
+    $toUserName = $enquete->fullname;
+    $id = $enquete->id;
+    $mail->isSMTP();
     $mail->Host       = EMAIL_HOST;                        
     $mail->SMTPAuth   = true;                                  
     $mail->Username   = EMAIL_USERNAME;        
@@ -37,15 +40,21 @@ try {
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         
     $mail->Port       = EMAIL_PORT;                                    
     $mail->setFrom(EMAIL_USERNAME);
-
-
-    $mail->addAddress('maxime.vasseur.79@hotmail.fr', 'Joe User');     
+    $mail->addAddress($toUser);     
     $mail->isHTML(true);                                  
     $mail->Subject = 'AKKAPPINESS';
-    $toUser = $enquete->fullname;
-    $id = $enquete->id;
+    $mail->SMTPSecure = 'tls';
+    $mail->SMTPOptions = array(
+        'ssl' => array(
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => true
+        )
+        );
+// OR use TLS
+
     $mail->Body    = "
-    <h1>Bonjour $toUser,</h1>
+    <h1>Bonjour $toUserName,</h1>
     <p>Dans le cadre de notre campagne d’enquête de satisfaction, merci de nous donner votre niveau de satisfaction de votre mission actuelle.
     En vous remerciant par avance</p>
 
@@ -55,7 +64,6 @@ try {
      ";
     
     $mail->send();
-    echo 'Message has been sent';
     $sql = "UPDATE enquete SET state = 0 WHERE id=:id";
          $statement = $connection->prepare($sql);
          $statement->execute([':id' => $id]);
