@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-<?php require '../layout/header.php'; 
+<?php require '../layout/header.php';
 
 $id = $_GET['id'];
 
@@ -37,46 +37,47 @@ if (
 
 <body>
     <div class="container">
-    <?php if (!empty($message)) : ?>
-                    <div class="alert alert-success">
-                        <?= $message; ?>
-                    </div>
-                <?php endif; ?>
-               <div class="box">
+        <?php if (!empty($message)) : ?>
+            <div class="alert alert-success">
+                <?= $message; ?>
+            </div>
+        <?php endif; ?>
+        <div class="box">
 
-                <form method="post">
+            <form method="post">
                 <h2>Modifier les informations de <?= utf8_encode($row->firstname) . ' ' . utf8_encode($row->lastname) ?></h2>
                 <a onclick="goBack()"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
                 <div class="input-box">
-                        <input value="<?= utf8_encode($row->lastname); ?>" type="text" name="lastname" id="lastname" maxlength="50" minlength="2" required>
+                    <input value="<?= utf8_encode($row->lastname); ?>" type="text" name="lastname" id="lastname" maxlength="50" minlength="2" required>
                 </div>
                 <div class="input-box">
-                        <input value="<?= utf8_encode($row->firstname); ?>" type="text" name="firstname" id="firstname" maxlength="50" minlength="2" required>
+                    <input value="<?= utf8_encode($row->firstname); ?>" type="text" name="firstname" id="firstname" maxlength="50" minlength="2" required>
                 </div>
                 <div class="input-box">
-                        <input value="<?= $row->mail; ?>" type="email" name="mail" id="mail" placeholder= "Email" maxlength="50" minlength="5" required>
+                    <input value="<?= $row->mail; ?>" type="email" name="mail" id="mail" placeholder="Email" maxlength="50" minlength="5" required>
                 </div>
                 <div class="input-box">
-                        <select name="manager_id" required>
-                            <option name="choice" id="choice" value="">Selectionner un manager</option>
-                            <?php foreach ($managers as $manager) { ?>
-                               <?php $selected = $row->manager_id == $manager->id ? 'selected' : ''; ?>
-                                <?= "<option value='$manager->id' name='manager_id' id='manager_id' $selected>"?><?= utf8_encode($manager->fullname)?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
+                    <select name="manager_id" required>
+                        <option name="choice" id="choice" value="">Selectionner un manager</option>
+                        <?php foreach ($managers as $manager) { ?>
+                            <?php $selected = $row->manager_id == $manager->id ? 'selected' : ''; ?>
+                            <?= "<option value='$manager->id' name='manager_id' id='manager_id' $selected>" ?><?= utf8_encode($manager->fullname) ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <div class="form-group">
                     <div class="input-box">
                         <button type="submit" class="btn btn-info">Valider</button>
                         <button class="btn btn-info retour"><a href="/Akkappiness/consultant/show.php">Annuler</a></button>
                     </div>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
+    </div>
     </div>
     </div>
 </body>
 <?php require '../layout/footer.php'; ?>
+
 </html>

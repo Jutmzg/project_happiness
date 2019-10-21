@@ -71,7 +71,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       field: "mission",
       sortable: true,
       filter: true,
-      width: 250,
+      width: 220,
       hide: true,
     },
     {
@@ -120,6 +120,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
     columnDefs: columnDefs,
     pagination: true,
     paginationPageSize: 20,
+    rowMultiSelectWithClick: true,
     rowData: rowData,
     rowSelection: 'multiple',
     headerHeight: 50,
