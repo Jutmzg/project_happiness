@@ -130,7 +130,7 @@ if (
         var selectedItem = $(this).val();
         var FourLetters = $('option:selected', consultant).attr('data-value');
         var customerName = $('option:selected', customer).attr('data-value');
-        console.log(FourLetters)
+
         if(customerName === undefined){
         document.getElementById('name').value = FourLetters
         }
