@@ -3,14 +3,20 @@
 <?php require '../layout/header.php';
 
 $message = '';
-if(isset($_GET['id'])){
-$id = $_GET['id'];
 
+if(isset($id)){
+  $id = $_GET['id'];
 
 $sql = 'SELECT * FROM mission WHERE id=:id';
 $statement = $connection->prepare($sql);
 $statement->execute([':id' => $id]);
 $mission = $statement->fetch(PDO::FETCH_OBJ);
+
+$sql = 'SELECT * FROM consultant WHERE id=:id';
+$statement = $connection->prepare($sql);
+$statement->execute([':id' => $id]);
+$row = $statement->fetch(PDO::FETCH_OBJ);
+}
 
 $sql2 = 'SELECT * FROM job ORDER BY name';
 $statement = $connection->query($sql2);
@@ -50,12 +56,6 @@ if (
   }
 
 }
-}
-
-$sql = 'SELECT * FROM consultant WHERE id=:id';
-$statement = $connection->prepare($sql);
-$statement->execute([':id' => $id]);
-$row = $statement->fetch(PDO::FETCH_OBJ);
 ?>
 
 <body>
