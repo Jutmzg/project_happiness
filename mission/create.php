@@ -5,6 +5,11 @@
 $message = '';
 $id = $_GET['id'];
 
+$sql = 'SELECT * FROM mission WHERE id=:id';
+$statement = $connection->prepare($sql);
+$statement->execute([':id' => $id]);
+$mission = $statement->fetch(PDO::FETCH_OBJ);
+
 $sql2 = 'SELECT * FROM job ORDER BY name';
 $statement = $connection->query($sql2);
 $statement->execute();
@@ -62,7 +67,7 @@ $row = $statement->fetch(PDO::FETCH_OBJ);
         <a onclick="goBack()"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
       <div class="input-box">
-        <input type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" required readonly>
+        <input value="<?= utf8_encode($mission->name); ?>" type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" required readonly>
       </div>
 
         <div class="input-box">
@@ -70,7 +75,8 @@ $row = $statement->fetch(PDO::FETCH_OBJ);
       <option name="choice" id="choice" value="">Sélectionner un consultant</option>
       <?php foreach ($consultants as $consultant) { 
                 $selected = $row->id == $consultant->id ? 'selected' : ''; ?>
-                <?= "<option value='$consultant->id' name='consultant_id' id='consultant' $selected>" ?><?= utf8_encode($consultant->fullname) ?></option>
+                <?php $cons = substr(utf8_encode($consultant->fullname), 0, 4);?>
+                <?= "<option value='$consultant->id' name='consultant_id' id='consultant' data-value=$cons $selected>" ?><?= utf8_encode($consultant->fullname) ?></option>
       <?php } ?>
     </select>
   </div>

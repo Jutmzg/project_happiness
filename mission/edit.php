@@ -72,7 +72,7 @@ if (
 
           <div class="input-box">
             <select id="consultant" name="consultant_id"required>
-              <option name="choice" id="choice" value="">Selectionner un consultant</option>
+              <option name="choice" id="choice" value="">Sélectionner un consultant</option>
 
               <?php foreach ($consultants as $consultant) { ?>
                <?= $selected = $row->consultant_id == $consultant->id ? 'selected' : ''; ?>
@@ -84,7 +84,7 @@ if (
 
                 <div class="input-box">
             <select id="customer" name="customer_id"required>
-              <option name="choice" id="choice" value="">Selectionner un client</option>
+              <option name="choice" id="choice" value="">Sélectionner un client</option>
 
               <?php foreach ($customers as $customer) { 
                  $customerName = utf8_encode($customer->name);
@@ -96,7 +96,7 @@ if (
 
                 <div class="input-box">
             <select name="job_id"required>
-              <option name="choice" id="choice" value="">Selectionner un métier</option>
+              <option name="choice" id="choice" value="">Sélectionner un métier</option>
 
               <?php foreach ($jobs as $job) {
                 $selected = $row->job_id == $job->id ? 'selected' : ''; ?>
