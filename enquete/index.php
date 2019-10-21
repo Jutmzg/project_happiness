@@ -120,6 +120,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
     columnDefs: columnDefs,
     pagination: true,
     paginationPageSize: 20,
+    rowMultiSelectWithClick: true,
     rowData: rowData,
     rowSelection: 'multiple',
     headerHeight: 50,

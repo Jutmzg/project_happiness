@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-<?php require '../layout/header.php'; 
+<?php require '../layout/header.php';
 
 $sql = "SELECT e.id, CONCAT(c.lastname,' ', c.firstname) fullname, c.mail mail, m.name mission, CONCAT(mana.lastname,' ', mana.firstname) manager FROM enquete e 
 JOIN mission m 
@@ -20,36 +20,36 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
   <div class="container">
     <div class="card mt-4">
       <div class="card-header">
-        <h2 class="text-center text-uppercase">Enquêtes non lancées</h2>
+        <h2 class="text-center text-uppercase">Enquêtes à envoyer</h2>
         <div class="add d-flex">
 
-        <a class="btn btn-primary mr-1" href="/Akkappiness/mailing/phpmailer.php">Envoyer</a>
+          <a class="btn btn-primary mr-1" href="/Akkappiness/mailing/phpmailer.php">Envoyer</a>
           <div id="DeleteEnquete" onclick="return confirm('Etes vous sur de vouloir effectuer la suppression?')"></div>
         </div>
 
         <div class="card-body">
-        <div class="add d-flex">
-        </div>
-        <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
+          <div class="add d-flex">
+          </div>
+          <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
           <div id="myGrid" class="ag-theme-balham" onclick="buttons()"></div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
   <script type="text/javascript" charset="utf-8">
     var columnDefs = [{
-      headerName: "",
-      field: "nom",
-      sortable: true,
-      filter: true,
-      width: 40,
-      suppressSizeToFit: true,
-      checkboxSelection: true,
-      headerCheckboxSelection: true,
-      headerCheckboxSelectionFilteredOnly: true,
+        headerName: "",
+        field: "nom",
+        sortable: true,
+        filter: true,
+        width: 40,
+        suppressSizeToFit: true,
+        checkboxSelection: true,
+        headerCheckboxSelection: true,
+        headerCheckboxSelectionFilteredOnly: true,
 
-    },
+      },
       {
         headerName: "Nom",
         field: "nom",
@@ -108,17 +108,18 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
       paginationPageSize: 20,
       rowData: rowData,
       rowSelection: 'multiple',
+      rowMultiSelectWithClick: true,
       headerHeight: 50,
-      
+
       // hauteur des rows
       getRowHeight: function(params) {
         return 60;
       },
       localeText: {
-      
-      noRowsToShow: 'Aucune ligne',   
-  }
-    
+
+        noRowsToShow: 'Aucune ligne',
+      }
+
     };
 
     var eGridDiv = document.querySelector('#myGrid');
@@ -128,20 +129,19 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
     function onFilterTextBoxChanged() {
       gridOptions.api.setQuickFilter(document.getElementById('filter-text-box').value);
     }
-
     function buttons() {
-        let selectedNodes = gridOptions.api.getSelectedNodes()
-        let selectedData = selectedNodes.map(function(node) {
-          return node.data
-        })
-        let action = selectedData.map(function(node) {
-          return node.action
-        })
-        document.getElementById("DeleteEnquete").innerHTML =
-          "<a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
-      }
-
+      let selectedNodes = gridOptions.api.getSelectedNodes()
+      let selectedData = selectedNodes.map(function(node) {
+        return node.data
+      })
+      let action = selectedData.map(function(node) {
+        return node.action
+      })
+      document.getElementById("DeleteEnquete").innerHTML =
+        "<a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
+    }
   </script>
 </body>
 <?php require '../layout/footer.php'; ?>
+
 </html>
