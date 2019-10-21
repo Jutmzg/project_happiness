@@ -59,7 +59,7 @@ if (
                 </div>
                 <div class="input-box">
                     <select name="manager_id" required>
-                        <option name="choice" id="choice" value="">Selectionner un manager</option>
+                        <option name="choice" id="choice" value="">Sélectionner un manager</option>
                         <?php foreach ($managers as $manager) { ?>
                             <?php $selected = $row->manager_id == $manager->id ? 'selected' : ''; ?>
                             <?= "<option value='$manager->id' name='manager_id' id='manager_id' $selected>" ?><?= utf8_encode($manager->fullname) ?></option>
