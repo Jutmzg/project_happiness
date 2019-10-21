@@ -3,7 +3,9 @@
 <?php require '../layout/header.php';
 
 $message = '';
+if(isset($_GET['id'])){
 $id = $_GET['id'];
+
 
 $sql = 'SELECT * FROM mission WHERE id=:id';
 $statement = $connection->prepare($sql);
@@ -48,6 +50,7 @@ if (
   }
 
 }
+}
 
 $sql = 'SELECT * FROM consultant WHERE id=:id';
 $statement = $connection->prepare($sql);
@@ -66,20 +69,20 @@ $row = $statement->fetch(PDO::FETCH_OBJ);
       <form method="post" id="monFormulaire">
         <a onclick="goBack()"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
-      <div class="input-box">
-        <input value="<?= utf8_encode($mission->name); ?>" type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" required readonly>
-      </div>
+        <div class="input-box">
+          <input value="<?php $cons; ?>" type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" required readonly>
+        </div>
 
         <div class="input-box">
-    <select id="consultant" name="consultant_id" required>
-      <option name="choice" id="choice" value="">Sélectionner un consultant</option>
-      <?php foreach ($consultants as $consultant) { 
-                $selected = $row->id == $consultant->id ? 'selected' : ''; ?>
+          <select id="consultant" name="consultant_id" required>
+            <option name="choice" id="choice" value="">Sélectionner un consultant</option>
+              <?php foreach ($consultants as $consultant) { 
+                      $selected = $row->id == $consultant->id ? 'selected' : ''; ?>
                 <?php $cons = substr(utf8_encode($consultant->fullname), 0, 4);?>
-                <?= "<option value='$consultant->id' name='consultant_id' id='consultant' data-value=$cons $selected>" ?><?= utf8_encode($consultant->fullname) ?></option>
-      <?php } ?>
-    </select>
-  </div>
+                  <?= "<option value='$consultant->id' name='consultant_id' id='consultant' data-value=$cons $selected>" ?><?= utf8_encode($consultant->fullname) ?></option>
+              <?php } ?>
+          </select>
+        </div>
 
       <div class="input-box">
         <select id="customer" name="customer_id" required>
@@ -121,9 +124,9 @@ $row = $statement->fetch(PDO::FETCH_OBJ);
   <script>
     $(document).ready(function(fourletters) {
       $("#consultant, #customer").change(function() {
-        var selectedItem = $(this).val();
-        var FourLetters = $('option:selected', consultant).attr('data-value');
-        var customerName = $('option:selected', customer).attr('data-value');
+        let selectedItem = $(this).val();
+        let FourLetters = $('option:selected', consultant).attr('data-value');
+        let customerName = $('option:selected', customer).attr('data-value');
 
         if(customerName === undefined){
         document.getElementById('name').value = FourLetters
