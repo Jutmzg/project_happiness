@@ -3,6 +3,7 @@
 <?php require '../layout/header.php';
 
 $message = '';
+$id = $_GET['id'];
 
 $sql2 = 'SELECT * FROM job ORDER BY name';
 $statement = $connection->query($sql2);
@@ -49,8 +50,10 @@ if (
     $statement->execute([':lastname' => $lastname, ':firstname' => $firstname, ':manager_id' => $manager_id, ':id' => $id]);
 }
 
-$id = $_GET['id'];
-var_dump($id);
+$sql = 'SELECT * FROM consultant WHERE id=:id';
+$statement = $connection->prepare($sql);
+$statement->execute([':id' => $id]);
+$row = $statement->fetch(PDO::FETCH_OBJ);
 ?>
 
 <body>
@@ -73,9 +76,8 @@ var_dump($id);
     <select id="consultant" name="consultant_id" required>
       <option name="choice" id="choice" value="">Sélectionner un consultant</option>
       <?php foreach ($consultants as $consultant) { 
-                $selected = NULL;
-                $selected = "selected=" . $_GET['id'] = 'consultant';
-                echo "\t".'<option value="'.'"'. $selected .'>'. $consultant->fullname .'</option>'."\n";?>
+                $selected = "selected=" . $row->id;
+                echo "\t".'<option value="'.'"'. $selected .'>'. $row->lastname . ' ' . $row->firstname .'</option>'."\n";?>
                 
       <?php } ?>
     </select>
