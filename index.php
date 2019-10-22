@@ -18,7 +18,11 @@
   <link href="assets/fontawesome/css/all.css" rel="stylesheet">
   <link href="assets/bootstrap/bootstrap.min.css" rel="stylesheet">
   <link href="assets/css/style.css" rel="stylesheet">
+  <script src="assets/jquery/jquery-3.4.1.min.js"></script>
+  <script src="assets/bootstrap/bootstrap.min.js"></script>
   <script src="assets/js/Chart.min.js"></script>
+  
+
 
 </head>
 

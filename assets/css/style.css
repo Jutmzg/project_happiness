@@ -610,3 +610,25 @@ option{
   }
 
   }
+
+  @media (max-width: 720px) {
+    #filter-text-box {
+      position: relative;
+      top: 0px;
+      left: 36%;
+      margin: 10px;
+  }
+    .add {
+      position: relative;
+      bottom: 0px;
+      left: 36%;
+}
+    }
+    @media (max-width: 400px) {
+    
+      .add {
+        position: relative;
+        bottom: 0px;
+        left: 20%;
+  }
+      }
