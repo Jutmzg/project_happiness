@@ -22,38 +22,38 @@ $statement->execute();
 $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
 
 
-    
-    
+
+
 try {
     foreach ($enquetes as $enquete) {
-        if(!empty($enquete->mail)){
+        if (!empty($enquete->mail)) {
 
-    $toUser = $enquete->mail;
-    $toUserName = $enquete->fullname;
-    $id = $enquete->id;
-    $mail = new PHPMailer(true);
-    $mail->CharSet = 'UTF-8';
-    $mail->isSMTP();
-    $mail->Host       = EMAIL_HOST;                        
-    $mail->SMTPAuth   = true;                                  
-    $mail->Username   = EMAIL_USERNAME;        
-    $mail->Password   = EMAIL_PASSWORD;                             
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         
-    $mail->Port       = EMAIL_PORT;                                    
-    $mail->setFrom(EMAIL_USERNAME);
-    $mail->addAddress($toUser);     
-    $mail->isHTML(true);                                  
-    $mail->Subject = 'AKKAPPINESS';
-    $mail->SMTPSecure = 'tls';
-    $mail->SMTPOptions = array(
-        'ssl' => array(
-        'verify_peer' => false,
-        'verify_peer_name' => false,
-        'allow_self_signed' => true
-        )
-        );
+            $toUser = $enquete->mail;
+            $toUserName = $enquete->fullname;
+            $id = $enquete->id;
+            $mail = new PHPMailer(true);
+            $mail->CharSet = 'UTF-8';
+            $mail->isSMTP();
+            $mail->Host       = EMAIL_HOST;
+            $mail->SMTPAuth   = false;
+            $mail->Username   = EMAIL_USERNAME;
+            // $mail->Password   = EMAIL_PASSWORD;
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = EMAIL_PORT;
+            $mail->setFrom("NoReply@akka.eu");
+            $mail->addAddress($toUser);
+            $mail->isHTML(true);
+            $mail->Subject = 'Enquete de satisfaction';
+            $mail->SMTPSecure = 'tls';
+            $mail->SMTPOptions = array(
+                'ssl' => array(
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                )
+            );
 
-    $mail->Body    = "
+            $mail->Body    = "
     <h1>Bonjour $toUserName,</h1>
     <p>Dans le cadre de notre campagne d’enquête de satisfaction, merci de nous donner votre niveau de satisfaction de votre mission actuelle.
     En vous remerciant par avance</p>
@@ -62,14 +62,20 @@ try {
      <a href='http://$_SERVER[HTTP_HOST]/Akkappiness/mailing/2.php?id=$id'><img src='https://zupimages.net/up/19/42/ixon.png' alt='moyen' width='80' height='80'/></a>
      <a href='http://$_SERVER[HTTP_HOST]/Akkappiness/mailing/3.php?id=$id'><img src='https://zupimages.net/up/19/42/m6zb.png' alt='mauvais' width='80' height='80'/></a>
      ";
-    
-    $mail->send();
-    $sql = "UPDATE enquete SET state = 0 WHERE id=:id";
-         $statement = $connection->prepare($sql);
-         $statement->execute([':id' => $id]);
-         $enquete = $statement->fetch(PDO::FETCH_OBJ);
+
+            $mail->send();
+            $sql = "UPDATE enquete SET state = 0 WHERE id=:id";
+            $statement = $connection->prepare($sql);
+            $statement->execute([':id' => $id]);
+            $enquete = $statement->fetch(PDO::FETCH_OBJ);
         }
     }
-} catch (Exception $e) {
+    
+
+}
+
+
+catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
+header("Location: /Akkappiness");

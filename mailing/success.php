@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 
   <link href="../assets/bootstrap/bootstrap.min.css" rel="stylesheet">
   <link href="../assets/fontawesome/css/all.css" rel="stylesheet">
