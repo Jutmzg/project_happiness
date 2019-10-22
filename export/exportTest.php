@@ -23,9 +23,9 @@ foreach($enquetes as $enquete) {
 } 
 
 if($enquete->state === '0'){
-    $enquete->state = "PAS ENVOYER";    
+    $enquete->state = "PAS ENVOYE";    
 } elseif ($enquete->state = '1'){
-    $enquete->state = "ENVOYER";   
+    $enquete->state = "ENVOYE";   
 } 
 
     $excel .= "$enquete->mission\t$enquete->resultat\t$enquete->created_at\t$enquete->state\n";
