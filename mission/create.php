@@ -11,11 +11,6 @@ else{
   $id = "";
 }
 
-$sql = 'SELECT * FROM mission WHERE id=:id';
-$statement = $connection->prepare($sql);
-$statement->execute([':id' => $id]);
-$mission = $statement->fetch(PDO::FETCH_OBJ);
-
 $sql = 'SELECT * FROM consultant WHERE id=:id';
 $statement = $connection->prepare($sql);
 $statement->execute([':id' => $id]);
@@ -132,11 +127,11 @@ if (
         let FourLetters = $('option:selected', consultant).attr('data-value');
         let customerName = $('option:selected', customer).attr('data-value');
 
-        if(customerName === undefined){
-        document.getElementById('name').value = FourLetters
-        }
         if(FourLetters === undefined){
           document.getElementById('name').value = '-' + customerName;
+        }
+        else if(customerName === undefined){
+        document.getElementById('name').value = FourLetters;
         }
         else {
           document.getElementById('name').value = FourLetters + '-' + customerName;
