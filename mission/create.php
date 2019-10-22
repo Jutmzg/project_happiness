@@ -133,6 +133,9 @@ if (
         if(customerName === undefined){
         document.getElementById('name').value = FourLetters
         }
+        if(FourLetters === undefined){
+          document.getElementById('name').value = '-' + customerName;
+        }
         else {
           document.getElementById('name').value = FourLetters + '-' + customerName;
         }
