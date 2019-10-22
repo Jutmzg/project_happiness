@@ -38,18 +38,7 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
   </div>
 
   <script type="text/javascript" charset="utf-8">
-    var columnDefs = [{
-        headerName: "",
-        field: "nom",
-        sortable: true,
-        filter: true,
-        width: 40,
-        suppressSizeToFit: true,
-        checkboxSelection: true,
-        headerCheckboxSelection: true,
-        headerCheckboxSelectionFilteredOnly: true,
-
-      },
+    var columnDefs = [
       {
         headerName: "Nom",
         field: "nom",

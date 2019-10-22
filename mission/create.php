@@ -4,8 +4,12 @@
 
 $message = '';
 
-if(isset($id)){
-  $id = $_GET['id'];
+if(isset($_GET['id'])){
+$id = $_GET['id'];
+}
+else{
+  $id = "";
+}
 
 $sql = 'SELECT * FROM mission WHERE id=:id';
 $statement = $connection->prepare($sql);
@@ -16,7 +20,6 @@ $sql = 'SELECT * FROM consultant WHERE id=:id';
 $statement = $connection->prepare($sql);
 $statement->execute([':id' => $id]);
 $row = $statement->fetch(PDO::FETCH_OBJ);
-}
 
 $sql2 = 'SELECT * FROM job ORDER BY name';
 $statement = $connection->query($sql2);
@@ -74,15 +77,16 @@ if (
         </div>
 
         <div class="input-box">
-          <select id="consultant" name="consultant_id" required>
-            <option name="choice" id="choice" value="">Sélectionner un consultant</option>
-              <?php foreach ($consultants as $consultant) { 
-                      $selected = $row->id == $consultant->id ? 'selected' : ''; ?>
-                <?php $cons = substr(utf8_encode($consultant->fullname), 0, 4);?>
-                  <?= "<option value='$consultant->id' name='consultant_id' id='consultant' data-value=$cons $selected>" ?><?= utf8_encode($consultant->fullname) ?></option>
-              <?php } ?>
-          </select>
-        </div>
+
+    <select id="consultant" name="consultant_id" required>
+      <option name="choice" id="choice" value="">Sélectionner un consultant</option>
+      <?php foreach ($consultants as $consultant) { 
+                        $cons = substr(utf8_encode($consultant->fullname), 0, 4);
+                $selected = $row->id == $consultant->id ? 'selected' : ''; ?>
+                <?=  "<option value='$consultant->id' data-value='$cons' name='consultant_id' id='consultant' $selected>" ?><?= utf8_encode($consultant->fullname) ?></option>
+      <?php } ?>
+    </select>
+  </div>
 
       <div class="input-box">
         <select id="customer" name="customer_id" required>
@@ -130,6 +134,9 @@ if (
 
         if(customerName === undefined){
         document.getElementById('name').value = FourLetters
+        }
+        if(FourLetters === undefined){
+          document.getElementById('name').value = '-' + customerName;
         }
         else {
           document.getElementById('name').value = FourLetters + '-' + customerName;
