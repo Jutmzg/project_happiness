@@ -2,7 +2,8 @@
 <html lang="fr">
 <?php require '../layout/header.php'; 
 
-$sql = "SELECT m.ID, m.name mission,c.name customer, CONCAT(cons.lastname,' ', cons.firstname) as consultant, j.name job, m.start, m.stop, m.state FROM mission m
+$sql = "SELECT m.ID, m.name mission,c.name customer, CONCAT(cons.lastname,' ', cons.firstname) as consultant, j.name job, m.start, m.stop, m.state 
+FROM mission m
 LEFT JOIN consultant cons ON m.consultant_id = cons.ID
 INNER JOIN customer c ON m.customer_id = c.ID
 INNER JOIN job j ON m.job_id = j.ID
