@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-<?php require '../layout/header.php'; 
+<?php require '../layout/header.php';
 
 $sql = "SELECT m.ID, m.name mission,c.name customer, CONCAT(cons.lastname,' ', cons.firstname) as consultant, j.name job, m.start, m.stop, m.state 
 FROM mission m
@@ -21,8 +21,8 @@ $mission = $statement->fetchAll(PDO::FETCH_OBJ);
       <div class="card-header">
         <h2 class="text-center text-uppercase">Missions</h2>
         <div class="add d-flex">
-        <a href="/Akkappiness/mission/create.php" class='btn btn-primary mr-1'><i class="fas fa-plus"></i></a>
-        <div id="editAndDelete"></div>
+          <a href="/Akkappiness/mission/create.php" class='btn btn-primary mr-1'><i class="fas fa-plus"></i></a>
+          <div id="editAndDelete"></div>
         </div>
         <div class="card-body">
           <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
@@ -135,17 +135,17 @@ $mission = $statement->fetchAll(PDO::FETCH_OBJ);
         "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-pencil-alt'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
     }
 
-    function edit(){
-        let selectedNodes = gridOptions.api.getSelectedNodes()
-        let selectedData = selectedNodes.map(function(node) {
-          return node.data
-        })
-        let action = selectedData.map(function(node) {
-          return node.action
-        })
-        var edit = 'edit.php?id='+action;
-        window.location= edit;
-        }
+    function edit() {
+      let selectedNodes = gridOptions.api.getSelectedNodes()
+      let selectedData = selectedNodes.map(function(node) {
+        return node.data
+      })
+      let action = selectedData.map(function(node) {
+        return node.action
+      })
+      var edit = 'edit.php?id=' + action;
+      window.location = edit;
+    }
   </script>
 </body>
 <?php require '../layout/footer.php'; ?>

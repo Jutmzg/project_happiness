@@ -13,7 +13,8 @@ if (
   $sql = 'INSERT INTO job(name) VALUES(:name)';
   $statement = $connection->prepare($sql);
   if ($statement->execute([':name' => $name])) {
-    $message = 'Métier enregistré';
+    $message = '<i class="far fa-check-circle"></i>
+    Métier enregistré';
   }
 }
 ?>

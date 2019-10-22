@@ -4,10 +4,9 @@
 
 $message = '';
 
-if(isset($_GET['id'])){
-$id = $_GET['id'];
-}
-else{
+if (isset($_GET['id'])) {
+  $id = $_GET['id'];
+} else {
   $id = "";
 }
 
@@ -50,9 +49,9 @@ if (
   $sql = 'INSERT INTO mission(name, customer_id, job_id, consultant_id, start, stop,state) VALUES(:name, :customer_id, :job_id, :consultant_id, :start, :stop, :state)';
   $statement = $connection->prepare($sql);
   if ($statement->execute([':name' => $name, ':customer_id' => $customer_id, ':job_id' => $job_id, ':consultant_id' => $consultant_id, ':start' => $start, ':stop' => $stop, ':state' => $state])) {
-    $message = 'Mission enregistrée';
+    $message = '<i class="far fa-check-circle"></i>
+    Mission enregistrée';
   }
-
 }
 ?>
 
@@ -64,24 +63,24 @@ if (
   <?php endif; ?>
 
   <div class="boxmission">
-      <form method="post" id="monFormulaire">
-        <a onclick="goBack()"> <i class="fas fa-times fa-2x" id="cross"></i></a>
+    <form method="post" id="monFormulaire">
+      <a onclick="goBack()"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
-        <div class="input-box">
-          <input value="<?php $cons; ?>" type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" required readonly>
-        </div>
+      <div class="input-box">
+        <input value="<?php $cons; ?>" type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" required readonly>
+      </div>
 
-        <div class="input-box">
+      <div class="input-box">
 
-    <select id="consultant" name="consultant_id" required>
-      <option name="choice" id="choice" value="">Sélectionner un consultant</option>
-      <?php foreach ($consultants as $consultant) { 
-                        $cons = substr(utf8_encode($consultant->fullname), 0, 4);
-                $selected = $row->id == $consultant->id ? 'selected' : ''; ?>
-                <?=  "<option value='$consultant->id' data-value='$cons' name='consultant_id' id='consultant' $selected>" ?><?= utf8_encode($consultant->fullname) ?></option>
-      <?php } ?>
-    </select>
-  </div>
+        <select id="consultant" name="consultant_id" required>
+          <option name="choice" id="choice" value="">Sélectionner un consultant</option>
+          <?php foreach ($consultants as $consultant) {
+            $cons = substr(utf8_encode($consultant->fullname), 0, 4);
+            $selected = $row->id == $consultant->id ? 'selected' : ''; ?>
+            <?= "<option value='$consultant->id' data-value='$cons' name='consultant_id' id='consultant' $selected>" ?><?= utf8_encode($consultant->fullname) ?></option>
+          <?php } ?>
+        </select>
+      </div>
 
       <div class="input-box">
         <select id="customer" name="customer_id" required>
@@ -127,13 +126,11 @@ if (
         let FourLetters = $('option:selected', consultant).attr('data-value');
         let customerName = $('option:selected', customer).attr('data-value');
 
-        if(FourLetters === undefined){
+        if (FourLetters === undefined) {
           document.getElementById('name').value = '-' + customerName;
-        }
-        else if(customerName === undefined){
-        document.getElementById('name').value = FourLetters;
-        }
-        else {
+        } else if (customerName === undefined) {
+          document.getElementById('name').value = FourLetters;
+        } else {
           document.getElementById('name').value = FourLetters + '-' + customerName;
         }
       });

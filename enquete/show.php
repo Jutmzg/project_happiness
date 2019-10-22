@@ -44,7 +44,7 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
         field: "nom",
         sortable: true,
         filter: true,
-        width: 230,
+        width: 235,
         suppressSizeToFit: true,
       },
       {
@@ -60,7 +60,7 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
         field: "mission",
         sortable: true,
         filter: true,
-        width: 210,
+        width: 230,
         suppressSizeToFit: true,
       },
       {
@@ -68,7 +68,7 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
         field: "manager",
         sortable: true,
         filter: true,
-        width: 210,
+        width: 230,
         suppressSizeToFit: true,
       },
       {
