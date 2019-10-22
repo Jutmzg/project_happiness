@@ -145,6 +145,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
   new agGrid.Grid(eGridDiv, gridOptions);
 
   function getSelectedMissionId() {
+    let success =  iziToast.success({position: "center", message: 'Enquête(s) effectuée(s)'});
     let selectedNodes = gridOptions.api.getSelectedNodes()
     let selectedData = selectedNodes.map(function(node) {
       return node.data
@@ -165,12 +166,9 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
           done: 1,
           info: missions
         },
-        success: function(data) {
-          iziToast.success({position: "center", message: 'Enquête effectuée'});
-
-        }
       });
     });
+    return success
   }
 
   function onFilterTextBoxChanged() {
