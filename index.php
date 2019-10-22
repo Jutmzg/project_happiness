@@ -179,9 +179,11 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
 <body>
   <h2 class="text-center p-4 welcome">BIENVENUE SUR AKKAPPINESS</h2>
   <div class="container">
-    <div class="col-md-5 col-lg-6 col-sm-12 d-flex justify-center">
+    <div class="row">
+    <div class="col-md-5 col-lg-6 col-sm-9 row-chart">
       <canvas id="myChart1" width="400" height="400"></canvas>
       <canvas id="myChart2" width="400" height="400"></canvas>
+    </div>
     </div>
     <div>
       <canvas id="myChart3"></canvas>

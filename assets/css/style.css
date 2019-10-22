@@ -92,8 +92,12 @@ h2{
 #myChart1, #myChart2, #myChart3 {
   background-color: #0000001a;
   margin:20px;
+  height: 100%;
+  width:100%;
 }
-
+.row-chart{
+  display: flex;
+}
 .welcome{
   color:white;
 }
@@ -622,6 +626,9 @@ option{
       position: relative;
       bottom: 0px;
       left: 36%;
+}
+.row-chart{
+  flex-direction: column;
 }
     }
     @media (max-width: 400px) {
