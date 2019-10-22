@@ -22,8 +22,7 @@ $statement->execute();
 $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
 
 
-    $mail = new PHPMailer(true);
-    $mail->CharSet = 'UTF-8';
+    
     
 try {
     foreach ($enquetes as $enquete) {
@@ -32,6 +31,8 @@ try {
     $toUser = $enquete->mail;
     $toUserName = $enquete->fullname;
     $id = $enquete->id;
+    $mail = new PHPMailer(true);
+    $mail->CharSet = 'UTF-8';
     $mail->isSMTP();
     $mail->Host       = EMAIL_HOST;                        
     $mail->SMTPAuth   = true;                                  
@@ -51,14 +52,13 @@ try {
         'allow_self_signed' => true
         )
         );
-// OR use TLS
 
     $mail->Body    = "
     <h1>Bonjour $toUserName,</h1>
     <p>Dans le cadre de notre campagne d’enquête de satisfaction, merci de nous donner votre niveau de satisfaction de votre mission actuelle.
     En vous remerciant par avance</p>
 
-    <a href='http://$_SERVER[HTTP_HOST]/Akkappiness/mailing/1.php?id=$id'><img src='https://zupimages.net/up/19/42/zk2l.png' alt='bien' width='80' height='80'/></a>
+     <a href='http://$_SERVER[HTTP_HOST]/Akkappiness/mailing/1.php?id=$id'><img src='https://zupimages.net/up/19/42/zk2l.png' alt='bien' width='80' height='80'/></a>
      <a href='http://$_SERVER[HTTP_HOST]/Akkappiness/mailing/2.php?id=$id'><img src='https://zupimages.net/up/19/42/ixon.png' alt='moyen' width='80' height='80'/></a>
      <a href='http://$_SERVER[HTTP_HOST]/Akkappiness/mailing/3.php?id=$id'><img src='https://zupimages.net/up/19/42/m6zb.png' alt='mauvais' width='80' height='80'/></a>
      ";

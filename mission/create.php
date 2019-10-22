@@ -3,7 +3,9 @@
 <?php require '../layout/header.php';
 
 $message = '';
+if(isset($_GET['id'])){
 $id = $_GET['id'];
+}
 
 $sql2 = 'SELECT * FROM job ORDER BY name';
 $statement = $connection->query($sql2);
@@ -69,8 +71,9 @@ $row = $statement->fetch(PDO::FETCH_OBJ);
     <select id="consultant" name="consultant_id" required>
       <option name="choice" id="choice" value="">Sélectionner un consultant</option>
       <?php foreach ($consultants as $consultant) { 
+                        $cons = substr(utf8_encode($consultant->fullname), 0, 4);
                 $selected = $row->id == $consultant->id ? 'selected' : ''; ?>
-                <?= "<option value='$consultant->id' name='consultant_id' id='consultant' $selected>" ?><?= utf8_encode($consultant->fullname) ?></option>
+                <?=  "<option value='$consultant->id' data-value='$cons' name='consultant_id' id='consultant' $selected>" ?><?= utf8_encode($consultant->fullname) ?></option>
       <?php } ?>
     </select>
   </div>

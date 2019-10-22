@@ -2,19 +2,26 @@
 <html lang="fr">
 <?php require '../layout/header.php';
 
-$sql = "SELECT CONCAT(c.lastname,' ', c.firstname) as fullname, c.mail mail, m.id mission_id, m.name mission, CONCAT(mana.lastname,' ', mana.firstname) manager 
+$sql = "SELECT CONCAT(c.lastname,' ', c.firstname) as fullname, c.mail mail, m.id mission_id, m.name mission, CONCAT(mana.lastname,' ', mana.firstname) manager
 FROM mission m
 JOIN consultant c
 ON m.consultant_id = c.id
 JOIN manager mana
 ON c.manager_id = mana.id
-WHERE NOT EXISTS (
-    SELECT * 
+WHERE c.state = 0 AND m.state = 0
+AND NOT EXISTS (
+    SELECT *
     FROM enquete e
     WHERE e.mission_id = m.id 
 )
-AND c.state = 0 AND m.state = 0
+OR
+EXISTS (
+    SELECT *
+    FROM enquete e
+   WHERE e.mission_id = m.id AND DATEDIFF(NOW(), e.created_at) > 30
+    )
 ORDER BY fullname";
+
 $statement = $connection->prepare($sql);
 $statement->execute();
 $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
@@ -189,30 +196,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
     $('#infoClick').click(function () {
       iziToast.success({position: "center", message: 'Enquête effectuée'});
     }); // ! click
-
-    // custom toast
-    $('#customClick').click(function () {
-
-      iziToast.show({
-        color: 'dark',
-        icon: 'fa fa-user',
-        title: 'Hey',
-        message: 'Custom Toast!',
-        position: 'center', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
-        progressBarColor: 'rgb(0, 255, 184)',
-        buttons: [
-          [
-            '<button>Close</button>',
-            function (instance, toast) {
-              instance.hide({
-                transitionOut: 'fadeOutUp'
-              }, toast);
-            }
-          ]
-        ]
-      });
-
-    }); 
+   
 </script>
 </body>
 <?php require '../layout/footer.php'; ?>
