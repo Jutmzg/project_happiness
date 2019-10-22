@@ -193,11 +193,11 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
         datasets: [{
           label: "Répondu",
           data: [<?= count($responseTrue); ?>],
-          backgroundColor: "rgba(0,255,0,0.2)"
+          backgroundColor: "#4F772D"
         }, {
           label: "En attente",
           data: [<?= count($responseFalse); ?>],
-          backgroundColor: "rgba(255,0,0,0.4)"
+          backgroundColor: "#D36135"
         }]
       },
       options: {
@@ -239,7 +239,7 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
         labels: [<?="'".implode("','",$top5)."'";?>],
         datasets: [{
           label: "Meilleur taux de satisfaction",
-          backgroundColor: ["rgba(0,255,0,0.2)", "rgba(255, 180, 67,0.7)", "rgba(255,0,0,0.4)", "rgba(0,0,255,0.4)", "rgba(112,0,122,0.4)"],
+          backgroundColor: ["#4F772D", "rgba(255, 180, 67,0.7)", "#D36135", "rgba(0,0,255,0.4)", "rgba(112,0,122,0.4)"],
           borderWidth: 0,
 
           data: [<?= "'".implode("','",$topNote)."'";?>]
