@@ -12,17 +12,23 @@ $excel = "";
 $excel .=  "MISSION\tRESULTAT\tCREE LE\tENVOYE\n";
 
 foreach($enquetes as $enquete) {
-    
-    $excel .= "$enquete->mission\t$enquete->resultat\t$enquete->created_at\t$enquete->state\n";
     if($enquete->resultat === '0'){
-            echo "Pas de retour";
-    } elseif ($enquete->resultat === '1'){
-            echo "Bon";
+        $enquete->resultat = "Pas de retour";    
+    } elseif ($enquete->resultat = '1'){
+        $enquete->resultat = "Bon";   
     } elseif ($enquete->resultat === '2'){
-            echo "Moyen";
+        $enquete->resultat = "Moyen";   
     } elseif ($enquete->resultat === '3'){
-            echo "Mauvais";
-    } 
+        $enquete->resultat = "Mauvais";   
+} 
+
+if($enquete->state === '0'){
+    $enquete->state = "PAS ENVOYER";    
+} elseif ($enquete->state = '1'){
+    $enquete->state = "ENVOYER";   
+} 
+
+    $excel .= "$enquete->mission\t$enquete->resultat\t$enquete->created_at\t$enquete->state\n";
 }   
 
 header("Content-type: application/vnd.msexcel; charset=utf-16");
