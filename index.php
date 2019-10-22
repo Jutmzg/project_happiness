@@ -218,7 +218,7 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
         labels: ["Bon", "Moyen", "Mauvais"],
         datasets: [{
           label: "Population (millions)",
-          backgroundColor: ["rgba(0,255,0,0.2)", "rgba(255, 180, 67,0.7)", "rgba(255,0,0,0.4)"],
+          backgroundColor: ["#4F772D", "#D38B5D", "#D36135"],
           borderWidth: 0,
 
           data: [<?= count($goodRate); ?>, <?= count($mediumRate); ?>, <?= count($badRate); ?>, ]

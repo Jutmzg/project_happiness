@@ -23,7 +23,7 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
         <h2 class="text-center text-uppercase">Enquêtes à envoyer</h2>
         <div class="add d-flex">
 
-          <a class="btn btn-primary mr-1" href="/Akkappiness/mailing/phpmailer.php">Envoyer</a>
+          <a class="btn btn-info mr-1" href="/Akkappiness/mailing/phpmailer.php">Envoyer</a>
           <div id="DeleteEnquete" onclick="return confirm('Etes vous sur de vouloir effectuer la suppression?')"></div>
         </div>
 
@@ -44,7 +44,7 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
         field: "nom",
         sortable: true,
         filter: true,
-        width: 235,
+        width: 225,
         suppressSizeToFit: true,
       },
       {
@@ -52,7 +52,7 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
         field: "mail",
         sortable: true,
         filter: true,
-        width: 230,
+        width: 225,
         suppressSizeToFit: true,
       },
       {
@@ -60,7 +60,7 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
         field: "mission",
         sortable: true,
         filter: true,
-        width: 230,
+        width: 225,
         suppressSizeToFit: true,
       },
       {
@@ -68,7 +68,7 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
         field: "manager",
         sortable: true,
         filter: true,
-        width: 230,
+        width: 225,
         suppressSizeToFit: true,
       },
       {
