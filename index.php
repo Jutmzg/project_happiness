@@ -56,12 +56,12 @@
   </nav>
 </header>
 <?php
-$sql = "SELECT * FROM `enquete` WHERE resultat != 0";
+$sql = "SELECT * FROM `enquete` WHERE resultat != 0 AND state =0";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $responseTrue = $statement->fetchAll(PDO::FETCH_OBJ);
 
-$sql = "SELECT * FROM `enquete` WHERE resultat = 0";
+$sql = "SELECT * FROM `enquete` WHERE resultat = 0 AND state = 0";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $responseFalse = $statement->fetchAll(PDO::FETCH_OBJ);

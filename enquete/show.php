@@ -22,7 +22,6 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
       <div class="card-header">
         <h2 class="text-center text-uppercase">Enquêtes à envoyer</h2>
         <div class="add d-flex">
-
           <a class="btn btn-primary mr-1" href="/Akkappiness/mailing/phpmailer.php">Envoyer</a>
           <div id="DeleteEnquete" onclick="return confirm('Etes vous sur de vouloir effectuer la suppression?')"></div>
         </div>
@@ -36,6 +35,7 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
       </div>
     </div>
   </div>
+
 
   <script type="text/javascript" charset="utf-8">
     var columnDefs = [
@@ -127,9 +127,11 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
         return node.action
       })
       document.getElementById("DeleteEnquete").innerHTML =
-        "<a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
+        "<a href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
     }
+    
   </script>
+
 </body>
 <?php require '../layout/footer.php'; ?>
 
