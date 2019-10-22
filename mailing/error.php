@@ -4,15 +4,14 @@
 
 <div class="container mt-5">
   <div class="alert-box mt-5">
-    <div class="alert alert-success col-6 offset-3">
+    <div class="alert alert-danger col-6 offset-3">
       <div class="alert-icon text-center">
-        <i class="far fa-check-circle fa-3x"></i>
+        <i class="far fa-times-circle fa-3x"></i>
       </div>
       <div class="alert-message text-center">
-        <strong>Merci!</strong> Votre avis a bien été pris en compte
+        <strong>Erreur!</strong> Vous avez déjà voté
       </div>
     </div>
   </div>
 </div>
-
 <?php header("Refresh: 3;url=https://www.google.com/"); ?>

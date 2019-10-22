@@ -24,8 +24,8 @@
   <script src="../assets/jquery/jquery-3.4.1.min.js"></script>
   <script src="../assets/jquery-ui/jquery-ui.min.js"></script>
   <script src="../assets/aggrid/ag-grid-community.min.noStyle.js"></script>
-
   <script src="../assets/js/alert.js"></script>
+  
 </head>
 
 <header>
