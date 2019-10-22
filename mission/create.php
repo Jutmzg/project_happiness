@@ -11,11 +11,6 @@ else{
   $id = "";
 }
 
-$sql = 'SELECT * FROM mission WHERE id=:id';
-$statement = $connection->prepare($sql);
-$statement->execute([':id' => $id]);
-$mission = $statement->fetch(PDO::FETCH_OBJ);
-
 $sql = 'SELECT * FROM consultant WHERE id=:id';
 $statement = $connection->prepare($sql);
 $statement->execute([':id' => $id]);
