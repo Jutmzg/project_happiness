@@ -52,7 +52,7 @@
         <a class="nav-link mr-2" href="/Akkappiness/enquete/index.php">Enquêtes</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link mr-2" href="/Akkappiness/enquete/show.php">A envoyer</a>
+        <a class="nav-link mr-2" href="/Akkappiness/enquete/show.php">Envoyer</a>
         </li>
         <li class="nav-item logout">
         <a class="nav-link mr-2" href="/Akkappiness/user/logout.php"><i class="fas fa-power-off fa-lg"></i></a>
