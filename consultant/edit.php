@@ -40,13 +40,7 @@ if (
 
 <body>
     <div class="container">
-        <?php if (!empty($message)) : ?>
-            <div class="alert alert-success">
-                <?= $message; ?>
-            </div>
-        <?php endif; ?>
         <div class="box">
-
             <form method="post">
                 <h2>Modifier les informations de <?= utf8_encode($row->firstname) . ' ' . utf8_encode($row->lastname) ?></h2>
                 <a onclick="goBack()"> <i class="fas fa-times fa-2x" id="cross"></i></a>
