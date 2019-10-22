@@ -1,7 +1,16 @@
 <?php
 require '../connection.php';
 
-$sql = 'SELECT m.name as mission, resultat, created_at, e.state AS state FROM enquete AS e LEFT JOIN mission AS m ON m.id=e.mission_id';
+$sql = "SELECT CONCAT(co.lastname,' ', co.firstname) as consultant, j.name job, c.name customer, m.name mission, resultat, created_at, e.state 
+FROM enquete AS e 
+LEFT JOIN mission AS m 
+ON m.id=e.mission_id
+LEFT JOIN consultant co 
+ON m.consultant_id = co.ID
+INNER JOIN customer c 
+ON m.customer_id = c.ID
+INNER JOIN job j 
+ON m.job_id = j.ID";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
@@ -9,7 +18,7 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
 
 
 $excel = "";
-$excel .=  "MISSION\tRESULTAT\tCREE LE\tENVOYE\n";
+$excel .=  "CONSULTANT\tPOSTE\tCLIENT\tMISSION\tRESULTAT\tCREE LE\tENVOYE\n";
 
 foreach($enquetes as $enquete) {
     if($enquete->resultat === '0'){
@@ -28,7 +37,7 @@ if($enquete->state === '0'){
     $enquete->state = "ENVOYE";   
 } 
 
-    $excel .= "$enquete->mission\t$enquete->resultat\t$enquete->created_at\t$enquete->state\n";
+    $excel .= "$enquete->consultant\t$enquete->job\t$enquete->customer\t$enquete->mission\t$enquete->resultat\t$enquete->created_at\t$enquete->state\n";
 }   
 
 header("Content-type: application/vnd.msexcel; charset=utf-16");
