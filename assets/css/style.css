@@ -409,7 +409,7 @@ h2{
   font-size: 12px;
   font-weight: 400;
   padding: 0.45em 0.3em !important;
-  /*   width: 15px !important; */
+  
 }
 
 .openemr-calendar .ui-datepicker-calendar thead tr th {
@@ -504,8 +504,6 @@ h2{
   text-align: center;
   
 }
-
-
 
 .input-box {
   position: relative;
