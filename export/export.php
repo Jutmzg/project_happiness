@@ -1,130 +1,48 @@
-<?php 
-require '../assets/phpspreadsheet/vendor/autoload.php';
+<?php
 require '../connection.php';
 
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-
-$sql = 'SELECT * FROM consultant';
+$sql = "SELECT CONCAT(co.lastname,' ', co.firstname) as consultant, j.name job, c.name customer, m.name mission, resultat, created_at, e.state 
+FROM enquete AS e 
+LEFT JOIN mission AS m 
+ON m.id=e.mission_id
+LEFT JOIN consultant co 
+ON m.consultant_id = co.ID
+INNER JOIN customer c 
+ON m.customer_id = c.ID
+INNER JOIN job j 
+ON m.job_id = j.ID";
 $statement = $connection->prepare($sql);
 $statement->execute();
-$consultants = $statement->fetchAll(PDO::FETCH_OBJ);
+$enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
 
-$spreadsheet = new Spreadsheet();
-$spreadsheet->setActiveSheetIndex(0);
-$row = 3;
-foreach($consultants as $value){
-        $spreadsheet->getActiveSheet()->setCellValue('B'.$row, $value->lastname)
-            ->setCellValue('C'.$row, utf8_encode($value->firstname))
-            ->setCellValue('D'.$row, utf8_encode($value->mail))
-            ->setCellValue('F'.$row, utf8_encode($value->state))
-            ->setCellValue('G'.$row, utf8_encode($value->manager_id));
-        $row++;     
+
+
+$excel = "";
+$excel .=  "CONSULTANT\tPOSTE\tCLIENT\tMISSION\tRESULTAT\tCREE LE\tENVOYE\n";
+
+foreach($enquetes as $enquete) {
+    if($enquete->resultat === '0'){
+        $enquete->resultat = "Pas de retour";    
+    } elseif ($enquete->resultat = '1'){
+        $enquete->resultat = "Bon";   
+    } elseif ($enquete->resultat === '2'){
+        $enquete->resultat = "Moyen";   
+    } elseif ($enquete->resultat === '3'){
+        $enquete->resultat = "Mauvais";   
+} 
+
+if($enquete->state === '0'){
+    $enquete->state = "NON";    
+} elseif ($enquete->state = '1'){
+    $enquete->state = "OUI";   
 }
-$spreadsheet->getActiveSheet()->setCellValue('A1', 'Liste des Consultants')
-        ->setCellValue('B2', 'Nom')
-        ->setCellValue('C2', 'Prénom')
-        ->setCellValue('D2', 'Mail')
-        ->setCellValue('F2', 'Statut')
-        ->setCellValue('G2', 'Manager');
-$spreadsheet->getActiveSheet()->mergeCells('A1:D1');
-$spreadsheet->getActiveSheet()->setTitle('Consultant');
 
-$sql = 'SELECT * FROM mission';
-$statement = $connection->prepare($sql);
-$statement->execute();
-$missions = $statement->fetchAll(PDO::FETCH_OBJ);
-$spreadsheet->createSheet(1);
-$spreadsheet->setActiveSheetIndex(1);
-$row = 3;
-foreach($missions as $value){
-    $spreadsheet->getActiveSheet()->setCellValue('B'.$row, $value->name)
-        ->setCellValue('C'.$row, utf8_encode($value->customer_id))
-        ->setCellValue('D'.$row, utf8_encode($value->job_id))
-        ->setCellValue('E'.$row, utf8_encode($value->consultant_id))
-        ->setCellValue('F'.$row, utf8_encode($value->start))
-        ->setCellValue('G'.$row, utf8_encode($value->stop))
-        ->setCellValue('E'.$row, utf8_encode($value->state));
-    $row++;     
-}
-$spreadsheet->getActiveSheet()->setTitle('Mission');
-$spreadsheet->getActiveSheet()->mergeCells('A1:D1');
-$spreadsheet->getActiveSheet()->setCellValue('A1', 'Liste des Missions')
-        ->setCellValue('B2', 'Nom')
-        ->setCellValue('C2', 'Client')
-        ->setCellValue('D2', 'Métier')
-        ->setCellValue('E2', 'Consultant')
-        ->setCellValue('F2', 'Début de la Mission')
-        ->setCellValue('G2', 'Fin de la Mission')
-        ->setCellValue('E2', 'Statut');
+    $excel .= "$enquete->consultant\t$enquete->job\t$enquete->customer\t$enquete->mission\t$enquete->resultat\t$enquete->created_at\t$enquete->state\n";
+}   
 
-$sql = 'SELECT * FROM customer';
-$statement = $connection->prepare($sql);
-$statement->execute();
-$customers = $statement->fetchAll(PDO::FETCH_OBJ);
-$spreadsheet->createSheet(2);
-$spreadsheet->setActiveSheetIndex(2);
-$row = 3;
-    foreach($customers as $value){
-        $spreadsheet->getActiveSheet()
-        ->setCellValue('B'.$row,utf8_encode($value->name))
-        ->setCellValue('C'.$row, utf8_encode($value->address))
-        ->setCellValue('D'.$row, utf8_encode($value->state));
-    $row++;     
-    }
-$spreadsheet->getActiveSheet()->setTitle('Client');
-$spreadsheet->getActiveSheet()->mergeCells('A1:D1');
-$spreadsheet->getActiveSheet()->setCellValue('A1', 'Liste des Clients')
-    ->setCellValue('B2', 'Nom')
-    ->setCellValue('C2', 'Adresse')
-    ->setCellValue('D2', 'Statut');
+header("Content-type: application/vnd.msexcel; charset=utf-16");
+header("Content-disposition: attachment; filename=enquete_akkappiness.xls");
 
-$sql = 'SELECT * FROM job';
-$statement = $connection->prepare($sql);
-$statement->execute();
-$jobs = $statement->fetchAll(PDO::FETCH_OBJ);
-$spreadsheet->createSheet(3);
-$spreadsheet->setActiveSheetIndex(3);
-$row = 3;
-    foreach($jobs as $value){
-        $spreadsheet->getActiveSheet()
-            ->setCellValue('B'.$row, utf8_encode(($value->name)));
-        $row++;     
-    }
-$spreadsheet->getActiveSheet()->mergeCells('A1:D1');
-$spreadsheet->getActiveSheet()->setTitle('Métier');
-$spreadsheet->getActiveSheet()->setCellValue('A1', 'Liste des Métiers')
-    ->setCellValue('B2', 'Nom');
 
-$sql = 'SELECT m.name as mission, resultat, created_at, e.state AS state FROM enquete AS e LEFT JOIN mission AS m ON m.id=e.mission_id';
-$statement = $connection->prepare($sql);
-$statement->execute();
-$enquete = $statement->fetchAll(PDO::FETCH_OBJ);
-$spreadsheet->createSheet(4);
-$spreadsheet->setActiveSheetIndex(4);
-$row = 3;
-        foreach($enquete as $value){
-            $spreadsheet->getActiveSheet()
-                ->setCellValue('B'.$row, utf8_encode(($value->mission)))
-                ->setCellValue('C'.$row, utf8_encode($value->resultat))
-                ->setCellValue('D'.$row, utf8_encode($value->created_at))
-                ->setCellValue('E'.$row, utf8_encode($value->state));
-            $row++;     
-        }
-    $spreadsheet->getActiveSheet()->mergeCells('A1:D1');
-    $spreadsheet->getActiveSheet()->setTitle('Enquête');
-    $spreadsheet->getActiveSheet()->setCellValue('A1', 'Résultats de l\'enquête Akkappiness')
-        ->setCellValue('B2', 'Mission')
-        ->setCellValue('C2', 'Résultat')
-        ->setCellValue('D2', 'Créé le')
-        ->setCellValue('E2', 'Statut');
-
-header('Content-Type: text/xlsx; charset=UTF-8');
-header('Content-Disposition: attachment; filename="Akkappiness.xlsx"');
-header('Cache-Control: max-age=0');
-header('Cache-Control: max-age=1');
-header('Content-Encoding: UTF-8');
-
-$writer = new Xlsx($spreadsheet);
-$writer->save('php://output');
-?>
+print $excel;
+exit;
