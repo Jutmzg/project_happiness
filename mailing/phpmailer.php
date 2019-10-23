@@ -83,7 +83,7 @@ try {
                     <tbody>
                         <tr>
                             <td>
-                                <a href='https://www.aacmena.com/Images/Program/6368462727441017906EEEFDC756AAF21BBEF30A936A693830.jpg' target='_blank'><img src='https://www.aacmena.com/Images/Program/6368462727441017906EEEFDC756AAF21BBEF30A936A693830.jpg?width=&amp;t=1452605472977&amp;width=580' style='border:0;max-width:100%!important' width='580'></a>
+                                <img src='https://www.aacmena.com/Images/Program/6368462727441017906EEEFDC756AAF21BBEF30A936A693830.jpg?width=&amp;t=1452605472977&amp;width=580' style='border:0;max-width:100%!important' width='580'></a>
                             </td>
                         </tr>
                         <tr>
