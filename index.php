@@ -209,7 +209,7 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
         title: {
           fontColor: '#ffff',
           display: true,
-          text: 'Total des enquêtes <?= count($responseTrue) + count($responseFalse); ?>'
+          text: 'Total des enquêtes : <?= count($responseTrue) + count($responseFalse); ?>'
         },
         legend: {
           display: true,
@@ -238,7 +238,7 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
         title: {
           fontColor: '#ffff',
           display: true,
-          text: 'Taux de satisfaction , Total de réponse <?= count($responseTrue); ?>'
+          text: 'Taux de satisfaction  |  Total de réponses : <?= count($responseTrue); ?>'
         },
         legend: {
           display: true,
