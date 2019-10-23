@@ -40,7 +40,7 @@ if (
     <a href="/Akkappiness/customer/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
     <div class="input-box">
-      <input value="<?= utf8_encode($customers->name); ?>" type="text" name="name" id="name" placeholder="Nom" maxlength="50" minlength="2" required>
+      <input value="<?= $customers->name; ?>" type="text" name="name" id="name" placeholder="Nom" maxlength="50" minlength="2" required>
     </div>
     <div class="input-box">
       <input value="<?= $customers->address; ?>" type="text" name="address" id="address" placeholder="Adresse" maxlength="75" minlength="10">

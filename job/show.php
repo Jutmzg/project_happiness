@@ -25,7 +25,7 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
     </div>
   </div>
 
-  <script type="text/javascript" charset="utf-8">
+  <script type="text/javascript">
     var columnDefs = [{
         headerName: "Nom",
         field: "nom",
@@ -43,7 +43,7 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
 
     var rowData = [
       <?php foreach ($jobs as $job) { ?> {
-          nom: "<?= utf8_encode($job->name) ?>",
+          nom: "<?=$job->name ?>",
           action: "<?= $job->id ?>",
         },
 

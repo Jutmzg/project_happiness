@@ -63,11 +63,11 @@ if (
         <div class="boxmission">
         
         <form method="post">
-        <h2>Modifier la mission : <?= utf8_encode($row->name) ?></h2>
+        <h2>Modifier la mission : <?= $row->name ?></h2>
         <a href="/Akkappiness/mission/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
                 <div class="input-box">
-            <input value="<?= utf8_encode($row->name); ?>" type="text" name="name" id="name" maxlength="50" minlength="2" readonly required>
+            <input value="<?= $row->name; ?>" type="text" name="name" id="name" maxlength="50" minlength="2" readonly required>
           </div>
 
           <div class="input-box">
@@ -76,8 +76,8 @@ if (
 
               <?php foreach ($consultants as $consultant) { ?>
                <?= $selected = $row->consultant_id == $consultant->id ? 'selected' : ''; ?>
-                  <?php $cons = substr(utf8_encode($consultant->fullname), 0, 4);?>
-                <?= "<option value='$consultant->id' name='consultant' id='consultant' data-value=$cons $selected>"?><?= utf8_encode($consultant->fullname)?></option>
+                  <?php $cons = substr($consultant->fullname, 0, 4);?>
+                <?= "<option value='$consultant->id' name='consultant' id='consultant' data-value=$cons $selected>"?><?= $consultant->fullname?></option>
             <?php } ?>
             </select>
           </div>
@@ -89,7 +89,7 @@ if (
               <?php foreach ($customers as $customer) { 
                  $customerName = utf8_encode($customer->name);
                 $selected = $row->customer_id == $customer->id ? 'selected' : ''; ?>
-                <?= "<option value='$customer->id' name='customer' id='customer' data-value=$customer->name $selected>"?><?=utf8_encode($customer->name)?></option>
+                <?= "<option value='$customer->id' name='customer' id='customer' data-value=$customer->name $selected>"?><?=$customer->name?></option>
               <?php } ?>
             </select>
           </div>
@@ -100,7 +100,7 @@ if (
 
               <?php foreach ($jobs as $job) {
                 $selected = $row->job_id == $job->id ? 'selected' : ''; ?>
-                <?= "<option value='$job->id' $selected>"?><?=utf8_encode($job->name)?></option>
+                <?= "<option value='$job->id' $selected>"?><?=$job->name?></option>
             <?php  } ?>
             </select>
           </div>

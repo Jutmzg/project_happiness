@@ -32,7 +32,7 @@ $mission = $statement->fetchAll(PDO::FETCH_OBJ);
     </div>
   </div>
 
-  <script type="text/javascript" charset="utf-8">
+  <script type="text/javascript">
     var columnDefs = [{
         headerName: "Nom",
         field: "mission",
@@ -88,10 +88,10 @@ $mission = $statement->fetchAll(PDO::FETCH_OBJ);
       <?php foreach ($mission as $row) { ?>
 
         {
-          mission: "<?= utf8_encode($row->mission) ?>",
+          mission: "<?= $row->mission ?>",
           customer: "<?= utf8_encode($row->customer) ?>",
-          consultant: "<?= utf8_encode($row->consultant) ?>",
-          job: "<?= utf8_encode($row->job) ?>",
+          consultant: "<?= $row->consultant ?>",
+          job: "<?= $row->job?>",
           start: "<?= date('d/m/Y', strtotime($row->start)) ?>",
           stop: "<?= date('d/m/Y', strtotime($row->stop)) ?>",
           action: "<?= $row->ID ?>",

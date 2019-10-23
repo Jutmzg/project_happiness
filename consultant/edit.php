@@ -42,14 +42,14 @@ if (
     <div class="container">
         <div class="box">
             <form method="post">
-                <h2>Modifier les informations de <?= utf8_encode($row->firstname) . ' ' . utf8_encode($row->lastname) ?></h2>
+                <h2>Modifier les informations de <?= $row->firstname . ' ' . $row->lastname ?></h2>
                 <a onclick="goBack()"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
                 <div class="input-box">
-                    <input value="<?= utf8_encode($row->lastname); ?>" type="text" name="lastname" id="lastname" maxlength="50" minlength="2" required>
+                    <input value="<?= $row->lastname; ?>" type="text" name="lastname" id="lastname" maxlength="50" minlength="2" required>
                 </div>
                 <div class="input-box">
-                    <input value="<?= utf8_encode($row->firstname); ?>" type="text" name="firstname" id="firstname" maxlength="50" minlength="2" required>
+                    <input value="<?= $row->firstname; ?>" type="text" name="firstname" id="firstname" maxlength="50" minlength="2" required>
                 </div>
                 <div class="input-box">
                     <input value="<?= $row->mail; ?>" type="email" name="mail" id="mail" placeholder="Email" maxlength="50" minlength="5" required>
