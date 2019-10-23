@@ -37,7 +37,7 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
   </div>
 
 
-  <script type="text/javascript" charset="utf-8">
+  <script type="text/javascript">
     var columnDefs = [
       {
         headerName: "Nom",
@@ -80,7 +80,7 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
 
     var rowData = [
       <?php foreach ($enquetes as $enquete) { ?> {
-          nom: "<?= utf8_encode($enquete->fullname) ?>",
+          nom: "<?= $enquete->fullname?>",
           mail: "<?= $enquete->mail ?>",
           mission: "<?= $enquete->mission ?>",
           manager: "<?= utf8_encode($enquete->manager) ?>",

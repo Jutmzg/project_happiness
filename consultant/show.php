@@ -1,5 +1,6 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
   <html lang="fr">
+
   <?php require '../layout/header.php'; 
   
 $sql = "SELECT c.id, CONCAT(c.lastname,' ', c.firstname) as fullname, 
@@ -32,7 +33,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       </div>
     </div>
     
-    <script type="text/javascript" charset="utf-8">
+    <script type="text/javascript">
       let columnDefs = [{
           headerName: "Nom",
           field: "nom",
@@ -67,10 +68,10 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       // specify the data
       let rowData = [
         <?php foreach ($consultants as $consultant) { ?> {
-            nom: "<?= utf8_encode($consultant->fullname) ?>",
+            nom: "<?= $consultant->fullname ?>",
             mail: "<?= $consultant->mail ?>",
             manager: "<?= utf8_encode($consultant->manager) ?>",
-            action: "<?= utf8_encode($consultant->id) ?>",
+            action: "<?= $consultant->id ?>",
 
           },
         <?php } ?>

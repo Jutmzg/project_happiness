@@ -25,7 +25,7 @@ $customers = $statement->fetchAll(PDO::FETCH_OBJ);
     </div>
   </div>
 </div>
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
 
   var columnDefs = [{
       headerName: "Nom",
@@ -53,7 +53,7 @@ $customers = $statement->fetchAll(PDO::FETCH_OBJ);
   var rowData = [
     <?php foreach ($customers as $customer) { ?>
       {
-        nom: "<?= utf8_encode($customer->name) ?>",
+        nom: "<?= $customer->name ?>",
         adresse: "<?= $customer->address ?>",
         action: "<?= $customer->id ?>",
       },

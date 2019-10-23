@@ -43,7 +43,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
     </div>
   </div>
   <div id="missionId"></div>
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   // specify the columns
   let columnDefs = [{
       headerName: "",
@@ -108,7 +108,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
   // specify the data
   let rowData = [
     <?php foreach ($consultants as $consultant) { ?> {
-        nom: "<?= utf8_encode($consultant->fullname) ?>",
+        nom: "<?= $consultant->fullname ?>",
         mail: "<?= $consultant->mail ?>",
         mission: "<?= $consultant->mission_id ?>",
         missionName: "<?= $consultant->mission ?>",
