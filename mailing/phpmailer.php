@@ -52,11 +52,11 @@ try {
                     'allow_self_signed' => true
                 )
             );
-
+            $message = MESSAGE;
             $mail->Body    = "
+            <div class='container'>
     <h1>Bonjour $toUserName,</h1>
-    <p>Dans le cadre de notre campagne d’enquête de satisfaction, merci de nous donner votre niveau de satisfaction de votre mission actuelle.
-    En vous remerciant par avance</p>
+    <p>$message</p>
 
      <a href='http://$_SERVER[HTTP_HOST]/Akkappiness/mailing/1.php?id=$id'><img src='https://zupimages.net/up/19/42/zk2l.png' alt='bien' width='80' height='80'/></a>
      <a href='http://$_SERVER[HTTP_HOST]/Akkappiness/mailing/2.php?id=$id'><img src='https://zupimages.net/up/19/42/ixon.png' alt='moyen' width='80' height='80'/></a>
