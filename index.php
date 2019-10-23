@@ -60,29 +60,29 @@
   </nav>
 </header>
 <?php
-$sql = "SELECT * FROM `enquete` WHERE resultat != 0 AND state =0";
+$sql = "SELECT * FROM `enquete` WHERE month(created_at)=month(now()) AND resultat != 0 AND state=0";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $responseTrue = $statement->fetchAll(PDO::FETCH_OBJ);
 
-$sql = "SELECT * FROM `enquete` WHERE resultat = 0 AND state = 0";
+$sql = "SELECT * FROM `enquete` WHERE month(created_at)=month(now()) AND resultat = 0 AND state = 0";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $responseFalse = $statement->fetchAll(PDO::FETCH_OBJ);
 
 //////////////////////////////////////////////////////////
 
-$sql = "SELECT * FROM `enquete` WHERE resultat = 1";
+$sql = "SELECT * FROM `enquete` WHERE resultat = 1 AND month(created_at)=month(now())";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $goodRate = $statement->fetchAll(PDO::FETCH_OBJ);
 
-$sql = "SELECT * FROM `enquete` WHERE resultat = 2";
+$sql = "SELECT * FROM `enquete` WHERE resultat = 2 AND month(created_at)=month(now())";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $mediumRate = $statement->fetchAll(PDO::FETCH_OBJ);
 
-$sql = "SELECT * FROM `enquete` WHERE resultat = 3";
+$sql = "SELECT * FROM `enquete` WHERE resultat = 3 AND month(created_at)=month(now())";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
@@ -95,7 +95,7 @@ $sql = "SELECT COUNT(c.name) customer, c.name, e.state
         ON m.id = e.mission_id
         JOIN customer c
         ON c.id = m.customer_id
-        WHERE e.state = 0 
+        WHERE e.state = 0  AND month(created_at)=month(now())
         GROUP BY c.name
         ORDER BY customer DESC
         LIMIT 5";
@@ -179,12 +179,12 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
 <body>
   <h2 class="text-center p-4 welcome">BIENVENUE SUR AKKAPPINESS</h2>
   <div class="container">
-    <div class="row">
+
     <div class="col-md-5 col-lg-6 col-sm-9 row-chart">
       <canvas id="myChart1" width="400" height="400"></canvas>
       <canvas id="myChart2" width="400" height="400"></canvas>
     </div>
-    </div>
+  
     <div>
       <canvas id="myChart3"></canvas>
     </div>
@@ -192,28 +192,31 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
 
   <script>
     var ctx = document.getElementById('myChart1').getContext('2d');
-    var myChart1 = new Chart(ctx, {
-      type: 'bar',
+    var myChart2 = new Chart(ctx, {
+      type: 'pie',
       data: {
-        labels: ["Taux de réponse , Total des enquêtes <?= count($responseTrue) + count($responseFalse); ?>"],
+        labels: ["Répondu", "En attente"],
         datasets: [{
-          label: "Répondu",
-          data: [<?= count($responseTrue); ?>],
-          backgroundColor: "#4F772D"
-        }, {
-          label: "En attente",
-          data: [<?= count($responseFalse); ?>],
-          backgroundColor: "#D36135"
+          label: "Nombre de réponses par mois",
+          backgroundColor: ["#4F772D", "#D36135"],
+          borderWidth: 0,
+
+          data: [<?= count($responseTrue); ?>, <?= count($responseFalse); ?>, ]
         }]
       },
       options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
+        responsive: true,
+        title: {
+          fontColor: '#ffff',
+          display: true,
+          text: 'Total des enquêtes <?= count($responseTrue) + count($responseFalse); ?>'
+        },
+        legend: {
+          display: true,
+          labels: {
+                fontColor: '#b3cccc'
             }
-          }]
-        }
+        },
       }
     });
 
@@ -231,10 +234,18 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
         }]
       },
       options: {
+        responsive: true,
         title: {
+          fontColor: '#ffff',
           display: true,
           text: 'Taux de satisfaction , Total de réponse <?= count($responseTrue); ?>'
-        }
+        },
+        legend: {
+          display: true,
+          labels: {
+                fontColor: '#b3cccc'
+            }
+        },
       }
     });
 
@@ -245,20 +256,44 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
         labels: [<?="'".implode("','",$top5)."'";?>],
         datasets: [{
           label: "Meilleur taux de satisfaction",
-          backgroundColor: ["#4F772D", "rgba(255, 180, 67,0.7)", "#D36135", "rgba(0,0,255,0.4)", "rgba(112,0,122,0.4)"],
+          backgroundColor: ["#4F772D", "#548687", "#747572", "rgba(255, 180, 67,0.7)", "#D36135"],
           borderWidth: 0,
 
           data: [<?= "'".implode("','",$topNote)."'";?>]
         }]
       },
   options: {
+    responsive: true,
+    title: {
+          fontColor: '#ffff',
+          display: true,
+          text: 'Top 5 du taux de satisfaction par client'
+        },
+  legend: {
+          display: false,
+        },
     scales: {
       xAxes: [{
         ticks: {
+          fontColor: '#b3cccc',
           beginAtZero: true
-        }
-
-      }]
+        },
+        scaleLabel: {
+          fontColor: '#ffff',
+        },
+        gridLines: {
+          color: '#b3cccc',
+        },
+      }],
+      yAxes: [{
+        ticks: {
+          fontColor: '#b3cccc',
+        },
+        gridLines: {
+          display: false,
+          color: '#b3cccc',
+        },
+      }],
     }
   }
 });

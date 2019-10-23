@@ -89,11 +89,14 @@ h2{
 
 /*******CHARTS********/
 
-#myChart1, #myChart2, #myChart3 {
+#myChart1, #myChart2 {
   background-color: #0000001a;
-  margin:20px;
-  height: 100%;
-  width:100%;
+  margin: 5%;
+  margin-right: -6%;
+}
+#myChart3{
+  background-color: #0000001a;
+  justify-content: center;
 }
 .row-chart{
   display: flex;
@@ -101,7 +104,6 @@ h2{
 .welcome{
   color:white;
 }
-
 /*************AG GRID***********/
 
 #filter-text-box{
