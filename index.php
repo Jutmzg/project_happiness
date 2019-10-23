@@ -108,7 +108,7 @@ $sql = "SELECT COUNT(e.resultat) as nbrDeBien, c.name
         FROM enquete e
         JOIN mission m ON m.id = e.mission_id
         JOIN customer c ON m.customer_id = c.id
-        WHERE resultat = 1
+        WHERE resultat = 1 AND month(created_at)=month(now())
         GROUP BY c.name
         ORDER BY nbrDeBien DESC
         LIMIT 5";
