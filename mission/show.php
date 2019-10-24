@@ -21,8 +21,11 @@ $mission = $statement->fetchAll(PDO::FETCH_OBJ);
       <div class="card-header">
         <h2 class="text-center text-uppercase">Missions</h2>
         <div class="add d-flex">
-          <a href="/Akkappiness/mission/create.php" class='btn btn-primary mr-1'><i class="fas fa-plus"></i></a>
-          <div id="editAndDelete"></div>
+        <div class="bouton">
+            <a href="/Akkappiness/mission/create.php" class='btn btn-primary mr-1'><i class="fas fa-plus"></i></a>
+            <div id="edit"></div>
+            <div id="delete" onclick="return confirm('Etes-vous sûr de vouloir supprimer cette mission ?')"></div>
+        </div>
         </div>
         <div class="card-body">
           <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
@@ -131,8 +134,10 @@ $mission = $statement->fetchAll(PDO::FETCH_OBJ);
       var action = selectedData.map(function(node) {
         return node.action
       })
-      document.getElementById("editAndDelete").innerHTML =
-        "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-pencil-alt'></i></a> <a 'onclick=return confirm('Etes vous sur de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
+      document.getElementById("edit").innerHTML =
+        "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-pencil-alt'></i></a>"; 
+      document.getElementById("delete").innerHTML =
+        "<a href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
     }
 
     function edit() {
