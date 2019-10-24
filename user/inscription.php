@@ -53,10 +53,12 @@ if(!empty($_POST)) {
     if (empty($errors)) {
 
         $sql = "INSERT INTO user(mail,password) VALUES(:mail, :password)";
+         
         $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
         $statement = $connection->prepare($sql);
         $statement->execute([':mail' => $_POST['mail'], ':password' => $password]);
         echo 'Inscription effectuée';
+        header('Location: /Akkappiness/user/login');
     } else {
         echo "<div class='alert alert-danger'>";
         foreach ($errors as $error) { ?>

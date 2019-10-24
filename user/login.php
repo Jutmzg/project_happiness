@@ -16,7 +16,7 @@ if (!empty($_POST) && (!empty($_POST['mail'])) && (!empty($_POST['password']))) 
   $statement = $connection->prepare($sql);
   $statement->execute([':mail' => $_POST['mail']]);
   $user = $statement->fetch(PDO::FETCH_OBJ);
-  if ($_POST['password'] == $user->password) {
+  if (password_verify($_POST['password'], $user->password)) {
     
     $_SESSION['login'] = $user->mail;
     header('Location: /Akkappiness');

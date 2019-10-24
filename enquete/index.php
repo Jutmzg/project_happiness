@@ -18,7 +18,7 @@ OR
 EXISTS (
     SELECT *
     FROM enquete e
-    WHERE e.mission_id = m.id AND DATEDIFF(NOW(), e.created_at) > 30 
+    WHERE e.mission_id = m.id AND DATEDIFF(NOW(), (SELECT MAX(created_at) FROM enquete GROUP BY mission_id LIMIT 1)) > 30 
     )
 ORDER BY fullname";
 
