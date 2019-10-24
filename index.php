@@ -44,7 +44,7 @@
           <a class="nav-link mr-2" href="/Akkappiness/customer/show.php">Clients</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link mr-2" href="/Akkappiness/job/show.php">Métiers</a>
+          <a class="nav-link mr-2" href="/Akkappiness/job/show.php">Postes</a>
         </li>
         <li class="nav-item">
           <a class="nav-link mr-2" href="/Akkappiness/enquete/index.php">Enquêtes</a>

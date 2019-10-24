@@ -47,6 +47,15 @@ h2{
     color: #294456;
 }
 
+.bouton{
+  display: flex;
+  flex-direction: row;
+}
+
+#edit, #delete, #addMission{
+  margin-right: 2%;
+}
+
 .navbar-light .navbar-nav .nav-link{
     color: #294456;
     font-size: 1rem;
@@ -64,7 +73,6 @@ h2{
   height:100%;
   width:100%;
 }
-
 #missionId {
   display:none;
 }
@@ -78,14 +86,11 @@ h2{
   right: 0;
   margin: 13px;
   color:red;
-
 }
 .add{
   position: relative;
   bottom: 46px;
 }
-
-
 
 /*******CHARTS********/
 
@@ -104,6 +109,7 @@ h2{
 .welcome{
   color:white;
 }
+
 /*************AG GRID***********/
 
 #filter-text-box{
@@ -174,7 +180,6 @@ h2{
     margin-top: 8%;
     border:solid 1px white;
   }
-
 
   /* datepicker css */
 
@@ -575,7 +580,6 @@ option{
   margin: auto;
   margin-top:2px;
   text-align: center;
-
   }
 
 
@@ -585,10 +589,8 @@ option{
         padding:0;
         width: 100%;
         height:650px;
-      
     }
     .box{
-      
         background: #0000001a;
         width: 700px;
         height: auto;
@@ -615,7 +617,7 @@ option{
       color: #294456;
   }
 
-  }
+}
 
   @media (max-width: 720px) {
     #filter-text-box {

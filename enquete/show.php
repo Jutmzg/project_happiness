@@ -36,7 +36,6 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
     </div>
   </div>
 
-
   <script type="text/javascript">
     var columnDefs = [
       {
