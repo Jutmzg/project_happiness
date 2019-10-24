@@ -2,25 +2,21 @@
 <html lang="fr">
 <?php require '../layout/header.php';
 
-$sql = "SELECT CONCAT(c.lastname,' ', c.firstname) as fullname, c.mail mail, m.id mission_id, m.name mission, CONCAT(mana.lastname,' ', mana.firstname) manager
-FROM mission m
-JOIN consultant c
-ON m.consultant_id = c.id
-JOIN manager mana
-ON c.manager_id = mana.id
-WHERE c.state = 0 AND m.state = 0
-AND NOT EXISTS (
-    SELECT *
-    FROM enquete e
-    WHERE e.mission_id = m.id 
-)
-OR
-EXISTS (
-    SELECT *
-    FROM enquete e
-    WHERE e.mission_id = m.id AND DATEDIFF(NOW(), (SELECT MAX(created_at) FROM enquete GROUP BY mission_id LIMIT 1)) > 30 
-    )
-ORDER BY fullname";
+$sql = "SELECT CONCAT(c.lastname,' ', c.firstname) as fullname, c.mail mail, m.id mission_id, m.name mission, CONCAT(mana.lastname,' ' , mana.firstname) manager
+        FROM mission m
+        JOIN consultant c
+        ON m.consultant_id = c.id
+        JOIN manager mana
+        ON c.manager_id =  mana.id
+        WHERE c.state = 0 AND m.state = 0
+        AND NOT
+        EXISTS (
+                SELECT *
+                FROM enquete e
+                WHERE e.mission_id = m.id
+                AND CONCAT(YEAR(e.created_at),MONTH(e.created_at)) = CONCAT(YEAR(CURRENT_DATE()),MONTH(CURRENT_DATE()))
+                )
+        ORDER BY fullname";
 
 $statement = $connection->prepare($sql);
 $statement->execute();
