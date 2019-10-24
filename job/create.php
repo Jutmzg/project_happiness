@@ -38,7 +38,7 @@ if (
         <div class="form-group">
           <div class="input-box">
           <button type="submit" class="btn btn-info">Valider</button>
-          <button class="btn btn-info retour"><a href ="/Akkappiness/job/show.php">Annuler</a></button>
+          <button class="btn btn-info retour"><a onclick="goBack()">Annuler</a></button>
 
         </div>
         </div>

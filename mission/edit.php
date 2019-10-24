@@ -64,7 +64,7 @@ if (
         
         <form method="post">
         <h2>Modifier la mission : <?= $row->name ?></h2>
-        <a href="/Akkappiness/mission/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
+        <a onclick="goBack()"><i class="fas fa-times fa-2x" id="cross"></i></a>
 
                 <div class="input-box">
             <input value="<?= $row->name; ?>" type="text" name="name" id="name" maxlength="50" minlength="2" readonly required>
@@ -96,7 +96,7 @@ if (
 
                 <div class="input-box">
             <select name="job_id"required>
-              <option name="choice" id="choice" value="">Sélectionner un métier</option>
+              <option name="choice" id="choice" value="">Sélectionner un poste</option>
 
               <?php foreach ($jobs as $job) {
                 $selected = $row->job_id == $job->id ? 'selected' : ''; ?>
@@ -116,7 +116,7 @@ if (
           <div class="input-box">
 
             <button type="submit" class="btn btn-info">Valider</button>
-            <button class="btn btn-info retour"><a href="/Akkappiness/mission/show.php">Annuler</a></button>
+            <button class="btn btn-info retour"><a onclick="goBack()">Annuler</a></button>
           </div>
           </div>
         </form>
