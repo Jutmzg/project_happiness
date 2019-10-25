@@ -481,6 +481,17 @@ h2{
 
 /***********INPUTS***********/
 
+#slide, #panel {
+  padding: 10px;
+  text-align: center;
+  color:white;
+  font-weight:bold;
+  position: relative;
+}
+
+#panel {
+  display: none;
+}
 .box {
   background: #0000001a;
   width: 600px;
@@ -505,6 +516,7 @@ h2{
   transform: translate(-50%, -50%);
   color:#294456;
 }
+
 .box h2 {
   color:white;
   font-size: 1.5rem;
@@ -515,6 +527,25 @@ h2{
   font-size: 1.5rem;
   text-align: center;
   
+}
+
+.boxConsultantMission{
+  background: #0000001a;
+  width: 600px;
+  height: auto;
+  border-radius: 5px;
+  padding: 40px;
+  position: absolute;
+  left: 50%;
+  top:15%;
+  transform: translate(-50%, 0%);
+  color:#294456;
+}
+
+.boxConsultantMission h2 {
+  color:white;
+  font-size: 1.5rem;
+  text-align: center;
 }
 
 .input-box {
