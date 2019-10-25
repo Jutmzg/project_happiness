@@ -2,6 +2,43 @@
 <html lang="fr">
 <?php require '../layout/header.php'; 
 
+// INSERTION
+if (
+  isset($_POST['name']) 
+) {
+  $name = $_POST['name'];
+
+  $sql = 'INSERT INTO job(name) VALUES(:name)';
+  $statement = $connection->prepare($sql);
+  if ($statement->execute([':name' => $name])) {
+    $message = '<i class="far fa-check-circle"></i>
+    Métier enregistré';
+  }
+}
+?>
+<div id="myModal" class="modal fade" role="dialog">
+<div class="modal-dialog">
+<div class="box">
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+<h4 class="modal-title text-center">CREATION D'UN POSTE</h4>
+    <div class="modal-content">
+
+      <form method="post">
+      <div class="input-box">
+
+          <input type="text" name="name" id="name" placeholder="Nom" maxlength="50" minlength="2" required> 
+      </div>
+      <div class="ValAnn">
+      <button type="submit" class="btn btn-info">Valider</button>
+      <button class="btn btn-info retour"><a href ="/Akkappiness/job/show.php">Annuler</a></button> 
+      </div>     
+      </form>
+    </div>
+    </div>
+  </div>
+</div>
+
+<?php
 $sql = 'SELECT id, name FROM job ORDER BY name';
 $statement = $connection->prepare($sql);
 $statement->execute();
@@ -16,7 +53,7 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
 
         <div class="add d-flex">
         <div class="bouton">
-          <a href="/Akkappiness/job/create.php" class='btn btn-primary mr-1'><i class="fas fa-plus"></i></a>
+          <button type="button" class='btn btn-primary mr-1' data-toggle="modal" data-target="#myModal"><i class="fas fa-plus"></i></button>
           <div id="edit"></div>
           <div id="delete" onclick="return confirm('Etes-vous sûr de vouloir supprimer ce poste ?')"></div>
         </div>

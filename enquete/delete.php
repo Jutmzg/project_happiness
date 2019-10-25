@@ -1,12 +1,12 @@
 <?php require '../connection.php'; 
-$ids = explode(',', $_GET['id']);
+  $ids = explode(',', $_GET['id']);
 
-foreach($ids as $id){
-$sql = 'DELETE FROM enquete WHERE id=:id';
-$statement = $connection->prepare($sql);
-if ($statement->execute([':id' => $id])) {
-  header("Location: show.php");
-}
-}
+  foreach($ids as $id){
+  $sql = 'DELETE FROM enquete WHERE id=:id';
+  $statement = $connection->prepare($sql);
+  if ($statement->execute([':id' => $id])) {
+    header("Location: show.php");
+  }
+  }
 
 
