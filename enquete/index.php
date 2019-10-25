@@ -40,7 +40,6 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
   </div>
   <div id="missionId"></div>
 <script type="text/javascript">
-  // specify the columns
   let columnDefs = [{
       headerName: "",
       field: "nom",
@@ -101,7 +100,6 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 
     },
   ];
-  // specify the data
   let rowData = [
     <?php foreach ($consultants as $consultant) { ?> {
         nom: "<?= $consultant->fullname ?>",
@@ -113,7 +111,6 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       },
     <?php } ?>
   ];
-  // let the grid know which columns and what data to use
   let gridOptions = {
 
     defaultColDef: {
@@ -134,11 +131,8 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 
   };
 
-  // lookup the container we want the Grid to use
   let eGridDiv = document.querySelector('#myGrid');
-  
-  // create the grid passing in the div to use together with the columns & data we want to use
-  new agGrid.Grid(eGridDiv, gridOptions);
+    new agGrid.Grid(eGridDiv, gridOptions);
 
   function getSelectedMissionId() {
     let success =  iziToast.success({position: "center", message: 'Enquête(s) effectuée(s)'});
@@ -172,12 +166,11 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
   }
 
   iziToast.settings({
-      timeout: 2000, // default timeout
+      timeout: 2000, 
       resetOnHover: true,
-      // icon: '', // icon class
       transitionIn: 'flipInX',
       transitionOut: 'flipOutX',
-      position: 'topRight', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter, center
+      position: 'topRight',
     });
    
 </script>
