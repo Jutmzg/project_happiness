@@ -6,5 +6,7 @@ $password = $password;
 $options = [];
 try {
 $connection = new PDO($dsn, $username, $password, $options);
+return $connection;
+
 } catch(PDOException $e) {
 }

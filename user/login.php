@@ -30,17 +30,15 @@ if (!empty($_POST) && (!empty($_POST['mail'])) && (!empty($_POST['password']))) 
   }
 }
 ?>
-
 <body>
   <div class="container login col-lg-4 col-sm-6 text-center">
     <form method="post">
-      <div class="form-group">
-        <label for="exampleInputEmail1">Email</label>
-        <input type="email" name="mail" class="form-control" value="" placeholder="Enter email" required>
+      <div class="input-box">
+        <input type="email" name="mail" value="" placeholder="Email" required>
       </div>
-      <div class="form-group mt-4">
+      <div class="input-box mt-4">
         <label for="exampleInputPassword1">Mot de passe</label>
-        <input type="password" name="password" class="form-control" value="" placeholder="Password" required>
+        <input type="password" name="password" value="" placeholder="Mot de passe" required>
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-info connexion" name="connexion" value="Connexion">Connexion</button>
