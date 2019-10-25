@@ -487,6 +487,7 @@ h2{
   color:white;
   font-weight:bold;
   position: relative;
+  cursor:pointer;
 }
 
 #panel {
