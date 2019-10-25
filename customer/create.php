@@ -31,7 +31,7 @@ if (
     <?php endif; ?>
     <div class="box">
       <form method="post">
-        <a href="/Akkappiness/customer/show.php"><i class="fas fa-times fa-2x" id="cross"></i></a>
+        <a onclick="goBack()"><i class="fas fa-times fa-2x" id="cross"></i></a>
 
         <div class="input-box">
           <input type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" required>
@@ -43,7 +43,7 @@ if (
         <div class="form-group">
           <div class="input-box">
             <button type="submit" class="btn btn-info">Valider</button>
-            <button class="btn btn-info retour"><a href="/Akkappiness/customer/show.php">Annuler</a></button>
+            <button class="btn btn-info retour"><a onclick="goBack()">Annuler</a></button>
 
           </div>
         </div>

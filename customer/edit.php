@@ -37,7 +37,7 @@ if (
 
   <form method="post">
   <h2>Modifier les informations de : <?= $customers->name ?></h2>
-    <a href="/Akkappiness/customer/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
+    <a onclick="goBack()"><i class="fas fa-times fa-2x" id="cross"></i></a>
 
     <div class="input-box">
       <input value="<?= $customers->name; ?>" type="text" name="name" id="name" placeholder="Nom" maxlength="50" minlength="2" required>
@@ -49,7 +49,7 @@ if (
       <div class="input-box">
 
         <button type="submit" class="btn btn-info">Valider</button>
-        <button class="btn btn-info retour"><a href="/Akkappiness/customer/show.php">Annuler</a></button>
+        <button class="btn btn-info retour"><a onclick="goBack()">Annuler</a></button>
       </div>
     </div>
   </form>

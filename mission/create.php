@@ -94,7 +94,7 @@ if (
 
       <div class="input-box">
         <select name="job" required>
-          <option name="choice" id="choice" value="">Sélectionner un métier</option>
+          <option name="choice" id="choice" value="">Sélectionner un poste</option>
           <?php foreach ($jobs as $job) {
             ?>
             <option value="<?= $job->id ?>" name="job" id="job"><?= $job->name ?></option>
@@ -113,7 +113,7 @@ if (
       <div class="form-group">
         <div class="input-box">
           <button type="submit" class="btn btn-info">Valider</button>
-          <button class="btn btn-info retour"><a href="/Akkappiness/mission/show.php">Annuler</a></button>
+          <button class="btn btn-info retour"><a onclick="goBack()">Annuler</a></button>
         </div>
       </div>
     </form>

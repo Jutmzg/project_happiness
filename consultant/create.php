@@ -54,7 +54,7 @@ if (
 
         <div class="input-box">
           <select name="manager_id" class="" required>
-            <option name="choice" id="choice" value="">Selectionner un manager</option>
+            <option name="choice" id="choice" value="">Sélectionner un manager</option>
             <?php foreach ($managers as $manager) {
               ?>
               <option value="<?= $manager->id ?>" name="manager" id="manager"><?= utf8_encode($manager->fullname) ?></option>
@@ -65,7 +65,7 @@ if (
         <div class="form-group">
           <div class="input-box">
             <button type="submit" class="btn btn-info">Valider</button>
-            <button class="btn btn-info retour"><a href="/Akkappiness/consultant/show.php">Annuler</a></button>
+            <button class="btn btn-info retour"><a onclick="goBack()">Annuler</a></button>
           </div>
         </div>
       </form>

@@ -116,7 +116,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
         document.getElementById("edit").innerHTML =
           "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-pencil-alt'></i></a>";
         document.getElementById("delete").innerHTML =
-          "<a 'onclick=return confirm('Etes vous sr de vouloir effectuer la suppression?)' href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
+          "<a href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
         document.getElementById("addMission").innerHTML =
           "<a href=/Akkappiness/mission/create.php?id=" + action + " class='btn btn-info'><i class='fas fa-folder-plus'></i></a>";
       }
