@@ -22,13 +22,6 @@ $statement = $connection->query($sql);
 $statement->execute();
 $customers = $statement->fetchAll(PDO::FETCH_OBJ);
 
-// LISTE DES CONSULTANTS A SUPPRIMER 
-
-$sql3 = "SELECT id, CONCAT(lastname,' ', firstname) as fullname FROM consultant WHERE state = 0 ORDER BY fullname";
-$statement = $connection->query($sql3);
-$statement->execute();
-$consultants = $statement->fetchAll(PDO::FETCH_OBJ);
-
 if (
   isset($_POST['lastname']) &&
   isset($_POST['firstname']) &&
@@ -71,6 +64,7 @@ $name = $_POST['name'];
   $start = date('Y-m-d', strtotime($_POST['start']));
   $stop = date('Y-m-d', strtotime($_POST['stop']));
   $state = 0;
+
 $sql = 'INSERT INTO mission(name, customer_id, job_id, consultant_id, start, stop,state) VALUES(:name, :customer_id, :job_id, :consultant_id, :start, :stop, :state)';
   $statement = $connection->prepare($sql);
   if($statement->execute([':name' => $name, ':customer_id' => $customer_id, ':job_id' => $job_id, ':consultant_id' => $consultant_id, ':start' => $start, ':stop' => $stop, ':state' => $state])) {
@@ -83,12 +77,13 @@ $sql = 'INSERT INTO mission(name, customer_id, job_id, consultant_id, start, sto
 ?>
 <body>
   <div class="container">
-    <?php if (isset($message)) : ?>
-        <?= $message; ?>
-        <?php endif; ?>
-        <?php if (isset($messageMission)) : ?>
-        <?= $messageMission; ?>
-        <?php endif; ?>
+    <?php if (isset($message)) : 
+        echo $message; 
+         endif; 
+         if (isset($messageMission)) : 
+        echo $messageMission; 
+         endif; 
+    ?>
    
     <div class="boxConsultantMission">
       <form method="post">
@@ -122,18 +117,6 @@ $sql = 'INSERT INTO mission(name, customer_id, job_id, consultant_id, start, sto
         <div class="input-box">
         <input value="<?php $cons; ?>" type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" readonly>
       </div>
-
-      <!-- <div class="input-box">
-
-        <select id="consultant" name="consultant_id">
-          <option name="choice" id="choice" value="">Sélectionner un consultant</option>
-          <?php foreach ($consultants as $consultant) {
-            $cons = substr($consultant->fullname, 0, 4);
-            $selected = $row->id == $consultant->id ? 'selected' : ''; ?>
-            <?= "<option value='$consultant->id' data-value='$cons' name='consultant_id' id='consultant' $selected>" ?><?= $consultant->fullname ?></option>
-          <?php } ?>
-        </select>
-      </div> -->
 
       <div class="input-box">
         <select id="customer" name="customer_id">
@@ -198,8 +181,5 @@ $sql = 'INSERT INTO mission(name, customer_id, job_id, consultant_id, start, sto
     });
   </script>
 </body>
-
-
 <?php require '../layout/footer.php'; ?>
-
 </html>
