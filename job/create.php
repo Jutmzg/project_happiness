@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<?php require '../layout/header.php'; 
+
 
 $message = '';
 
@@ -17,7 +15,7 @@ if (
     Métier enregistré';
   }
 }
-?>
+/* ?>
 
 <body>
 <div class="container">
@@ -48,4 +46,4 @@ if (
 </div>
 </body>
 <?php require '../layout/footer.php'; ?>
-</html>
+</html> */

@@ -6,6 +6,22 @@ $sql = 'SELECT id, name FROM job ORDER BY name';
 $statement = $connection->prepare($sql);
 $statement->execute();
 $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
+
+$message = '';
+
+if (
+  isset($_POST['name']) 
+) {
+
+  $name = $_POST['name'];
+
+  $sql = 'INSERT INTO job(name) VALUES(:name)';
+  $statement = $connection->prepare($sql);
+  if ($statement->execute([':name' => $name])) {
+    $message = '<i class="far fa-check-circle"></i>
+    Métier enregistré';
+  }
+}
 ?>
 
 <body>
@@ -16,7 +32,31 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
 
         <div class="add d-flex">
         <div class="bouton">
-          <a href="/Akkappiness/job/create.php" class='btn btn-primary mr-1'><i class="fas fa-plus"></i></a>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add" data-whatever="@mdo"><i class="fas fa-plus"></i></button>
+        <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+              <form method="post">
+                <a onclick="goBack()"><span aria-hidden="true">&times;</span></a>
+
+          <div class="input-box">
+          <input type="text" name="name" id="name" placeholder="Nom" maxlength="50" minlength="2" required>
+        </div>
+
+        <div class="form-group">
+          <div class="input-box">
+          <button type="submit" class="btn btn-info">Valider</button>
+          <button class="btn btn-info retour"><a onclick="goBack()">Annuler</a></button>
+
+        </div>
+        </div>
+      </form>
+                <p id="result"></p>
+              </div>
+            </div>
+          </div>
+        </div>
           <div id="edit"></div>
           <div id="delete" onclick="return confirm('Etes-vous sûr de vouloir supprimer ce poste ?')"></div>
         </div>
@@ -89,7 +129,7 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
         "<a href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
     }
 
-    function edit(){
+    function edit() {
         let selectedNodes = gridOptions.api.getSelectedNodes()
         let selectedData = selectedNodes.map(function(node) {
           return node.data
