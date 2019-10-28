@@ -15,7 +15,6 @@ if (
     Métier enregistré';
   }
 }
-
 // SUPPRESSION 
 if (
   isset($_GET['id'])
@@ -53,6 +52,7 @@ if (
           </div>
         </form>
       </div>
+
     </div>
   </div>
 </div>
@@ -63,6 +63,7 @@ $sql = 'SELECT id, name FROM job ORDER BY name';
 $statement = $connection->prepare($sql);
 $statement->execute();
 $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
+
 ?>
 
 <body>
@@ -77,6 +78,7 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
             <div id="edit"></div>
             <div id="delete" onclick="return confirm('Etes-vous sûr de vouloir supprimer ce poste ?')"></div>
           </div>
+
         </div>
         <div class="card-body">
           <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
@@ -147,6 +149,7 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
     }
 
     function edit() {
+
       let selectedNodes = gridOptions.api.getSelectedNodes()
       let selectedData = selectedNodes.map(function(node) {
         return node.data
@@ -157,6 +160,7 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
       var edit = 'edit.php?id=' + action;
       window.location = edit;
     }
+
   </script>
 </body>
 <?php require '../layout/footer.php'; ?>

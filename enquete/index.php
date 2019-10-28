@@ -157,7 +157,6 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
     })
     let mission = selectedData.map(function(node) {
       return node.mission
-
     }).join(',')
     document.getElementById("missionId").innerHTML = mission;
     
