@@ -38,8 +38,8 @@ if (
   $sql = 'INSERT INTO mission(name, customer_id, job_id, consultant_id, start, stop,state) VALUES(:name, :customer_id, :job_id, :consultant_id, :start, :stop, :state)';
   $statement = $connection->prepare($sql);
   if ($statement->execute([':name' => $name, ':customer_id' => $customer_id, ':job_id' => $job_id, ':consultant_id' => $consultant_id, ':start' => $start, ':stop' => $stop, ':state' => $state])) {
-    $message = '<i class="far fa-check-circle"></i>
-    Mission enregistrée';
+    $message = urlencode('<div class="alert alert-success"><i class="far fa-check-circle"></i> Mission ajoutée</div>');
+    header("Location:show.php?Message=".$message);
   }
 }
 
@@ -61,7 +61,6 @@ if (
   }
 }
 
-
 $sql = "SELECT m.ID, m.name mission,c.name customer, CONCAT(cons.lastname,' ', cons.firstname) as consultant, j.name job, m.start, m.stop, m.state 
 FROM mission m
 LEFT JOIN consultant cons ON m.consultant_id = cons.ID
@@ -72,10 +71,10 @@ ORDER BY consultant ASC";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $mission = $statement->fetchAll(PDO::FETCH_OBJ);
-
+if(isset($_GET['Message'])){
+  echo $_GET['Message'];
+}
 ?>
-
-
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="popUpMission">
@@ -136,11 +135,9 @@ $mission = $statement->fetchAll(PDO::FETCH_OBJ);
           </div>
         </form>
       </div>
-
     </div>
   </div>
 </div>
-
 
 <body>
   <div class="container">

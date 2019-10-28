@@ -11,8 +11,9 @@ if (
   $sql = 'INSERT INTO job(name) VALUES(:name)';
   $statement = $connection->prepare($sql);
   if ($statement->execute([':name' => $name])) {
-    $message = '<i class="far fa-check-circle"></i>
-    Métier enregistré';
+    $message = urlencode('<div class="alert alert-success"><i class="far fa-check-circle"></i> Métier ajouté</div>');
+    header("Location:show.php?Message=".$message);
+die;
   }
 }
 // SUPPRESSION 
@@ -32,27 +33,28 @@ if (
     }
   }
 }
-
+if(isset($_GET['Message'])){
+  echo $_GET['Message'];
+}
 ?>
+
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="popUpBox">
       <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times" id="cross"></i></button>
       <h4 class="modal-title text-center">CREATION D'UN POSTE</h4>
       <div class="modal-content">
-
-        <form method="post">
+      <form method="post">
           <div class="input-box">
 
             <input type="text" name="name" id="name" placeholder="Nom" maxlength="50" minlength="2" required>
           </div>
           <div class="ValAnn">
-            <button type="submit" class="btn btn-info">Valider</button>
+            <button type="submit" class="btn btn-info" id="butsave">Valider</button>
             <button class="btn btn-info retour" class="close" data-dismiss="modal">Annuler</a></button>
           </div>
         </form>
       </div>
-
     </div>
   </div>
 </div>
@@ -67,11 +69,12 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
 ?>
 
 <body>
+
   <div class="container">
     <div class="card mt-4">
       <div class="card-header">
         <h2 class="text-center text-uppercase">Postes</h2>
-
+        <div class="alert alert-success alert-dismissible" id="success" style="display:none;"></div>
         <div class="add d-flex">
           <div class="bouton">
             <button type="button" class='btn btn-primary mr-1' data-toggle="modal" data-target="#myModal"><i class="fas fa-plus"></i></button>
