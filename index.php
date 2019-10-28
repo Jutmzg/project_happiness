@@ -272,13 +272,13 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
     var myChart3 = new Chart('myChart3', {
   type: 'horizontalBar',
   data: {
-        labels: [<?="'".implode("','",$top5)."'";?>],
+        labels: [<?="'".implode("','",array_reverse($top5))."'";?>],
         datasets: [{
           label: "Meilleur taux de satisfaction",
           backgroundColor: ["#4F772D", "#548687", "#747572", "rgba(255, 180, 67,0.7)", "#D36135"],
           borderWidth: 0,
 
-          data: [<?= "'".implode("','",array_reverse($topNote))."'";?>]
+          data: [<?= "'".implode("','",$topNote)."'";?>]
         }]
       },
   options: {
