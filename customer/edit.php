@@ -48,8 +48,10 @@ if (
     <div class="form-group">
       <div class="input-box">
 
-        <button type="submit" class="btn btn-info">Valider</button>
-        <button class="btn btn-info retour"><a onclick="goBack()">Annuler</a></button>
+      <div class="ValAnn">
+            <button type="submit" class="btn btn-info">Valider</button>
+            <a class="btn btn-info" href="/Akkappiness/customer/show.php">Annuler</a>
+          </div>
       </div>
     </div>
   </form>

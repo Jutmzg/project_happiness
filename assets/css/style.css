@@ -501,6 +501,10 @@ h2{
   border-color:white;
   border-radius:0;
 }
+.ValAnn > a {
+  border-color:white;
+  border-radius:0;
+}
 .modal-title{
   color:white;
 }

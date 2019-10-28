@@ -69,7 +69,7 @@ if (
   $sql = 'INSERT INTO mission(name, customer_id, job_id, consultant_id, start, stop,state) VALUES(:name, :customer_id, :job_id, :consultant_id, :start, :stop, :state)';
   $statement = $connection->prepare($sql);
   if ($statement->execute([':name' => $name, ':customer_id' => $customer_id, ':job_id' => $job_id, ':consultant_id' => $consultant_id, ':start' => $start, ':stop' => $stop, ':state' => $state])) {
-   $message .= "<div class='alert alert-success'><i class='far fa-check-circle'></i> Mission enregistrée</div>";
+    $message .= "<div class='alert alert-success'><i class='far fa-check-circle'></i> Mission enregistrée</div>";
   }
 }
 
@@ -91,7 +91,7 @@ if (isset($_GET['Message'])) {
   echo $_GET['Message'];
 }
 
-if($message !== ''){
+if ($message !== '') {
   echo "<div class='alert alert-success'><i class='far fa-check-circle'></i>$message</div>";
 }
 
@@ -174,8 +174,10 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
           </div>
           <div class="form-group">
             <div class="input-box">
-              <button type="submit" class="btn btn-info">Valider</button>
-              <button class="btn btn-info retour"><a onclick="goBack()">Annuler</a></button>
+              <div class="ValAnn">
+                  <button type="submit" class="btn btn-info">Valider</button>
+                  <button class="btn btn-info" class="close" data-dismiss="modal">Annuler</button>
+              </div>
             </div>
           </div>
         </form>
@@ -301,7 +303,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
     $("#slide").click(function() {
       $("#panel").slideToggle("slow");
       $("i", this).toggleClass("fas fa-sort-down fa-x fas fa-sort-up fa-x");
-      console.log( $("i", this).toggleClass("fas fa-sort-down fa-x fas fa-sort-up fa-x"));
+      console.log($("i", this).toggleClass("fas fa-sort-down fa-x fas fa-sort-up fa-x"));
     });
 
     $(document).ready(function(fourletters) {

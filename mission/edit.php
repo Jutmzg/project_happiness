@@ -115,8 +115,10 @@ if (
           <div class="form-group">
           <div class="input-box">
 
+          <div class="ValAnn">
             <button type="submit" class="btn btn-info">Valider</button>
-            <button class="btn btn-info retour"><a onclick="goBack()">Annuler</a></button>
+            <a class="btn btn-info" href="/Akkappiness/mission/show.php">Annuler</a>
+          </div>
           </div>
           </div>
         </form>

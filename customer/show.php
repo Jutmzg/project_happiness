@@ -56,8 +56,10 @@ if (
 
         <div class="form-group">
           <div class="input-box">
-            <button type="submit" class="btn btn-info">Valider</button>
-            <button class="btn btn-info retour" class="close" data-dismiss="modal">Annuler</a></button>
+          <div class="ValAnn">
+                  <button type="submit" class="btn btn-info">Valider</button>
+                  <button class="btn btn-info" class="close" data-dismiss="modal">Annuler</button>
+              </div>
 
           </div>
         </div>

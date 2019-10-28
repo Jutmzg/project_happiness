@@ -163,7 +163,7 @@ if (count($arrayNbrDeBien) == 1) {
                     $arrayCustomer[3] => $Note4,
                     $arrayCustomer[4] => $Note5];
 }
-
+if(isset($customerNote)){
 ksort($customerNote);
 
 foreach ($customerNote as $key => $val) {
@@ -177,6 +177,8 @@ foreach($customerNote as $customer => $key){
   $top5Customers[] = $key;
   $top5Rate[] = $customer;
 }
+}
+
 arsort($customerNote);
 
 $topNote = [];
@@ -187,6 +189,7 @@ $top5 = [];
 foreach($customerNote as $enterprise => $value){
   $top5[] = $enterprise;
 }
+
 
 
 $sql = "SELECT * FROM `enquete` WHERE resultat = 3";

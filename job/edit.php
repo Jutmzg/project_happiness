@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
-<?php require '../layout/header.php'; 
+<?php require '../layout/header.php';
 
 $id = $_GET['id'];
-if($id == ""){
+if ($id == "") {
   header('Location: /Akkappiness/job/show.php');
 }
 $sql = 'SELECT * FROM job WHERE id=:id';
@@ -28,33 +28,34 @@ if (
 
 <body>
   <div class="container">
-        
-      </div>
-        <?php if (!empty($message)) : ?>
-          <div class="alert alert-success">
-            <?= $message; ?>
-          </div>
-        <?php endif; ?>
-        <div class="box">
 
-        <form method="post">
-        <h2>Modifier les informations de : <?= $jobs->name?></h2>
-        <a onclick="goBack()"><i class="fas fa-times fa-2x" id="cross"></i></a>
-
-        <div class="input-box">
-            <input value="<?= $jobs->name; ?>" type="text" name="name" id="name" maxlength="50" minlength="2" required>
-          </div>
-
-          <div class="form-group">
-          <div class="input-box">
-            <button type="submit" class="btn btn-info">Valider</button>
-            <button class="btn btn-info retour"><a href="/Akkappiness/job/show.php">Annuler</a></button>
-
-          </div>
-          </div>
-        </form>
-      </div>
+  </div>
+  <?php if (!empty($message)) : ?>
+    <div class="alert alert-success">
+      <?= $message; ?>
     </div>
+  <?php endif; ?>
+  <div class="box">
+
+    <form method="post">
+      <h2>Modifier les informations de : <?= $jobs->name ?></h2>
+      <a onclick="goBack()"><i class="fas fa-times fa-2x" id="cross"></i></a>
+
+      <div class="input-box">
+        <input value="<?= $jobs->name; ?>" type="text" name="name" id="name" maxlength="50" minlength="2" required>
+      </div>
+
+      <div class="form-group">
+        <div class="input-box">
+          <div class="ValAnn">
+            <button type="submit" class="btn btn-info">Valider</button>
+            <a class="btn btn-info" href="/Akkappiness/job/show.php">Annuler</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  </div>
   </div>
 </body>
 <?php require '../layout/footer.php'; ?>

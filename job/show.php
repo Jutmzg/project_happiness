@@ -50,9 +50,9 @@ if(isset($_GET['Message'])){
             <input type="text" name="name" id="name" placeholder="Nom" maxlength="50" minlength="2" required>
           </div>
           <div class="ValAnn">
-            <button type="submit" class="btn btn-info" id="butsave">Valider</button>
-            <button class="btn btn-info retour" class="close" data-dismiss="modal">Annuler</a></button>
-          </div>
+                  <button type="submit" class="btn btn-info">Valider</button>
+                  <button class="btn btn-info" class="close" data-dismiss="modal">Annuler</button>
+              </div>
         </form>
       </div>
     </div>
