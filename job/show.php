@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
-<?php require '../layout/header.php'; 
+<?php require '../layout/header.php';
 
 // INSERTION
 if (
-  isset($_POST['name']) 
+  isset($_POST['name'])
 ) {
   $name = $_POST['name'];
 
@@ -15,30 +15,50 @@ if (
     Métier enregistré';
   }
 }
+
+// SUPPRESSION 
+if (
+  isset($_GET['id'])
+) {
+  $ids = explode(',', $_GET['id']);
+
+  if ($id == "") {
+    header('Location: /Akkappiness/job/show.php');
+  }
+  foreach ($ids as $id) {
+    $sql = 'DELETE FROM job WHERE id=:id';
+    $statement = $connection->prepare($sql);
+    if ($statement->execute([':id' => $id])) {
+      header("Location: show.php");
+    }
+  }
+}
+
 ?>
 <div id="myModal" class="modal fade" role="dialog">
-<div class="modal-dialog">
-<div class="box">
-<button type="button" class="close" data-dismiss="modal">&times;</button>
-<h4 class="modal-title text-center">CREATION D'UN POSTE</h4>
-    <div class="modal-content">
+  <div class="modal-dialog">
+    <div class="popUpBox">
+      <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times" id="cross"></i></button>
+      <h4 class="modal-title text-center">CREATION D'UN POSTE</h4>
+      <div class="modal-content">
 
-      <form method="post">
-      <div class="input-box">
+        <form method="post">
+          <div class="input-box">
 
-          <input type="text" name="name" id="name" placeholder="Nom" maxlength="50" minlength="2" required> 
+            <input type="text" name="name" id="name" placeholder="Nom" maxlength="50" minlength="2" required>
+          </div>
+          <div class="ValAnn">
+            <button type="submit" class="btn btn-info">Valider</button>
+            <button class="btn btn-info retour" class="close" data-dismiss="modal">Annuler</a></button>
+          </div>
+        </form>
       </div>
-      <div class="ValAnn">
-      <button type="submit" class="btn btn-info">Valider</button>
-      <button class="btn btn-info retour"><a href ="/Akkappiness/job/show.php">Annuler</a></button> 
-      </div>     
-      </form>
-    </div>
     </div>
   </div>
 </div>
 
 <?php
+// AFFICHAGE
 $sql = 'SELECT id, name FROM job ORDER BY name';
 $statement = $connection->prepare($sql);
 $statement->execute();
@@ -52,11 +72,11 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
         <h2 class="text-center text-uppercase">Postes</h2>
 
         <div class="add d-flex">
-        <div class="bouton">
-          <button type="button" class='btn btn-primary mr-1' data-toggle="modal" data-target="#myModal"><i class="fas fa-plus"></i></button>
-          <div id="edit"></div>
-          <div id="delete" onclick="return confirm('Etes-vous sûr de vouloir supprimer ce poste ?')"></div>
-        </div>
+          <div class="bouton">
+            <button type="button" class='btn btn-primary mr-1' data-toggle="modal" data-target="#myModal"><i class="fas fa-plus"></i></button>
+            <div id="edit"></div>
+            <div id="delete" onclick="return confirm('Etes-vous sûr de vouloir supprimer ce poste ?')"></div>
+          </div>
         </div>
         <div class="card-body">
           <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
@@ -84,7 +104,7 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
 
     var rowData = [
       <?php foreach ($jobs as $job) { ?> {
-          nom: "<?=$job->name ?>",
+          nom: "<?= $job->name ?>",
           action: "<?= $job->id ?>",
         },
 
@@ -121,23 +141,24 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
         return node.action
       })
       document.getElementById("edit").innerHTML =
-        "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-pencil-alt'></i></a>"; 
+        "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-pencil-alt'></i></a>";
       document.getElementById("delete").innerHTML =
-        "<a href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
+        "<a href=show.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
     }
 
-    function edit(){
-        let selectedNodes = gridOptions.api.getSelectedNodes()
-        let selectedData = selectedNodes.map(function(node) {
-          return node.data
-        })
-        let action = selectedData.map(function(node) {
-          return node.action
-        })
-        var edit = 'edit.php?id='+action;
-        window.location= edit;
-        }
+    function edit() {
+      let selectedNodes = gridOptions.api.getSelectedNodes()
+      let selectedData = selectedNodes.map(function(node) {
+        return node.data
+      })
+      let action = selectedData.map(function(node) {
+        return node.action
+      })
+      var edit = 'edit.php?id=' + action;
+      window.location = edit;
+    }
   </script>
 </body>
 <?php require '../layout/footer.php'; ?>
+
 </html>

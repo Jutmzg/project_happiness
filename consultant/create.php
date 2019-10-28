@@ -48,7 +48,6 @@ if (
   }
 }
 
-
 if (
     isset($_POST['name']) &&
     isset($_POST['customer_id']) &&
@@ -147,7 +146,6 @@ $sql = 'INSERT INTO mission(name, customer_id, job_id, consultant_id, start, sto
       </div>
 
       </div>
-
         <div class="form-group">
           <div class="input-box">
             <button type="submit" class="btn btn-info">Valider</button>

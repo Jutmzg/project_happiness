@@ -523,8 +523,18 @@ h2{
   padding: 40px;
   position: absolute;
   left: 50%;
-  top:55%;
-  transform: translate(-50%, 50%);
+  transform: translate(-50%, 20%);
+  color:#294456;
+}
+
+.popUpBox {
+  background: rgba(40, 63, 78, 0.89);
+  width: 600px;
+  height: auto;
+  padding: 40px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 60%);
   color:#294456;
 }
 .boxmission {
