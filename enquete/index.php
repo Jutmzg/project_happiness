@@ -39,8 +39,22 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
     </div>
   </div>
   <div id="missionId"></div>
+
+
+
+<?Php
+  if (isset($_POST['done'])) {
+    $mission_id = $_POST['info'];
+   $now = date("Y-m-d H:i:s");
+
+       $sql = 'INSERT INTO enquete(mission_id,created_at) VALUES(:mission_id,:created_at)';
+        $statement = $connection->prepare($sql);
+        $statement->execute(array(':mission_id' => $mission_id,':created_at' => $now));  
+  
+        return true;
+}
+?>
 <script type="text/javascript">
-  // specify the columns
   let columnDefs = [{
       headerName: "",
       field: "nom",
@@ -101,7 +115,6 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 
     },
   ];
-  // specify the data
   let rowData = [
     <?php foreach ($consultants as $consultant) { ?> {
         nom: "<?= $consultant->fullname ?>",
@@ -113,7 +126,6 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       },
     <?php } ?>
   ];
-  // let the grid know which columns and what data to use
   let gridOptions = {
 
     defaultColDef: {
@@ -134,11 +146,8 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 
   };
 
-  // lookup the container we want the Grid to use
   let eGridDiv = document.querySelector('#myGrid');
-  
-  // create the grid passing in the div to use together with the columns & data we want to use
-  new agGrid.Grid(eGridDiv, gridOptions);
+    new agGrid.Grid(eGridDiv, gridOptions);
 
   function getSelectedMissionId() {
     let success =  iziToast.success({position: "center", message: 'Enquête(s) effectuée(s)'});
@@ -154,7 +163,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
     selectedData.forEach(function(element) {
       let missions = element.mission
       $.ajax({
-        url: "insertion.php",
+        url: "index.php",
         type: "post",
         
         data: {
@@ -171,12 +180,11 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
   }
 
   iziToast.settings({
-      timeout: 2000, // default timeout
+      timeout: 2000, 
       resetOnHover: true,
-      // icon: '', // icon class
       transitionIn: 'flipInX',
       transitionOut: 'flipOutX',
-      position: 'topRight', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter, center
+      position: 'topRight',
     });
    
 </script>

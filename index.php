@@ -21,9 +21,6 @@
   <script src="assets/jquery/jquery-3.4.1.min.js"></script>
   <script src="assets/bootstrap/bootstrap.min.js"></script>
   <script src="assets/js/Chart.min.js"></script>
-  
-
-
 </head>
 
 <header>
@@ -95,7 +92,7 @@ $sql = "SELECT COUNT(c.name) customer, c.name, e.state
         ON m.id = e.mission_id
         JOIN customer c
         ON c.id = m.customer_id
-        WHERE e.state = 0  AND month(created_at)=month(now())
+        WHERE e.state = 0 AND e.resultat != 0 AND e.resultat != 0 AND month(created_at)=month(now())
         GROUP BY c.name
         ORDER BY customer DESC
         LIMIT 5";
@@ -130,18 +127,42 @@ foreach($goodRateByCustomer as $row){
   $arrayNbrEnquete[] = $enquete->customer;
 } 
 
-$Note1 = round(($arrayNbrDeBien[0] / $arrayNbrEnquete[0])*100);
-$Note2 = round(($arrayNbrDeBien[1] / $arrayNbrEnquete[1])*100);
-$Note3 = round(($arrayNbrDeBien[2] / $arrayNbrEnquete[2])*100);
-$Note4 = round(($arrayNbrDeBien[3] / $arrayNbrEnquete[3])*100);
-$Note5 = round(($arrayNbrDeBien[4] / $arrayNbrEnquete[4])*100);
-
-$customerNote = [ $arrayCustomer[0] => $Note1 ,
-                   $arrayCustomer[1] => $Note2 ,
-                   $arrayCustomer[2] => $Note3 ,
-                   $arrayCustomer[3] => $Note4 ,
-                   $arrayCustomer[4] => $Note5 ,
-                  ];
+if (count($arrayNbrDeBien) == 1) {
+  $Note1 = round(($arrayNbrDeBien[0] / $arrayNbrEnquete[0])*100);
+  $customerNote = [ $arrayCustomer[0] => $Note1];
+} elseif (count($arrayNbrDeBien) == 2) {
+  $Note1 = round(($arrayNbrDeBien[0] / $arrayNbrEnquete[0])*100);
+  $Note2 = round(($arrayNbrDeBien[1] / $arrayNbrEnquete[1])*100);
+  $customerNote = [ $arrayCustomer[0] => $Note1 ,
+                   $arrayCustomer[1] => $Note2];
+} elseif (count($arrayNbrDeBien) == 3) {
+  $Note1 = round(($arrayNbrDeBien[0] / $arrayNbrEnquete[0])*100);
+  $Note2 = round(($arrayNbrDeBien[1] / $arrayNbrEnquete[1])*100);
+  $Note3 = round(($arrayNbrDeBien[2] / $arrayNbrEnquete[2])*100);
+  $customerNote = [ $arrayCustomer[0] => $Note1 ,
+                   $arrayCustomer[1] => $Note2,
+                   $arrayCustomer[2] => $Note3];
+} elseif (count($arrayNbrDeBien) == 4) {
+  $Note1 = round(($arrayNbrDeBien[0] / $arrayNbrEnquete[0])*100);
+  $Note2 = round(($arrayNbrDeBien[1] / $arrayNbrEnquete[1])*100);
+  $Note3 = round(($arrayNbrDeBien[2] / $arrayNbrEnquete[2])*100);
+  $Note4 = round(($arrayNbrDeBien[3] / $arrayNbrEnquete[3])*100);
+  $customerNote = [ $arrayCustomer[0] => $Note1 ,
+                    $arrayCustomer[1] => $Note2,
+                    $arrayCustomer[2] => $Note3,
+                    $arrayCustomer[3] => $Note4];
+} elseif (count($arrayNbrDeBien) == 5) {
+  $Note1 = round(($arrayNbrDeBien[0] / $arrayNbrEnquete[0])*100);
+  $Note2 = round(($arrayNbrDeBien[1] / $arrayNbrEnquete[1])*100);
+  $Note3 = round(($arrayNbrDeBien[2] / $arrayNbrEnquete[2])*100);
+  $Note4 = round(($arrayNbrDeBien[3] / $arrayNbrEnquete[3])*100);
+  $Note5 = round(($arrayNbrDeBien[4] / $arrayNbrEnquete[4])*100);
+  $customerNote = [ $arrayCustomer[0] => $Note1 ,
+                    $arrayCustomer[1] => $Note2,
+                    $arrayCustomer[2] => $Note3,
+                    $arrayCustomer[3] => $Note4,
+                    $arrayCustomer[4] => $Note5];
+}
 
 ksort($customerNote);
 
@@ -166,8 +187,6 @@ $top5 = [];
 foreach($customerNote as $enterprise => $value){
   $top5[] = $enterprise;
 }
-
-
 
 
 $sql = "SELECT * FROM `enquete` WHERE resultat = 3";
@@ -259,7 +278,7 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
           backgroundColor: ["#4F772D", "#548687", "#747572", "rgba(255, 180, 67,0.7)", "#D36135"],
           borderWidth: 0,
 
-          data: [<?= "'".implode("','",$topNote)."'";?>]
+          data: [<?= "'".implode("','",array_reverse($topNote))."'";?>]
         }]
       },
   options: {

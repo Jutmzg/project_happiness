@@ -71,7 +71,7 @@ if (
       </div>
 
       <div class="input-box">
-
+        
         <select id="consultant" name="consultant_id" required>
           <option name="choice" id="choice" value="">Sélectionner un consultant</option>
           <?php foreach ($consultants as $consultant) {
@@ -120,7 +120,7 @@ if (
   </div>
 
   <script>
-    $(document).ready(function(fourletters) {
+      $(document).ready(function(fourletters) {
       $("#consultant, #customer").change(function() {
         let selectedItem = $(this).val();
         let FourLetters = $('option:selected', consultant).attr('data-value');
@@ -134,7 +134,8 @@ if (
           document.getElementById('name').value = FourLetters + '-' + customerName;
         }
       });
-    });
+    }); 
+
   </script>
 </body>
 <?php require '../layout/footer.php'; ?>

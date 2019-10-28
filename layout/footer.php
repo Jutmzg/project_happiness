@@ -3,6 +3,7 @@
 <script>
 
 $(function() {
+	
 $( ".datepicker" ).datepicker({
 	yearRange: "-2:+10",
 	closeText: 'Fermer',
@@ -16,7 +17,8 @@ $( ".datepicker" ).datepicker({
 	dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
 	weekHeader: 'Sem.',
 	dateFormat: 'mm/dd/yy',
-	afterShow: 'mm/dd/yy'
+	afterShow: 'mm/dd/yy',
+	
 	});
 
 	$.datepicker.setDefaults($.datepicker.regional['fr']);

@@ -25,7 +25,6 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
               <a href="/Akkappiness/consultant/create.php" class='btn btn-primary mr-1'><i class="fas fa-plus"></i></a>
             <div id="edit"></div>
             <div id="delete" onclick="return confirm('Etes-vous sûr de vouloir supprimer ce consultant ?')"></div>
-            <div id="addMission"></div>
           </div>
           </div>
           <div class="card-body">
@@ -117,8 +116,6 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
           "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-pencil-alt'></i></a>";
         document.getElementById("delete").innerHTML =
           "<a href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
-        document.getElementById("addMission").innerHTML =
-          "<a href=/Akkappiness/mission/create.php?id=" + action + " class='btn btn-info'><i class='fas fa-folder-plus'></i></a>";
       }
       function edit(){
         let selectedNodes = gridOptions.api.getSelectedNodes()

@@ -481,16 +481,50 @@ h2{
 
 /***********INPUTS***********/
 
+.modal-content {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: transparent;
+  background-clip: padding-box;
+  border: none;
+}
+
+.modal-footer, .modal-header {
+  border:none;
+}
+.ValAnn > button {
+  border-color:white;
+  border-radius:0;
+}
+.modal-title{
+  color:white;
+}
+#slide, #panel {
+  padding: 10px;
+  text-align: center;
+  color:white;
+  font-weight:bold;
+  position: relative;
+  cursor:pointer;
+}
+
+#panel {
+  display: none;
+}
 .box {
-  background: #0000001a;
+  background: rgba(40, 63, 78, 0.89);
   width: 600px;
   height: auto;
-  border-radius: 5px;
   padding: 40px;
   position: absolute;
   left: 50%;
   top:55%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 50%);
   color:#294456;
 }
 .boxmission {
@@ -505,6 +539,7 @@ h2{
   transform: translate(-50%, -50%);
   color:#294456;
 }
+
 .box h2 {
   color:white;
   font-size: 1.5rem;
@@ -515,6 +550,25 @@ h2{
   font-size: 1.5rem;
   text-align: center;
   
+}
+
+.boxConsultantMission{
+  background: #0000001a;
+  width: 600px;
+  height: auto;
+  border-radius: 5px;
+  padding: 40px;
+  position: absolute;
+  left: 50%;
+  top:15%;
+  transform: translate(-50%, 0%);
+  color:#294456;
+}
+
+.boxConsultantMission h2 {
+  color:white;
+  font-size: 1.5rem;
+  text-align: center;
 }
 
 .input-box {

@@ -2,11 +2,26 @@
 <html lang="fr">
 <?php require '../layout/header.php';
 
-$message = '';
+// RECUPERE LES MANAGERS 
 $sql = "SELECT id, mail, CONCAT(lastname,' ', firstname) as fullname FROM manager WHERE state = 0 ORDER BY fullname";
 $statement = $connection->query($sql);
 $statement->execute();
 $managers = $statement->fetchAll(PDO::FETCH_OBJ);
+
+// RECUPERE LES POSTES 
+
+$sql2 = 'SELECT * FROM job ORDER BY name';
+$statement = $connection->query($sql2);
+$statement->execute();
+$jobs = $statement->fetchAll(PDO::FETCH_OBJ);
+
+// RECUPERE LES CLIENTS 
+
+$sql = 'SELECT * FROM customer WHERE state = 0 ORDER BY name';
+$statement = $connection->query($sql);
+$statement->execute();
+$customers = $statement->fetchAll(PDO::FETCH_OBJ);
+
 if (
   isset($_POST['lastname']) &&
   isset($_POST['firstname']) &&
@@ -20,23 +35,57 @@ if (
   $manager_id = $_POST['manager_id'];
   $state = 0;
 
+  
   $sql = 'INSERT INTO consultant(lastname, firstname, mail, state, manager_id) VALUES(:lastname, :firstname, :mail, :state, :manager_id)';
   $statement = $connection->prepare($sql);
   if ($statement->execute([':lastname' => $lastname, ':firstname' => $firstname, ':mail' => $mail, ':state' => $state, ':manager_id' => $manager_id])) {
-    $message = '<i class="far fa-check-circle"></i> Consultant ajouté';
+    $message = '<div class="alert alert-success"><i class="far fa-check-circle"></i> Consultant ajouté</div>';
+    $id = $connection->lastInsertId();
+
+  }
+  else{
+    $message = '<div class="alert alert-danger"><i class="far fa-check-circle"></i> Erreur lors de la saisie du consultant</div>';
+  }
+}
+
+
+if (
+    isset($_POST['name']) &&
+    isset($_POST['customer_id']) &&
+    isset($_POST['job']) &&
+    isset($_POST['start']) &&
+    isset($_POST['stop'])
+  ) {
+
+$name = $_POST['name'];
+  $customer_id = $_POST['customer_id'];
+  $job_id = $_POST['job'];
+  $consultant_id = $id;
+  $start = date('Y-m-d', strtotime($_POST['start']));
+  $stop = date('Y-m-d', strtotime($_POST['stop']));
+  $state = 0;
+
+$sql = 'INSERT INTO mission(name, customer_id, job_id, consultant_id, start, stop,state) VALUES(:name, :customer_id, :job_id, :consultant_id, :start, :stop, :state)';
+  $statement = $connection->prepare($sql);
+  if($statement->execute([':name' => $name, ':customer_id' => $customer_id, ':job_id' => $job_id, ':consultant_id' => $consultant_id, ':start' => $start, ':stop' => $stop, ':state' => $state])) {
+    $messageMission = '<div class="alert alert-success"><i class="far fa-check-circle"></i> Mission ajoutée</div>';
+  }
+  else{
+    $messageMission = '<div class="alert alert-danger"><i class="far fa-check-circle"></i> Erreur lors de la saisie de la mission</div>';
   }
 }
 ?>
-
 <body>
   <div class="container">
-    <?php if (!empty($message)) : ?>
-      <div class="alert alert-success">
-        <?= $message; ?>
-      </div>
-    <?php endif; ?>
-    <div class="box">
-
+    <?php if (isset($message)) : 
+        echo $message; 
+         endif; 
+         if (isset($messageMission)) : 
+        echo $messageMission; 
+         endif; 
+    ?>
+   
+    <div class="boxConsultantMission">
       <form method="post">
         <a href="/Akkappiness/consultant/show.php"> <i class="fas fa-times fa-2x" id="cross"></i></a>
 
@@ -53,7 +102,7 @@ if (
         </div>
 
         <div class="input-box">
-          <select name="manager_id" class="" required>
+          <select name="manager_id" required>
             <option name="choice" id="choice" value="">Sélectionner un manager</option>
             <?php foreach ($managers as $manager) {
               ?>
@@ -61,6 +110,43 @@ if (
             <?php } ?>
           </select>
         </div>
+
+        <!-- MISSION -->
+        <div id="slide">Créer une mission <i class="fas fa-sort-down fa-x"></i></div>
+        <div id="panel">
+        <div class="input-box">
+        <input value="<?php $cons; ?>" type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" readonly>
+      </div>
+
+      <div class="input-box">
+        <select id="customer" name="customer_id">
+          <option name="choice" id="choice" value="">Sélectionner un client</option>
+          <?php foreach ($customers as $customer) {
+            ?>
+            <option value="<?= $customer->id ?>" data-value="<?= $customer->name ?>" name="customer" id="customer"><?= $customer->name ?></option>
+          <?php } ?>
+        </select>
+      </div>
+
+      <div class="input-box">
+        <select name="job">
+          <option name="choice" id="choice" value="">Sélectionner un poste</option>
+          <?php foreach ($jobs as $job) {
+            ?>
+            <option value="<?= $job->id ?>" name="job" id="job"><?= $job->name ?></option>
+          <?php } ?>
+        </select>
+      </div>
+
+      <div class="input-box">
+        <input type="text" placeholder="Début de la mission" name="start" id="start" value="" class="datepicker">
+      </div>
+
+      <div class="input-box">
+        <input type="text" placeholder="Fin de la mission" name="stop" id="stop" value="" class="datepicker">
+      </div>
+
+      </div>
 
         <div class="form-group">
           <div class="input-box">
@@ -72,7 +158,28 @@ if (
     </div>
   </div>
 
+<script>
+    $("#slide").click(function(){
+    $("#panel").slideToggle("slow");
+    $("i", this).toggleClass("fas fa-sort-down fa-x fas fa-sort-up fa-x");
+    });
+
+    $(document).ready(function(fourletters) {
+      $("#lastname, #customer").change(function() {
+        let selectedItem = $(this).val();
+        let FourLetters = document.getElementById('lastname').value.substr(0, 4);
+        let customerName = $('option:selected', customer).attr('data-value');
+
+        if (FourLetters === undefined) {
+          document.getElementById('name').value = '-' + customerName;
+        } else if (customerName === undefined) {
+          document.getElementById('name').value = FourLetters.toUpperCase();
+        } else {
+          document.getElementById('name').value = FourLetters.toUpperCase() + '-' + customerName;
+        }
+      });
+    });
+  </script>
 </body>
 <?php require '../layout/footer.php'; ?>
-
 </html>
