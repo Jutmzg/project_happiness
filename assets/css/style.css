@@ -537,6 +537,16 @@ h2{
   transform: translate(-50%, 60%);
   color:#294456;
 }
+.popUpMission {
+  background: rgba(40, 63, 78, 0.89);
+  width: 600px;
+  height: auto;
+  padding: 40px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 10%);
+  color:#294456;
+}
 .boxmission {
   background: #0000001a;
   width: 600px;

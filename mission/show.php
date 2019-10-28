@@ -1,17 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <?php require '../layout/header.php';
-// INSERTION 
 
-if (isset($_GET['id'])) {
-  $id = $_GET['id'];
-} else {
-  $id = "";
-}
-$sql = 'SELECT * FROM consultant WHERE id=:id';
-$statement = $connection->prepare($sql);
-$statement->execute([':id' => $id]);
-$row = $statement->fetch(PDO::FETCH_OBJ);
+// INSERTION 
 
 $sql2 = 'SELECT * FROM job ORDER BY name';
 $statement = $connection->query($sql2);
@@ -52,6 +43,24 @@ if (
   }
 }
 
+// SUPPRESSION 
+if (
+  isset($_GET['id'])
+) {
+  $ids = explode(',', $_GET['id']);
+
+  if ($id == "") {
+    header('Location: /Akkappiness/mission/show.php');
+  }
+  foreach ($ids as $id) {
+    $sql = 'UPDATE mission SET state = 1 WHERE id=:id';
+    $statement = $connection->prepare($sql);
+    if ($statement->execute([':id' => $id])) {
+      header("Location: show.php");
+    }
+  }
+}
+
 
 $sql = "SELECT m.ID, m.name mission,c.name customer, CONCAT(cons.lastname,' ', cons.firstname) as consultant, j.name job, m.start, m.stop, m.state 
 FROM mission m
@@ -69,63 +78,63 @@ $mission = $statement->fetchAll(PDO::FETCH_OBJ);
 
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
-    <div class="box">
+    <div class="popUpMission">
       <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times" id="cross"></i></button>
       <h4 class="modal-title text-center">CREATION D'UNE MISSION</h4>
       <div class="modal-content">
 
-      <form method="post" id="monFormulaire">
-      <div class="input-box">
-        <input value="<?php $cons; ?>" type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" required readonly>
-      </div>
+        <form method="post" id="monFormulaire">
+          <div class="input-box">
+            <input value="<?php $cons; ?>" type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" required readonly>
+          </div>
 
-      <div class="input-box">
-        
-        <select id="consultant" name="consultant_id" required>
-          <option name="choice" id="choice" value="">Sélectionner un consultant</option>
-          <?php foreach ($consultants as $consultant) {
-            $cons = substr($consultant->fullname, 0, 4);
-            $selected = $row->id == $consultant->id ? 'selected' : ''; ?>
-            <?= "<option value='$consultant->id' data-value='$cons' name='consultant_id' id='consultant' $selected>" ?><?= $consultant->fullname ?></option>
-          <?php } ?>
-        </select>
-      </div>
+          <div class="input-box">
 
-      <div class="input-box">
-        <select id="customer" name="customer_id" required>
-          <option name="choice" id="choice" value="">Sélectionner un client</option>
-          <?php foreach ($customers as $customer) {
-            ?>
-            <option value="<?= $customer->id ?>" data-value="<?= $customer->name ?>" name="customer" id="customer"><?= $customer->name ?></option>
-          <?php } ?>
-        </select>
-      </div>
+            <select id="consultant" name="consultant_id" required>
+              <option name="choice" id="choice" value="">Sélectionner un consultant</option>
+              <?php foreach ($consultants as $consultant) {
+                $cons = substr($consultant->fullname, 0, 4);
+                $selected = $row->id == $consultant->id ? 'selected' : ''; ?>
+                <?= "<option value='$consultant->id' data-value='$cons' name='consultant_id' id='consultant' $selected>" ?><?= $consultant->fullname ?></option>
+              <?php } ?>
+            </select>
+          </div>
 
-      <div class="input-box">
-        <select name="job" required>
-          <option name="choice" id="choice" value="">Sélectionner un poste</option>
-          <?php foreach ($jobs as $job) {
-            ?>
-            <option value="<?= $job->id ?>" name="job" id="job"><?= $job->name ?></option>
-          <?php } ?>
-        </select>
-      </div>
+          <div class="input-box">
+            <select id="customer" name="customer_id" required>
+              <option name="choice" id="choice" value="">Sélectionner un client</option>
+              <?php foreach ($customers as $customer) {
+                ?>
+                <option value="<?= $customer->id ?>" data-value="<?= $customer->name ?>" name="customer" id="customer"><?= $customer->name ?></option>
+              <?php } ?>
+            </select>
+          </div>
 
-      <div class="input-box">
-        <input type="text" placeholder="Début de la mission" name="start" id="start" value="" class="datepicker" required>
-      </div>
+          <div class="input-box">
+            <select name="job" required>
+              <option name="choice" id="choice" value="">Sélectionner un poste</option>
+              <?php foreach ($jobs as $job) {
+                ?>
+                <option value="<?= $job->id ?>" name="job" id="job"><?= $job->name ?></option>
+              <?php } ?>
+            </select>
+          </div>
 
-      <div class="input-box">
-        <input type="text" placeholder="Fin de la mission" name="stop" id="stop" value="" class="datepicker" required>
-      </div>
+          <div class="input-box">
+            <input type="text" placeholder="Début de la mission" name="start" id="start" value="" class="datepicker" required>
+          </div>
 
-      <div class="form-group">
-        <div class="input-box">
-          <button type="submit" class="btn btn-info">Valider</button>
-          <button class="btn btn-info retour"><a onclick="goBack()">Annuler</a></button>
-        </div>
-      </div>
-    </form>
+          <div class="input-box">
+            <input type="text" placeholder="Fin de la mission" name="stop" id="stop" value="" class="datepicker" required>
+          </div>
+
+          <div class="form-group">
+            <div class="input-box">
+              <button type="submit" class="btn btn-info">Valider</button>
+              <button class="btn btn-info retour"><a onclick="goBack()">Annuler</a></button>
+            </div>
+          </div>
+        </form>
       </div>
 
     </div>
@@ -139,11 +148,11 @@ $mission = $statement->fetchAll(PDO::FETCH_OBJ);
       <div class="card-header">
         <h2 class="text-center text-uppercase">Missions</h2>
         <div class="add d-flex">
-        <div class="bouton">
-        <button type="button" class='btn btn-primary mr-1' data-toggle="modal" data-target="#myModal"><i class="fas fa-plus"></i></button>
+          <div class="bouton">
+            <button type="button" class='btn btn-primary mr-1' data-toggle="modal" data-target="#myModal"><i class="fas fa-plus"></i></button>
             <div id="edit"></div>
             <div id="delete" onclick="return confirm('Etes-vous sûr de vouloir supprimer cette mission ?')"></div>
-        </div>
+          </div>
         </div>
         <div class="card-body">
           <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
@@ -212,7 +221,7 @@ $mission = $statement->fetchAll(PDO::FETCH_OBJ);
           mission: "<?= $row->mission ?>",
           customer: "<?= utf8_encode($row->customer) ?>",
           consultant: "<?= $row->consultant ?>",
-          job: "<?= $row->job?>",
+          job: "<?= $row->job ?>",
           start: "<?= date('d/m/Y', strtotime($row->start)) ?>",
           stop: "<?= date('d/m/Y', strtotime($row->stop)) ?>",
           action: "<?= $row->ID ?>",
@@ -253,9 +262,9 @@ $mission = $statement->fetchAll(PDO::FETCH_OBJ);
         return node.action
       })
       document.getElementById("edit").innerHTML =
-        "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-pencil-alt'></i></a>"; 
+        "<a href=edit.php?id=" + action + " class='btn btn-info'><i class='fas fa-pencil-alt'></i></a>";
       document.getElementById("delete").innerHTML =
-        "<a href=delete.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
+        "<a href=show.php?id=" + action + " class='btn btn-danger'><i class='fas fa-trash-alt'></i></a>";
     }
 
     function edit() {
@@ -284,7 +293,7 @@ $mission = $statement->fetchAll(PDO::FETCH_OBJ);
           document.getElementById('name').value = FourLetters + '-' + customerName;
         }
       });
-    }); 
+    });
   </script>
 </body>
 <?php require '../layout/footer.php'; ?>
