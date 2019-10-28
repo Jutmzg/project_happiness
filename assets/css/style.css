@@ -534,7 +534,7 @@ h2{
   padding: 40px;
   position: absolute;
   left: 50%;
-  transform: translate(-50%, 60%);
+  transform: translate(-50%, 50%);
   color:#294456;
 }
 .popUpMission {
