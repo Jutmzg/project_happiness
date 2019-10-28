@@ -2,8 +2,6 @@
 <html lang="fr">
 <?php require '../layout/header.php';
 
-// INSERTION 
-
 $sql2 = 'SELECT * FROM job ORDER BY name';
 $statement = $connection->query($sql2);
 $statement->execute();
@@ -19,6 +17,7 @@ $statement = $connection->query($sql3);
 $statement->execute();
 $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 
+// INSERTION 
 if (
   isset($_POST['name']) &&
   isset($_POST['customer_id']) &&
@@ -66,7 +65,8 @@ FROM mission m
 LEFT JOIN consultant cons ON m.consultant_id = cons.ID
 INNER JOIN customer c ON m.customer_id = c.ID
 INNER JOIN job j ON m.job_id = j.ID
-WHERE m.state = 0
+WHERE m.state = 0 
+AND cons.state = 0
 ORDER BY consultant ASC";
 $statement = $connection->prepare($sql);
 $statement->execute();
@@ -75,6 +75,7 @@ if(isset($_GET['Message'])){
   echo $_GET['Message'];
 }
 ?>
+<body>
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="popUpMission">
@@ -141,7 +142,7 @@ if(isset($_GET['Message'])){
   </div>
 </div>
 
-<body>
+
   <div class="container">
     <div class="card mt-4">
       <div class="card-header">

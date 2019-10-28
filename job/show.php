@@ -13,7 +13,7 @@ if (
   if ($statement->execute([':name' => $name])) {
     $message = urlencode('<div class="alert alert-success"><i class="far fa-check-circle"></i> Métier ajouté</div>');
     header("Location:show.php?Message=".$message);
-die;
+
   }
 }
 // SUPPRESSION 
@@ -36,7 +36,17 @@ if (
 if(isset($_GET['Message'])){
   echo $_GET['Message'];
 }
+
+
+// AFFICHAGE
+$sql = 'SELECT id, name FROM job ORDER BY name';
+$statement = $connection->prepare($sql);
+$statement->execute();
+$jobs = $statement->fetchAll(PDO::FETCH_OBJ);
+
 ?>
+
+<body>
 
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -58,17 +68,6 @@ if(isset($_GET['Message'])){
     </div>
   </div>
 </div>
-
-<?php
-// AFFICHAGE
-$sql = 'SELECT id, name FROM job ORDER BY name';
-$statement = $connection->prepare($sql);
-$statement->execute();
-$jobs = $statement->fetchAll(PDO::FETCH_OBJ);
-
-?>
-
-<body>
 
   <div class="container">
     <div class="card mt-4">

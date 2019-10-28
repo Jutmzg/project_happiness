@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <?php require '../layout/header.php';
-
 $message = '';
-// INSERTION 
+
 
 // RECUPERE LES MANAGERS 
 $sql = "SELECT id, mail, CONCAT(lastname,' ', firstname) as fullname FROM manager WHERE state = 0 ORDER BY fullname";
@@ -26,6 +24,7 @@ $statement = $connection->query($sql);
 $statement->execute();
 $customers = $statement->fetchAll(PDO::FETCH_OBJ);
 
+// INSERTION 
 if (
   isset($_POST['lastname']) &&
   isset($_POST['firstname']) &&
@@ -87,9 +86,6 @@ if (
     }
   }
 }
-if (isset($_GET['Message'])) {
-  echo $_GET['Message'];
-}
 
 if ($message !== '') {
   echo "<div class='alert alert-success'><i class='far fa-check-circle'></i>$message</div>";
@@ -106,87 +102,88 @@ $statement = $connection->prepare($sql);
 $statement->execute();
 $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 ?>
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="popUpMission">
-      <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times" id="cross"></i></button>
-      <h4 class="modal-title text-center">CREATION D'UN POSTE</h4>
-      <div class="modal-content">
 
-        <form method="post">
-          <div class="input-box">
-            <input type="text" name="lastname" id="lastname" class="" maxlength="50" minlength="2" placeholder="Nom" required>
-          </div>
+<body>
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="popUpMission">
+        <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times" id="cross"></i></button>
+        <h4 class="modal-title text-center">CREATION D'UN POSTE</h4>
+        <div class="modal-content">
 
-          <div class="input-box">
-            <input type="text" name="firstname" id="firstname" class="" maxlength="50" minlength="2" placeholder="Prénom" required>
-          </div>
-
-          <div class="input-box">
-            <input type="email" name="mail" id="mail" class="" maxlength="50" minlength="5" placeholder="Email" required>
-          </div>
-
-          <div class="input-box">
-            <select name="manager_id" required>
-              <option name="choice" id="choice" value="">Sélectionner un manager</option>
-              <?php foreach ($managers as $manager) {
-                ?>
-                <option value="<?= $manager->id ?>" name="manager" id="manager"><?= utf8_encode($manager->fullname) ?></option>
-              <?php } ?>
-            </select>
-          </div>
-
-          <!-- MISSION -->
-          <div id="slide">Créer une mission <i class="fas fa-sort-down fa-x"></i></div>
-          <div id="panel">
+          <form method="post">
             <div class="input-box">
-              <input value="<?php $cons; ?>" type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" readonly>
+              <input type="text" name="lastname" id="lastname" class="" maxlength="50" minlength="2" placeholder="Nom" required>
             </div>
 
             <div class="input-box">
-              <select id="customer" name="customer_id">
-                <option name="choice" id="choice" value="">Sélectionner un client</option>
-                <?php foreach ($customers as $customer) {
+              <input type="text" name="firstname" id="firstname" class="" maxlength="50" minlength="2" placeholder="Prénom" required>
+            </div>
+
+            <div class="input-box">
+              <input type="email" name="mail" id="mail" class="" maxlength="50" minlength="5" placeholder="Email" required>
+            </div>
+
+            <div class="input-box">
+              <select name="manager_id" required>
+                <option name="choice" id="choice" value="">Sélectionner un manager</option>
+                <?php foreach ($managers as $manager) {
                   ?>
-                  <option value="<?= $customer->id ?>" data-value="<?= $customer->name ?>" name="customer" id="customer"><?= $customer->name ?></option>
+                  <option value="<?= $manager->id ?>" name="manager" id="manager"><?= utf8_encode($manager->fullname) ?></option>
                 <?php } ?>
               </select>
             </div>
 
-            <div class="input-box">
-              <select name="job">
-                <option name="choice" id="choice" value="">Sélectionner un poste</option>
-                <?php foreach ($jobs as $job) {
-                  ?>
-                  <option value="<?= $job->id ?>" name="job" id="job"><?= $job->name ?></option>
-                <?php } ?>
-              </select>
-            </div>
+            <!-- MISSION -->
+            <div id="slide">Créer une mission <i class="fas fa-sort-down fa-x"></i></div>
+            <div id="panel">
+              <div class="input-box">
+                <input value="<?php $cons; ?>" type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" readonly>
+              </div>
 
-            <div class="input-box">
-              <input type="text" placeholder="Début de la mission" name="start" id="start" value="" class="datepicker">
-            </div>
+              <div class="input-box">
+                <select id="customer" name="customer_id">
+                  <option name="choice" id="choice" value="">Sélectionner un client</option>
+                  <?php foreach ($customers as $customer) {
+                    ?>
+                    <option value="<?= $customer->id ?>" data-value="<?= $customer->name ?>" name="customer" id="customer"><?= $customer->name ?></option>
+                  <?php } ?>
+                </select>
+              </div>
 
-            <div class="input-box">
-              <input type="text" placeholder="Fin de la mission" name="stop" id="stop" value="" class="datepicker">
-            </div>
+              <div class="input-box">
+                <select name="job">
+                  <option name="choice" id="choice" value="">Sélectionner un poste</option>
+                  <?php foreach ($jobs as $job) {
+                    ?>
+                    <option value="<?= $job->id ?>" name="job" id="job"><?= $job->name ?></option>
+                  <?php } ?>
+                </select>
+              </div>
 
-          </div>
-          <div class="form-group">
-            <div class="input-box">
-              <div class="ValAnn">
+              <div class="input-box">
+                <input type="text" placeholder="Début de la mission" name="start" id="start" value="" class="datepicker">
+              </div>
+
+              <div class="input-box">
+                <input type="text" placeholder="Fin de la mission" name="stop" id="stop" value="" class="datepicker">
+              </div>
+
+            </div>
+            <div class="form-group">
+              <div class="input-box">
+                <div class="ValAnn">
                   <button type="submit" class="btn btn-info">Valider</button>
                   <button class="btn btn-info" class="close" data-dismiss="modal">Annuler</button>
+                </div>
               </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<body>
   <div class="container">
     <div class="card mt-4">
       <div class="card-header">
@@ -322,7 +319,6 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       });
     });
   </script>
-
 </body>
 <?php require '../layout/footer.php'; ?>
 

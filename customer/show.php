@@ -37,42 +37,9 @@ if (
       header("Location: show.php");
     }
   }
-} ?>
+}
 
-
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="popUpBox">
-      <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times" id="cross"></i></button>
-      <h4 class="modal-title text-center">AJOUT D'UN CLIENT</h4>
-      <div class="modal-content">
-      <form method="post">
-        <div class="input-box">
-          <input type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" required>
-        </div>
-        <div class="input-box">
-          <input type="text" placeholder="Adresse" name="address" id="address" maxlength="75" minlength="10" required>
-        </div>
-
-        <div class="form-group">
-          <div class="input-box">
-          <div class="ValAnn">
-                  <button type="submit" class="btn btn-info">Valider</button>
-                  <button class="btn btn-info" class="close" data-dismiss="modal">Annuler</button>
-              </div>
-
-          </div>
-        </div>
-      </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<?php
-
-if($message !== ''){
+if ($message !== '') {
   echo "<div class='alert alert-success'><i class='far fa-check-circle'></i>$message</div>";
 }
 $sql = 'SELECT id, name, address FROM customer WHERE state = 0 ORDER BY name';
@@ -82,6 +49,35 @@ $customers = $statement->fetchAll(PDO::FETCH_OBJ);
 ?>
 
 <body>
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="popUpBox">
+        <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times" id="cross"></i></button>
+        <h4 class="modal-title text-center">AJOUT D'UN CLIENT</h4>
+        <div class="modal-content">
+          <form method="post">
+            <div class="input-box">
+              <input type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" required>
+            </div>
+            <div class="input-box">
+              <input type="text" placeholder="Adresse" name="address" id="address" maxlength="75" minlength="10" required>
+            </div>
+
+            <div class="form-group">
+              <div class="input-box">
+                <div class="ValAnn">
+                  <button type="submit" class="btn btn-info">Valider</button>
+                  <button class="btn btn-info" class="close" data-dismiss="modal">Annuler</button>
+                </div>
+
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="container">
     <div class="card mt-4">
       <div class="card-header">
@@ -89,7 +85,7 @@ $customers = $statement->fetchAll(PDO::FETCH_OBJ);
 
         <div class="add d-flex">
           <div class="bouton">
-          <button type="button" class='btn btn-primary mr-1' data-toggle="modal" data-target="#myModal"><i class="fas fa-plus"></i></button>
+            <button type="button" class='btn btn-primary mr-1' data-toggle="modal" data-target="#myModal"><i class="fas fa-plus"></i></button>
             <div id="edit"></div>
             <div id="delete" onclick="return confirm('Etes-vous sûr de vouloir supprimer ce client ?')"></div>
           </div>
