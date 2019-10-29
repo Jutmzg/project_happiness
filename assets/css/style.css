@@ -170,6 +170,7 @@ h2{
   }
 
   /******************/
+  /****** LOGIN *****/
 
   .login{
     padding:5%;
@@ -187,8 +188,9 @@ h2{
     margin-top: 8%;
     border:solid 1px white;
   }
+  /******************/
 
-  /* datepicker css */
+  /*** DATEPICKER ***/
 
 .ui-datepicker {
   text-align: center;
@@ -349,20 +351,6 @@ h2{
   transform: scaleX(1.0029)
 }
 
-.ui-datepicker-month option,
-.ui-datepicker-year option {
-  color: #3985a0 !important;
-  background-color: #fff !important;
-  font-family: Open Sans !important;
-  font-size: 14px !important;
-  font-weight: 600;
-}
-
-.ui-datepicker-month option[selected],
-.ui-datepicker-year option[selected] {
-  background-color: #e5edf0 !important;
-}
-
 .ui-datepicker .ui-state-hover {
   border: 0 !important;
 }
@@ -389,9 +377,9 @@ h2{
 }
 
 .ui-datepicker .ui-state-default.ui-state-highlight{
-  border-color: #dcdcdc;
-  background-color: #cff3f8 !important;
-  color: #3e9aba !important;
+  background-color: #294456;
+  color: white;
+  font-size: 1.1em;
 }
 
 .openemr-calendar .ui-state-default {
@@ -414,13 +402,13 @@ h2{
 }
 .ui-state-default.ui-state-hover {
   border-color: #dcdcdc;
-  background-color: #cff3f8 !important;
+  background-color: #294456 !important;
 }
 
 .ui-datepicker .ui-state-active {
-  border-color: #dcdcdc;
-  background-color: #cff3f8 !important;
-  color: #3e9aba !important;
+  background-color: #294456;
+  color: white;
+  font-size: 1.1em;
 } 
 
 .ui-datepicker-calendar thead tr th {
@@ -439,14 +427,6 @@ h2{
   display: none;
 }
 
-.ui-datepicker thead {
-  background-color: #f5f5f5;
-}
-
-.openemr-calendar .ui-datepicker thead {
-  background: none;
-}
-
 .ui-state-default.ui-datepicker-current {
   float: none !important;
   font-family: Open Sans, Arial, sans-serif;
@@ -463,26 +443,10 @@ h2{
 
 .ui-datepicker-buttonpane.ui-widget-content {
   text-align: center;
-  background-color: #3e9aba;
+  background-color: white;
   margin: 0 !important;
   height: 28px;
   padding: 0 !important;
-}
-
-.openemr-calendar .ui-datepicker-year {
-  background-color: transparent;
-}
-
-.openemr-calendar .ui-datepicker-month {
-  background-color: transparent;
-}
-
-.openemr-calendar .ui-state-default {
-  border: 0 !important;
-}
-
-.openemr-calendar .ui-datepicker-month {
-  margin-right: 10px !important;
 }
 
 
