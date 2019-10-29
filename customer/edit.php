@@ -37,7 +37,7 @@ if (
 
   <form method="post">
   <h2>Modifier les informations de : <?= $customers->name ?></h2>
-    <a onclick="goBack()"><i class="fas fa-times fa-2x" id="cross"></i></a>
+  <a onclick="goBack()" class="close"><i class="fas fa-times" id="cross"></i></a>
 
     <div class="input-box">
       <input value="<?= $customers->name; ?>" type="text" name="name" id="name" placeholder="Nom" maxlength="50" minlength="2" required>
