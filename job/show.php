@@ -62,7 +62,7 @@ $jobs = $statement->fetchAll(PDO::FETCH_OBJ);
           </div>
           <div class="ValAnn">
                   <button type="submit" class="btn btn-info">Valider</button>
-                  <button class="btn btn-info" class="close" data-dismiss="modal">Annuler</button>
+                  <a href="/Akkappiness/job/show.php" class="btn btn-info">Annuler</a>
               </div>
         </form>
       </div>

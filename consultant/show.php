@@ -105,10 +105,9 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
   <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
       <div class="popUpMission">
-        <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times" id="cross"></i></button>
+      <a href="/Akkappiness/consultant/show.php" class="close" type="button"><i class="fas fa-times" id="cross"></i></a>
         <h4 class="modal-title text-center">CREATION D'UN POSTE</h4>
         <div class="modal-content">
-
           <form method="post">
             <div class="input-box">
               <input type="text" name="lastname" id="lastname" class="" maxlength="50" minlength="2" placeholder="Nom" required>
@@ -171,7 +170,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
               <div class="input-box">
                 <div class="ValAnn">
                   <button type="submit" class="btn btn-info">Valider</button>
-                  <button class="btn btn-info" class="close" data-dismiss="modal">Annuler</button>
+                  <a href="/Akkappiness/consultant/show.php" class="btn btn-info">Annuler</a>
                 </div>
               </div>
             </div>
