@@ -23,9 +23,7 @@ if (
     header("Location: show.php");
   }
 }
-
 ?>
-
 <body>
   <div class="container">
 

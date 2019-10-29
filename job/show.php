@@ -38,6 +38,7 @@ if(isset($_GET['Message'])){
 }
 
 
+
 // AFFICHAGE
 $sql = 'SELECT id, name FROM job ORDER BY name';
 $statement = $connection->prepare($sql);

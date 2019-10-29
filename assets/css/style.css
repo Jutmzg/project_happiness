@@ -46,7 +46,14 @@ h2{
     border-color: #294456;
     color: #294456;
 }
-
+.btn-info:not(:disabled):not(.disabled).active, .btn-info:not(:disabled):not(.disabled):active, .show>.btn-info.dropdown-toggle{
+  background-color: white;
+  border-color: #294456;
+  color: #294456;
+}
+.btn-info.focus, .btn-info:focus {
+  box-shadow: none;
+}
 .bouton{
   display: flex;
   flex-direction: row;
@@ -498,11 +505,11 @@ h2{
   border:none;
 }
 .ValAnn > button {
-  border-color:white;
+  border: solid 0.5px white;
   border-radius:0;
 }
 .ValAnn > a {
-  border-color:white;
+  border: solid 0.5px white;
   border-radius:0;
 }
 .modal-title{
