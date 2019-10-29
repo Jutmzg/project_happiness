@@ -37,7 +37,7 @@ if (
 
     <form method="post">
       <h2>Modifier les informations de : <?= $jobs->name ?></h2>
-      <a onclick="goBack()" class="close"><i class="fas fa-times" id="cross"></i></a>
+      <a class="close" href="/Akkappiness/job/show.php"><i class="fas fa-times" id="cross"></i></a>
 
       <div class="input-box">
         <input value="<?= $jobs->name; ?>" type="text" name="name" id="name" maxlength="50" minlength="2" required>
