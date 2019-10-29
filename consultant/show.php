@@ -42,8 +42,6 @@ if (
   $sql = 'INSERT INTO consultant(lastname, firstname, mail, state, manager_id) VALUES(:lastname, :firstname, :mail, :state, :manager_id)';
   $statement = $connection->prepare($sql);
   if ($statement->execute([':lastname' => $lastname, ':firstname' => $firstname, ':mail' => $mail, ':state' => $state, ':manager_id' => $manager_id])) {
-    /* $message = urlencode('<div class="alert alert-success"><i class="far fa-check-circle"></i> Consultant ajoutée</div>');
-    header("Location:show.php?Message=" . $message); */
     $message = ' Consultant ajouté';
     $id = $connection->lastInsertId();
   }
@@ -138,11 +136,10 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
             <div id="slide">Créer une mission <i class="fas fa-sort-down fa-x"></i></div>
             <div id="panel">
               <div class="input-box">
-                <input value="<?php $cons; ?>" type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" readonly>
+                <input value="" type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" readonly>
               </div>
-
               <div class="input-box">
-                <select id="customer" name="customer_id">
+                <select id="customer" name="customer_id" value="0">
                   <option name="choice" id="choice" value="">Sélectionner un client</option>
                   <?php foreach ($customers as $customer) {
                     ?>
@@ -152,7 +149,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
               </div>
 
               <div class="input-box">
-                <select name="job">
+                <select name="job" id="job">
                   <option name="choice" id="choice" value="">Sélectionner un poste</option>
                   <?php foreach ($jobs as $job) {
                     ?>
@@ -317,6 +314,36 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
           document.getElementById('name').value = FourLetters.toUpperCase() + '-' + customerName;
         }
       });
+    });
+
+
+    $('select[name=customer_id]').change(function () {
+        if ($(this).val() != null) {
+            $('#job').prop('required',true);
+            $('#start').prop('required',true);
+            $('#stop').prop('required',true);
+        }
+    });
+    $('select[name=job]').change(function () {
+        if ($(this).val() != null) {
+            $('#customer').prop('required',true);
+            $('#start').prop('required',true);
+            $('#stop').prop('required',true);
+        }
+    });
+    $('select[name=start]').change(function () {
+        if ($(this).val() != null) {
+            $('#customer').prop('required',true);
+            $('#job').prop('required',true);
+            $('#stop').prop('required',true);
+        }
+    });
+    $('select[name=stop]').change(function () {
+        if ($(this).val() != null) {
+            $('#customer').prop('required',true);
+            $('#job').prop('required',true);
+            $('#start').prop('required',true);
+        }
     });
   </script>
 </body>
