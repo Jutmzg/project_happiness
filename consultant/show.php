@@ -104,7 +104,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
   <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
       <div class="popUpMission">
-        <a href="/Akkappiness/consultant/show.php" class="close" type="button"><i class="fas fa-times" id="cross"></i></a>
+        <a class="close" href="/Akkappiness/consultant/show.php"><i class="fas fa-times" id="cross"></i></a>
         <h4 class="modal-title text-center">CREATION D'UN POSTE</h4>
         <div class="modal-content">
           <form method="post">
@@ -291,7 +291,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       var edit = 'edit.php?id=' + action;
       window.location = edit;
     }
-    // SHOW MISSION
+
     $("#slide").click(function() {
       $("#panel").slideToggle("slow");
       $("i", this).toggleClass("fas fa-sort-down fa-x fas fa-sort-up fa-x");
@@ -314,8 +314,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       });
     });
 
-
-    $('select[name=customer_id]').change(function() {
+     $('select[name=customer_id]').change(function() {
       if ($(this).val() != null) {
         $('#job').prop('required', true);
         $('#start').prop('required', true);
