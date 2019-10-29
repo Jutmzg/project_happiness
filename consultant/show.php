@@ -3,7 +3,6 @@
 <?php require '../layout/header.php';
 $message = '';
 
-
 // RECUPERE LES MANAGERS 
 $sql = "SELECT id, mail, CONCAT(lastname,' ', firstname) as fullname FROM manager WHERE state = 0 ORDER BY fullname";
 $statement = $connection->query($sql);
@@ -105,7 +104,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
   <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
       <div class="popUpMission">
-      <a href="/Akkappiness/consultant/show.php" class="close" type="button"><i class="fas fa-times" id="cross"></i></a>
+        <a href="/Akkappiness/consultant/show.php" class="close" type="button"><i class="fas fa-times" id="cross"></i></a>
         <h4 class="modal-title text-center">CREATION D'UN POSTE</h4>
         <div class="modal-content">
           <form method="post">
@@ -316,33 +315,56 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
     });
 
 
-    $('select[name=customer_id]').change(function () {
-        if ($(this).val() != null) {
-            $('#job').prop('required',true);
-            $('#start').prop('required',true);
-            $('#stop').prop('required',true);
+    $('select[name=customer_id]').change(function() {
+      if ($(this).val() != null) {
+        $('#job').prop('required', true);
+        $('#start').prop('required', true);
+        $('#stop').prop('required', true);
+        if ($(this).val() == '') {
+          $('#job').prop('required', false);
+          $('#start').prop('required', false);
+          $('#stop').prop('required', false);
         }
+      }
     });
-    $('select[name=job]').change(function () {
-        if ($(this).val() != null) {
-            $('#customer').prop('required',true);
-            $('#start').prop('required',true);
-            $('#stop').prop('required',true);
+    $('select[name=job]').change(function() {
+      if ($(this).val() != null) {
+        $('#customer').prop('required', true);
+        $('#start').prop('required', true);
+        $('#stop').prop('required', true);
+        if ($(this).val() == '') {
+          $('#customer').prop('required', false);
+          $('#start').prop('required', false);
+          $('#stop').prop('required', false);
+
         }
+      }
     });
-    $('input[name=start]').change(function () {
-        if ($(this).val() != null) {
-            $('#customer').prop('required',true);
-            $('#job').prop('required',true);
-            $('#stop').prop('required',true);
+    $('input[name=start]').change(function() {
+      if ($(this).val() != null) {
+        $('#customer').prop('required', true);
+        $('#job').prop('required', true);
+        $('#stop').prop('required', true);
+        if ($(this).val() == '') {
+          $('#customer').prop('required', false);
+          $('#job').prop('required', false);
+          $('#stop').prop('required', false);
+
         }
+      }
     });
-    $('input[name=stop]').change(function () {
-        if ($(this).val() != null) {
-            $('#customer').prop('required',true);
-            $('#job').prop('required',true);
-            $('#start').prop('required',true);
+    $('input[name=stop]').change(function() {
+      if ($(this).val() != null) {
+        $('#customer').prop('required', true);
+        $('#job').prop('required', true);
+        $('#start').prop('required', true);
+        if ($(this).val() == '') {
+          $('#customer').prop('required', false);
+          $('#job').prop('required', false);
+          $('#start').prop('required', false);
+
         }
+      }
     });
   </script>
 </body>
