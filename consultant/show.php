@@ -331,14 +331,14 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
             $('#stop').prop('required',true);
         }
     });
-    $('select[name=start]').change(function () {
+    $('input[name=start]').change(function () {
         if ($(this).val() != null) {
             $('#customer').prop('required',true);
             $('#job').prop('required',true);
             $('#stop').prop('required',true);
         }
     });
-    $('select[name=stop]').change(function () {
+    $('input[name=stop]').change(function () {
         if ($(this).val() != null) {
             $('#customer').prop('required',true);
             $('#job').prop('required',true);
