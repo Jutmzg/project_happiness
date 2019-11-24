@@ -43,7 +43,7 @@ if (
         <div class="box">
             <form method="post">
                 <h2>Modifier les informations de <?= $row->firstname . ' ' . $row->lastname ?></h2>
-                <a onclick="goBack()"> <i class="fas fa-times fa-2x" id="cross"></i></a>
+                <a class="close" href="/Akkappiness/consultant/show.php"><i class="fas fa-times" id="cross"></i></a>
 
                 <div class="input-box">
                     <input value="<?= $row->lastname; ?>" type="text" name="lastname" id="lastname" maxlength="50" minlength="2" required>

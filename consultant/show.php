@@ -3,7 +3,6 @@
 <?php require '../layout/header.php';
 $message = '';
 
-
 // RECUPERE LES MANAGERS 
 $sql = "SELECT id, mail, CONCAT(lastname,' ', firstname) as fullname FROM manager WHERE state = 0 ORDER BY fullname";
 $statement = $connection->query($sql);
@@ -42,8 +41,6 @@ if (
   $sql = 'INSERT INTO consultant(lastname, firstname, mail, state, manager_id) VALUES(:lastname, :firstname, :mail, :state, :manager_id)';
   $statement = $connection->prepare($sql);
   if ($statement->execute([':lastname' => $lastname, ':firstname' => $firstname, ':mail' => $mail, ':state' => $state, ':manager_id' => $manager_id])) {
-    /* $message = urlencode('<div class="alert alert-success"><i class="far fa-check-circle"></i> Consultant ajoutée</div>');
-    header("Location:show.php?Message=" . $message); */
     $message = ' Consultant ajouté';
     $id = $connection->lastInsertId();
   }
@@ -107,10 +104,9 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
   <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
       <div class="popUpMission">
-        <button type="button" class="close" data-dismiss="modal"><i class="fas fa-times" id="cross"></i></button>
+        <a class="close" href="/Akkappiness/consultant/show.php"><i class="fas fa-times" id="cross"></i></a>
         <h4 class="modal-title text-center">CREATION D'UN POSTE</h4>
         <div class="modal-content">
-
           <form method="post">
             <div class="input-box">
               <input type="text" name="lastname" id="lastname" class="" maxlength="50" minlength="2" placeholder="Nom" required>
@@ -138,11 +134,10 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
             <div id="slide">Créer une mission <i class="fas fa-sort-down fa-x"></i></div>
             <div id="panel">
               <div class="input-box">
-                <input value="<?php $cons; ?>" type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" readonly>
+                <input value="" type="text" placeholder="Nom" name="name" id="name" maxlength="50" minlength="2" readonly>
               </div>
-
               <div class="input-box">
-                <select id="customer" name="customer_id">
+                <select id="customer" name="customer_id" value="0">
                   <option name="choice" id="choice" value="">Sélectionner un client</option>
                   <?php foreach ($customers as $customer) {
                     ?>
@@ -152,7 +147,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
               </div>
 
               <div class="input-box">
-                <select name="job">
+                <select name="job" id="job">
                   <option name="choice" id="choice" value="">Sélectionner un poste</option>
                   <?php foreach ($jobs as $job) {
                     ?>
@@ -174,7 +169,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
               <div class="input-box">
                 <div class="ValAnn">
                   <button type="submit" class="btn btn-info">Valider</button>
-                  <button class="btn btn-info" class="close" data-dismiss="modal">Annuler</button>
+                  <a href="/Akkappiness/consultant/show.php" class="btn btn-info">Annuler</a>
                 </div>
               </div>
             </div>
@@ -296,7 +291,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
       var edit = 'edit.php?id=' + action;
       window.location = edit;
     }
-    // SHOW MISSION
+
     $("#slide").click(function() {
       $("#panel").slideToggle("slow");
       $("i", this).toggleClass("fas fa-sort-down fa-x fas fa-sort-up fa-x");
@@ -317,6 +312,58 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
           document.getElementById('name').value = FourLetters.toUpperCase() + '-' + customerName;
         }
       });
+    });
+
+     $('select[name=customer_id]').change(function() {
+      if ($(this).val() != null) {
+        $('#job').prop('required', true);
+        $('#start').prop('required', true);
+        $('#stop').prop('required', true);
+        if ($(this).val() == '') {
+          $('#job').prop('required', false);
+          $('#start').prop('required', false);
+          $('#stop').prop('required', false);
+        }
+      }
+    });
+    $('select[name=job]').change(function() {
+      if ($(this).val() != null) {
+        $('#customer').prop('required', true);
+        $('#start').prop('required', true);
+        $('#stop').prop('required', true);
+        if ($(this).val() == '') {
+          $('#customer').prop('required', false);
+          $('#start').prop('required', false);
+          $('#stop').prop('required', false);
+
+        }
+      }
+    });
+    $('input[name=start]').change(function() {
+      if ($(this).val() != null) {
+        $('#customer').prop('required', true);
+        $('#job').prop('required', true);
+        $('#stop').prop('required', true);
+        if ($(this).val() == '') {
+          $('#customer').prop('required', false);
+          $('#job').prop('required', false);
+          $('#stop').prop('required', false);
+
+        }
+      }
+    });
+    $('input[name=stop]').change(function() {
+      if ($(this).val() != null) {
+        $('#customer').prop('required', true);
+        $('#job').prop('required', true);
+        $('#start').prop('required', true);
+        if ($(this).val() == '') {
+          $('#customer').prop('required', false);
+          $('#job').prop('required', false);
+          $('#start').prop('required', false);
+
+        }
+      }
     });
   </script>
 </body>

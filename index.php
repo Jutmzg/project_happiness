@@ -103,8 +103,10 @@ $enqueteByCustomer = $statement->fetchAll(PDO::FETCH_OBJ);
 
 $sql = "SELECT COUNT(e.resultat) as nbrDeBien, c.name 
         FROM enquete e
-        JOIN mission m ON m.id = e.mission_id
-        JOIN customer c ON m.customer_id = c.id
+        JOIN mission m 
+        ON m.id = e.mission_id
+        JOIN customer c 
+        ON m.customer_id = c.id
         WHERE resultat = 1 AND month(created_at)=month(now())
         GROUP BY c.name
         ORDER BY nbrDeBien DESC
@@ -281,7 +283,7 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
           backgroundColor: ["#4F772D", "#548687", "#747572", "rgba(255, 180, 67,0.7)", "#D36135"],
           borderWidth: 0,
 
-          data: [<?= "'".implode("','",$topNote)."'";?>]
+          data: [<?= "'".implode("','",array_reverse($topNote))."'";?>]
         }]
       },
   options: {
