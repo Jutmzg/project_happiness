@@ -23,7 +23,7 @@ $excel .=  "CONSULTANT\tPOSTE\tCLIENT\tMISSION\tRESULTAT\tCREE LE\tENVOYE\n";
 foreach($enquetes as $enquete) {
     if($enquete->resultat === '0'){
         $enquete->resultat = "Pas de retour";    
-    } elseif ($enquete->resultat = '1'){
+    } elseif ($enquete->resultat === '1'){
         $enquete->resultat = "Bon";   
     } elseif ($enquete->resultat === '2'){
         $enquete->resultat = "Moyen";   
@@ -33,7 +33,7 @@ foreach($enquetes as $enquete) {
 
 if($enquete->state === '0'){
     $enquete->state = "NON";    
-} elseif ($enquete->state = '1'){
+} elseif ($enquete->state === '1'){
     $enquete->state = "OUI";   
 }
 
