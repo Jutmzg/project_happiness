@@ -64,7 +64,7 @@ if (
         
         <form method="post">
         <h2>Modifier la mission : <?= $row->name ?></h2>
-        <a class="close" href="/Akkappiness/mission/show.php"><i class="fas fa-times" id="cross"></i></a>
+        <a class="close" href="/mission/show.php"><i class="fas fa-times" id="cross"></i></a>
 
                 <div class="input-box">
             <input value="<?= $row->name; ?>" type="text" name="name" id="name" maxlength="50" minlength="2" readonly required>
@@ -117,7 +117,7 @@ if (
 
           <div class="ValAnn">
             <button type="submit" class="btn btn-info">Valider</button>
-            <a class="btn btn-info" href="/Akkappiness/mission/show.php">Annuler</a>
+            <a class="btn btn-info" href="/mission/show.php">Annuler</a>
           </div>
           </div>
           </div>

@@ -38,25 +38,25 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link mr-2" href="/Akkappiness/consultant/show.php">Consultants</a>
+          <a class="nav-link mr-2" href="/consultant/show.php">Consultants</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link mr-2" href="/Akkappiness/mission/show.php">Missions</a>
+          <a class="nav-link mr-2" href="/mission/show.php">Missions</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link mr-2" href="/Akkappiness/customer/show.php">Clients</a>
+          <a class="nav-link mr-2" href="/customer/show.php">Clients</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link mr-2" href="/Akkappiness/job/show.php">Postes</a>
+          <a class="nav-link mr-2" href="/job/show.php">Postes</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link mr-2" href="/Akkappiness/enquete/index.php">Enquêtes</a>
+        <a class="nav-link mr-2" href="/enquete/index.php">Enquêtes</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link mr-2" href="/Akkappiness/enquete/show.php">Envoyer</a>
+        <a class="nav-link mr-2" href="/enquete/show.php">Envoyer</a>
         </li>
         <li class="nav-item logout">
-        <a class="nav-link mr-2" href="/Akkappiness/user/logout.php"><i class="fas fa-power-off fa-lg"></i></a>
+        <a class="nav-link mr-2" href="/user/logout.php"><i class="fas fa-power-off fa-lg"></i></a>
         </li>
       </ul>
     </div>

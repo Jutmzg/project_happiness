@@ -37,7 +37,7 @@ if (
 
     <form method="post">
       <h2>Modifier les informations de : <?= $jobs->name ?></h2>
-      <a class="close" href="/Akkappiness/job/show.php"><i class="fas fa-times" id="cross"></i></a>
+      <a class="close" href="/job/show.php"><i class="fas fa-times" id="cross"></i></a>
 
       <div class="input-box">
         <input value="<?= $jobs->name; ?>" type="text" name="name" id="name" maxlength="50" minlength="2" required>
@@ -47,7 +47,7 @@ if (
         <div class="input-box">
           <div class="ValAnn">
             <button type="submit" class="btn btn-info">Valider</button>
-            <a class="btn btn-info" href="/Akkappiness/job/show.php">Annuler</a>
+            <a class="btn btn-info" href="/job/show.php">Annuler</a>
           </div>
         </div>
       </div>

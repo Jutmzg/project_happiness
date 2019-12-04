@@ -30,7 +30,7 @@ $consultants = $statement->fetchAll(PDO::FETCH_OBJ);
 
         <h2 class="text-center text-uppercase darkblue">Enquêtes</h2>
         <button class="btn btn-info add" onclick="getSelectedMissionId()">Créer</button>
-        <a href="/Akkappiness/export/export.php" class="btn btn-success add"><i class="fas fa-file-excel"></i></a>
+        <a href="/export/export.php" class="btn btn-success add"><i class="fas fa-file-excel"></i></a>
         <div class="card-body">
           <input type="text" class="form-control col-3" id="filter-text-box" placeholder="Rechercher" oninput="onFilterTextBoxChanged()" />
           <div id="myGrid" class="ag-theme-balham"></div>

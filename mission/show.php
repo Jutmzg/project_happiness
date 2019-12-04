@@ -49,7 +49,7 @@ if (
   $ids = explode(',', $_GET['id']);
 
   if ($id == "") {
-    header('Location: /Akkappiness/mission/show.php');
+    header('Location: /mission/show.php');
   }
   foreach ($ids as $id) {
     $sql = 'UPDATE mission SET state = 1 WHERE id=:id';
@@ -132,7 +132,7 @@ if(isset($_GET['Message'])){
             <div class="input-box">
             <div class="ValAnn">
                   <button type="submit" class="btn btn-info">Valider</button>
-                  <a href="/Akkappiness/mission/show.php" class="btn btn-info">Annuler</a>
+                  <a href="/mission/show.php" class="btn btn-info">Annuler</a>
               </div>
             </div>
           </div>

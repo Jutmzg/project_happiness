@@ -20,7 +20,7 @@ $bdd = 'akkappiness';
 $username = 'root';
 
 // mot de passe mySQL
-$password = '';
+$password = 'fev2019FAQ';
 
 
 $dsn = "mysql:host=$host;dbname=$bdd";
@@ -58,7 +58,7 @@ if(!empty($_POST)) {
         $statement = $connection->prepare($sql);
         $statement->execute([':mail' => $_POST['mail'], ':password' => $password]);
         echo 'Inscription effectuée';
-        header('Location: /Akkappiness/user/login');
+        header('Location: /user/login');
     } else {
         echo "<div class='alert alert-danger'>";
         foreach ($errors as $error) { ?>

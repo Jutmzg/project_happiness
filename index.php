@@ -7,7 +7,7 @@
   if (session_status() == PHP_SESSION_NONE) {
     session_start();
     if (!isset($_SESSION['login'])) {
-      header('Location: /Akkappiness/user/login.php');
+      header('Location: /user/login.php');
     }
   }; ?>
 <head>
@@ -25,32 +25,32 @@
 
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-light text-uppercase p-1">
-    <a class="navbar-brand" href="/Akkappiness"><img src='assets/img/logo.png' alt="logo"> </a>
+    <a class="navbar-brand" href="/"><img src='assets/img/logo.png' alt="logo"> </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link mr-2" href="/Akkappiness/consultant/show.php">Consultants</a>
+          <a class="nav-link mr-2" href="consultant/show.php">Consultants</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link mr-2" href="/Akkappiness/mission/show.php">Missions</a>
+          <a class="nav-link mr-2" href="mission/show.php">Missions</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link mr-2" href="/Akkappiness/customer/show.php">Clients</a>
+          <a class="nav-link mr-2" href="customer/show.php">Clients</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link mr-2" href="/Akkappiness/job/show.php">Postes</a>
+          <a class="nav-link mr-2" href="job/show.php">Postes</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link mr-2" href="/Akkappiness/enquete/index.php">Enquêtes</a>
+          <a class="nav-link mr-2" href="enquete/index.php">Enquêtes</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link mr-2" href="/Akkappiness/enquete/show.php">Envoyer</a>
+        <a class="nav-link mr-2" href="enquete/show.php">Envoyer</a>
         </li>
         <li class="nav-item logout">
-          <a class="nav-link mr-2 " href="/Akkappiness/user/logout.php"><i class="fas fa-power-off fa-lg"></i></a>
+          <a class="nav-link mr-2 " href="user/logout.php"><i class="fas fa-power-off fa-lg"></i></a>
         </li>
       </ul>
     </div>
@@ -67,7 +67,7 @@ $statement = $connection->prepare($sql);
 $statement->execute();
 $responseFalse = $statement->fetchAll(PDO::FETCH_OBJ);
 
-//////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////
 
 $sql = "SELECT * FROM `enquete` WHERE resultat = 1 AND month(created_at)=month(now())";
 $statement = $connection->prepare($sql);
@@ -198,10 +198,7 @@ $sql = "SELECT * FROM `enquete` WHERE resultat = 3";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
-?>
-
-<body>
-  <h2 class="text-center p-4 welcome">BIENVENUE SUR AKKAPPINESS</h2>
+*/?><!--
   <div class="container">
 
     <div class="col-md-5 col-lg-6 col-sm-9 row-chart">
@@ -225,7 +222,7 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
           backgroundColor: ["#4F772D", "#D36135"],
           borderWidth: 0,
 
-          data: [<?= count($responseTrue); ?>, <?= count($responseFalse); ?>, ]
+          data: [<?/*= count($responseTrue); */?>, <?/*= count($responseFalse); */?>, ]
         }]
       },
       options: {
@@ -233,7 +230,7 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
         title: {
           fontColor: '#ffff',
           display: true,
-          text: 'Total des enquêtes : <?= count($responseTrue) + count($responseFalse); ?>'
+          text: 'Total des enquêtes : <?/*= count($responseTrue) + count($responseFalse); */?>'
         },
         legend: {
           display: true,
@@ -254,7 +251,7 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
           backgroundColor: ["#4F772D", "#D38B5D", "#D36135"],
           borderWidth: 0,
 
-          data: [<?= count($goodRate); ?>, <?= count($mediumRate); ?>, <?= count($badRate); ?>, ]
+          data: [<?/*= count($goodRate); */?>, <?/*= count($mediumRate); */?>, <?/*= count($badRate); */?>, ]
         }]
       },
       options: {
@@ -262,7 +259,7 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
         title: {
           fontColor: '#ffff',
           display: true,
-          text: 'Taux de satisfaction  |  Total de réponses : <?= count($responseTrue); ?>'
+          text: 'Taux de satisfaction  |  Total de réponses : <?/*= count($responseTrue); */?>'
         },
         legend: {
           display: true,
@@ -277,13 +274,13 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
     var myChart3 = new Chart('myChart3', {
   type: 'horizontalBar',
   data: {
-        labels: [<?="'".implode("','",array_reverse($top5))."'";?>],
+        labels: [<?/*="'".implode("','",array_reverse($top5))."'";*/?>],
         datasets: [{
           label: "Meilleur taux de satisfaction",
           backgroundColor: ["#4F772D", "#548687", "#747572", "rgba(255, 180, 67,0.7)", "#D36135"],
           borderWidth: 0,
 
-          data: [<?= "'".implode("','",array_reverse($topNote))."'";?>]
+          data: [<?/*= "'".implode("','",array_reverse($topNote))."'";*/?>]
         }]
       },
   options: {
@@ -321,8 +318,9 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
     }
   }
 });
-  </script>
-
+  </script>-->
+<body>
+<h2 class="text-center p-4 welcome">BIENVENUE SUR AKKAPPINESS</h2>
 </body>
 
 </html>

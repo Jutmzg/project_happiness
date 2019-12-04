@@ -19,7 +19,7 @@ if (!empty($_POST) && (!empty($_POST['mail'])) && (!empty($_POST['password']))) 
   if (password_verify($_POST['password'], $user->password)) {
     
     $_SESSION['login'] = $user->mail;
-    header('Location: /Akkappiness');
+    header('Location: /');
     exit();
    
   }
@@ -37,7 +37,6 @@ if (!empty($_POST) && (!empty($_POST['mail'])) && (!empty($_POST['password']))) 
         <input type="email" name="mail" value="" placeholder="Email" required>
       </div>
       <div class="input-box mt-4">
-        <label for="exampleInputPassword1">Mot de passe</label>
         <input type="password" name="password" value="" placeholder="Mot de passe" required>
       </div>
       <div class="form-group">

@@ -4,7 +4,7 @@
 
 $id = $_GET['id'];
 if($id == ""){
-  header('Location: /Akkappiness/consultant/show.php');
+  header('Location: /consultant/show.php');
 }
 
 $sql = 'SELECT * FROM consultant WHERE id=:id';
@@ -43,7 +43,7 @@ if (
         <div class="box">
             <form method="post">
                 <h2>Modifier les informations de <?= $row->firstname . ' ' . $row->lastname ?></h2>
-                <a class="close" href="/Akkappiness/consultant/show.php"><i class="fas fa-times" id="cross"></i></a>
+                <a class="close" href="/consultant/show.php"><i class="fas fa-times" id="cross"></i></a>
 
                 <div class="input-box">
                     <input value="<?= $row->lastname; ?>" type="text" name="lastname" id="lastname" maxlength="50" minlength="2" required>
@@ -66,7 +66,7 @@ if (
                 <div class="form-group">
                 <div class="ValAnn">
             <button type="submit" class="btn btn-info">Valider</button>
-            <a class="btn btn-info" href="/Akkappiness/consultant/show.php">Annuler</a>
+            <a class="btn btn-info" href="/consultant/show.php">Annuler</a>
           </div>
                 </div>
             </form>

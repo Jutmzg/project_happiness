@@ -22,7 +22,7 @@ $enquetes = $statement->fetchAll(PDO::FETCH_OBJ);
       <div class="card-header">
         <h2 class="text-center text-uppercase">Enquêtes à envoyer</h2>
         <div class="add d-flex">
-          <a class="btn btn-info mr-1" href="/Akkappiness/mailing/phpmailer.php">Envoyer</a>
+          <a class="btn btn-info mr-1" href="/mailing/phpmailer.php">Envoyer</a>
           <div id="DeleteEnquete" onclick="return confirm('Etes vous sur de vouloir effectuer la suppression?')"></div>
         </div>
 

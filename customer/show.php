@@ -28,7 +28,7 @@ if (
   $ids = explode(',', $_GET['id']);
 
   if ($id == "") {
-    header('Location: /Akkappiness/customer/show.php');
+    header('Location: /customer/show.php');
   }
   foreach ($ids as $id) {
     $sql = 'UPDATE customer SET state = 1 WHERE id=:id';
@@ -67,7 +67,7 @@ $customers = $statement->fetchAll(PDO::FETCH_OBJ);
               <div class="input-box">
                 <div class="ValAnn">
                   <button type="submit" class="btn btn-info">Valider</button>
-                  <a href="/Akkappiness/customer/show.php" class="btn btn-info">Annuler</a>
+                  <a href="/customer/show.php" class="btn btn-info">Annuler</a>
                 </div>
 
               </div>
