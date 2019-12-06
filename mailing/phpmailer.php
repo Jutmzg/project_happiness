@@ -41,7 +41,7 @@ try {
             // $mail->Password   = EMAIL_PASSWORD;
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = EMAIL_PORT;
-            $mail->setFrom("NoReply@akka.eu");
+            $mail->setFrom("jul.bousseau@gmail.com");
             $mail->addAddress($toUser);
             $mail->isHTML(true);
             $mail->Subject = 'Enquete de satisfaction';
@@ -124,9 +124,9 @@ try {
                                     <tbody>
                                         <tr padding-top='10px'>
                                         <td margin-bottom='30px'>
-                                        <a href='http://$_SERVER[HTTP_HOST]/Akkappiness/mailing/1.php?id=$id'><img src='https://zupimages.net/up/19/42/zk2l.png' alt='bien' width='80' height='80'/></a>
-                                        <a href='http://$_SERVER[HTTP_HOST]/Akkappiness/mailing/2.php?id=$id'><img src='https://zupimages.net/up/19/42/ixon.png' alt='moyen' width='80' height='80'/></a>
-                                        <a href='http://$_SERVER[HTTP_HOST]/Akkappiness/mailing/3.php?id=$id'><img src='https://zupimages.net/up/19/42/m6zb.png' alt='mauvais' width='80' height='80'/></a>
+                                        <a href='http://$_SERVER[HTTP_HOST]/mailing/1.php?id=$id'><img src='https://zupimages.net/up/19/42/zk2l.png' alt='bien' width='80' height='80'/></a>
+                                        <a href='http://$_SERVER[HTTP_HOST]/mailing/2.php?id=$id'><img src='https://zupimages.net/up/19/42/ixon.png' alt='moyen' width='80' height='80'/></a>
+                                        <a href='http://$_SERVER[HTTP_HOST]/mailing/3.php?id=$id'><img src='https://zupimages.net/up/19/42/m6zb.png' alt='mauvais' width='80' height='80'/></a>
                                         </td>
                                         </tr>
                                     </tbody>

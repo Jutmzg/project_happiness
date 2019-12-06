@@ -56,6 +56,8 @@
     </div>
   </nav>
 </header>
+<body>
+<h2 class="text-center p-4 welcome">BIENVENUE SUR AKKAPPINESS</h2>
 <?php
 $sql = "SELECT * FROM `enquete` WHERE month(created_at)=month(now()) AND resultat != 0 AND state=0";
 $statement = $connection->prepare($sql);
@@ -67,7 +69,7 @@ $statement = $connection->prepare($sql);
 $statement->execute();
 $responseFalse = $statement->fetchAll(PDO::FETCH_OBJ);
 
-/*//////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
 
 $sql = "SELECT * FROM `enquete` WHERE resultat = 1 AND month(created_at)=month(now())";
 $statement = $connection->prepare($sql);
@@ -86,119 +88,7 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
 
 //////////////////////////////////////////////////////////
 
-$sql = "SELECT COUNT(c.name) customer, c.name, e.state 
-        FROM enquete e
-        JOIN mission m
-        ON m.id = e.mission_id
-        JOIN customer c
-        ON c.id = m.customer_id
-        WHERE e.state = 0 AND e.resultat != 0 AND e.resultat != 0 AND month(created_at)=month(now())
-        GROUP BY c.name
-        ORDER BY customer DESC
-        LIMIT 5";
-$statement = $connection->prepare($sql);
-$statement->execute();
-$enqueteByCustomer = $statement->fetchAll(PDO::FETCH_OBJ);
-
-
-$sql = "SELECT COUNT(e.resultat) as nbrDeBien, c.name 
-        FROM enquete e
-        JOIN mission m 
-        ON m.id = e.mission_id
-        JOIN customer c 
-        ON m.customer_id = c.id
-        WHERE resultat = 1 AND month(created_at)=month(now())
-        GROUP BY c.name
-        ORDER BY nbrDeBien DESC
-        LIMIT 5";
-$statement = $connection->prepare($sql);
-$statement->execute();
-$goodRateByCustomer = $statement->fetchAll(PDO::FETCH_OBJ);
-
-
-$arrayCustomer = [];
-$arrayNbrDeBien = [];
-$arrayNbrEnquete = [];
-foreach($goodRateByCustomer as $row){
-  
-  $arrayNbrDeBien[] = $row->nbrDeBien;
-  $arrayCustomer[] = $row->name;
-}
-
- foreach($enqueteByCustomer as $enquete){
-  $arrayNbrEnquete[] = $enquete->customer;
-} 
-
-if (count($arrayNbrDeBien) == 1) {
-  $Note1 = round(($arrayNbrDeBien[0] / $arrayNbrEnquete[0])*100);
-  $customerNote = [ $arrayCustomer[0] => $Note1];
-} elseif (count($arrayNbrDeBien) == 2) {
-  $Note1 = round(($arrayNbrDeBien[0] / $arrayNbrEnquete[0])*100);
-  $Note2 = round(($arrayNbrDeBien[1] / $arrayNbrEnquete[1])*100);
-  $customerNote = [ $arrayCustomer[0] => $Note1 ,
-                   $arrayCustomer[1] => $Note2];
-} elseif (count($arrayNbrDeBien) == 3) {
-  $Note1 = round(($arrayNbrDeBien[0] / $arrayNbrEnquete[0])*100);
-  $Note2 = round(($arrayNbrDeBien[1] / $arrayNbrEnquete[1])*100);
-  $Note3 = round(($arrayNbrDeBien[2] / $arrayNbrEnquete[2])*100);
-  $customerNote = [ $arrayCustomer[0] => $Note1 ,
-                   $arrayCustomer[1] => $Note2,
-                   $arrayCustomer[2] => $Note3];
-} elseif (count($arrayNbrDeBien) == 4) {
-  $Note1 = round(($arrayNbrDeBien[0] / $arrayNbrEnquete[0])*100);
-  $Note2 = round(($arrayNbrDeBien[1] / $arrayNbrEnquete[1])*100);
-  $Note3 = round(($arrayNbrDeBien[2] / $arrayNbrEnquete[2])*100);
-  $Note4 = round(($arrayNbrDeBien[3] / $arrayNbrEnquete[3])*100);
-  $customerNote = [ $arrayCustomer[0] => $Note1 ,
-                    $arrayCustomer[1] => $Note2,
-                    $arrayCustomer[2] => $Note3,
-                    $arrayCustomer[3] => $Note4];
-} elseif (count($arrayNbrDeBien) == 5) {
-  $Note1 = round(($arrayNbrDeBien[0] / $arrayNbrEnquete[0])*100);
-  $Note2 = round(($arrayNbrDeBien[1] / $arrayNbrEnquete[1])*100);
-  $Note3 = round(($arrayNbrDeBien[2] / $arrayNbrEnquete[2])*100);
-  $Note4 = round(($arrayNbrDeBien[3] / $arrayNbrEnquete[3])*100);
-  $Note5 = round(($arrayNbrDeBien[4] / $arrayNbrEnquete[4])*100);
-  $customerNote = [ $arrayCustomer[0] => $Note1 ,
-                    $arrayCustomer[1] => $Note2,
-                    $arrayCustomer[2] => $Note3,
-                    $arrayCustomer[3] => $Note4,
-                    $arrayCustomer[4] => $Note5];
-}
-if(isset($customerNote)){
-ksort($customerNote);
-
-foreach ($customerNote as $key => $val) {
-  $key = $val;
-}
-
-$top5Customers = [];
-$top5Rate = [];
-
-foreach($customerNote as $customer => $key){
-  $top5Customers[] = $key;
-  $top5Rate[] = $customer;
-}
-}
-
-arsort($customerNote);
-
-$topNote = [];
-foreach ($customerNote as $note => $value) {
-  $topNote[] = $value;
-}
-$top5 = [];
-foreach($customerNote as $enterprise => $value){
-  $top5[] = $enterprise;
-}
-
-
-
-$sql = "SELECT * FROM `enquete` WHERE resultat = 3";
-$statement = $connection->prepare($sql);
-$statement->execute();
-$badRate = $statement->fetchAll(PDO::FETCH_OBJ);
-*/?><!--
+?>
   <div class="container">
 
     <div class="col-md-5 col-lg-6 col-sm-9 row-chart">
@@ -318,9 +208,7 @@ $badRate = $statement->fetchAll(PDO::FETCH_OBJ);
     }
   }
 });
-  </script>-->
-<body>
-<h2 class="text-center p-4 welcome">BIENVENUE SUR AKKAPPINESS</h2>
+  </script>
 </body>
 
 </html>

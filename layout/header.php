@@ -26,12 +26,13 @@
   <script src="../assets/jquery-ui/jquery-ui.min.js"></script>
   <script src="../assets/aggrid/ag-grid-community.min.noStyle.js"></script>
   <script src="../assets/js/alert.js"></script>
+
   
 </head>
 
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-light text-uppercase p-1">
-    <a class="navbar-brand" href="/Akkappiness"><img src='../assets/img/logo.png' alt="logo"> </a>
+    <a class="navbar-brand" href="/"><img src='../assets/img/logo.png' alt="logo"> </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

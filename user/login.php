@@ -40,7 +40,7 @@ if (!empty($_POST) && (!empty($_POST['mail'])) && (!empty($_POST['password']))) 
         <input type="password" name="password" value="" placeholder="Mot de passe" required>
       </div>
       <div class="form-group">
-        <button type="submit" class="btn btn-info connexion" name="connexion" value="Connexion">Connexion</button>
+        <button type="submit" class="btn btn-info connexion" name="connexion" value="Connexion">Se Connecter</button>
       </div>
     </form>
   </div>

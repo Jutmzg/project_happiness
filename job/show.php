@@ -23,7 +23,7 @@ if (
   $ids = explode(',', $_GET['id']);
 
   if ($id == "") {
-    header('Location: /Akkappiness/job/show.php');
+    header('Location: /job/show.php');
   }
   foreach ($ids as $id) {
     $sql = 'DELETE FROM job WHERE id=:id';
